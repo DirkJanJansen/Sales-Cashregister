@@ -1,6 +1,8 @@
 # Sales
 Cash Register
 
+![Sales Cash Register Screenshot](https://github.com/DirkJanJansen/Sales/blob/blob/master/Cashregister.png
+
 Register with logon from barcode.
 Barcode labels employees included
 
