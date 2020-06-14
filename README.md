@@ -5,15 +5,6 @@
 
 Register with logon from barcode.
 Barcode labels employees included
+3 Entrance security levels 
 
-Installation:
-Python3
-PyQt5
-Pillow
-Python-barcode
-postgreSQL
-Pypiwin32
-Sqlalchemy
-Psycopg2
-
-The Project ducumentation and Instruction follows
+The Project ducumentation and Instructions follows
