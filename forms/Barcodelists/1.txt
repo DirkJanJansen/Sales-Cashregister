@@ -1,0 +1,29 @@
+Sales - Ordernumber: 1 Date : 2020-06-14 Pagenumber 1 
+==================================================================================================
+Artikelnr  Description                                  Number  Item_price    Subtotal         VAT
+==================================================================================================
+8002000000204  Moer RVS M10                                  1        0.26        0.26        0.05
+8002000000327  Router Asus RT-N66U                           1       56.55       56.55       11.88
+8002000000440  Router TP-Link Archer C7                      1       49.34       49.34       10.36
+8002000000563  Printer Canon MG 3650                         1       56.78       56.78       11.92
+8002000000709  USB Memory Stick Toshiba 8GB                  2        6.55       13.10        2.75
+8002000000815  Computervoeding Corsair CS550M                1       67.90       67.90       14.26
+8002000000938  Midi Tower Antec GX500                        1       45.90       45.90        9.64
+8002000001003  Cardreader Revoltec RZ060                     1       14.20       14.20        2.98
+8002000001119  Moederbord MSI Z97 U3 Plus                    1      108.85      108.85       22.86
+8002000001232  DDD3 Ram 2x 4GB Crucial PC3 12800             1       71.90       71.90       15.10
+8002000001355  Harddisk Seagate Barracuda 2TB STBD20002      1       86.90       86.90       18.25
+8002000001591  Behuizing Midi Tower Corsair 450D             2      109.90      219.80       46.16
+8002000002024  M-Audio 2496 Delta AudioPhile Geluidskaa      2       89.95      179.90       37.78
+8002000002871  Haakse fitting 3/4 met bev. messing warm      1        6.67        6.67        1.40
+8002000003427  Schroevendraaier heft kunststof spuitgie      1        5.43        5.43        1.14
+8002000004103  Keilbout,A,M10x70/50                          1        7.08        7.08        1.49
+8002000004455  Houtdraadbout,ev 4.6,20x160mm,DIN571          1        7.88        7.88        1.65
+8002000004691  Zeskantbout.,thv 8.8,M16x35,DIN933            1        7.87        7.87        1.65
+8002000004707  Slotbout,m moer,gv 4.6,M8x170,DIN603/5        1        4.86        4.86        1.02
+8002000004820  Houtdraadbout,thv 4.6,8x30mm,DIN571           1        0.76        0.76        0.16
+8002000005001  Houtdraadbout,thv 4.6,10x60mm,DIN571          1        6.80        6.80        1.43
+===================================================================================================
+Total  amount to pay inclusive VAT and amount VAT                              1018.73      213.93 
+===================================================================================================
+Employee : Dirk 
