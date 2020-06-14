@@ -7,4 +7,6 @@ Register with logon from barcode.
 Barcode labels employees included
 3 Entrance security levels 
 
-The Project ducumentation and Instructions follows
+The Project ducumentation and Instructions follows.
+The product buttons are not yet linked, the project is still in development!
+
