@@ -9,6 +9,8 @@ Link to Installation: https://github.com/DirkJanJansen/Sales/blob/master/Install
 
 Link to Linux Installation: https://github.com/DirkJanJansen/Sales/blob/master/Installation/LINUX_install.txt
 
+Link to documentation: https://github.com/DirkJanJansen/Sales/blob/master/Installation/Sales_CashRegister.pdf
+
 Link to changelog: https://github.com/DirkJanJansen/Sales/blob/master/Installation/Changelog.txt
 
 Barcode labels employees included
