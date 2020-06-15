@@ -222,7 +222,7 @@ def emplAccess(self):
                     con.execute(insacc)
                     accountOK()
                     self.close()
-               else:
+                else:
                     notInserted()
                     self.close() 
            
