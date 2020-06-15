@@ -1,5 +1,6 @@
 2020-06-15 cashregister.backup paths in columns thumbnail and photo changed
 2020-06-15 install.txt added
+2020-06-15 LINUX_install.txt added
 2020-06-15 changelog.txt added
 2020-06-15 pgpass.conf added
 2020-06-15 Notepad_HKCU.reg added
