@@ -24,7 +24,7 @@ echo.
 echo.
 echo.
 "C:\ProgramData\postgres\bin\createdb.exe" -h  localhost -p 5432 -U postgres -w cashregister 
-"C:\ProgramData\postgres\bin\pg_restore.exe" --dbname=cashregister  --verbose "C:\ProgramData\Sales\Backup\cashregister.backup"
+"C:\ProgramData\postgres\bin\pg_restore.exe" --dbname=cashregister  --verbose "C:\ProgramData\Sales\Installation\cashregister.backup"
 echo.
 echo Database cashregister is teruggeplaatst!
 echo.
