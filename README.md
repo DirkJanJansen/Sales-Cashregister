@@ -1,5 +1,5 @@
 # Sales
-# Cash Register
+# * Cash Register
 
 ![Sales Cash Register Screenshot](https://raw.githubusercontent.com/DirkJanJansen/Sales/master/Cashregister.png)
 
