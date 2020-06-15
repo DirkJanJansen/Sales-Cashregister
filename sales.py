@@ -55,10 +55,7 @@ def emplAccess(self):
     from barcode.writer import ImageWriter #for barcode as png 
     from sys import platform
     import random
-    
-    inlogstr = random.randint(1000000, 9999999)
-    ean = barcode.get('ean8', str(inlogstr), writer=ImageWriter()) # for barcode as png
-    mbarcode = ean.get_fullcode() 
+ 
     metadata = MetaData()
     accounts = Table('accounts', metadata,
          Column('barcodeID', String, primary_key=True),
@@ -70,6 +67,10 @@ def emplAccess(self):
     engine = create_engine('postgresql+psycopg2://postgres:@localhost/cashregister')
     con = engine.connect()
     while True:
+        inlogstr = random.randint(1000000, 9999999)
+        ean = barcode.get('ean8', str(inlogstr), writer=ImageWriter()) # for barcode as png
+        mbarcode = ean.get_fullcode()
+        
         selbarc = select([accounts]).where(accounts.c.barcodeID==mbarcode)
         rpbarc = con.execute(selbarc).first()
         if not rpbarc:
