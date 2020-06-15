@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Cashregister
+Comment=Barcode Sales System
+Path=/home/postgres/Sales
+Exec=python3 sales.py
+Icon=register.png
+Terminal=false
+Type=Application
+Categories=Application;
