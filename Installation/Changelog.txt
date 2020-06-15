@@ -10,3 +10,5 @@
 2020-06-15 register.png and Sales.desktop added for startup linux
 2020-06-15 folder Backup changed in Installation
 2020-06-15 sales.py changed info for logon procedure.
+2020-06-15 sales.py function added insert and generating accounts + barcodelabel saved for logon
+2020-06-15 Documentation first document Sales_Cashregister.pdf added in folder Installation more explanation follows!
