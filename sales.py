@@ -205,13 +205,12 @@ def info():
         Logging in takes place with a barcode card with 3 access levels.
         Level 1. Selling, scanning, printing (normal cash register usage).
         Level 2. Return bookings, a checkable ± button is shown, with which return bookings can be made.
-        Level 3. Administrator - assign productbuttons, creating accounts, administration, perform stock
-                      management and importing productfiles.
+        Level 3. Administration, a button Adminstration is shown, for assigning productbuttons,
+                 creating accounts, administration, perform stock management and imports.
         Employee first time scan barcode  = logon, second time = logout.
         Other employee scanning = switching employee (for return booking, or replacement).
                          
         Article scanning:
-            
         By default, scanning is performed with an number of 1.
         With the spinbox the correct number can be chosen for scanning, this can be done by the arrows of 
         the spinbox or with the mous wheel. After every scan, the number is reset to 1.
