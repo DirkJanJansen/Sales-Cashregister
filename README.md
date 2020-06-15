@@ -3,6 +3,11 @@
 
 ![Sales Cash Register Screenshot](https://raw.githubusercontent.com/DirkJanJansen/Sales/master/Cashregister.png)
 
+Link to Installation file: https://github.com/DirkJanJansen/Sales/blob/master/Installation/install.txt
+
+Link to Linux Installation: https://github.com/DirkJanJansen/Sales/blob/master/Installation/LINUX-install.txt
+
+
 Register with logon from barcode.
 
 Barcode labels employees included
