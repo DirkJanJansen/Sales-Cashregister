@@ -16,6 +16,26 @@ def noData():
     msg.setText('There are no transactions yet!')
     msg.setWindowTitle('Transactions')
     msg.exec_() 
+    
+def accountOK():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Information)
+    msg.setText('Insert account succeeded!')
+    msg.setWindowTitle('Insert accounts')
+    msg.exec_()
+    
+def notInserted():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Warning)
+    msg.setText('Not all fields are filled in!')
+    msg.setWindowTitle('Insert accounts')
+    msg.exec_() 
             
 def windowSluit(self):
     self.close()
@@ -30,9 +50,187 @@ def salesRequest(self):
 def paymentsRequest(self):
     print('Payments requesting')
     
-def emplAccess(self) :
-    print('Mutate employees icluding printing access barcodes')
+def emplAccess(self):
+    import barcode
+    from barcode.writer import ImageWriter #for barcode as png 
+    from sys import platform
+    import random
     
+    inlogstr = random.randint(1000000, 9999999)
+    ean = barcode.get('ean8', str(inlogstr), writer=ImageWriter()) # for barcode as png
+    mbarcode = ean.get_fullcode() 
+    metadata = MetaData()
+    accounts = Table('accounts', metadata,
+         Column('barcodeID', String, primary_key=True),
+         Column('firstname', String),
+         Column('lastname', String),
+         Column('access', Integer),
+         Column('callname', String))
+        
+    engine = create_engine('postgresql+psycopg2://postgres:@localhost/cashregister')
+    con = engine.connect()
+    while True:
+        selbarc = select([accounts]).where(accounts.c.barcodeID==mbarcode)
+        rpbarc = con.execute(selbarc).first()
+        if not rpbarc:
+            if platform == 'win32':
+               ean.save('.\\Barcodes\\Accounts\\'+str(mbarcode))
+               break
+            else:
+               ean.save('./Barcodes/Accounts/'+str(mbarcode))
+               print('Mutate employees icluding printing access barcodes')
+               break
+           
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            
+            self.setWindowTitle("Access Employees")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF")  
+    
+            grid = QGridLayout()
+            grid.setSpacing(20)
+            
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 2)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            q1Edit = QLineEdit(str(mbarcode))
+            q1Edit.setFixedWidth(100)
+            q1Edit.setFont(QFont("Arial",10))
+            q1Edit.setStyleSheet("color: black")
+            q1Edit.setDisabled(True)
+                            
+            q2Edit = QLineEdit()     #firstname
+            q2Edit.setFixedWidth(200)
+            q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            q2Edit.setFont(QFont("Arial",10))
+            reg_ex = QRegExp("^.{1,20}$")
+            input_validator = QRegExpValidator(reg_ex, q2Edit)
+            q2Edit.setValidator(input_validator)
+             
+            q3Edit = QLineEdit()   #lastname
+            q3Edit.setFixedWidth(200)
+            q3Edit.setFont(QFont("Arial",10))
+            q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            reg_ex = QRegExp("^.{1,20}$")
+            input_validator = QRegExpValidator(reg_ex, q3Edit)
+            q3Edit.setValidator(input_validator)
+             
+            q4Edit = QLineEdit()   #callname
+            q4Edit.setFixedWidth(200)
+            q4Edit.setFont(QFont("Arial",10))
+            q4Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            reg_ex = QRegExp("^.{1,20}$")
+            input_validator = QRegExpValidator(reg_ex, q4Edit)
+            q4Edit.setValidator(input_validator)
+            
+            q5Edit = QLineEdit('1')   #access
+            q5Edit.setFixedWidth(30)
+            q5Edit.setFont(QFont("Arial",10))
+            q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            reg_ex = QRegExp("^[123]{1}$")
+            input_validator = QRegExpValidator(reg_ex, q5Edit)
+            q5Edit.setValidator(input_validator)
+            
+            def q2Changed():
+                q2Edit.setText(q2Edit.text())
+            q2Edit.textChanged.connect(q2Changed)
+             
+            def q3Changed():
+                q3Edit.setText(q3Edit.text())
+            q3Edit.textChanged.connect(q3Changed)  
+            
+            def q4Changed():
+                q4Edit.setText(q4Edit.text())
+            q4Edit.textChanged.connect(q4Changed)  
+            
+            def q5Changed():
+                q5Edit.setText(q5Edit.text())
+            q5Edit.textChanged.connect(q5Changed)
+
+            lbl1 = QLabel('Accountbarcode')
+            lbl1.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl1, 4, 0, 1, 1, Qt.AlignRight)
+            grid.addWidget(q1Edit, 4, 1)
+                      
+            lbl2 = QLabel('First name')
+            lbl2.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl2, 5, 0, 1, 1, Qt.AlignRight)
+            grid.addWidget(q2Edit, 5, 1)
+            
+            lbl3 = QLabel('Last name')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 6, 0, 1, 1, Qt.AlignRight)
+            grid.addWidget(q3Edit, 6, 1)
+            
+            lbl4 = QLabel('Call name')
+            lbl4.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl4, 7, 0, 1, 1, Qt.AlignRight)
+            grid.addWidget(q4Edit, 7, 1)
+            
+            lbl5 = QLabel('Access level')
+            lbl5.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl5, 8, 0, 1, 1, Qt.AlignRight)
+            grid.addWidget(q5Edit, 8, 1)
+            
+            applyBtn = QPushButton('Insert')
+            applyBtn.clicked.connect(lambda: insertacc())
+               
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro") 
+                
+            grid.addWidget(applyBtn,9, 2, 1 , 1, Qt.AlignRight)
+                
+            cancelBtn = QPushButton('Close')
+            cancelBtn.clicked.connect(self.close) 
+    
+            grid.addWidget(cancelBtn, 9, 1, 1, 1, Qt.AlignRight)
+            cancelBtn.setFont(QFont("Arial",10))
+            cancelBtn.setFixedWidth(100)
+            cancelBtn.setStyleSheet("color: black; background-color: gainsboro") 
+            
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 10, 0, 1, 3, Qt.AlignCenter)
+          
+            def insertacc():
+                fname = q2Edit.text()
+                lname = q3Edit.text()
+                cname = q4Edit.text()
+                maccess = q5Edit.text()
+                if fname and lname and cname:
+                    insacc = insert(accounts).values(barcodeID = str(mbarcode),\
+                       firstname = fname, lastname = lname,\
+                       callname = cname, access = int(maccess))
+                    con.execute(insacc)
+                    accountOK()
+                    self.close()
+               else:
+                    notInserted()
+                    self.close() 
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 200, 150, 100)
+            
+    window = Widget()
+    window.exec_()
+        
 def defButtons(self):
     print('Defining product buttons')
     
@@ -55,7 +253,7 @@ def adminMenu(self):
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            self.setWindowTitle("Administrator Menu Cashregister")
+            self.setWindowTitle("Administrator Menu")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -126,7 +324,7 @@ def adminMenu(self):
                 elif mindex == 10:
                     defParams(self)
                 
-            applyBtn = QPushButton('Choosing')
+            applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
             applyBtn.setFont(QFont("Arial",10))
             applyBtn.setFixedWidth(100)
