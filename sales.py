@@ -22,34 +22,34 @@ def windowSluit(self):
     sys.exit()
   
 def artRequest(self):
-    print('Dit is artikelen opvragen')
+    print('Articles requesting')
     
 def salesRequest(self):
-    print('Dit is verkopen opvragen') 
+    print('Sales requesting') 
                
 def paymentsRequest(self):
-    print('Dit is afdrachten opvragen')
+    print('Payments requesting')
     
-def  emplAccess(self) :
-    print('Dit is muteren medewerkers')
+def emplAccess(self) :
+    print('Mutate employees icluding printing access barcodes')
     
 def defButtons(self):
-    print('Dit is definieren van knoppen')
+    print('Defining product buttons')
     
 def insertArticles(self):
-    print('Dit is artikelen invoeren')
+    print('Insering articles')
     
 def importArticles(self):
-    print('Dit is impoorteren van artikelen')
+    print('Imports articles')
     
 def bookingLoss(self):
-    print('Dit is derving boeken')
+    print('Loss products')
     
 def purchaseArticles(self):
-    print('Dit is inkoop artikelen')
+    print('Purchasing articles')
     
 def defParams(self):
-    print('Dit is parameter beheer')
+    print('Admin1stration parameters')
     
 def adminMenu(self):
     class Widget(QDialog):
@@ -207,7 +207,9 @@ def info():
         Level 2. Return bookings, a checkable ± button is shown, with which return bookings can be made.
         Level 3. Administrator - assign productbuttons, creating accounts, administration, perform stock
                       management and importing productfiles.
-                 
+        Employee first time scan barcode  = logon, second time = logout.
+        Other employee scanning = switching employee (for return booking, or replacement).
+                         
         Article scanning:
             
         By default, scanning is performed with an number of 1.
