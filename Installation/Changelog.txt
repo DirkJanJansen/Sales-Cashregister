@@ -8,3 +8,4 @@
 2020-06-15 pgrestore-custom.bat path changed
 2020-06-15 .pgpass added for linux
 2020-06-15 register.png and Sales.desktop added for startup linux
+2020-06-15 folder Backup changed in Installation
