@@ -8,7 +8,7 @@ echo.
 echo Druk op een toets om een backup te maken van de database cashregister.
 pause > nul
 echo.
-"C:\ProgramData\Postgres\bin\pg_dump.exe" -U postgres -v --verbose -d  cashregister -Fc -f  "D:\Sales\Backup\cashregister.backup"
+"C:\ProgramData\Postgres\bin\pg_dump.exe" -U postgres -v --verbose -d  cashregister -Fc -f  "C:\ProgramData\Sales\Backup\cashregister.backup"
 echo.
 echo.
 echo Backup van de database cashregister is gemaakt.
