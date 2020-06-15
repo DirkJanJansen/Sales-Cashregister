@@ -1,5 +1,5 @@
 The project is still in development
 The front end is ready besides the product buttons
-All backends programs for administration are in development, so only the administration menu is ready.
+All backends programs for administration are in development, so only the administration menu is ready and accounts.
 So logon barcodes and product barcodes printing, administration modules and documentation are on todo list.
  
