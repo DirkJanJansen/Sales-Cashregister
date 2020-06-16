@@ -79,7 +79,6 @@ def emplAccess(self):
                break
             else:
                ean.save('./Barcodes/Accounts/'+str(mbarcode))
-               print('Mutate employees icluding printing access barcodes')
                break
            
     class Widget(QDialog):
@@ -248,7 +247,7 @@ def purchaseArticles(self):
     print('Purchasing articles')
     
 def defParams(self):
-    print('Admin1stration parameters')
+    print('Administration parameters')
     
 def adminMenu(self):
     class Widget(QDialog):
@@ -891,6 +890,7 @@ def barcodeScan():
             con = engine.connect()
             selbtn = select([buttons]).order_by(buttons.c.buttonID)
             rpbtn = con.execute(selbtn)
+            
             # insert 32 programmable articlebuttons
             a = 0
             for row in rpbtn:
@@ -908,7 +908,7 @@ def barcodeScan():
                 elif a < 32:
                     grid.addWidget(self.aBtn, 10, a%8+1)
                 a += 1
-                
+                      
             kassa = QLabel()
             pixmap = QPixmap('./logos/register.png')
             kassa.setPixmap(pixmap.scaled(150, 150))
