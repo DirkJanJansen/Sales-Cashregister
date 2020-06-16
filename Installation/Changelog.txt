@@ -12,3 +12,5 @@
 2020-06-15 sales.py changed info for logon procedure.
 2020-06-15 sales.py function added insert and generating accounts + barcodelabel saved for logon
 2020-06-15 Documentation first document Sales_Cashregister.pdf added in folder Installation more explanation follows!
+2020-06-15 cashregister.backup table sales added callname 
+2020-06-15 sales.py typeerror corrected
