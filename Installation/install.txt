@@ -1,7 +1,7 @@
 For additional instructions for Linux see folder Linux "LINUX Install.txt".
 For adjustments or  additions see "Changelog.txt".
 
-Install python3,  pyqt5, pyqt5, sqlalchemy, psycopg2 and pypiwin32.
+Install python3,  pyqt5, pyqt5, sqlalchemy, psycopg2 and pypiwin32, pillow, python-barcode and keyboard
 
 For printing listings change this settings in notepad:
 Pagesettings: Left 0 Right 0 Top 14 Bottom 40
@@ -9,7 +9,8 @@ Font: Consolas 10
 Or change registry with Notepad_HKCU.reg 
 Follow these settings exactly for printlists with more pages
 
-Setting in Windows 10:
+Settings in Windows 10:
+app scaled in windows set to 125 %
 copy to c:\users\<username>\appdata\roaming\postgresql\pgpass.conf
 <username> = your own user folder in C:\users\
 appdata is hidden soo you will type it yourself or make hidden folders temporarely visible

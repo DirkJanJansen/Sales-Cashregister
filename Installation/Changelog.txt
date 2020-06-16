@@ -12,5 +12,11 @@
 2020-06-15 sales.py changed info for logon procedure.
 2020-06-15 sales.py function added insert and generating accounts + barcodelabel saved for logon
 2020-06-15 Documentation first document Sales_Cashregister.pdf added in folder Installation more explanation follows!
-2020-06-15 cashregister.backup table sales added callname 
-2020-06-15 sales.py typeerror corrected
+2020-06-15 sales.py typererror corrected
+2020-06-15 cashregister.backup added callname column in table sales
+2020-06-16 cashregister.backup added records for button products
+2020-06-16 sales.py linked programmable buttons, working now for input separate products, module for changing buttons follows!
+2020-06-16 pip install keyboard added for generating keyboard buffer for enter key by buttons
+2020-06-16 added compile.bat for precompling program
+2020-06-16 requirements.txt changed with keyboard module
+2020-06-16 install.txt and LINUX_install.txt added keyboard and pillow and python-barcode requirements.
