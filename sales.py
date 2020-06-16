@@ -1,5 +1,6 @@
 from datetime import datetime
 import sys
+import keyboard
 from PyQt5.QtCore import Qt, QSize, QRegExp
 from PyQt5.QtGui import QIcon, QFont, QPixmap, QMovie, QRegExpValidator
 from PyQt5.QtWidgets import QLineEdit, QGridLayout, QDialog, QLabel, QPushButton,\
@@ -890,25 +891,33 @@ def barcodeScan():
             con = engine.connect()
             selbtn = select([buttons]).order_by(buttons.c.buttonID)
             rpbtn = con.execute(selbtn)
-            
+  
             # insert 32 programmable articlebuttons
+            btnlist = []
             a = 0
             for row in rpbtn:
-                self.aBtn = QPushButton(row[1].strip())
-                self.aBtn.setFont(QFont("Times", 8, 75))
-                self.aBtn.setStyleSheet('color: black; background-color: gainsboro')
-                self.aBtn.setFocusPolicy(Qt.NoFocus)
-                self.aBtn.setFixedSize(65, 40)
+                aBtn = QPushButton(row[1].strip())
+                btnlist.append(row[2].strip())
+                aBtn.setFont(QFont("Times", 8, 75))
+                aBtn.setStyleSheet('color: black; background-color: gainsboro')
+                aBtn.setFocusPolicy(Qt.NoFocus)
+                aBtn.setFixedSize(65, 40)
                 if a < 8:
-                    grid.addWidget(self.aBtn, 7, a+1)
+                    grid.addWidget(aBtn, 7, a+1)
                 elif a < 16:
-                    grid.addWidget(self.aBtn, 8, a%8+1)
+                    grid.addWidget(aBtn, 8, a%8+1)
                 elif a < 24:
-                    grid.addWidget(self.aBtn, 9, a%8+1)
+                    grid.addWidget(aBtn, 9, a%8+1)
                 elif a < 32:
-                    grid.addWidget(self.aBtn, 10, a%8+1)
+                    grid.addWidget(aBtn, 10, a%8+1)
+                 
+                aBtn.clicked.connect(lambda checked, btn = btnlist[a] : getbarcode(btn))
                 a += 1
-                      
+                
+            def getbarcode(btn):
+                self.q1Edit.setText(btn)
+                keyboard.write('\n')
+                        
             kassa = QLabel()
             pixmap = QPixmap('./logos/register.png')
             kassa.setPixmap(pixmap.scaled(150, 150))
