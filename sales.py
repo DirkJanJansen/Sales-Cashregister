@@ -37,7 +37,7 @@ def notInserted():
     msg.setWindowTitle('Insert accounts')
     msg.exec_() 
             
-def windowSluit(self):
+def windowClose(self):
     self.close()
     sys.exit()
   
@@ -455,7 +455,7 @@ def printing():
     msg.setWindowIcon(QIcon('./logos/logo.jpg')) 
     msg.setIcon(QMessageBox.Information)
     msg.setFont(QFont("Arial", 10))
-    msg.setText('Just a moment printing is srating!')
+    msg.setText('Just a moment printing is starting!')
     msg.setWindowTitle('Printing receipt')
     msg.exec_()
     
@@ -945,7 +945,7 @@ def barcodeScan():
             grid.addWidget(self.adminBtn, 9, 9, 1, 1, Qt.AlignRight)
                                                    
             self.closeBtn = QPushButton('Exit')
-            self.closeBtn.clicked.connect(lambda: windowSluit(self))
+            self.closeBtn.clicked.connect(lambda: windowClose(self))
             self.closeBtn.setFont(QFont("Arial",12))
             self.closeBtn.setFocusPolicy(Qt.NoFocus)
             self.closeBtn.setFixedWidth(120)
