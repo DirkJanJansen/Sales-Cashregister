@@ -908,6 +908,7 @@ def set_barcodenr(self):
             self.maccess = 0
             self.plusminBtn.setHidden(True)
             self.adminBtn.setHidden(True)
+            self.q1Edit.setText('')
             self.logonstate.setText('Logged out')
         else:
             self.checknr = barcodenr
