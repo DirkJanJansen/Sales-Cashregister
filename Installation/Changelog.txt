@@ -20,3 +20,4 @@
 2020-06-16 added compile.bat for precompling program
 2020-06-16 requirements.txt changed with keyboard module
 2020-06-16 install.txt and LINUX_install.txt added keyboard and pillow and python-barcode requirements.
+2020-06-16 cashregister.backup added column mutation_date in table sales
