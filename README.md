@@ -15,7 +15,7 @@ Link to changelog: https://github.com/DirkJanJansen/Sales/blob/master/Installati
 
 Barcode testlabels for employees for logon included
 
-Programmable buttons included for unpackaged products
+Programmable buttons for unpackaged products
 
 3 Entrance security levels 
 
