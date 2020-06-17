@@ -620,7 +620,7 @@ def newBarcode(self):
             self.q12Edit.setFixedWidth(100)
             self.q12Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q12Edit.setFont(QFont("Arial",10))
-            reg_ex = QRegExp("^[highlow]{3,4}$")
+            reg_ex = QRegExp("^high|low$")
             input_validator = QRegExpValidator(reg_ex, self.q12Edit)
             self.q12Edit.setValidator(input_validator)
             
