@@ -13,7 +13,11 @@ Link to documentation: https://github.com/DirkJanJansen/Sales/blob/master/Instal
 
 Link to changelog: https://github.com/DirkJanJansen/Sales/blob/master/Installation/Changelog.txt
 
-Barcode labels employees included
+Barcode testlabels for employees for logon included
+
+Programmable buttons included for unpackaged products
 
 3 Entrance security levels 
+
+
 
