@@ -625,7 +625,7 @@ def newBarcode(self):
             self.q12Edit.setValidator(input_validator)
             
             #button-number
-            self.q13Edit = QLineEdit()
+            self.q13Edit = QLineEdit('0')
             self.q13Edit.setFixedWidth(40)
             self.q13Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q13Edit.setFont(QFont("Arial",10))
@@ -638,6 +638,9 @@ def newBarcode(self):
             self.q14Edit.setFixedWidth(200)
             self.q14Edit.setFont(QFont("Arial",10))
             self.q14Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            reg_ex = QRegExp("^.{1,20}$")
+            input_validator = QRegExpValidator(reg_ex, self.q14Edit)
+            self.q14Edit.setValidator(input_validator)
             
             def q2Changed():
                 self.q2Edit.setText(self.q2Edit.text())
@@ -768,7 +771,6 @@ def newBarcode(self):
                 mdescr = self.q2Edit.text()
                 mprice = float(self.q3Edit.text())
                 munit = self.q5Edit.currentText()
-                print(munit)
                 msize = float(self.q7Edit.text())
                 mloc = self.q8Edit.text()
                 mgroup = self.q9Edit.text()
@@ -779,9 +781,9 @@ def newBarcode(self):
                 mbtntext = self.q14Edit.text()
                 if mdescr and mprice and mcat and mbtnnr and mbtntext:
                     insart = insert(articles).values(barcode=str(mbarcode),\
-                       description = mdescr,item_price=mprice, item_unit=munit,order_size=msize,\
-                       location_warehouse=mloc, article_group=mgroup,thumbnail=mthumb,\
-                       category=mcat,VAT=mvat)
+                       description = mdescr,item_price=mprice, item_unit=munit,\
+                       order_size=msize,location_warehouse=mloc, article_group=mgroup,\
+                       thumbnail=mthumb,category=mcat,VAT=mvat)
                     con.execute(insart)
                     updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
                      values(barcode=str(mbarcode), buttontext=mbtntext)
