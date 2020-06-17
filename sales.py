@@ -8,8 +8,8 @@ from PyQt5.QtGui import QIcon, QFont, QPixmap, QMovie, QRegExpValidator, QColor,
 from PyQt5.QtWidgets import QLineEdit, QGridLayout, QDialog, QLabel, QPushButton,\
         QMessageBox, QSpinBox, QComboBox, QTextEdit, QApplication, QWidget,\
         QVBoxLayout, QTableView, QStyledItemDelegate
-from sqlalchemy import (Table, Column, Integer, String, Boolean, MetaData, create_engine, Float,\
-                        select, update,insert, delete, func, and_, ForeignKey)
+from sqlalchemy import Table, Column, Integer, String, Boolean, MetaData, create_engine,\
+                     Float, select, update,insert, delete, func, and_, ForeignKey
 
 def noData():
     msg = QMessageBox()
@@ -471,23 +471,27 @@ def newBarcode(self):
     # generate new barcode
     metadata = MetaData()
     articles = Table('articles', metadata,
-    Column('barcode', String, primary_key=True),
-    Column('description', String),
-    Column('item_price', Float),
-    Column('item_stock', Float),
-    Column('item_unit', String),
-    Column('minimum_stock', Float),
-    Column('order_size', Float),
-    Column('location_warehouse', String),
-    Column('article_group', String),
-    Column('thumbnail', String),
-    Column('category', Integer),
-    Column('order_balance', Float),
-    Column('order_status', Boolean),
-    Column('mutation_date', String),
-    Column('annual_consumption_1', Float),
-    Column('annual_consumption_2', Float),
-    Column('VAT', String))
+        Column('barcode', String, primary_key=True),
+        Column('description', String),
+        Column('item_price', Float),
+        Column('item_stock', Float),
+        Column('item_unit', String),
+        Column('minimum_stock', Float),
+        Column('order_size', Float),
+        Column('location_warehouse', String),
+        Column('article_group', String),
+        Column('thumbnail', String),
+        Column('category', Integer),
+        Column('order_balance', Float),
+        Column('order_status', Boolean),
+        Column('mutation_date', String),
+        Column('annual_consumption_1', Float),
+        Column('annual_consumption_2', Float),
+        Column('VAT', String))
+    buttons = Table('buttons', metadata,
+        Column('buttonID', Integer, primary_key=True),
+        Column('buttontext', String),
+        Column('barcode', String))
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
@@ -532,195 +536,212 @@ def newBarcode(self):
             grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
             
             #barcode
-            q1Edit = QLineEdit(str(mbarcode)) 
-            q1Edit.setFixedWidth(130)
-            q1Edit.setFont(QFont("Arial",10))
-            q1Edit.setStyleSheet("color: black")
-            q1Edit.setDisabled(True)
+            self.q1Edit = QLineEdit(str(mbarcode)) 
+            self.q1Edit.setFixedWidth(130)
+            self.q1Edit.setFont(QFont("Arial",10))
+            self.q1Edit.setStyleSheet("color: black")
+            self.q1Edit.setDisabled(True)
 
             #description
-            q2Edit = QLineEdit()    
-            q2Edit.setFixedWidth(400)
-            q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q2Edit.setFont(QFont("Arial",10))
+            self.q2Edit = QLineEdit()    
+            self.q2Edit.setFixedWidth(400)
+            self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q2Edit.setFont(QFont("Arial",10))
             reg_ex = QRegExp("^.{1,50}$")
-            input_validator = QRegExpValidator(reg_ex, q2Edit)
-            q2Edit.setValidator(input_validator)
+            input_validator = QRegExpValidator(reg_ex, self.q2Edit)
+            self.q2Edit.setValidator(input_validator)
             
             #item_price
-            q3Edit = QLineEdit('0')
-            q3Edit.setFixedWidth(100)
-            q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q3Edit.setFont(QFont("Arial",10))
+            self.q3Edit = QLineEdit('0')
+            self.q3Edit.setFixedWidth(100)
+            self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q3Edit.setFont(QFont("Arial",10))
             reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
-            input_validator = QRegExpValidator(reg_ex, q3Edit)
-            q3Edit.setValidator(input_validator)
-                           
-            #item_stock
-            q4Edit = QLineEdit('0')
-            q4Edit.setFixedWidth(100)
-            q4Edit.setFont(QFont("Arial",10))
-            q4Edit.setStyleSheet("color: black")
-            q4Edit.setDisabled(True)
+            input_validator = QRegExpValidator(reg_ex, self.q3Edit)
+            self.q3Edit.setValidator(input_validator)
  
             #item_unit
-            q5Edit = QComboBox()
-            q5Edit.setFixedWidth(160)
-            q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q5Edit.setFont(QFont("Arial",10))
-            q5Edit.addItem('  Maak uw keuze  ')
-            q5Edit.addItem('stuk')
-            q5Edit.addItem('100')
-            q5Edit.addItem('meter')
-            q5Edit.addItem('kg')
-            q5Edit.addItem('liter')
-            q5Edit.addItem('m²')
-            q5Edit.addItem('m³')
-                     
-            #minimum_stock
-            q6Edit = QLineEdit('0')
-            q6Edit.setFixedWidth(100)
-            q6Edit.setFont(QFont("Arial",10))
-            q6Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q6Edit.setStyleSheet("color: black")
-            q6Edit.setDisabled(True)
-          
+            self.q5Edit = QComboBox()
+            self.q5Edit.setFixedWidth(170)
+            self.q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q5Edit.setFont(QFont("Arial",10))
+            self.q5Edit.addItem('stuk')
+            self.q5Edit.addItem('100')
+            self.q5Edit.addItem('meter')
+            self.q5Edit.addItem('kg')
+            self.q5Edit.addItem('liter')
+            self.q5Edit.addItem('m²')
+            self.q5Edit.addItem('m³')
+
             #order_size
-            q7Edit = QLineEdit('0')
-            q7Edit.setFixedWidth(100)
-            q7Edit.setFont(QFont("Arial",10))
-            q7Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q7Edit = QLineEdit('0')
+            self.q7Edit.setFixedWidth(100)
+            self.q7Edit.setFont(QFont("Arial",10))
+            self.q7Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
-            input_validator = QRegExpValidator(reg_ex, q7Edit)
-            q7Edit.setValidator(input_validator)
+            input_validator = QRegExpValidator(reg_ex, self.q7Edit)
+            self.q7Edit.setValidator(input_validator)
                          
             #location
-            q8Edit = QLineEdit()
-            q8Edit.setFixedWidth(100)
-            q8Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q8Edit.setFont(QFont("Arial",10))
+            self.q8Edit = QLineEdit()
+            self.q8Edit.setFixedWidth(100)
+            self.q8Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q8Edit.setFont(QFont("Arial",10))
                         
             # article_group
-            q9Edit = QLineEdit()
-            q9Edit.setFixedWidth(200)
-            q9Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q9Edit.setFont(QFont("Arial",10))
+            self.q9Edit = QLineEdit()
+            self.q9Edit.setFixedWidth(200)
+            self.q9Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q9Edit.setFont(QFont("Arial",10))
                 
             #thumbnail
-            q10Edit = QLineEdit('./thumbs/')
-            q10Edit.setFixedWidth(200)
-            q10Edit.setFont(QFont("Arial",10))
-            q10Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q10Edit = QLineEdit('./thumbs/')
+            self.q10Edit.setFixedWidth(200)
+            self.q10Edit.setFont(QFont("Arial",10))
+            self.q10Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                         
             #category
-            q11Edit = QComboBox()
-            q11Edit.setFixedWidth(260)
-            q11Edit.setFont(QFont("Arial",10))
-            q11Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q11Edit.addItem('               Maak uw keuze')
-            q11Edit.addItem('1. Voorraadgestuurd < 3 weken.')
-            q11Edit.addItem('2. Voorraadgestuurd < 12 weken')
-            q11Edit.addItem('3. Voorraadgestuurd < 26 weken')
-            q11Edit.addItem('4. Voorraadgestuurd < 52 weken')
-            q11Edit.addItem('5. Reservering < 3 weken')
-            q11Edit.addItem('6. Reservering < 6 weken')
-            q11Edit.addItem('7. Reservering < 12 weken')
-            q11Edit.addItem('8. Reservering < 24 weken')
-            q11Edit.addItem('9. Reservering < 52 weken')
+            self.q11Edit = QComboBox()
+            self.q11Edit.setFixedWidth(260)
+            self.q11Edit.setFont(QFont("Arial",10))
+            self.q11Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q11Edit.addItem('1. Stock-driven < 3 weken.')
+            self.q11Edit.addItem('2. Stock-driven < 12 weken')
+            self.q11Edit.addItem('3. Stock-driven < 26 weken')
+            self.q11Edit.addItem('4. Stock-driven < 52 weken')
+            self.q11Edit.addItem('5. Reservation < 3 weken')
+            self.q11Edit.addItem('6. Reservation < 6 weken')
+            self.q11Edit.addItem('7. Reservation < 12 weken')
+            self.q11Edit.addItem('8. Reservation < 24 weken')
+            self.q11Edit.addItem('9. Reservation < 52 weken')
             
             #vat
-            q12Edit = QLineEdit('high')
-            q12Edit.setFixedWidth(100)
-            q12Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q12Edit.setFont(QFont("Arial",10))
+            self.q12Edit = QLineEdit('high')
+            self.q12Edit.setFixedWidth(100)
+            self.q12Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q12Edit.setFont(QFont("Arial",10))
             reg_ex = QRegExp("^[highlow]{3,4}$")
-            input_validator = QRegExpValidator(reg_ex, q12Edit)
-            q12Edit.setValidator(input_validator)
+            input_validator = QRegExpValidator(reg_ex, self.q12Edit)
+            self.q12Edit.setValidator(input_validator)
             
             #button-number
-            q13Edit = QLineEdit()
-            q13Edit.setFixedWidth(40)
-            q13Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            q13Edit.setFont(QFont("Arial",10))
+            self.q13Edit = QLineEdit()
+            self.q13Edit.setFixedWidth(40)
+            self.q13Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q13Edit.setFont(QFont("Arial",10))
             reg_ex = QRegExp("^[123]{1}[0-9]{0,1}$")
-            input_validator = QRegExpValidator(reg_ex, q13Edit)
-            q13Edit.setValidator(input_validator)
+            input_validator = QRegExpValidator(reg_ex, self.q13Edit)
+            self.q13Edit.setValidator(input_validator)
             
             #button-text
-            q14Edit = QLineEdit()
-            q14Edit.setFixedWidth(200)
-            q14Edit.setFont(QFont("Arial",10))
-            q14Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.q14Edit = QLineEdit()
+            self.q14Edit.setFixedWidth(200)
+            self.q14Edit.setFont(QFont("Arial",10))
+            self.q14Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            
+            def q2Changed():
+                self.q2Edit.setText(self.q2Edit.text())
+            self.q2Edit.textChanged.connect(q2Changed)
+            
+            def q3Changed():
+                self.q3Edit.setText(self.q3Edit.text())
+            self.q3Edit.textChanged.connect(q3Changed)
+            
+            def q5Changed():
+                self.q5Edit.setCurrentIndex(self.q5Edit.currentIndex())
+            self.q5Edit.currentIndexChanged.connect(q5Changed)
+            
+            def q7Changed():
+                self.q7Edit.setText(self.q7Edit.text())
+            self.q7Edit.textChanged.connect(q7Changed)
+            
+            def q8Changed():
+                self.q8Edit.setText(self.q8Edit.text())
+            self.q8Edit.textChanged.connect(q8Changed)
+            
+            def q9Changed():
+                self.q9Edit.setText(self.q9Edit.text())
+            self.q9Edit.textChanged.connect(q9Changed)
+            
+            def q10Changed():
+                self.q10Edit.setText(self.q10Edit.text())
+            self.q10Edit.textChanged.connect(q10Changed)
+  
+            def q11Changed():
+                self.q11Edit.setCurrentIndex(self.q11Edit.currentIndex())
+            self.q11Edit.currentIndexChanged.connect(q11Changed)
+            
+            def q12Changed():
+                self.q12Edit.setText(self.q12Edit.text())
+            self.q12Edit.textChanged.connect(q12Changed)
+            
+            def q13Changed():
+                self.q13Edit.setText(self.q13Edit.text())
+            self.q13Edit.textChanged.connect(q13Changed)
+            
+            def q14Changed():
+                self.q14Edit.setText(self.q14Edit.text())
+            self.q14Edit.textChanged.connect(q14Changed)
                          
             lbl1 = QLabel('Barcode')
             lbl1.setFont(QFont("Arial", 10))
             grid.addWidget(lbl1, 3, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q1Edit, 3, 1)
+            grid.addWidget(self.q1Edit, 3, 1)
                       
             lbl2 = QLabel('Description')
             lbl2.setFont(QFont("Arial", 10))
             grid.addWidget(lbl2, 4, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q2Edit, 4, 1, 1, 3)
+            grid.addWidget(self.q2Edit, 4, 1, 1, 3)
             
             lbl3 = QLabel('Item-price')
             lbl3.setFont(QFont("Arial", 10))
             grid.addWidget(lbl3, 5, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q3Edit, 5, 1)
+            grid.addWidget(self.q3Edit, 5, 1)
             
-            lbl4 = QLabel('Item-stock')
-            lbl4.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl4, 5, 0, 1, 2, Qt.AlignRight)
-            grid.addWidget(q4Edit, 5, 2)
-            
+            lbl10 = QLabel('Thumbnail')
+            lbl10.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl10, 5, 1, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.q10Edit, 5, 2, 1, 1, Qt.AlignRight)
+               
             lbl5 = QLabel('Item-unit')
             lbl5.setFont(QFont("Arial", 10))
             grid.addWidget(lbl5, 6, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q5Edit, 6, 1)
-            
-            lbl6 = QLabel('Min.-stock')
-            lbl6.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl6, 6, 0, 1, 2, Qt.AlignRight)
-            grid.addWidget(q6Edit, 6, 2) 
-            
+            grid.addWidget(self.q5Edit, 6, 1)
+               
             lbl7 = QLabel('Order-size')
             lbl7.setFont(QFont("Arial", 10))
             grid.addWidget(lbl7, 7, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q7Edit, 7, 1)
+            grid.addWidget(self.q7Edit, 7, 1)
             
             lbl8 = QLabel('Location')
             lbl8.setFont(QFont("Arial", 10))
             grid.addWidget(lbl8, 7, 0, 1, 2, Qt.AlignRight)
-            grid.addWidget(q8Edit, 7, 2)
+            grid.addWidget(self.q8Edit, 7, 2, 1, 1, Qt.AlignRight)
             
             lbl9 = QLabel('Article-Group')
             lbl9.setFont(QFont("Arial", 10))
             grid.addWidget(lbl9, 8, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q9Edit, 8, 1)   
-            
-            lbl10 = QLabel('Thumb')
-            lbl10.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl10, 8, 0, 1, 2, Qt.AlignRight)
-            grid.addWidget(q10Edit, 8, 2)
-            
+            grid.addWidget(self.q9Edit, 8, 1)   
+     
             lbl11 = QLabel('Category')
             lbl11.setFont(QFont("Arial", 10))
             grid.addWidget(lbl11, 9, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q11Edit, 9, 1)
+            grid.addWidget(self.q11Edit, 9, 1, 1, 1, Qt.AlignRight)
          
             lbl12 = QLabel('VAT')
             lbl12.setFont(QFont("Arial", 10))
             grid.addWidget(lbl12, 9, 2)
-            grid.addWidget(q12Edit, 9, 2, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.q12Edit, 9, 2, 1, 1, Qt.AlignRight)
             
             lbl13 = QLabel('Button-Number')
             lbl13.setFont(QFont("Arial", 10))
             grid.addWidget(lbl13, 10, 0, 1, 1, Qt.AlignRight)
-            grid.addWidget(q13Edit, 10, 1)
+            grid.addWidget(self.q13Edit, 10, 1)
             
             lbl14 = QLabel('Button-Text')
             lbl14.setFont(QFont("Arial", 10))
             grid.addWidget(lbl14, 10, 1, 1, 1, Qt.AlignRight)
-            grid.addWidget(q14Edit, 10, 2, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.q14Edit, 10, 2, 1, 1, Qt.AlignRight)
                         
             applyBtn = QPushButton('Insert')
             applyBtn.clicked.connect(lambda: insertart())
@@ -744,20 +765,31 @@ def newBarcode(self):
             grid.addWidget(lbl3, 12, 0, 1, 3, Qt.AlignCenter)
           
             def insertart():
-                fname = q2Edit.text()
-                lname = q3Edit.text()
-                cname = q4Edit.text()
-                maccess = q5Edit.text()
-                if fname and lname and cname:
-                    insacc = insert(articles).values(barcodeID = str(mbarcode),\
-                       firstname = fname, lastname = lname,\
-                       callname = cname, access = int(maccess))
-                    con.execute(insacc)
+                mdescr = self.q2Edit.text()
+                mprice = float(self.q3Edit.text())
+                munit = self.q5Edit.currentIndex()
+                msize = float(self.q7Edit.text())
+                mloc = self.q8Edit.text()
+                mgroup = self.q9Edit.text()
+                mthumb = self.q10Edit.text()
+                mcat = int(self.q11Edit.currentIndex()) + 1
+                mvat = self.q12Edit.text()
+                mbtnnr = int(self.q13Edit.text())
+                mbtntext = self.q14Edit.text()
+                if mdescr and mprice and mcat and mbtnnr and mbtntext:
+                    insart = insert(articles).values(barcode=str(mbarcode),\
+                       description = mdescr,item_price=mprice, item_unit=munit,order_size=msize,\
+                       location_warehouse=mloc, article_group=mgroup,thumbnail=mthumb,\
+                       category=mcat,VAT=mvat)
+                    con.execute(insart)
+                    updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
+                     values(barcode=str(mbarcode), buttontext=mbtntext)
+                    con.execute(updbtn)
                     if sys.platform == 'win32':
                         ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
                     else:
                         ean.save('./Barcodes/Articles/'+str(mbarcode))
-                        insertOK()
+                    insertOK()
                     self.close()
                 else:
                     notInserted()
@@ -815,7 +847,6 @@ def defButtons(self):
                            
             def menuChoice(self):
                 mindex = self.k0Edit.currentIndex()
-                
                 if mindex == 0:
                     newBarcode(self)
                 elif mindex == 1:
