@@ -648,7 +648,7 @@ def newBarcode(self):
             self.q3Edit.textChanged.connect(q3Changed)
             
             def q5Changed():
-                self.q5Edit.setCurrentIndex(self.q5Edit.currentIndex())
+                self.q5Edit.setCurrentText(self.q5Edit.currentText())
             self.q5Edit.currentIndexChanged.connect(q5Changed)
             
             def q7Changed():
@@ -767,12 +767,13 @@ def newBarcode(self):
             def insertart():
                 mdescr = self.q2Edit.text()
                 mprice = float(self.q3Edit.text())
-                munit = self.q5Edit.currentIndex()
+                munit = self.q5Edit.currentText()
+                print(munit)
                 msize = float(self.q7Edit.text())
                 mloc = self.q8Edit.text()
                 mgroup = self.q9Edit.text()
                 mthumb = self.q10Edit.text()
-                mcat = int(self.q11Edit.currentIndex()) + 1
+                mcat = int(self.q11Edit.currentIndex())+1
                 mvat = self.q12Edit.text()
                 mbtnnr = int(self.q13Edit.text())
                 mbtntext = self.q14Edit.text()
