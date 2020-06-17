@@ -25,3 +25,4 @@
 2020-06-16 sales.py added module requesting sales
 2020-06-16 sales.py added module payments request
 2020-06-16 sales.py ongoing development assigning buttons
+2020-06-16 sales.py administration buttontext assign for buttons ready for new barcode items, todo buttontext for existing barcode items
