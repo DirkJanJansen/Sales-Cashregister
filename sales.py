@@ -872,7 +872,8 @@ def set_barcodenr(self):
                 midnr += 1
                 insbal = insert(sales).values(ID = midnr, receiptnumber = self.mreceipt,\
                   barcode = barcodenr, description = mdescr, number = mnumber, item_price = mprice,\
-                  sub_total = mnumber*mprice, sub_vat = mnumber*mprice*self.mvat, callname = self.mcallname)
+                  sub_total = mnumber*mprice, sub_vat = mnumber*mprice*self.mvat,\
+                  callname = self.mcallname, mutation_date = mutdate)
                 con.execute(insbal)
                 
             updart = update(articles).where(articles.c.barcode == rpart[0])\
