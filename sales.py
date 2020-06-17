@@ -163,7 +163,7 @@ def salesRequest(self):
     class MyWindow(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
-            self.setGeometry(100, 50, 900, 900)
+            self.setGeometry(100, 50, 1200, 900)
             self.setWindowTitle('Sales requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
