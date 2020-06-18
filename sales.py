@@ -7,9 +7,20 @@ from PyQt5.QtCore import Qt, QSize, QRegExp, QAbstractTableModel
 from PyQt5.QtGui import QIcon, QFont, QPixmap, QMovie, QRegExpValidator, QColor, QImage
 from PyQt5.QtWidgets import QLineEdit, QGridLayout, QDialog, QLabel, QPushButton,\
         QMessageBox, QSpinBox, QComboBox, QTextEdit, QApplication, QWidget,\
-        QVBoxLayout, QTableView, QStyledItemDelegate
+        QVBoxLayout, QTableView, QStyledItemDelegate, QCheckBox
 from sqlalchemy import Table, Column, Integer, String, Boolean, MetaData, create_engine,\
                      Float, select, update,insert, delete, func, and_, ForeignKey
+
+def paySuccess():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Information)
+    msg.setText('Payment succeeded!')
+    msg.setWindowTitle('Payments instances')
+    msg.exec_() 
+    
 
 def alertText():
     msg = QMessageBox()
@@ -372,7 +383,7 @@ def paymentsRequest(self):
     class MyWindow(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
-            self.setGeometry(100, 50, 900, 900)
+            self.setGeometry(500, 50, 900, 900)
             self.setWindowTitle('Sales requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
@@ -387,6 +398,7 @@ def paymentsRequest(self):
             layout = QVBoxLayout(self)
             layout.addWidget(table_view)
             self.setLayout(layout)
+            table_view.clicked.connect(showSelection)
 
     class MyTableModel(QAbstractTableModel):
         def __init__(self, parent, mylist, header, *args):
@@ -420,7 +432,182 @@ def paymentsRequest(self):
     data_list=[]
     for row in rppay:
         data_list += [(row)] 
-                                   
+        
+    def showSelection(idx):
+        mpaynr = idx.data()
+        selp = select([payments]).where(payments.c.payID == mpaynr)
+        rpp = con.execute(selp).first()
+                  
+        class MainWindow(QDialog):
+            def __init__(self):
+                QDialog.__init__(self)
+                self.setWindowTitle("Payments instances")
+                self.setWindowIcon(QIcon('./logos/logo.jpg'))
+                self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                    Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                       
+                self.setFont(QFont('Arial', 10))
+                self.setStyleSheet("background-color: #D9E1DF") 
+            
+                grid = QGridLayout()
+                grid.setSpacing(20)
+                                                    
+                pyqt = QLabel()
+                movie = QMovie('./logos/pyqt.gif')
+                pyqt.setMovie(movie)
+                movie.setScaledSize(QSize(240,80))
+                movie.start()
+                grid.addWidget(pyqt, 0 ,0, 1, 2)
+           
+                logo = QLabel()
+                pixmap = QPixmap('./logos/logo.jpg')
+                logo.setPixmap(pixmap.scaled(70,70))
+                grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
+                
+                #kind
+                q1Edit = QLineEdit(rpp[1])
+                q1Edit.setFixedWidth(250)
+                q1Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q1Edit.setDisabled(True)
+                                
+                #amount
+                q2Edit = QLineEdit(str(round(float(rpp[2]),2)))
+                q2Edit.setAlignment(Qt.AlignRight)
+                q2Edit.setFixedWidth(150)
+                q2Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q2Edit.setDisabled(True)
+                 
+                #bookdate
+                q3Edit = QLineEdit(str(rpp[3]))
+                q3Edit.setFixedWidth(150)
+                q3Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q3Edit.setDisabled(True)
+                
+                #paydate
+                q4Edit = QLineEdit(str(rpp[4]))
+                q4Edit.setFixedWidth(150)
+                q4Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q4Edit.setDisabled(True)
+                             
+                #instance
+                q5Edit = QLineEdit(rpp[5])
+                q5Edit.setFixedWidth(250)
+                q5Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q5Edit.setDisabled(True)
+                  
+                #accountnumber
+                q9Edit = QLineEdit(str(rpp[6]))
+                q9Edit.setFixedWidth(250)
+                q9Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q9Edit.setDisabled(True)
+                                 
+                #receiptnumber)
+                q12Edit = QLineEdit(str(rpp[7]))
+                q12Edit.setAlignment(Qt.AlignRight)
+                q12Edit.setFixedWidth(150)
+                q12Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                q12Edit.setDisabled(True)    
+                        
+                lbl3 = QLabel('Kind')  
+                lbl3.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl3, 2, 0)
+                grid.addWidget(q1Edit, 2, 1)
+                                                     
+                lbl4 = QLabel('Amount')  
+                lbl4.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl4, 3, 0)
+                grid.addWidget(q2Edit, 3, 1)
+                
+                lbl5 = QLabel('Bookdate')  
+                lbl5.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl5, 4, 0)
+                grid.addWidget(q3Edit, 4, 1)
+                
+                lbl6 = QLabel('Paydate')  
+                lbl6.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl6, 5, 0)
+                grid.addWidget(q4Edit, 5, 1)
+                
+                lbl7 = QLabel('Pay')
+                lbl7.setFont(QFont("Arial",10))
+                grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
+                     
+                cBox = QCheckBox()
+                cBox.stateChanged.connect(self.cBoxChanged)
+                cBox.setStyleSheet('color: black; background-color: #F8F7EE')
+                grid.addWidget(cBox, 6, 1)
+                if len(rpp[4])==10:
+                    lbl7 = QLabel('Payed')
+                    lbl7.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
+                    cBox.setStyleSheet('color: black')
+                    cBox.setEnabled(False)
+                                                                   
+                lbl7 = QLabel('Instance')  
+                lbl7.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl7, 7, 0)
+                grid.addWidget(q5Edit, 7, 1, 1, 2)
+                 
+                lbl20 = QLabel('Accountnumber')  
+                lbl20.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl20, 10, 0)
+                grid.addWidget(q9Edit, 10, 1, 1, 2)
+                      
+                lbl23 = QLabel('Receiptnumber')  
+                lbl23.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                grid.addWidget(lbl23, 13, 0)
+                grid.addWidget(q12Edit, 13, 1)
+               
+                payBtn = QPushButton('Paying')
+                payBtn.clicked.connect(self.accept)
+        
+                grid.addWidget(payBtn, 14, 1, 1 , 1, Qt.AlignRight)
+                payBtn.setFont(QFont("Arial",10))
+                payBtn.setFixedWidth(100)
+                payBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                
+                closeBtn = QPushButton('Close')
+                closeBtn.clicked.connect(self.close)
+        
+                grid.addWidget(closeBtn, 14, 1)
+                closeBtn.setFont(QFont("Arial",10))
+                closeBtn.setFixedWidth(100)
+                closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                
+                grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 15, 0, 1, 2, Qt.AlignCenter)
+                
+                self.setLayout(grid)
+                self.setGeometry(600, 200, 150, 150)
+                
+            state = False  
+            def cBoxChanged(self, state):
+                if state == Qt.Checked:
+                    self.state = True
+                        
+            def returncBox(self):
+                return self.state
+                       
+            @staticmethod
+            def getData(parent=None):
+                dialog = MainWindow()
+                dialog.exec_()
+                return [dialog.returncBox()] 
+                                           
+        mainwin = MainWindow()
+        data = mainwin.getData()
+                 
+        if data[0]:
+            mstatus = True
+        else:
+            return
+        if mstatus:
+            mpaydate = str(datetime.datetime.now())[0:10]
+            updpay = update(payments).where(payments.c.payID == mpaynr).\
+                values(paydate = mpaydate)
+            con.execute(updpay)
+            paySuccess()    
+                                    
     win = MyWindow(data_list, header)
     win.exec_()
     
@@ -601,7 +788,6 @@ def emplAccess(self):
     window.exec_()
     
 def newBarcode(self):
-    # generate new barcode
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -629,14 +815,13 @@ def newBarcode(self):
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
     mbarcode=(con.execute(select([func.max(articles.c.barcode, type_=String)])).scalar())
+    # generate new barcode
     marticlenr = mbarcode[3:11]
     marticlenr = str((int(marticlenr[0:8]))+int(1))
     total = 0
     for i in range(int(8)):
         total += int(marticlenr[i])*(int(9)-i)
-    checkdigit = total % 11
-    if checkdigit == 10:
-        checkdigit = 0
+    checkdigit = total % 11 % 10
     marticlenr = marticlenr+str(checkdigit)
     ean = barcode.get('ean13','800'+str(marticlenr), writer=ImageWriter()) # for barcode as png
     mbarcode = ean.get_fullcode()
@@ -1060,7 +1245,7 @@ def adminMenu(self):
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('Articles request')
             self.k0Edit.addItem('Sales request')
-            self.k0Edit.addItem('Payments request')
+            self.k0Edit.addItem('Payments request/Payments')
             self.k0Edit.addItem('Accounts insert/change')
             self.k0Edit.addItem('Buttons define')
             self.k0Edit.addItem('Articles insert')
