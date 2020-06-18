@@ -55,7 +55,7 @@ def windowClose(self):
     self.close()
     sys.exit()
   
-def artRequest(self):
+def artRequest(self, mflag):
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -100,6 +100,8 @@ def artRequest(self):
             table_view.setItemDelegateForColumn(9, showImage(self))
             table_view.setColumnWidth(9, 100)
             table_view.verticalHeader().setDefaultSectionSize(75)
+            if mflag:
+                table_view.clicked.connect(defineButton)
             layout = QVBoxLayout(self)
             layout.addWidget(table_view)
             self.setLayout(layout)
@@ -148,7 +150,128 @@ def artRequest(self):
     data_list=[]
     for row in rparticles:
         data_list += [(row)] 
-                                   
+    
+    def defineButton(idx):
+        mbarcode = idx.data()
+        if idx.column() == 0:
+            metadata = MetaData()
+            buttons = Table('buttons', metadata,
+                Column('buttonID', Integer, primary_key=True),
+                Column('barcode', String),
+                Column('buttontext', String))
+            
+            class Widget(QDialog):
+                def __init__(self, parent=None):
+                    super(Widget, self).__init__(parent)
+                    
+                    self.setWindowTitle("Button Text")
+                    self.setWindowIcon(QIcon('./logos/logo.jpg'))
+                    self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                        Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                    self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                           
+                    self.setFont(QFont('Arial', 10))
+                    self.setStyleSheet("background-color: #D9E1DF")  
+            
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 ,0, 1, 2)
+               
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
+                    
+                    #barcode
+                    self.q1Edit = QLineEdit(str(mbarcode)) 
+                    self.q1Edit.setFixedWidth(130)
+                    self.q1Edit.setFont(QFont("Arial",10))
+                    self.q1Edit.setStyleSheet("color: black")
+                    self.q1Edit.setDisabled(True)
+                    
+                    #button-number
+                    self.q2Edit = QLineEdit('0')
+                    self.q2Edit.setFixedWidth(40)
+                    self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q2Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^[123]{1}[0-9]{0,1}$")
+                    input_validator = QRegExpValidator(reg_ex, self.q2Edit)
+                    self.q2Edit.setValidator(input_validator)
+                    
+                    #button-text
+                    self.q3Edit = QTextEdit()
+                    self.q3Edit.setFixedSize(200,40)
+                    self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+                    self.q3Edit.setFont(QFont("Arial",10))
+                    self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                          
+                    def q2Changed():
+                        self.q2Edit.setText(self.q2Edit.text())
+                    self.q2Edit.textChanged.connect(q2Changed)
+                    
+                    lbl1 = QLabel('Barcodenummer')
+                    lbl1.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl1, 1, 0)
+                    grid.addWidget(self.q1Edit, 1, 1)
+                     
+                    lbl2 = QLabel('Button-Number')
+                    lbl2.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl2, 2, 0)
+                    grid.addWidget(self.q2Edit, 2, 1)
+                    
+                    lbl3 = QLabel('Button-Text')
+                    lbl3.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl3, 3, 0)
+                    grid.addWidget(self.q3Edit, 3, 1)
+                    
+                    applyBtn = QPushButton('Insert')
+                    applyBtn.clicked.connect(lambda: insBtnText())
+                       
+                    applyBtn.setFont(QFont("Arial",10))
+                    applyBtn.setFixedWidth(100)
+                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro") 
+                        
+                    grid.addWidget(applyBtn, 4, 1 , 1, 1, Qt.AlignRight)
+                        
+                    cancelBtn = QPushButton('Close')
+                    cancelBtn.clicked.connect(self.close) 
+                    cancelBtn.setFont(QFont("Arial",10))
+                    cancelBtn.setFixedWidth(100)
+                    cancelBtn.setStyleSheet("color: black; background-color: gainsboro") 
+            
+                    grid.addWidget(cancelBtn, 4, 0, 1, 2, Qt.AlignCenter)
+                    
+                    lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+                    lbl3.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl3, 5, 0, 1, 3, Qt.AlignCenter)
+                   
+                    def insBtnText():
+                        mbtnnr = int(self.q2Edit.text())
+                        mbtntext = self.q3Edit.toPlainText()
+                        if len(mbtntext) > 16:
+                            alertText()
+                        elif mbtnnr and mbtntext:
+                            updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
+                             values(barcode=str(mbarcode), buttontext=mbtntext)
+                            con.execute(updbtn)
+                            insertOK()
+                            self.close()
+                        else:
+                            notInserted()
+                            self.close() 
+                    
+                    self.setLayout(grid)
+                    self.setGeometry(600, 200, 150, 100)
+    
+            window = Widget()
+            window.exec_()
+    
     win = MyWindow(data_list, header)
     win.exec_()
     
@@ -810,8 +933,9 @@ def newBarcode(self):
     win = Widget()
     win.exec_()
     
-def existingBarcode(self, acc):
-    print('This is existing') #met parameter voor articlesRequest
+def existingBarcode(self):
+    mflag = 1
+    artRequest(self, mflag)
         
 def defButtons(self):
     class Widget(QDialog):
@@ -955,7 +1079,8 @@ def adminMenu(self):
                 mindex = self.k0Edit.currentIndex()
 
                 if mindex == 0:
-                    artRequest(self)
+                    mflag = 0
+                    artRequest(self, mflag)
                 elif mindex == 1:
                     salesRequest(self)                
                 elif mindex == 2:
@@ -1612,7 +1737,7 @@ def barcodeScan():
             self.adminBtn.setFocusPolicy(Qt.NoFocus)
             self.adminBtn.setHidden(True)
             self.adminBtn.setFont(QFont("Arial",12))
-            self.adminBtn.setFixedSize(160, 60) 
+            self.adminBtn.setFixedSize(160, 40) 
             self.adminBtn.setStyleSheet("color: black; background-color: gainsboro")
             self.adminBtn.clicked.connect(lambda: adminMenu(self)) 
     
