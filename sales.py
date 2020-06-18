@@ -626,14 +626,13 @@ def newBarcode(self):
             self.q11Edit.addItem('9. Reservation < 52 weken')
             
             #vat
-            self.q12Edit = QLineEdit('high')
+            self.q12Edit = QComboBox()
             self.q12Edit.setFixedWidth(100)
             self.q12Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q12Edit.setFont(QFont("Arial",10))
-            reg_ex = QRegExp("^high|low$")
-            input_validator = QRegExpValidator(reg_ex, self.q12Edit)
-            self.q12Edit.setValidator(input_validator)
-            
+            self.q12Edit.addItem('high')
+            self.q12Edit.addItem('low')
+                        
             #button-number
             self.q13Edit = QLineEdit('0')
             self.q13Edit.setFixedWidth(40)
@@ -683,15 +682,12 @@ def newBarcode(self):
             self.q11Edit.currentIndexChanged.connect(q11Changed)
             
             def q12Changed():
-                self.q12Edit.setText(self.q12Edit.text())
-            self.q12Edit.textChanged.connect(q12Changed)
+                self.q12Edit.setCurrentText(self.q12Edit.currentText())
+            self.q12Edit.currentIndexChanged.connect(q12Changed)
             
             def q13Changed():
                 self.q13Edit.setText(self.q13Edit.text())
             self.q13Edit.textChanged.connect(q13Changed)
-            
-            def q14Changed():
-                self.q14Edit.textChanged.connect(q14Changed)
                          
             lbl1 = QLabel('Barcode')
             lbl1.setFont(QFont("Arial", 10))
@@ -783,10 +779,10 @@ def newBarcode(self):
                 mgroup = self.q9Edit.text()
                 mthumb = self.q10Edit.text()
                 mcat = int(self.q11Edit.currentIndex())+1
-                mvat = self.q12Edit.text()
+                mvat = self.q12Edit.currentText()
                 mbtnnr = int(self.q13Edit.text())
                 mbtntext = self.q14Edit.toPlainText()
-                if len(mbtntext) > 20:
+                if len(mbtntext) > 16:
                     alertText()
                 elif mdescr and mprice and mcat and mbtnnr and mbtntext:
                     insart = insert(articles).values(barcode=str(mbarcode),\
