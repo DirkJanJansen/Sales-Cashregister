@@ -11,6 +11,16 @@ from PyQt5.QtWidgets import QLineEdit, QGridLayout, QDialog, QLabel, QPushButton
 from sqlalchemy import Table, Column, Integer, String, Boolean, MetaData, create_engine,\
                      Float, select, update,insert, delete, func, and_, ForeignKey
 
+def alertText():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Warning)
+    msg.setText('Buttontext to long, no records inserted!')
+    msg.setWindowTitle('Transactions')
+    msg.exec_() 
+
 def noData():
     msg = QMessageBox()
     msg.setStyleSheet("color: black;  background-color: gainsboro")
@@ -634,14 +644,12 @@ def newBarcode(self):
             self.q13Edit.setValidator(input_validator)
             
             #button-text
-            self.q14Edit = QLineEdit()
-            self.q14Edit.setFixedWidth(200)
+            self.q14Edit = QTextEdit()
+            self.q14Edit.setFixedSize(200,40)
+            self.q14Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
             self.q14Edit.setFont(QFont("Arial",10))
             self.q14Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            reg_ex = QRegExp("^.{1,20}$")
-            input_validator = QRegExpValidator(reg_ex, self.q14Edit)
-            self.q14Edit.setValidator(input_validator)
-            
+                 
             def q2Changed():
                 self.q2Edit.setText(self.q2Edit.text())
             self.q2Edit.textChanged.connect(q2Changed)
@@ -683,8 +691,7 @@ def newBarcode(self):
             self.q13Edit.textChanged.connect(q13Changed)
             
             def q14Changed():
-                self.q14Edit.setText(self.q14Edit.text())
-            self.q14Edit.textChanged.connect(q14Changed)
+                self.q14Edit.textChanged.connect(q14Changed)
                          
             lbl1 = QLabel('Barcode')
             lbl1.setFont(QFont("Arial", 10))
@@ -778,8 +785,10 @@ def newBarcode(self):
                 mcat = int(self.q11Edit.currentIndex())+1
                 mvat = self.q12Edit.text()
                 mbtnnr = int(self.q13Edit.text())
-                mbtntext = self.q14Edit.text()
-                if mdescr and mprice and mcat and mbtnnr and mbtntext:
+                mbtntext = self.q14Edit.toPlainText()
+                if len(mbtntext) > 20:
+                    alertText()
+                elif mdescr and mprice and mcat and mbtnnr and mbtntext:
                     insart = insert(articles).values(barcode=str(mbarcode),\
                        description = mdescr,item_price=mprice, item_unit=munit,\
                        order_size=msize,location_warehouse=mloc, article_group=mgroup,\
@@ -788,6 +797,7 @@ def newBarcode(self):
                     updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
                      values(barcode=str(mbarcode), buttontext=mbtntext)
                     con.execute(updbtn)
+                        
                     if sys.platform == 'win32':
                         ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
                     else:
@@ -797,7 +807,7 @@ def newBarcode(self):
                 else:
                     notInserted()
                     self.close() 
-           
+            
             self.setLayout(grid)
             self.setGeometry(600, 200, 150, 100)
 
