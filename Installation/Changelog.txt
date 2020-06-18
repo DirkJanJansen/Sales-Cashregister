@@ -25,3 +25,4 @@
 2020-06-18 sales.py programmable buttontext 2 lines insert possible with check on maximum length 16 characters
 2020-06-18 sales.py field VAT changed in combobox
 2020-06-18 sales.py adminstration also ready buttontext buttons assign for existing barcode items
+2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
