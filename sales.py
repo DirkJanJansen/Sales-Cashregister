@@ -574,7 +574,7 @@ def paymentsRequest(self):
                 closeBtn.setFixedWidth(100)
                 closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
                 
-                grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 15, 0, 1, 2, Qt.AlignCenter)
+                grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 15, 0, 1, 2, Qt.AlignCenter)
                 
                 self.setLayout(grid)
                 self.setGeometry(600, 200, 150, 150)
