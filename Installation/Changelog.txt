@@ -33,3 +33,4 @@
 2020-06-19 documentation changed according payments procedure
 2020-06-19 sales.py articles categoy removed reservation items
 2020-06-19 database cashregister.backup category column values changed according revervation values
+2020-06-19 LINUX_install.txt install keyboard added
