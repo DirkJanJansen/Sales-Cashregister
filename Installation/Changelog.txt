@@ -40,3 +40,4 @@
 2020-06-19 documentation Sales_CashRegister.pdf added procedure for params
 2020-06-19 sales.py module insertArticles added
 2020-06-19 sales.py save barcodelabel in module insertArticles added
+2020-0-19 sales.py procedure payments cbox improved
