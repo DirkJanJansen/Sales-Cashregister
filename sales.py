@@ -1292,6 +1292,15 @@ def insertArticles(self):
             self.q5Edit.addItem('liter')
             self.q5Edit.addItem('m²')
             self.q5Edit.addItem('m³')
+            
+            #minimum stock
+            self.q6Edit = QLineEdit('0')
+            self.q6Edit.setFixedWidth(100)
+            self.q6Edit.setFont(QFont("Arial",10))
+            self.q6Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+            input_validator = QRegExpValidator(reg_ex, self.q6Edit)
+            self.q6Edit.setValidator(input_validator)
 
             #order_size
             self.q7Edit = QLineEdit('0')
@@ -1351,6 +1360,10 @@ def insertArticles(self):
                 self.q5Edit.setCurrentText(self.q5Edit.currentText()) #+1
             self.q5Edit.currentIndexChanged.connect(q5Changed)
             
+            def q6Changed():
+                self.q6Edit.setText(self.q6Edit.text())
+            self.q6Edit.textChanged.connect(q6Changed)
+            
             def q7Changed():
                 self.q7Edit.setText(self.q7Edit.text())
             self.q7Edit.textChanged.connect(q7Changed)
@@ -1379,7 +1392,7 @@ def insertArticles(self):
             grid.addWidget(self.q1Edit, 1, 1)
             
             grid.addWidget(QLabel('Description'), 2, 0)
-            grid.addWidget(self.q2Edit, 2, 1)
+            grid.addWidget(self.q2Edit, 2, 1 ,1 ,2)
             
             grid.addWidget(QLabel('Item_Price'), 3, 0)
             grid.addWidget(self.q3Edit, 3, 1)
@@ -1387,30 +1400,32 @@ def insertArticles(self):
             grid.addWidget(QLabel('Item-Unit'), 3, 2)
             grid.addWidget(self.q5Edit, 3, 3)
             
-            grid.addWidget(QLabel('Order-Size'), 4, 0)
-            grid.addWidget(self.q7Edit, 4, 1)
+            grid.addWidget(QLabel('Minimum_Stock'), 4, 0)
+            grid.addWidget(self.q6Edit, 4, 1)
             
-            grid.addWidget(QLabel('Location'), 4, 2)
-            grid.addWidget(self.q8Edit, 4, 3)
+            grid.addWidget(QLabel('Order-Size'), 4, 2)
+            grid.addWidget(self.q7Edit, 4, 3)
+              
+            grid.addWidget(QLabel('Location'), 5, 0)
+            grid.addWidget(self.q8Edit, 5, 1)
             
-            grid.addWidget(QLabel('Articlegroup'), 5, 0)
-            grid.addWidget(self.q9Edit, 5, 1)
+            grid.addWidget(QLabel('Articlegroup'), 5, 2)
+            grid.addWidget(self.q9Edit, 5, 3)
             
-            grid.addWidget(QLabel('Thumbnail'), 5, 2)
-            grid.addWidget(self.q10Edit, 5, 3)
+            grid.addWidget(QLabel('Thumbnail'), 6, 0)
+            grid.addWidget(self.q10Edit, 6, 1)
             
-            grid.addWidget(QLabel('Category'), 6, 0 )
-            grid.addWidget(self.q11Edit, 6, 1)
+            grid.addWidget(QLabel('Category'), 6, 2 )
+            grid.addWidget(self.q11Edit, 6, 3)
             
-            grid.addWidget(QLabel('VAT'), 6, 2 )
-            grid.addWidget(self.q12Edit, 6, 3)
-            
-            grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 8, 1, 1, 4, Qt.AlignCenter)
-            
+            grid.addWidget(QLabel('VAT'), 7, 0 )
+            grid.addWidget(self.q12Edit, 7, 1)
+  
             def insArticle(self):
                 mdescr = self.q2Edit.text()
                 mprice = float(self.q3Edit.text())
                 munit = self.q5Edit.currentText()
+                mminstock = float(self.q6Edit.text())
                 morder_size = float(self.q7Edit.text())
                 mlocation = self.q8Edit.text()
                 martgroup = self.q9Edit.text()
@@ -1419,9 +1434,10 @@ def insertArticles(self):
                 mvat = self.q12Edit.currentText()
                 if mdescr and mprice and morder_size and mlocation and mcategory:
                     insart = insert(articles).values(barcode=mbarcode,description=mdescr,\
-                        item_price=mprice,item_unit=munit,order_size=morder_size,\
-                        location_warehouse=mlocation,article_group=martgroup,\
-                        thumbnail=mthumb, category=mcategory,VAT=mvat)
+                        item_price=mprice,item_unit=munit, minimum_stock = mminstock,\
+                        order_size=morder_size, location_warehouse=mlocation,\
+                        article_group=martgroup,thumbnail=mthumb,\
+                        category=mcategory,VAT=mvat)
                     con.execute(insart)
                     if sys.platform == 'win32':
                         ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
@@ -1436,7 +1452,7 @@ def insertArticles(self):
             applyBtn = QPushButton('Insert')
             applyBtn.clicked.connect(lambda: insArticle(self))
     
-            grid.addWidget(applyBtn, 7, 3, 1, 1, Qt.AlignRight)
+            grid.addWidget(applyBtn, 8, 3, 1, 1, Qt.AlignRight)
             applyBtn.setFont(QFont("Arial",10))
             applyBtn.setFixedWidth(100)
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
@@ -1444,10 +1460,13 @@ def insertArticles(self):
             cancelBtn = QPushButton('Close')
             cancelBtn.clicked.connect(self.close)
             
-            grid.addWidget(cancelBtn, 7, 2, 1, 2)
+            grid.addWidget(cancelBtn, 8, 3)
             cancelBtn.setFont(QFont("Arial",10))
             cancelBtn.setFixedWidth(100)
             cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 9, 0, 1, 4, Qt.AlignCenter)
+            
     
             self.setLayout(grid)
             self.setGeometry(500, 300, 150, 100)
