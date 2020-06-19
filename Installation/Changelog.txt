@@ -27,6 +27,7 @@
 2020-06-18 sales.py adminstration also ready buttontext buttons assign for existing barcode items
 2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
 2020-06-18 sales.py in  payments request module added for paying instances (by clicking on first field)
+2020-06-18 LINUX_install.txt changed install keyboard added
 2020-06-19 sales.py buttontext length changed to max 20 positions
 2020-06-19 documentation changed according 20 positions and payments instances procedure added
 2020-06-19 documentation changed according payments procedure
