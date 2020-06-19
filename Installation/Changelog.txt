@@ -26,6 +26,7 @@
 2020-06-18 sales.py field VAT changed in combobox
 2020-06-18 sales.py adminstration also ready buttontext buttons assign for existing barcode items
 2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
+2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
 2020-06-18 sales.py in  payments request module added for paying instances (by clicking on first field)
 2020-06-18 LINUX_install.txt changed install keyboard added
 2020-06-19 sales.py buttontext length changed to max 20 positions
@@ -37,3 +38,4 @@
 2020-06-19 documentation added button procedure besides scanning.
 2020-06-19 sales.py added parameter request and change module
 2020-06-19 documentation Sales_CashRegister.pdf added procedure for params
+2020-06-19 sales.py module insertArticles added
