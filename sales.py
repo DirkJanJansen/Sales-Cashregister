@@ -377,7 +377,7 @@ def paymentsRequest(self):
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
      
-    selpay = select([payments]).order_by(payments.c.ovorderID)
+    selpay = select([payments]).order_by(payments.c.paydate, payments.c.ovorderID)
     rppay = con.execute(selpay)
     
     class MyWindow(QDialog):
@@ -1090,7 +1090,7 @@ def newBarcode(self):
                 mvat = self.q12Edit.currentText()
                 mbtnnr = int(self.q13Edit.text())
                 mbtntext = self.q14Edit.toPlainText()
-                if len(mbtntext) > 16:
+                if len(mbtntext) > 20:
                     alertText()
                 elif mdescr and mprice and mcat and mbtnnr and mbtntext:
                     insart = insert(articles).values(barcode=str(mbarcode),\
