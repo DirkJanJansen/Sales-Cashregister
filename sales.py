@@ -265,7 +265,7 @@ def artRequest(self, mflag):
                     def insBtnText():
                         mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
-                        if len(mbtntext) > 16:
+                        if len(mbtntext) > 20:
                             alertText()
                         elif mbtnnr and mbtntext:
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
