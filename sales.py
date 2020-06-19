@@ -64,6 +64,10 @@ def notInserted():
 def windowClose(self):
     self.close()
     sys.exit()
+    
+def refresh(self):
+    self.close()
+    defParams(self)
   
 def artRequest(self, mflag):
     metadata = MetaData()
@@ -1204,7 +1208,215 @@ def purchaseArticles(self):
     print('Purchasing articles')
     
 def defParams(self):
-    print('Administration parameters')
+    class Widget(QDialog):
+        def __init__(self, data_list, header, *args):
+            QWidget.__init__(self, *args,)
+            self.setWindowTitle('Parameters changing')
+            self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                    Qt.WindowMinMaxButtonsHint)
+            self.setFont(QFont('Arial', 10))
+            
+            grid = QGridLayout()
+            grid.setSpacing(20)
+            
+            table_model = MyTableModel(self, data_list, header)
+            table_view = QTableView()
+            table_view.setModel(table_model)
+            font = QFont("Arial", 10)
+            table_view.setFont(font)
+            table_view.resizeColumnsToContents()
+            table_view.setSelectionBehavior(QTableView.SelectRows)
+            table_view.clicked.connect(showSelection)
+            grid.addWidget(table_view, 0, 0, 1, 7)
+            
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 1 , 0 , 1, 2)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 1, 6, 1 ,1, Qt.AlignRight)
+                  
+            freshBtn = QPushButton('Verversen')
+            freshBtn.clicked.connect(lambda: refresh(self))
+
+            freshBtn.setFont(QFont("Arial",10))
+            freshBtn.setFixedWidth(100) 
+            freshBtn.setStyleSheet("color: black;  background-color: gainsboro")
+   
+            grid.addWidget(freshBtn, 1, 5, 1, 1, Qt.AlignRight | Qt.AlignBottom)
+        
+            sluitBtn = QPushButton('Sluiten')
+            sluitBtn.clicked.connect(self.close)
+
+            sluitBtn.setFont(QFont("Arial",10))
+            sluitBtn.setFixedWidth(100) 
+            sluitBtn.setStyleSheet("color: black;  background-color: gainsboro") 
+            
+            grid.addWidget(sluitBtn, 1, 4, 1, 1, Qt.AlignRight | Qt.AlignBottom)
+            
+            grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 1, 2, 1, 1, Qt.AlignBottom)
+            
+            self.setLayout(grid)
+            self.setGeometry(300, 50, 900, 900)
+            self.setLayout(grid)
+    
+    class MyTableModel(QAbstractTableModel):
+        def __init__(self, parent, mylist, header, *args):
+            QAbstractTableModel.__init__(self, parent, *args)
+            self.mylist = mylist
+            self.header = header
+        def rowCount(self, parent):
+            return len(self.mylist)
+        def columnCount(self, parent):
+            return len(self.mylist[0])
+        def data(self, index, role):
+            veld = self.mylist[index.row()][index.column()]
+            if not index.isValid():
+                return None
+            elif role == Qt.TextAlignmentRole and (type(veld) == float or type(veld) == int):
+                return Qt.AlignRight | Qt.AlignVCenter
+            elif role != Qt.DisplayRole:
+                return None
+            if type(veld) == float:
+                return '{:12.2f}'.format(veld)
+            else:
+                return veld
+        def headerData(self, col, orientation, role):
+            if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+                return self.header[col]
+            return None
+             
+    header = ['ParamID', 'Item', 'Tarief']
+    
+    metadata = MetaData()
+    params = Table('params', metadata,
+        Column('paramID', Integer(), primary_key=True),
+        Column('item', String),
+        Column('value', Float))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+        
+    sel = select([params]).order_by(params.c.paramID)
+    
+    rp = con.execute(sel)
+    
+    data_list=[]
+    for row in rp:
+        data_list += [(row)]
+        
+    def showSelection(idx):
+        paramnr = idx.data()
+        if idx.column() == 0: 
+            selpar = select([params]).where(params.c.paramID == paramnr)
+            rppar = con.execute(selpar).first()
+            
+            class MainWindow(QDialog):
+                def __init__(self):
+                    QDialog.__init__(self)
+                    
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    self.setWindowTitle("Changing parameters")
+                    self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
+                    
+                    self.setStyleSheet("background-color: #D9E1DF")
+                    self.setFont(QFont('Arial', 10))  
+                    
+                    #item
+                    self.q1Edit = QLineEdit(rppar[1])
+                    self.q1Edit.setCursorPosition(0)
+                    self.q1Edit.setFixedWidth(150)
+                    self.q1Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^.{0,20}$")
+                    input_validator = QRegExpValidator(reg_ex, self.q1Edit)
+                    self.q1Edit.setValidator(input_validator)
+                                    
+                    #value
+                    self.q2Edit = QLineEdit(str(round(float(rppar[2]),2)))
+                    self.q2Edit.setFixedWidth(100)
+                    self.q2Edit.setAlignment(Qt.AlignRight)
+                    self.q2Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, self.q2Edit)
+                    self.q2Edit.setValidator(input_validator)
+                    
+                    def q1Changed():
+                        self.q1Edit.setText(self.q1Edit.text())
+                    self.q1Edit.textChanged.connect(q1Changed)
+                    
+                    def q2Changed():
+                        self.q2Edit.setText(self.q2Edit.text())
+                    self.q2Edit.textChanged.connect(q2Changed)
+                    
+                    def updparams(self):
+                         mitem = self.q1Edit.text()   
+                         mvalue = self.q2Edit.text()
+                         updpar = update(params).where(params.c.paramID == paramnr).\
+                           values(item = mitem, value = float(mvalue))
+                         con.execute(updpar)
+                         insertOK()
+                         self.close()
+                                                      
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    
+                    lbl1 = QLabel('Parameter')  
+                    grid.addWidget(lbl1, 1, 0)
+                    lbl2 = QLabel(str(paramnr))
+                    grid.addWidget(lbl2, 1, 1)
+                           
+                    lbl3 = QLabel('Item')  
+                    grid.addWidget(lbl3, 2, 0)
+                    grid.addWidget(self.q1Edit, 2, 1, 1, 2) 
+                                                         
+                    lbl4 = QLabel('Value')  
+                    grid.addWidget(lbl4, 3, 0)
+                    grid.addWidget(self.q2Edit, 3, 1)
+                    
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 , 0 , 1, 2)
+               
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 2)
+                                                     
+                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 5, 0, 1, 3, Qt.AlignCenter)                  
+                    self.setLayout(grid)
+                    self.setGeometry(500, 300, 150, 150)
+            
+                    applyBtn = QPushButton('Change')
+                    applyBtn.clicked.connect(lambda: updparams(self))
+            
+                    grid.addWidget(applyBtn, 4, 2, 1, 1, Qt.AlignRight)
+                    applyBtn.setFont(QFont("Arial",10))
+                    applyBtn.setFixedWidth(100)
+                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+ 
+                    cancelBtn = QPushButton('Close')
+                    cancelBtn.clicked.connect(self.close)
+            
+                    grid.addWidget(cancelBtn, 4, 1, 1, 1, Qt.AlignRight)
+                    cancelBtn.setFont(QFont("Arial",10))
+                    cancelBtn.setFixedWidth(100)
+                    cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                                      
+            window = MainWindow()
+            window.exec_()
+            
+    win = Widget(data_list, header)
+    win.exec_()
     
 def adminMenu(self):
     class Widget(QDialog):
@@ -1241,13 +1453,13 @@ def adminMenu(self):
             self.k0Edit.addItem('Articles request')
             self.k0Edit.addItem('Sales request')
             self.k0Edit.addItem('Payments request/Payments')
-            self.k0Edit.addItem('Accounts insert/change')
+            self.k0Edit.addItem('Accounts insert')
             self.k0Edit.addItem('Buttons define')
             self.k0Edit.addItem('Articles insert')
             self.k0Edit.addItem('Articles-list import')
             self.k0Edit.addItem('Write off loss')
             self.k0Edit.addItem('Purchase products')
-            self.k0Edit.addItem('Parameters insert/change')
+            self.k0Edit.addItem('Parameters change')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
