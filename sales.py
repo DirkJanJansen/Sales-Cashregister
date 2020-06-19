@@ -1432,6 +1432,10 @@ def insertArticles(self):
                         location_warehouse=mlocation,article_group=martgroup,\
                         thumbnail=mthumb, category=mcategory,VAT=mvat)
                     con.execute(insart)
+                    if sys.platform == 'win32':
+                        ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
+                    else:
+                        ean.save('./Barcodes/Articles/'+str(mbarcode))
                     insertOK()
                     self.close()
                 else:
