@@ -35,3 +35,5 @@
 2020-06-19 database cashregister.backup category column values changed according revervation values
 2020-06-19 LINUX_install.txt install keyboard added
 2020-06-19 documentation added button procedure besides scanning.
+2020-06-19 sales.py added parameter request and change module
+2020-06-19 documentation Sales_CashRegister.pdf added procedure for params
