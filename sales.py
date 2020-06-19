@@ -20,8 +20,7 @@ def paySuccess():
     msg.setText('Payment succeeded!')
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
-    
-
+ 
 def alertText():
     msg = QMessageBox()
     msg.setStyleSheet("color: black;  background-color: gainsboro")
@@ -924,15 +923,11 @@ def newBarcode(self):
             self.q11Edit.setFont(QFont("Arial",10))
             self.q11Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q11Edit.addItem('1. Stock-driven < 3 weken.')
-            self.q11Edit.addItem('2. Stock-driven < 12 weken')
-            self.q11Edit.addItem('3. Stock-driven < 26 weken')
-            self.q11Edit.addItem('4. Stock-driven < 52 weken')
-            self.q11Edit.addItem('5. Reservation < 3 weken')
-            self.q11Edit.addItem('6. Reservation < 6 weken')
-            self.q11Edit.addItem('7. Reservation < 12 weken')
-            self.q11Edit.addItem('8. Reservation < 24 weken')
-            self.q11Edit.addItem('9. Reservation < 52 weken')
-            
+            self.q11Edit.addItem('2. Stock-driven < 6 weken')
+            self.q11Edit.addItem('3. Stock-driven < 12 weken')
+            self.q11Edit.addItem('4. Stock-driven < 26 weken')
+            self.q11Edit.addItem('5. Stock-driven < 52 weken')
+ 
             #vat
             self.q12Edit = QComboBox()
             self.q12Edit.setFixedWidth(100)
