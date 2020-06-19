@@ -1392,7 +1392,7 @@ def defParams(self):
                     logo = QLabel()
                     pixmap = QPixmap('./logos/logo.jpg')
                     logo.setPixmap(pixmap.scaled(70,70))
-                    grid.addWidget(logo , 0, 2)
+                    grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
                                                      
                     grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 5, 0, 1, 3, Qt.AlignCenter)                  
                     self.setLayout(grid)
