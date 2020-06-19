@@ -29,3 +29,6 @@
 2020-06-18 sales.py in  payments request module added for paying instances (by clicking on first field)
 2020-06-19 sales.py buttontext length changed to max 20 positions
 2020-06-19 documentation changed according 20 positions and payments instances procedure added
+2020-06-19 documentation changed according payments procedure
+2020-06-19 sales.py articles categoy removed reservation items
+2020-06-19 database cashregister.backup category column values changed according revervation values
