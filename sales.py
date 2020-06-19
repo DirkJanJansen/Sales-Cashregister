@@ -543,16 +543,32 @@ def paymentsRequest(self):
                 lbl7.setFont(QFont("Arial",10))
                 grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
                      
-                cBox = QCheckBox()
-                cBox.stateChanged.connect(self.cBoxChanged)
-                cBox.setStyleSheet('color: black; background-color: #F8F7EE')
-                grid.addWidget(cBox, 6, 1)
+                self.cBox = QCheckBox()
+                self.cBox.setStyleSheet('color: black; background-color: #F8F7EE')
+                grid.addWidget(self.cBox, 6, 1)
                 if len(rpp[4])==10:
                     lbl7 = QLabel('Payed')
                     lbl7.setFont(QFont("Arial",10))
                     grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
-                    cBox.setStyleSheet('color: black')
-                    cBox.setEnabled(False)
+                    self.cBox.setStyleSheet('color: black')
+                    self.cBox.setEnabled(False)
+                    
+                def cboxChanged():
+                    self.cBox.setCheckState(self.cBox.checkState())
+                self.cBox.stateChanged.connect(cboxChanged)
+                
+                def  updPayment(self):
+                    mstatus = self.cBox.checkState()
+                    if mstatus:
+                        mpaydate = str(datetime.datetime.now())[0:10]
+                        updpay = update(payments).where(payments.c.payID == mpaynr).\
+                        values(paydate = mpaydate)
+                        con.execute(updpay)
+                        paySuccess()  
+                        self.close()
+                    else:
+                        notInserted()
+                        self.close()
                                                                            
                 lbl7 = QLabel('Instance')  
                 lbl7.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
@@ -570,7 +586,7 @@ def paymentsRequest(self):
                 grid.addWidget(q12Edit, 13, 1)
                
                 payBtn = QPushButton('Paying')
-                payBtn.clicked.connect(self.accept)
+                payBtn.clicked.connect(lambda: updPayment(self))
         
                 grid.addWidget(payBtn, 14, 1, 1 , 1, Qt.AlignRight)
                 payBtn.setFont(QFont("Arial",10))
@@ -590,34 +606,9 @@ def paymentsRequest(self):
                 self.setLayout(grid)
                 self.setGeometry(600, 200, 150, 150)
                 
-            state = False  
-            def cBoxChanged(self, state):
-                if state == Qt.Checked:
-                    self.state = True
-                        
-            def returncBox(self):
-                return self.state
-                       
-            @staticmethod
-            def getData(parent=None):
-                dialog = MainWindow()
-                dialog.exec_()
-                return [dialog.returncBox()] 
-                                           
-        mainwin = MainWindow()
-        data = mainwin.getData()
-                 
-        if data[0]:
-            mstatus = True
-        else:
-            return
-        if mstatus:
-            mpaydate = str(datetime.datetime.now())[0:10]
-            updpay = update(payments).where(payments.c.payID == mpaynr).\
-                values(paydate = mpaydate)
-            con.execute(updpay)
-            paySuccess()    
-                                    
+        window = MainWindow()
+        window.exec_()
+                                     
     win = MyWindow(data_list, header)
     win.exec_()
     
