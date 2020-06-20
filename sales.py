@@ -117,7 +117,7 @@ def calculationStock():
                    
         for row in rparticles:
             mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-            mjrverbr = row[4]
+            mjrverbr = row[5]
             if row[3] == 1:
                 minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
             elif row[3] == 2:
@@ -634,8 +634,7 @@ def artRequest(self, mflag):
                     cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
                     
                     grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 10, 0, 1, 4, Qt.AlignCenter)
-                    
-            
+             
                     self.setLayout(grid)
                     self.setGeometry(500, 300, 150, 100)
          
