@@ -2203,7 +2203,6 @@ def info():
             infolbl = QLabel('''\t\t\t\t\t\t\t\t\t\t\t
         Instruction barcode scan.
         
-        A hand laser scanner of the type Nedis BCRLR100BK was used as test scanner. 
         Logging in takes place with a barcode card with 3 access levels.
         Level 1. Selling, scanning, printing (normal cash register usage).
         Level 2. Return bookings, a checkable ± button is shown, with which return bookings can be made.
@@ -2213,9 +2212,10 @@ def info():
         Other employee scanning = switching employee (for return booking, or replacement).
                          
         Article scanning:
-        By default, scanning is performed with an number of 1.
+        By default, scanning is performed with a number of 1.
         With the spinbox the correct number can be chosen for scanning, this can be done by the arrows of 
-        the spinbox or with the mous wheel. After every scan, the number is reset to 1.
+        the spinbox or with the mouse wheel. After every scan, the number is reset to 1.
+        Selecting can also been done with the productbuttons for unpackaged products.
         When scanning is started, the close button is blocked until the button 'Next customer' is pressed.
         The print button and the customer button are blocked until the first transaction is posted.
         In the following cases, an error message appears in red below the display screen. An acoustic alarm 
