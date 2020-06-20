@@ -606,20 +606,16 @@ def artRequest(self, mflag):
                         mthumb = self.q10Edit.text()
                         mcategory = self.q11Edit.currentIndex()+1
                         mvat = self.q12Edit.currentText()
-                        if mdescr and mprice and morder_size and mlocation and mcategory:
-                            updarticle = update(articles).where(articles.c.barcode==mbarcode)\
-                             .values(barcode=mbarcode,description=mdescr,\
-                                item_price=mprice,item_stock=mstock,item_unit=munit,\
-                                minimum_stock=mminstock,order_size=morder_size, \
-                                location_warehouse=mlocation,article_group=martgroup,\
-                                thumbnail=mthumb,category=mcategory,VAT=mvat)
-                            con.execute(updarticle)
-                            insertOK()
-                            self.close()
-                        else:
-                            notInserted()
-                            self.close()
-         
+                        updarticle = update(articles).where(articles.c.barcode==mbarcode)\
+                          .values(barcode=mbarcode,description=mdescr,\
+                            item_price=mprice,item_stock=mstock,item_unit=munit,\
+                            minimum_stock=mminstock,order_size=morder_size, \
+                            location_warehouse=mlocation,article_group=martgroup,\
+                            thumbnail=mthumb,category=mcategory,VAT=mvat)
+                        con.execute(updarticle)
+                        insertOK()
+                        self.close()
+                                 
                     applyBtn = QPushButton('Insert')
                     applyBtn.clicked.connect(lambda: updArticle(self))
             
