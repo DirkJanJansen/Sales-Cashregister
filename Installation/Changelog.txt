@@ -47,4 +47,5 @@
 2020-06-20 documentation added procedure for changing article and calculation minimum_stock and order_size.
 2020-06-20 sales.py adjusted to calculation order-sizes and minimum stock for all articles
 2020-06-20 database cashregister.backup extended with params for even/odd year, ordercosts and surcharge factor storage.
-2020-06-20 sales.py info added productchoice with buttons.
+2020-06-20 sales.py module bookingLoss added.
+2020-06-20 database cashregister.backup extended with table loss for module bookingLoss.
