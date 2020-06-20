@@ -133,7 +133,7 @@ def calculationStock():
                 values(annual_consumption_1 = 0, minimum_stock = minstock, order_size = mordersize)
             con.execute(updart)
   
-def artRequest(self, mflag):
+def articleRequest(self, mflag):
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -160,7 +160,7 @@ def artRequest(self, mflag):
     selarticles = select([articles]).order_by(articles.c.barcode)
     rparticles = con.execute(selarticles)
             
-    class MyWindow(QDialog):
+    class Mainwindow(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
             self.setGeometry(100, 50, 1800, 900)
@@ -180,6 +180,8 @@ def artRequest(self, mflag):
             table_view.verticalHeader().setDefaultSectionSize(75)
             if mflag == 1:
                 table_view.clicked.connect(defineButton)
+            elif mflag == 2:
+                table_view.clicked.connect(bookingLoss)
             else:
                 table_view.clicked.connect(changeArticle)
             layout = QVBoxLayout(self)
@@ -640,9 +642,133 @@ def artRequest(self, mflag):
          
             window = Widget()
             window.exec_()
-
-    
-    win = MyWindow(data_list, header)
+            
+    def bookingLoss(idx):
+        mbarcode = idx.data()
+        class Widget(QDialog):
+            def __init__(self, parent=None):
+                super(Widget, self).__init__(parent)
+                self.setWindowTitle("Booking loss products")
+                self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinMaxButtonsHint)
+            
+                self.setStyleSheet("background-color: #D9E1DF")
+                self.setFont(QFont('Arial', 10))
+                
+                q1Edit = QLineEdit(mbarcode)
+                q1Edit.setFixedWidth(130)
+                q1Edit.setFont(QFont("Arial", 10))
+                q1Edit.setStyleSheet("color: black")
+                q1Edit.setDisabled(True)
+                                
+                #Loss description
+                qloss = QComboBox()
+                qloss.setFixedWidth(220)
+                qloss.setFont(QFont("Arial", 10))
+                qloss.setStyleSheet("color: black;  background-color: #F8F7EE")
+                qloss.addItem('Obsolete')
+                qloss.addItem('Warehouse differences.')
+                qloss.addItem('Damaged')
+                qloss.addItem('Shelf Life')
+                       
+                #number
+                qnumber = QLineEdit('0')
+                qnumber.setFixedWidth(150)
+                qnumber.setFont(QFont("Arial",10))
+                qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
+                reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                input_validator = QRegExpValidator(reg_ex, qnumber)
+                qnumber.setValidator(input_validator)
+                
+                grid = QGridLayout()
+                grid.setSpacing(20)
+                              
+                pyqt = QLabel()
+                movie = QMovie('./logos/pyqt.gif')
+                pyqt.setMovie(movie)
+                movie.setScaledSize(QSize(240,80))
+                movie.start()
+                grid.addWidget(pyqt, 0 ,0, 1, 2)
+           
+                logo = QLabel()
+                pixmap = QPixmap('./logos/logo.jpg')
+                logo.setPixmap(pixmap.scaled(70,70))
+                grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
+                
+                lbl1 = QLabel('Barcodenumber')  
+                lbl1.setFont(QFont("Arial",10))
+                grid.addWidget(lbl1, 1, 0)
+                grid.addWidget(q1Edit, 1, 1)
+                
+                lbl2 = QLabel('Loss description')  
+                lbl2.setFont(QFont("Arial",10))
+                grid.addWidget(lbl2, 2, 0)
+                grid.addWidget(qloss, 2, 1)
+                        
+                lbl3 = QLabel('Number')  
+                lbl3.setFont(QFont("Arial",10))
+                grid.addWidget(lbl3, 3, 0)
+                grid.addWidget(qnumber, 3, 1)
+                       
+                def qlossChanged():
+                    qloss.setCurrentText(qloss.currentText())
+                qloss.currentIndexChanged.connect(qlossChanged)
+                
+                def qnumberChanged():
+                    qnumber.setText(qnumber.text())
+                qnumber.textChanged.connect(qnumberChanged)
+                
+                def insertLoss():
+                    metadata = MetaData()
+                    loss = Table('loss', metadata,
+                       Column('lossID', Integer, primary_key=True),
+                       Column('barcode', String),
+                       Column('number', Float),
+                       Column('bookdate', String),
+                       Column('category', String))
+                    
+                    mdescr = qloss.currentText()
+                    mnumber = qnumber.text()
+                    lossnr = con.execute(select([func.max(loss.c.lossID, type_=Integer)])).scalar()
+                    lossnr += 1
+                    mbookdate= str(datetime.datetime.now())[0:10]
+                                        
+                    ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
+                        number = mnumber, category = mdescr, bookdate = mbookdate)
+                    con.execute(ins)
+                    upd = update(articles).where(articles.c.barcode == mbarcode).\
+                      values(item_stock = articles.c.item_stock - mnumber)
+                    con.execute(upd)
+                    insertOK()
+                    self.close()
+                                                 
+                self.setLayout(grid)
+                self.setGeometry(500, 300, 150, 150)
+        
+                applyBtn = QPushButton('Change')
+                applyBtn.clicked.connect(lambda: insertLoss())
+        
+                grid.addWidget(applyBtn, 4, 1, 1, 1, Qt.AlignRight)
+                applyBtn.setFont(QFont("Arial",10))
+                applyBtn.setFixedWidth(100)
+                applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+               
+                cancelBtn = QPushButton('Close')
+                cancelBtn.clicked.connect(self.close) 
+                
+                grid.addWidget(cancelBtn, 4, 1)
+                cancelBtn.setFont(QFont("Arial",10))
+                cancelBtn.setFixedWidth(100)
+                cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                
+                lbl4 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+                lbl4.setFont(QFont("Arial", 10))
+                grid.addWidget(lbl4, 6, 0, 1, 2, Qt.AlignCenter)     
+          
+        win = Widget()
+        win.exec_()
+        
+    win = Mainwindow(data_list, header)
     win.exec_()
     
 def salesRequest(self):
@@ -1466,7 +1592,7 @@ def newBarcode(self):
     
 def existingBarcode(self):
     mflag = 1
-    artRequest(self, mflag)
+    articleRequest(self, mflag)
         
 def defButtons(self):
     class Widget(QDialog):
@@ -1827,7 +1953,8 @@ def importArticles(self):
     print('Imports articles')
     
 def bookingLoss(self):
-    print('Loss products')
+    flag = 2
+    articleRequest(self, flag)
     
 def purchaseArticles(self):
     print('Purchasing articles')
@@ -2099,7 +2226,7 @@ def adminMenu(self):
 
                 if mindex == 0:
                     mflag = 0
-                    artRequest(self, mflag)
+                    articleRequest(self, mflag)
                 elif mindex == 1:
                     salesRequest(self)                
                 elif mindex == 2:
