@@ -2514,12 +2514,12 @@ def set_barcodenr(self):
             if myear%2 == 1:     #odd year
                 updart = update(articles).where(articles.c.barcode == rpart[0])\
                     .values(item_stock = articles.c.item_stock - mnumber,\
-                     annual_consumption = articles.c.annual_consumption_2 + mnumber)
+                     annual_consumption_2 = articles.c.annual_consumption_2 + mnumber)
                 con.execute(updart)
             elif myear%2 == 0:  #even year
                 updart = update(articles).where(articles.c.barcode == rpart[0])\
                     .values(item_stock = articles.c.item_stock - mnumber,\
-                     annual_consumption = articles.c.annual_consumption_1 + mnumber)
+                     annual_consumption_1 = articles.c.annual_consumption_1 + mnumber)
                 con.execute(updart)
             
             self.mlist.append('{:\u2000<14s}'.format(martnr)+'{:\u2000<40s}'.format(mdescr)+' {:\u2000>6d}'\
