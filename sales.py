@@ -84,19 +84,18 @@ def calculationStock():
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
-        
-    selpar = select([params]).fetchall()
-    rppar = con.execute(selpar)
-         
+           
+    selpar = select([params]).order_by(params.c.paramID)
+    rppar = con.execute(selpar).fetchall()
     myear = int(str(datetime.date.today())[0:4])
-    if myear%2 == 1 and int(rppar[2]) == 0:
+    if myear%2 == 1 and int(rppar[3][2]) == 0:
         selarticles = select([articles]).order_by(articles.c.barcode)
         rparticles = con.execute(selarticles)
         updpar = update(params).where(params.c.paramID == 4).values(value = 1)
         con.execute(updpar)
                      
         for row in rparticles:
-            mordersize = round(sqrt(2*row[5]*rppar[5][2])/(row[1]*rppar[6][2]),0)
+            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
             mjrverbr = row[4]
             if row[3] == 1:
                 minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
@@ -112,11 +111,13 @@ def calculationStock():
             updart = update(articles).where(articles.c.barcode == row[0]).\
                 values(annual_consumption_2 = 0, minimum_stock = minstock, order_size = mordersize)
             con.execute(updart)
-    elif myear%2 == 0 and int(rppar[2]) == 1:
+    elif myear%2 == 0 and int(rppar[3][2]) == 1:
         updpar = update(params).where(params.c.paramID == 4).values(value = 0)
         con.execute(updpar)
                    
         for row in rparticles:
+            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+            mjrverbr = row[4]
             if row[3] == 1:
                 minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
             elif row[3] == 2:
@@ -2483,7 +2484,7 @@ def set_barcodenr(self):
                 sales.c.receiptnumber == self.mreceipt))
         rpart = con.execute(selart).first()
         rpbal = con.execute(selbal).first()
-        if rpart[4] == 'high':
+        if rpart[4] == 'high':      
             self.mvat = self.mvath
         else: 
             self.mvat = self.mvatl
@@ -2516,7 +2517,7 @@ def set_barcodenr(self):
                     .values(item_stock = articles.c.item_stock - mnumber,\
                      annual_consumption_2 = articles.c.annual_consumption_2 + mnumber)
                 con.execute(updart)
-            elif myear%2 == 0:  #even year
+            elif myear%2 == 0:   #even year
                 updart = update(articles).where(articles.c.barcode == rpart[0])\
                     .values(item_stock = articles.c.item_stock - mnumber,\
                      annual_consumption_1 = articles.c.annual_consumption_1 + mnumber)
@@ -2567,6 +2568,8 @@ def set_barcodenr(self):
     self.qspin.setValue(1)
       
 def barcodeScan():
+    #check order_sizes and minimum_stock
+    calculationStock()
     class widget(QDialog):
         def __init__(self):
             super(widget,self).__init__()
