@@ -45,3 +45,5 @@
 2020-06-20 sales.py Articles request extended with module Article chang by right clicking on thirst item
 2020-06-20 sales.py counting annual-stock established by article booking.
 2020-06-20 documentation added procedure for changing article and calculation minimu_stock and order_size.
+2020-06-20 sales.py adjusted to calculation order-sizes and minimum stock for all articles
+2020-06-20 database cashregister.backup extendet with params for even/odd year, ordercosts and surcharge factor storage.
