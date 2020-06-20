@@ -1,6 +1,5 @@
-import datetime
-import sys, random, barcode
-import keyboard
+import sys, random, barcode, datetime, keyboard
+from math import sqrt
 from barcode.writer import ImageWriter 
 
 from PyQt5.QtCore import Qt, QSize, QRegExp, QAbstractTableModel
@@ -68,6 +67,70 @@ def windowClose(self):
 def refresh(self):
     self.close()
     defParams(self)
+    
+def calculationStock():
+    metadata = MetaData()
+    params = Table('params', metadata,
+        Column('paramID', Integer(), primary_key=True),
+        Column('item', String),
+        Column('value', Float))
+    articles = Table('articles', metadata,
+        Column('barcode', String, primary_key=True),
+        Column('minimum_stock', Float),
+        Column('order_size', Float),
+        Column('category', Integer),
+        Column('annual_consumption_1', Float),
+        Column('annual_consumption_2', Float))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+        
+    selpar = select([params]).fetchall()
+    rppar = con.execute(selpar)
+         
+    myear = int(str(datetime.date.today())[0:4])
+    if myear%2 == 1 and int(rppar[2]) == 0:
+        selarticles = select([articles]).order_by(articles.c.barcode)
+        rparticles = con.execute(selarticles)
+        updpar = update(params).where(params.c.paramID == 4).values(value = 1)
+        con.execute(updpar)
+                     
+        for row in rparticles:
+            mordersize = round(sqrt(2*row[5]*rppar[5][2])/(row[1]*rppar[6][2]),0)
+            mjrverbr = row[4]
+            if row[3] == 1:
+                minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
+            elif row[3] == 2:
+                minstock = round(mjrverbr*2/17, 0) # < 6 weken levertijd
+            elif row[3] == 3:
+                minstock = round(mjrverbr*4/17, 0) # < 12 weken levertijd
+            elif row[3] == 4: 
+                minstock = round(mjrverbr*8/17, 0) # < 26 weken levertijd
+            elif row[3] == 5: 
+                minstock = round(mjrverbr*16/17,0) # < 52 weken levertijd
+                
+            updart = update(articles).where(articles.c.barcode == row[0]).\
+                values(annual_consumption_2 = 0, minimum_stock = minstock, order_size = mordersize)
+            con.execute(updart)
+    elif myear%2 == 0 and int(rppar[2]) == 1:
+        updpar = update(params).where(params.c.paramID == 4).values(value = 0)
+        con.execute(updpar)
+                   
+        for row in rparticles:
+            if row[3] == 1:
+                minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
+            elif row[3] == 2:
+                minstock = round(mjrverbr*2/17, 0) # < 6 weken levertijd
+            elif row[3] == 3:
+                minstock = round(mjrverbr*4/17, 0) # < 12 weken levertijd
+            elif row[3] == 4: 
+                minstock = round(mjrverbr*8/17, 0) # < 26 weken levertijd
+            elif row[3] == 5: 
+                minstock = round(mjrverbr*16/17,0) # < 52 weken levertijd
+                
+            updart = update(articles).where(articles.c.barcode == row[0]).\
+                values(annual_consumption_1 = 0, minimum_stock = minstock, order_size = mordersize)
+            con.execute(updart)
   
 def artRequest(self, mflag):
     metadata = MetaData()
@@ -116,7 +179,7 @@ def artRequest(self, mflag):
             table_view.verticalHeader().setDefaultSectionSize(75)
             if mflag == 1:
                 table_view.clicked.connect(defineButton)
-            if mflag == 2:
+            else:
                 table_view.clicked.connect(changeArticle)
             layout = QVBoxLayout(self)
             layout.addWidget(table_view)
@@ -290,8 +353,298 @@ def artRequest(self, mflag):
             
     def changeArticle(idx):
         mbarcode = idx.data() 
+        selarticle = select([articles]).where(articles.c.barcode == mbarcode)
+        rparticle = con.execute(selarticle).first()
         if idx.column() == 0:
-            print(mbarcode)
+            class Widget(QDialog):
+                def __init__(self, parent=None):
+                    super(Widget, self).__init__(parent)
+                    
+                    self.setWindowTitle("Article Change")
+                    self.setWindowIcon(QIcon('./logos/logo.jpg'))
+                    self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                        Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                    self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                           
+                    self.setFont(QFont('Arial', 10))
+                    self.setStyleSheet("background-color: #D9E1DF")  
+            
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 ,0, 1, 2)
+               
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 3, 1 ,1, Qt.AlignRight)
+                    
+                    #barcode
+                    self.q1Edit = QLineEdit(str(mbarcode)) 
+                    self.q1Edit.setFixedWidth(130)
+                    self.q1Edit.setFont(QFont("Arial",10))
+                    self.q1Edit.setStyleSheet("color: black")
+                    self.q1Edit.setDisabled(True)
+        
+                    #description
+                    self.q2Edit = QLineEdit(rparticle[1])    
+                    self.q2Edit.setFixedWidth(400)
+                    self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q2Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^.{1,50}$")
+                    input_validator = QRegExpValidator(reg_ex, self.q2Edit)
+                    self.q2Edit.setValidator(input_validator)
+                    
+                    #item_price
+                    self.q3Edit = QLineEdit(str(round(rparticle[2],2)))
+                    self.q3Edit.setAlignment(Qt.AlignRight)
+                    self.q3Edit.setFixedWidth(100)
+                    self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q3Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, self.q3Edit)
+                    self.q3Edit.setValidator(input_validator)
+                    
+                    #item_stock
+                    self.q4Edit = QLineEdit(str(round(rparticle[3],2)))
+                    self.q4Edit.setAlignment(Qt.AlignRight)
+                    self.q4Edit.setFixedWidth(100)
+                    self.q4Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q4Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, self.q4Edit)
+                    self.q4Edit.setValidator(input_validator)
+                    
+                    #item_unit
+                    self.q5Edit = QComboBox()
+                    self.q5Edit.setFixedWidth(170)
+                    self.q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q5Edit.setFont(QFont("Arial",10))
+                    self.q5Edit.addItem('stuk')
+                    self.q5Edit.addItem('100')
+                    self.q5Edit.addItem('meter')
+                    self.q5Edit.addItem('kg')
+                    self.q5Edit.addItem('liter')
+                    self.q5Edit.addItem('m²')
+                    self.q5Edit.addItem('m³')
+                    self.q5Edit.setCurrentIndex(self.q5Edit.findText(rparticle[4]))
+                    
+                    #minimum stock
+                    self.q6Edit = QLineEdit(str(round(rparticle[5],2)))
+                    self.q6Edit.setAlignment(Qt.AlignRight)
+                    self.q6Edit.setFixedWidth(100)
+                    self.q6Edit.setFont(QFont("Arial",10))
+                    self.q6Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, self.q6Edit)
+                    self.q6Edit.setValidator(input_validator)
+        
+                    #order_size
+                    self.q7Edit = QLineEdit(str(round(rparticle[6],2)))
+                    self.q7Edit.setAlignment(Qt.AlignRight)
+                    self.q7Edit.setFixedWidth(100)
+                    self.q7Edit.setFont(QFont("Arial",10))
+                    self.q7Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, self.q7Edit)
+                    self.q7Edit.setValidator(input_validator)
+                                 
+                    #location
+                    self.q8Edit = QLineEdit(rparticle[7])
+                    self.q8Edit.setFixedWidth(100)
+                    self.q8Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q8Edit.setFont(QFont("Arial",10))
+                                
+                    # article_group
+                    self.q9Edit = QLineEdit(rparticle[8])
+                    self.q9Edit.setFixedWidth(200)
+                    self.q9Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q9Edit.setFont(QFont("Arial",10))
+                        
+                    #thumbnail
+                    self.q10Edit = QLineEdit(rparticle[9])
+                    self.q10Edit.setFixedWidth(200)
+                    self.q10Edit.setFont(QFont("Arial",10))
+                    self.q10Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                                
+                    #category
+                    self.q11Edit = QComboBox()
+                    self.q11Edit.setFixedWidth(260)
+                    self.q11Edit.setFont(QFont("Arial",10))
+                    self.q11Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q11Edit.addItem('1. Stock-driven < 3 weken.')
+                    self.q11Edit.addItem('2. Stock-driven < 6 weken')
+                    self.q11Edit.addItem('3. Stock-driven < 12 weken')
+                    self.q11Edit.addItem('4. Stock-driven < 26 weken')
+                    self.q11Edit.addItem('5. Stock-driven < 52 weken')
+                    self.q11Edit.setCurrentIndex(rparticle[10]-1)
+         
+                    #vat
+                    self.q12Edit = QComboBox()
+                    self.q12Edit.setFixedWidth(100)
+                    self.q12Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q12Edit.setFont(QFont("Arial",10))
+                    self.q12Edit.addItem('high')
+                    self.q12Edit.addItem('low')
+                    self.q12Edit.setCurrentIndex(self.q12Edit.findText(rparticle[16]))
+                    
+                    #order-balance
+                    self.q13Edit = QLineEdit(str(round(rparticle[11],2)))
+                    self.q13Edit.setFixedWidth(100)
+                    self.q13Edit.setAlignment(Qt.AlignRight)
+                    self.q13Edit.setStyleSheet('color: black')
+                    self.q13Edit.setFont(QFont("Arial",10))
+                    self.q13Edit.setDisabled(True)
+                    
+                    #order_status
+                    self.q14Edit = QLineEdit(str(bool(rparticle[12])))
+                    self.q14Edit.setFixedWidth(100)
+                    self.q14Edit.setStyleSheet('color: black')
+                    self.q14Edit.setFont(QFont("Arial",10))
+                    self.q14Edit.setDisabled(True)
+                   
+                    def q2Changed():
+                        self.q2Edit.setText(self.q2Edit.text())
+                    self.q2Edit.textChanged.connect(q2Changed)
+                    
+                    def q3Changed():
+                        self.q3Edit.setText(self.q3Edit.text())
+                    self.q3Edit.textChanged.connect(q3Changed)
+                    
+                    def q4Changed():
+                        self.q4Edit.setText(self.q4Edit.text())
+                    self.q4Edit.textChanged.connect(q4Changed)
+                    
+                    def q5Changed():
+                        self.q5Edit.setCurrentText(self.q5Edit.currentText()) 
+                    self.q5Edit.currentIndexChanged.connect(q5Changed)
+                    
+                    def q6Changed():
+                        self.q6Edit.setText(self.q6Edit.text())
+                    self.q6Edit.textChanged.connect(q6Changed)
+                    
+                    def q7Changed():
+                        self.q7Edit.setText(self.q7Edit.text())
+                    self.q7Edit.textChanged.connect(q7Changed)
+                    
+                    def q8Changed():
+                        self.q8Edit.setText(self.q8Edit.text())
+                    self.q8Edit.textChanged.connect(q8Changed)
+                    
+                    def q9Changed():
+                        self.q9Edit.setText(self.q9Edit.text())
+                    self.q9Edit.textChanged.connect(q9Changed)
+                    
+                    def q10Changed():
+                        self.q10Edit.setText(self.q10Edit.text())
+                    self.q10Edit.textChanged.connect(q10Changed)
+                    
+                    def q11Changed():
+                        self.q11Edit.setCurrentIndex(self.q11Edit.currentIndex())
+                    self.q11Edit.currentIndexChanged.connect(q11Changed)
+                    
+                    def q12Changed():
+                        self.q5Edit.setCurrentText(self.q12Edit.currentText()) 
+                    self.q12Edit.currentIndexChanged.connect(q12Changed)
+                   
+                    grid.addWidget(QLabel('Barcodenumber'), 1, 0)
+                    grid.addWidget(self.q1Edit, 1, 1)
+                    
+                    grid.addWidget(QLabel('Description'), 2, 0)
+                    grid.addWidget(self.q2Edit, 2, 1 ,1 ,2)
+                    
+                    grid.addWidget(QLabel('Item_Price'), 3, 0)
+                    grid.addWidget(self.q3Edit, 3, 1)
+                    
+                    grid.addWidget(QLabel('Item-Unit'), 3, 2)
+                    grid.addWidget(self.q5Edit, 3, 3)
+                    
+                    grid.addWidget(QLabel('Minimum_Stock'), 4, 0)
+                    grid.addWidget(self.q6Edit, 4, 1)
+                    
+                    grid.addWidget(QLabel('Item-Stock'), 4, 2)
+                    grid.addWidget(self.q4Edit, 4, 3)
+                    
+                    grid.addWidget(QLabel('Order-Size'), 5, 2)
+                    grid.addWidget(self.q7Edit, 5, 3)
+                      
+                    grid.addWidget(QLabel('Location'), 5, 0)
+                    grid.addWidget(self.q8Edit, 5, 1)
+                    
+                    grid.addWidget(QLabel('Articlegroup'), 6, 2)
+                    grid.addWidget(self.q9Edit, 6, 3)
+                    
+                    grid.addWidget(QLabel('Thumbnail'), 6, 0)
+                    grid.addWidget(self.q10Edit, 6, 1)
+                    
+                    grid.addWidget(QLabel('Category'), 7, 2 )
+                    grid.addWidget(self.q11Edit, 7, 3)
+                    
+                    grid.addWidget(QLabel('VAT'), 7, 0 )
+                    grid.addWidget(self.q12Edit, 7, 1)
+                    
+                    grid.addWidget(QLabel('Order_Balance'), 8, 0 )
+                    grid.addWidget(self.q13Edit, 8, 1)
+                    
+                    grid.addWidget(QLabel('Order-Status'), 8, 2 )
+                    grid.addWidget(self.q14Edit, 8, 3)     
+          
+                    def updArticle(self):
+                        mdescr = self.q2Edit.text()
+                        mprice = float(self.q3Edit.text())
+                        mstock = float(self.q4Edit.text())
+                        munit = self.q5Edit.currentText()
+                        mminstock = float(self.q6Edit.text())
+                        morder_size = float(self.q7Edit.text())
+                        mlocation = self.q8Edit.text()
+                        martgroup = self.q9Edit.text()
+                        mthumb = self.q10Edit.text()
+                        mcategory = self.q11Edit.currentIndex()+1
+                        mvat = self.q12Edit.currentText()
+                        if mdescr and mprice and morder_size and mlocation and mcategory:
+                            updarticle = update(articles).where(articles.c.barcode==mbarcode)\
+                             .values(barcode=mbarcode,description=mdescr,\
+                                item_price=mprice,item_stock=mstock,item_unit=munit,\
+                                minimum_stock=mminstock,order_size=morder_size, \
+                                location_warehouse=mlocation,article_group=martgroup,\
+                                thumbnail=mthumb,category=mcategory,VAT=mvat)
+                            con.execute(updarticle)
+                            insertOK()
+                            self.close()
+                        else:
+                            notInserted()
+                            self.close()
+         
+                    applyBtn = QPushButton('Insert')
+                    applyBtn.clicked.connect(lambda: updArticle(self))
+            
+                    grid.addWidget(applyBtn, 9, 3, 1, 1, Qt.AlignRight)
+                    applyBtn.setFont(QFont("Arial",10))
+                    applyBtn.setFixedWidth(100)
+                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                    
+                    cancelBtn = QPushButton('Close')
+                    cancelBtn.clicked.connect(self.close)
+                    
+                    grid.addWidget(cancelBtn, 9, 3)
+                    cancelBtn.setFont(QFont("Arial",10))
+                    cancelBtn.setFixedWidth(100)
+                    cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                    
+                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 10, 0, 1, 4, Qt.AlignCenter)
+                    
+            
+                    self.setLayout(grid)
+                    self.setGeometry(500, 300, 150, 100)
+         
+            window = Widget()
+            window.exec_()
+
     
     win = MyWindow(data_list, header)
     win.exec_()
@@ -1728,7 +2081,7 @@ def adminMenu(self):
             self.k0Edit.setFixedWidth(220)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Articles request')
+            self.k0Edit.addItem('Articles request/change')
             self.k0Edit.addItem('Sales request')
             self.k0Edit.addItem('Payments request/Payments')
             self.k0Edit.addItem('Accounts insert')
@@ -2101,8 +2454,9 @@ def checkBarcode(c):
     
 def set_barcodenr(self):
     barcodenr = self.q1Edit.text()
-    mnumber = self.qspin.value()
+    mnumber = float(self.qspin.value())
     self.albl.setText('')
+    myear = int(str(datetime.datetime.now())[0:4])
     if len(barcodenr) == 13 and checkBarcode(barcodenr) and self.mcallname:
         metadata = MetaData()
         articles = Table('articles', metadata,
@@ -2110,7 +2464,9 @@ def set_barcodenr(self):
             Column('description', String),
             Column('item_price', Float),
             Column('item_stock', Float),
-            Column('VAT', String))
+            Column('VAT', String),
+            Column('annual_consumption_1', Float),
+            Column('annual_consumption_2', Float))
         sales = Table('sales', metadata,
             Column('ID', Integer(), primary_key=True),
             Column('receiptnumber', Integer),
@@ -2159,10 +2515,16 @@ def set_barcodenr(self):
                   sub_total = mnumber*mprice, sub_vat = mnumber*mprice*self.mvat,\
                   callname = self.mcallname, mutation_date = mutdate)
                 con.execute(insbal)
-                
-            updart = update(articles).where(articles.c.barcode == rpart[0])\
-                .values(item_stock = articles.c.item_stock - float(mnumber))
-            con.execute(updart)
+            if myear%2 == 1:     #odd year
+                updart = update(articles).where(articles.c.barcode == rpart[0])\
+                    .values(item_stock = articles.c.item_stock - mnumber,\
+                     annual_consumption = articles.c.annual_consumption_2 + mnumber)
+                con.execute(updart)
+            elif myear%2 == 0:  #even year
+                updart = update(articles).where(articles.c.barcode == rpart[0])\
+                    .values(item_stock = articles.c.item_stock - mnumber,\
+                     annual_consumption = articles.c.annual_consumption_1 + mnumber)
+                con.execute(updart)
             
             self.mlist.append('{:\u2000<14s}'.format(martnr)+'{:\u2000<40s}'.format(mdescr)+' {:\u2000>6d}'\
              .format(int(mnumber))+'{:\u2000>12.2f}'.format(mprice)+'{:\u2000>12.2f}'\
