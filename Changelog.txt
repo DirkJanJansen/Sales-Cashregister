@@ -1,0 +1,51 @@
+2020-06-15 cashregister.backup paths in columns thumbnail and photo changed
+2020-06-15 install.txt added
+2020-06-15 LINUX_install.txt added
+2020-06-15 changelog.txt added
+2020-06-15 pgpass.conf added
+2020-06-15 Notepad_HKCU.reg added
+2020-06-15 pgdump-custom.bat path changed
+2020-06-15 pgrestore-custom.bat path changed
+2020-06-15 .pgpass added for linux
+2020-06-15 register.png and Sales.desktop added for startup linux
+2020-06-15 folder Backup changed in Installation
+2020-06-15 sales.py changed info for logon procedure.
+2020-06-15 sales.py function added insert and generating accounts + barcodelabel saved for logon
+2020-06-15 Documentation first document Sales_Cashregister.pdf added in folder Installation more explanation follows!
+2020-06-15 sales.py typererror corrected
+2020-06-15 cashregister.backup added callname column in table sales
+2020-06-16 cashregister.backup added records for button products
+2020-06-16 sales.py linked programmable buttons, working now for input separate products, module for changing buttons follows!
+2020-06-16 pip install keyboard added for generating keyboard buffer for enter key by buttons
+2020-06-16 added compile.bat for precompling program
+2020-06-16 requirements.txt changed with keyboard module
+2020-06-16 install.txt and LINUX_install.txt added keyboard and pillow and python-barcode requirements.
+2020-06-16 cashregister.backup added column mutation_date in table sales
+2020-06-16 sales.py administration buttontext assign for buttons ready for new barcode items, todo buttontext for existing barcode items
+2020-06-18 sales.py programmable buttontext 2 lines insert possible with check on maximum length 16 characters
+2020-06-18 sales.py field VAT changed in combobox
+2020-06-18 sales.py adminstration also ready buttontext buttons assign for existing barcode items
+2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
+2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
+2020-06-18 sales.py in  payments request module added for paying instances (by clicking on first field)
+2020-06-18 LINUX_install.txt changed install keyboard added
+2020-06-19 sales.py buttontext length changed to max 20 positions
+2020-06-19 documentation changed according 20 positions and payments instances procedure added
+2020-06-19 documentation changed according payments procedure
+2020-06-19 sales.py articles categoy removed reservation items
+2020-06-19 database cashregister.backup category column values changed according revervation values
+2020-06-19 LINUX_install.txt install keyboard added
+2020-06-19 documentation added button procedure besides scanning.
+2020-06-19 sales.py added parameter request and change module
+2020-06-19 documentation Sales_CashRegister.pdf added procedure for params
+2020-06-19 sales.py module insertArticles added
+2020-06-19 sales.py save barcodelabel in module insertArticles added
+2020-06-19 sales.py procedure payments cbox improved
+2020-06-19 sales.py procedure insertArticles layout adjusted and field minimum-stock added.
+2020-06-20 sales.py Articles request extended with module Article chang by right clicking on thirst item
+2020-06-20 sales.py counting annual-stock established by article booking.
+2020-06-20 documentation added procedure for changing article and calculation minimum_stock and order_size.
+2020-06-20 sales.py adjusted to calculation order-sizes and minimum stock for all articles
+2020-06-20 database cashregister.backup extended with params for even/odd year, ordercosts and surcharge factor storage.
+2020-06-20 sales.py module write off loss added.
+2020-06-21 sales.py module requesting loss items added via submenu.
