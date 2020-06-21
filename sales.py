@@ -164,7 +164,7 @@ def articleRequest(self, mflag):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
             self.setGeometry(100, 50, 1800, 900)
-            self.setWindowTitle('Artikelen opvragen')
+            self.setWindowTitle('Articles requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                               Qt.WindowMinMaxButtonsHint)
@@ -663,7 +663,7 @@ def articleRequest(self, mflag):
                                 
                 #Loss description
                 qloss = QComboBox()
-                qloss.setFixedWidth(220)
+                qloss.setFixedWidth(230)
                 qloss.setFont(QFont("Arial", 10))
                 qloss.setStyleSheet("color: black;  background-color: #F8F7EE")
                 qloss.addItem('Obsolete')
@@ -676,7 +676,7 @@ def articleRequest(self, mflag):
                 qnumber.setFixedWidth(150)
                 qnumber.setFont(QFont("Arial",10))
                 qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
-                reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                reg_ex = QRegExp("^[+]?[0-9]*\.?[0-9]+$")
                 input_validator = QRegExpValidator(reg_ex, qnumber)
                 qnumber.setValidator(input_validator)
                 
@@ -732,18 +732,22 @@ def articleRequest(self, mflag):
                     lossnr = con.execute(select([func.max(loss.c.lossID, type_=Integer)])).scalar()
                     lossnr += 1
                     mbookdate= str(datetime.datetime.now())[0:10]
-                                        
-                    ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
-                        number = mnumber, category = mdescr, bookdate = mbookdate)
-                    con.execute(ins)
-                    upd = update(articles).where(articles.c.barcode == mbarcode).\
-                      values(item_stock = articles.c.item_stock - mnumber)
-                    con.execute(upd)
-                    insertOK()
-                    self.close()
+                    
+                    if float(mnumber) > 0:                 
+                        ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
+                            number = mnumber, category = mdescr, bookdate = mbookdate)
+                        con.execute(ins)
+                        upd = update(articles).where(articles.c.barcode == mbarcode).\
+                          values(item_stock = articles.c.item_stock - mnumber)
+                        con.execute(upd)
+                        insertOK()
+                        self.close()
+                    else:
+                        notInserted()
+                        self.close()
                                                  
                 self.setLayout(grid)
-                self.setGeometry(500, 300, 150, 150)
+                self.setGeometry(600, 400, 150, 150)
         
                 applyBtn = QPushButton('Change')
                 applyBtn.clicked.connect(lambda: insertLoss())
@@ -1950,14 +1954,209 @@ def insertArticles(self):
     window.exec_()
     
 def importArticles(self):
+    # import lijst met nieuwe artikelen new
+    # import lijst met nieuwe prijzen en levertijden 
+    
     print('Imports articles')
     
+def requestLoss(self):
+    metadata = MetaData()
+    loss = Table('loss', metadata,
+       Column('lossID', Integer, primary_key=True),
+       Column('barcode', String),
+       Column('number', Float),
+       Column('bookdate', String),
+       Column('category', String))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+    selloss = select([loss]).order_by(loss.c.category, loss.c.bookdate)
+    rploss = con.execute(selloss)
+    class Widget(QDialog):
+        def __init__(self, data_list, header, *args):
+            QWidget.__init__(self, *args,)
+            self.setGeometry(600, 50, 600, 800)
+            self.setWindowTitle('Loss items Requesting')
+            self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                              Qt.WindowMinMaxButtonsHint)
+            table_model = MyTableModel(self, data_list, header)
+            table_view = QTableView()
+            table_view.setModel(table_model)
+            font = QFont("Arial", 10)
+            table_view.setFont(font)
+            table_view.resizeColumnsToContents()
+            table_view.setSelectionBehavior(QTableView.SelectRows)
+            layout = QVBoxLayout(self)
+            layout.addWidget(table_view)
+            self.setLayout(layout)
+                
+    class MyTableModel(QAbstractTableModel):
+        def __init__(self, parent, mylist, header, *args):
+            QAbstractTableModel.__init__(self, parent, *args)
+            self.mylist = mylist
+            self.header = header
+        def rowCount(self, parent):
+            return len(self.mylist)
+        def columnCount(self, parent):
+            return len(self.mylist[0])
+        def data(self, index, role):
+            veld = self.mylist[index.row()][index.column()]
+            if not index.isValid():
+                return None
+            elif role == Qt.TextAlignmentRole and (type(veld) == float or type(veld) == int):
+                return Qt.AlignRight | Qt.AlignVCenter
+            elif role != Qt.DisplayRole:
+                return None
+            if type(veld) == float:
+                return '{:12.2f}'.format(veld)
+            else:
+                return veld
+        def headerData(self, col, orientation, role):
+            if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+                return self.header[col]
+            return None
+
+    header = ['ID','Barcode','Amount','Bookdate','Category']                                       
+    
+    data_list=[]
+    for row in rploss:
+        data_list += [(row)] 
+
+    win = Widget(data_list, header)
+    win.exec_()
+    
 def bookingLoss(self):
-    flag = 2
-    articleRequest(self, flag)
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Define Buttons")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(230)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Booking loss')
+            self.k0Edit.addItem('Request loss items')
+                           
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    flag = 2
+                    articleRequest(self, flag)
+                elif mindex == 1:
+                    requestLoss(self)
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_()  
     
 def purchaseArticles(self):
-    print('Purchasing articles')
+    metadata = MetaData()
+    articles = Table('articles', metadata,
+        Column('barcode', String, primary_key=True),
+        Column('description', String),
+        Column('item_price', Float),
+        Column('item_stock', Float),
+        Column('item_unit', String),
+        Column('minimum_stock', Float),
+        Column('order_size', Float),
+        Column('order_balance', Float),
+        Column('order_status', Boolean))
+
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+     
+    selarticles = select([articles]).order_by(articles.c.barcode).\
+      where(and_(articles.c.item_stock + articles.c.order_balance \
+             < articles.c.minimum_stock, articles.c.order_status == True))
+    rparticles = con.execute(selarticles)
+    mbookdate = str(datetime.datetime.now())[0:10]
+    if sys.platform == 'win32':
+        orderlist = '.\\forms\\Purchasing\\Purchaselist_'+mbookdate+'.txt'
+    else:
+        orderlist = './forms//Purchasing/Purchacelist_'+mbookdate+'.txt'
+    open(orderlist, 'w').write('')
+    mline = 0
+    pagenumber = 0
+    def head():
+        head =\
+        ('Sales - Purchaselist: '+ mbookdate+' Pagenumber '+str(pagenumber)+' \n'+
+        '==================================================================================================\n'+
+        'Barcode  Description                                  Item-Price        Item-Unit       Ordersize \n'
+        '==================================================================================================\n')
+        return(head)
+    
+    for row in rparticles:
+        if mline%58 == 0:
+           pagenumber += 1
+           open(orderlist, "a").write(head())
+           mline += 4
+            
+        mbarcode = row[0]
+        mdescr = row[1]
+        mprice = row[2]
+        munit = row[4]
+        mordersize = row[6]
+        #mordersize add to order_balance
+                  
+        open(orderlist,'a').write(mbarcode+mdescr+str(mprice)+munit+str(mordersize)+'\n')
+        mline += 1
+  
+    print('Purchasing articles', 'number orders', mline)
+    # stel bestellijst samen en sla op
+    # lees lijst in met goedgekeurde produkten en deblokkeer bestelstatus als > 90% geleverd
+    # printmogelijkheden voor bestellijst en leveringen
     
 def defParams(self):
     class Widget(QDialog):
@@ -2201,7 +2400,7 @@ def adminMenu(self):
             grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
             
             self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(220)
+            self.k0Edit.setFixedWidth(240)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('Articles request/change')
@@ -2211,8 +2410,8 @@ def adminMenu(self):
             self.k0Edit.addItem('Buttons define')
             self.k0Edit.addItem('Articles insert')
             self.k0Edit.addItem('Articles-list import')
-            self.k0Edit.addItem('Write off loss')
-            self.k0Edit.addItem('Purchase products')
+            self.k0Edit.addItem('Loss items booking/request')
+            self.k0Edit.addItem('Purchase/call products')
             self.k0Edit.addItem('Parameters change')
             
             def k0Changed():
@@ -2238,11 +2437,13 @@ def adminMenu(self):
                 elif mindex == 5:
                     insertArticles(self)
                 elif mindex == 6:
+                    print('todo')
                     importArticles(self)
                 elif mindex == 7:
                     bookingLoss(self)
                 elif mindex == 8:
-                    purchaseArticles(self)
+                    print('todo')
+                    #purchaseArticles(self)
                 elif mindex == 9:
                     defParams(self)
             
@@ -2439,9 +2640,11 @@ def printBon(self):
             if rgl == 1 :
                 mpage += 1
                 open(fbarc, 'w').write(heading(self, mpage))
-            elif rgl%57 == 1:
+                rgl += 4
+            elif rgl%58 == 1:
                 mpage += 1
                 open(fbarc, 'a').write(heading(self, mpage))
+                rgl += 4
                 
             martnr = row[2]
             mdescr = row[3]
