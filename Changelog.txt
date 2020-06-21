@@ -49,3 +49,5 @@
 2020-06-20 database cashregister.backup extended with params for even/odd year, ordercosts and surcharge factor storage.
 2020-06-20 sales.py module write off loss added.
 2020-06-21 sales.py module requesting loss items added via submenu.
+2020-06-21 sales.py module purchasing ready purchase collecting, viewing and printing. Delivery and importing new items ongoing.
+2020-06-21 cashregister.backup database changed according previous modifications
