@@ -1,4 +1,4 @@
-import sys, random, barcode, datetime, keyboard
+import sys, random, barcode, datetime, keyboard, os
 from math import sqrt
 from barcode.writer import ImageWriter 
 
@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt, QSize, QRegExp, QAbstractTableModel
 from PyQt5.QtGui import QIcon, QFont, QPixmap, QMovie, QRegExpValidator, QColor, QImage
 from PyQt5.QtWidgets import QLineEdit, QGridLayout, QDialog, QLabel, QPushButton,\
         QMessageBox, QSpinBox, QComboBox, QTextEdit, QApplication, QWidget,\
-        QVBoxLayout, QTableView, QStyledItemDelegate, QCheckBox
+        QVBoxLayout, QTableView, QStyledItemDelegate, QCheckBox, QPlainTextEdit
 from sqlalchemy import Table, Column, Integer, String, Boolean, MetaData, create_engine,\
                      Float, select, update,insert, delete, func, and_, ForeignKey
 
@@ -67,6 +67,244 @@ def windowClose(self):
 def refresh(self):
     self.close()
     defParams(self)
+    
+def viewFile(pathfile):
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("View purchase list for ordering")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinMaxButtonsHint)
+            
+            self.setStyleSheet("background-color: #D9E1DF")
+            self.setFont(QFont('Arial', 10))
+            grid = QGridLayout()
+            grid.setSpacing(20)
+                        
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap)
+            grid.addWidget(logo , 0, 1, 1, 1, Qt.AlignRight)
+        
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 1)
+            
+            lblh = QLabel('View purchase list')
+            grid.addWidget(lblh, 0, 0, 1, 2, Qt.AlignCenter)
+            lblh.setStyleSheet("color:rgba(45, 83, 115, 255); font: 25pt Comic Sans MS")
+            
+            text_edit = QPlainTextEdit()
+            text_edit.setStyleSheet('color: black; background-color: #F8F7EE') 
+            text_edit.setFont(QFont("Consolas",10))
+            text = open(pathfile).read()
+            text_edit.setPlainText(text)
+           
+            grid.addWidget(text_edit, 1, 0, 1, 2)
+            
+            cancelBtn = QPushButton('Close')
+            cancelBtn.clicked.connect(self.close)  
+            
+            grid.addWidget(cancelBtn, 2, 1, 1, 1,  Qt.AlignRight)
+            cancelBtn.setFont(QFont("Arial",10))
+            cancelBtn.setFixedWidth(90)
+            cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            lblreg = (QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'))
+            lblreg.setFont(QFont("Arial",10))
+            grid.addWidget(lblreg, 3, 0, 1, 2, Qt.AlignCenter)
+            
+            self.setLayout(grid)
+            self.setGeometry(250, 50, 1000, 900)
+            
+    window = Widget()
+    window.exec_()
+
+    
+def printFile(filename, path):
+    if sys.platform == 'win32':
+        os.startfile(path+filename, "print")
+    else:
+        os.system("lpr "+path+filename)
+    
+def viewList(path):
+    filelist = []
+    for file in os.listdir(path):
+        if file[-4:] == '.txt':
+            filelist.append(file)
+    class combo(QDialog):
+        def __init__(self, parent=None):
+              super(combo, self).__init__(parent)
+              self.setWindowTitle("Viewing List")
+              self.setWindowIcon(QIcon('./logos/logo.jpg'))
+              
+              self.setStyleSheet("background-color: #D9E1DF")
+              self.setFont(QFont('Arial', 10))
+              
+              grid = QGridLayout()
+              grid.setSpacing(20)
+            
+              logo = QLabel()
+              pixmap = QPixmap('./logos/logo.jpg')
+              logo.setPixmap(pixmap)
+              grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
+                       
+              pyqt = QLabel()
+              movie = QMovie('./logos/pyqt.gif')
+              pyqt.setMovie(movie)
+              movie.setScaledSize(QSize(240,80))
+              movie.start()
+              grid.addWidget(pyqt, 0 ,0, 1, 1)
+                
+              self.cb = QComboBox()
+              self.cb.setFixedWidth(420)
+              self.cb.setFont(QFont("Arial",10))
+              self.cb.setStyleSheet("color: black;  background-color: #F8F7EE")
+              grid.addWidget(self.cb, 1, 0, 1, 3, Qt.AlignRight)
+              
+              for item in range(len(filelist)):
+                  self.cb.addItem(filelist[item])
+                  self.cb.model().sort(0)
+                  grid.addWidget(self.cb, 1, 0, 1, 3, Qt.AlignRight)
+                  
+              def cbChanged():
+                  self.cb.setCurrentText(self.cb.currentText())
+              self.cb.currentIndexChanged.connect(cbChanged)
+                     
+              cancelBtn = QPushButton('Close')
+              cancelBtn.clicked.connect(self.close) 
+                
+              grid.addWidget(cancelBtn, 4, 1, 1, 1, Qt.AlignRight)
+              cancelBtn.setFont(QFont("Arial",10))
+              cancelBtn.setFixedWidth(90)
+              cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")    
+              
+              printBtn = QPushButton('View')
+              printBtn.clicked.connect(lambda: getfile(self))  
+                
+              grid.addWidget(printBtn,  4, 2)
+              printBtn.setFont(QFont("Arial",10))
+              printBtn.setFixedWidth(90)
+              printBtn.setStyleSheet("color: black;  background-color: gainsboro")    
+               
+              reslbl = QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl')
+              reslbl.setFont(QFont("Arial",10))
+              grid.addWidget(reslbl, 5, 0, 1, 3, Qt.AlignCenter)
+                
+              self.setLayout(grid)
+              self.setGeometry(550, 400, 150, 150)
+              
+              def getfile(self):
+                  filename = self.cb.currentText()
+                  viewFile(path+filename)
+          
+    win = combo()
+    win.exec_()
+
+
+def pickList(path):    
+    filelist = []
+    for file in os.listdir(path):
+        if file[-4:] == '.txt':
+            filelist.append(file)
+    class combo(QDialog):
+        def __init__(self, parent=None):
+              super(combo, self).__init__(parent)
+              self.setWindowTitle("Printing lists")
+              self.setWindowIcon(QIcon('./logos/logo.jpg'))
+              
+              self.setStyleSheet("background-color: #D9E1DF")
+              self.setFont(QFont('Arial', 10))
+              
+              grid = QGridLayout()
+              grid.setSpacing(20)
+            
+              logo = QLabel()
+              pixmap = QPixmap('./logos/logo.jpg')
+              logo.setPixmap(pixmap)
+              grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
+                       
+              pyqt = QLabel()
+              movie = QMovie('./logos/pyqt.gif')
+              pyqt.setMovie(movie)
+              movie.setScaledSize(QSize(240,80))
+              movie.start()
+              grid.addWidget(pyqt, 0 ,0, 1, 1)
+               
+              self.cb = QComboBox()
+              self.cb.setFixedWidth(420)
+              self.cb.setFont(QFont("Arial",10))
+              self.cb.setStyleSheet("color: black;  background-color: #F8F7EE")
+              grid.addWidget(self.cb, 1, 0, 1, 3, Qt.AlignRight)
+              
+              for item in range(len(filelist)):
+                  self.cb.addItem(filelist[item])
+                  self.cb.model().sort(0)
+                  grid.addWidget(self.cb, 1, 0, 1, 3, Qt.AlignRight)
+                  
+              def cbChanged():
+                  self.cb.setCurrentText(self.cb.currentText())
+              self.cb.currentIndexChanged.connect(cbChanged)
+              
+              aantalEdit = QLineEdit('1')
+              aantalEdit.setStyleSheet("background: #F8F7EE")
+              aantalEdit.setFixedWidth(30)
+              aantalEdit.setFont(QFont("Arial",10))
+              reg_ex = QRegExp("^[0-9]{1,2}$")
+              input_validator = QRegExpValidator(reg_ex, aantalEdit)
+              aantalEdit.setValidator(input_validator)
+              
+              def aantalChanged():
+                  aantalEdit.setText(aantalEdit.text())
+              aantalEdit.textChanged.connect(aantalChanged)
+                            
+              aantlbl = QLabel('Copies to print')
+              aantlbl.setFont(QFont("Arial", 10))
+              grid.addWidget(aantlbl, 3, 1, 1, 2)
+              grid.addWidget(aantalEdit, 3, 2, 1, 1, Qt.AlignRight)
+              
+              plbl = QLabel()
+              pmap = QPixmap('./thumbs/MG3650.jpg')
+              plbl.setPixmap(pmap)
+              grid.addWidget(plbl , 3, 0, 2, 1, Qt.AlignCenter)
+                    
+              cancelBtn = QPushButton('Close')
+              cancelBtn.clicked.connect(self.close) 
+                
+              grid.addWidget(cancelBtn, 4, 1, 1, 1, Qt.AlignRight)
+              cancelBtn.setFont(QFont("Arial",10))
+              cancelBtn.setFixedWidth(90)
+              cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")    
+              
+              printBtn = QPushButton('Printing')
+              printBtn.clicked.connect(lambda: getfile(self))  
+                
+              grid.addWidget(printBtn,  4, 2)
+              printBtn.setFont(QFont("Arial",10))
+              printBtn.setFixedWidth(90)
+              printBtn.setStyleSheet("color: black;  background-color: gainsboro")    
+               
+              reslbl = QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl')
+              reslbl.setFont(QFont("Arial",10))
+              grid.addWidget(reslbl, 5, 0, 1, 3, Qt.AlignCenter)
+                
+              self.setLayout(grid)
+              self.setGeometry(550, 300, 150, 150)
+              
+              def getfile(self):
+                  filename = self.cb.currentText()
+                  mnumber = aantalEdit.text()
+                  for x in range(0, int(mnumber)):
+                      printFile(filename,path)
+                  printing()
+          
+    win = combo()
+    win.exec_()
+     
     
 def calculationStock():
     metadata = MetaData()
@@ -2099,9 +2337,120 @@ def bookingLoss(self):
             self.setGeometry(600, 400, 150, 100)
                 
     window = Widget()
-    window.exec_()  
+    window.exec_() 
     
-def purchaseArticles(self):
+def purchasing(self):
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Define Buttons")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(230)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Collecting purchases')
+            self.k0Edit.addItem('View purchases list')
+            self.k0Edit.addItem('Printing purchases list')
+            self.k0Edit.addItem('Processing deliverylist')
+            self.k0Edit.addItem('View deliverylist')
+            self.k0Edit.addItem('Printing deliverylist')
+                             
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    purchaseCollect(self)
+                elif mindex == 1:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Purchasing\\'
+                    else:
+                        path = './forms/Purchasing/'
+                    viewList(path)
+                    #choose with QCombobox
+                    #print os.startfile
+                elif mindex == 2:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Purchasing\\'
+                    else:
+                        path = './forms/Purchasing/'
+                    pickList(path)
+                    #choose with QCombobox
+                    #print with os.startfile
+                elif mindex == 3:
+                    pass
+                    #deliveryImport()
+                elif mindex == 4:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Deliveries\\'
+                    else:
+                        path = './forms/Deliveries/'
+                    viewList(path)
+                    #choose with QCombobox
+                    #view with QTextEdit
+                elif mindex == 5:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Deliveries\\'
+                    else:
+                        path = './forms/Deliveries/'
+                    pickList(path)
+                    #choose with QCombobox
+                    #print with os.startfile
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_() 
+    
+def purchaseCollect(self):
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -2133,8 +2482,9 @@ def purchaseArticles(self):
         head =\
         ('Sales - Purchaselist: '+ mbookdate+' Pagenumber '+str(pagenumber)+' \n'+
         '==================================================================================================\n'+
-        'Barcode  Description                                  Item-Price        Item-Unit       Ordersize \n'
+        'Barcode       Description                                     Item-Price   Item-Unit   Ordersize  \n'
         '==================================================================================================\n')
+
         return(head)
     
     for row in rparticles:
@@ -2142,18 +2492,21 @@ def purchaseArticles(self):
            pagenumber += 1
            open(orderlist, "a").write(head())
            mline += 4
-            
+           
         mbarcode = row[0]
-        mdescr = row[1]
+        mdescr = row[1][:45]
         mprice = row[2]
         munit = row[4]
         mordersize = row[6]
-        #mordersize add to order_balance
-                  
-        open(orderlist,'a').write(mbarcode+mdescr+str(mprice)+munit+str(mordersize)+'\n')
+        #mordersize add to order_balance and order_status locked
+        updart = update(articles).where(articles.c.barcode == row[0]).values\
+         (order_balance=articles.c.order_balance+mordersize, order_status=False)
+        con.execute(updart)
+       
+        open(orderlist,'a').write('{:<14s}'.format(mbarcode)+'{:<46s}'.format(mdescr)+\
+         '{:>12.2f}'.format(mprice)+'{:>12s}'.format(munit)+'{:>12.2f}'.format(mordersize)+'\n')
         mline += 1
   
-    print('Purchasing articles', 'number orders', mline)
     # stel bestellijst samen en sla op
     # lees lijst in met goedgekeurde produkten en deblokkeer bestelstatus als > 90% geleverd
     # printmogelijkheden voor bestellijst en leveringen
@@ -2411,7 +2764,7 @@ def adminMenu(self):
             self.k0Edit.addItem('Articles insert')
             self.k0Edit.addItem('Articles-list import')
             self.k0Edit.addItem('Loss items booking/request')
-            self.k0Edit.addItem('Purchase/call products')
+            self.k0Edit.addItem('Purchase - Delivery')
             self.k0Edit.addItem('Parameters change')
             
             def k0Changed():
@@ -2442,8 +2795,7 @@ def adminMenu(self):
                 elif mindex == 7:
                     bookingLoss(self)
                 elif mindex == 8:
-                    print('todo')
-                    #purchaseArticles(self)
+                    purchasing(self)
                 elif mindex == 9:
                     defParams(self)
             
@@ -2586,7 +2938,7 @@ def printing():
     msg.setIcon(QMessageBox.Information)
     msg.setFont(QFont("Arial", 10))
     msg.setText('Just a moment printing is starting!')
-    msg.setWindowTitle('Printing receipt')
+    msg.setWindowTitle('Printing')
     msg.exec_()
     
 def heading(self, mpage):
