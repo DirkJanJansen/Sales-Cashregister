@@ -54,5 +54,6 @@
 2020-06-22 sales.py change title with view order versus delivery.
 2020-06-22 documentation adjusted for procedure purchase delivery
 2020-06-22 sales.py message added after gathering orderlines.
-2020-06-22 documentation added imports procedure and general remarks
-2020-06-22 sales.py changed message by  gathering no orderlines.
+2020-06-22 sales.py import prices, new products and remove expired products modules added and views for this items if imported.
+2020-06-22 documentation added explanation for imports.
+2020-06-22 added folders for imports.
