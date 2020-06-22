@@ -55,3 +55,4 @@
 2020-06-22 documentation adjusted for procedure purchase delivery
 2020-06-22 sales.py message added after gathering orderlines.
 2020-06-22 documentation added imports procedure and general remarks
+2020-06-22 sales.py changed message by  gathering no orderlines.
