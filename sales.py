@@ -2578,11 +2578,8 @@ def purchasing(self):
                     else:
                         path = './forms/Purchasing/'
                     pickList(path)
-                    #choose with QCombobox
-                    #print with os.startfile
                 elif mindex == 3:
-                    pass
-                    #deliveryImport()
+                    deliveryImport()
                 elif mindex == 4:
                     if sys.platform == 'win32':
                         path = '.\\forms\\Deliveries\\'
@@ -2694,11 +2691,36 @@ def purchaseCollect(self):
         msg.setText('No items matching the search criteria were found!')
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
-  
-    # stel bestellijst samen en sla op
-    # lees lijst in met goedgekeurde produkten en deblokkeer bestelstatus als > 90% geleverd
-    # printmogelijkheden voor bestellijst en leveringen
+
+def deliveryImport():
+    metadata = MetaData()
+    articles = Table('articles', metadata,
+        Column('barcode', String, primary_key=True),
+        Column('item_stock', Float),
+        Column('order_balance', Float),
+        Column('order_status', Boolean))
     
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+    
+    path = "./forms/Delivery/"
+    for filename in os.listdir(path):
+        file = (open(path+filename, "r"))
+        if filename[-4:] != '.txt':
+            lists = file.readlines()
+            item = len(lists)
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()
+                mdeliver =  float(lists[line][14:].strip())
+                updart = update(articles).where(articles.c.barcode == mbarcode).\
+                    values(item_stock=articles.c.item_stock+mdeliver,\
+                    order_balance=articles.c.order_balance-mdeliver,\
+                    order_status = True)
+                con.execute(updart)
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+            importOK()
+      
 def defParams(self):
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
