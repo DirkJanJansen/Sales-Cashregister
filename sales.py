@@ -19,6 +19,16 @@ def paySuccess():
     msg.setText('Payment succeeded!')
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
+    
+def importOK():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Information)
+    msg.setText('Import of list is succeeded!')
+    msg.setWindowTitle('Import list')
+    msg.exec_() 
  
 def alertText():
     msg = QMessageBox()
@@ -68,6 +78,86 @@ def refresh(self):
     self.close()
     defParams(self)
     
+def changePrices():
+    metadata = MetaData()
+    articles = Table('articles', metadata,
+        Column('barcode', String, primary_key=True),
+        Column('item_price', Float))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+    
+    path = "./forms/Imports/Prices/"
+    for filename in os.listdir(path):
+        file = (open(path+filename, "r"))
+        if filename[-4:] != '.txt':
+            lists = file.readlines()
+            item = len(lists)
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()
+                mprice =  float(lists[line][14:].strip())
+                updart = update(articles).where(articles.c.barcode == mbarcode).\
+                    values(item_price = mprice)
+                con.execute(updart)
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+            importOK()
+            
+def expiredProducts():
+    metadata = MetaData()
+    articles = Table('articles', metadata,
+        Column('barcode', String, primary_key=True))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+    
+    path = "./forms/Imports/Expired/"
+    for filename in os.listdir(path):
+        file = (open(path+filename, "r"))
+        if filename[-4:] != '.txt':
+            print(filename[-4:])
+            lists = file.readlines()
+            item = len(lists)
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()
+                delart = delete(articles).where(articles.c.barcode == mbarcode)
+                con.execute(delart)
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+            importOK()
+
+def newProducts():
+    metadata = MetaData()
+    articles = Table('articles', metadata,
+        Column('barcode', String, primary_key=True))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+    
+    path = "./forms/Imports/New/"
+    for filename in os.listdir(path):
+        file = (open(path+filename, "r"))
+        if filename[-4:] != '.txt':
+            lists = file.readlines()
+            item = len(lists)
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()           #0-12 +13 , 
+                mdescr = lists[line][14:54].strip()           #14-53 50 pos +54 ,
+                mprice =  float(lists[line][55:67].strip())   #55-66 +67 ,
+                munit = lists[line][68:74].strip()            #68-73 +74 ,
+                mgroup = lists[line][75:115].strip()          #75-114 +115 ,
+                thumb = lists[line][116:166].strip()          #116-165 +166 ,
+                mcat = int(lists[line][167:168].strip())      #167- 167 +168 ,
+                mvat = lists[line][169:173].strip()           #169 - 172
+                insart = insert(articles).values(barcode = mbarcode,description=mdescr,\
+                 item_price=mprice,item_unit=munit,article_group=mgroup,thumbnail=thumb,\
+                 category=mcat,VAT=mvat)
+                con.execute(insart)
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+            importOK()
+            
+        
 def viewFile(pathfile, mtitle):
     class Widget(QDialog):
         def __init__(self, parent=None):
@@ -2195,12 +2285,98 @@ def insertArticles(self):
     window = Widget()
     window.exec_()
     
-def importArticles(self):
-    # import lijst met nieuwe artikelen new
-    # import lijst met nieuwe prijzen en levertijden 
-    
-    print('Imports articles')
-    
+def importItems(self):
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Import lists and processing")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(280)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Import change product prices')
+            self.k0Edit.addItem('Import delete expired products')
+            self.k0Edit.addItem('Import insert new products')
+            self.k0Edit.addItem('View lists import prices')
+            self.k0Edit.addItem('View lists import expired products')
+            self.k0Edit.addItem('View lists import new products')
+                           
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    changePrices()
+                elif mindex == 1:
+                    expiredProducts()
+                elif mindex == 2:
+                    newProducts()
+                elif mindex == 3:
+                    path = "./forms/Imports/New/"
+                    mtitle = "View imports changed prices"
+                    viewList(path, mtitle)
+                elif mindex == 4:
+                    path = "./forms/Imports/Expired/"
+                    mtitle = "View imports expired products"
+                    viewList(path, mtitle)
+                elif mindex == 5:
+                    path = "./forms/Imports/New/"
+                    mtitle = "View import new products"
+                    viewList(path, mtitle)
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_() 
+     
 def requestLoss(self):
     metadata = MetaData()
     loss = Table('loss', metadata,
@@ -2770,19 +2946,19 @@ def adminMenu(self):
             grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
             
             self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(240)
+            self.k0Edit.setFixedWidth(260)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Articles request/change')
-            self.k0Edit.addItem('Sales request')
-            self.k0Edit.addItem('Payments request/Payments')
-            self.k0Edit.addItem('Accounts insert')
-            self.k0Edit.addItem('Buttons define')
-            self.k0Edit.addItem('Articles insert')
-            self.k0Edit.addItem('Articles-list import')
-            self.k0Edit.addItem('Loss items booking/request')
-            self.k0Edit.addItem('Purchase - Delivery')
-            self.k0Edit.addItem('Parameters change')
+            self.k0Edit.addItem('Articles - request / change')
+            self.k0Edit.addItem('Sales - request')
+            self.k0Edit.addItem('Payments - request / payments')
+            self.k0Edit.addItem('Accounts - insert')
+            self.k0Edit.addItem('Buttons - define')
+            self.k0Edit.addItem('Articles - insert')
+            self.k0Edit.addItem('Articleslist - import / processing')
+            self.k0Edit.addItem('Loss items - booking / request')
+            self.k0Edit.addItem('Purchase / Delivery')
+            self.k0Edit.addItem('Parameters - change')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -2807,8 +2983,7 @@ def adminMenu(self):
                 elif mindex == 5:
                     insertArticles(self)
                 elif mindex == 6:
-                    print('todo')
-                    importArticles(self)
+                    importItems(self)
                 elif mindex == 7:
                     bookingLoss(self)
                 elif mindex == 8:
@@ -3080,9 +3255,6 @@ def nextClient(self):
             Column('accountnumber', String),
             Column('ovorderID', Integer))
                
-        engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
-        con = engine.connect()
-
         self.mreceipt += 1
         updpar = update(params).where(params.c.paramID == 3).values(value = self.mreceipt)
         con.execute(updpar)
@@ -3397,17 +3569,13 @@ def barcodeScan():
                 Column('paramID', Integer(), primary_key=True),
                 Column('item', String),
                 Column('value', Float))
-                        
-            engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
-            con = engine.connect()
+                  
             metadata = MetaData()
             buttons = Table('buttons', metadata,
                 Column('buttonID', Integer(), primary_key=True),
                 Column('buttontext', String),
                 Column('barcode',  None, ForeignKey('articles.barcode')))
                                           
-            engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
-            con = engine.connect()
             selbtn = select([buttons]).order_by(buttons.c.buttonID)
             rpbtn = con.execute(selbtn)
   
