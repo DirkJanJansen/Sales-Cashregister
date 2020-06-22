@@ -53,3 +53,4 @@
 2020-06-21 cashregister.backup database changed according previous modifications
 2020-06-22 sales.py change title with view order versus delivery.
 2020-06-22 documentation adjusted for procedure purchase delivery
+2020-06-22 sales.py message added after gathering orderlines.
