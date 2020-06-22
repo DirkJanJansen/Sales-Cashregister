@@ -156,16 +156,13 @@ def newProducts():
             file.close()
             os.rename(path+filename,path+filename+'.txt')
             importOK()
-            
-        
+       
 def viewFile(pathfile, mtitle):
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            if mtitle == 0:
-                self.setWindowTitle("View purchase orderlist")
-            else:
-                self.setWindowTitle("View delivery list")
+            self.setWindowTitle(mtitle)
+              
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinMaxButtonsHint)
@@ -187,10 +184,8 @@ def viewFile(pathfile, mtitle):
             movie.start()
             grid.addWidget(pyqt, 0 ,0, 1, 1)
             
-            if mtitle == 0:
-                lblh = QLabel('View purchase orderlist')
-            else:
-                lblh = QLabel('View deliveryies list')
+            lblh = QLabel(mtitle)
+                     
             grid.addWidget(lblh, 0, 0, 1, 2, Qt.AlignCenter)
             lblh.setStyleSheet("color:rgba(45, 83, 115, 255); font: 25pt Comic Sans MS")
             
@@ -278,13 +273,13 @@ def viewList(path, mtitle):
               cancelBtn.setFixedWidth(90)
               cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")    
               
-              printBtn = QPushButton('View')
-              printBtn.clicked.connect(lambda: getfile(self))  
+              viewBtn = QPushButton('View')
+              viewBtn.clicked.connect(lambda: getfile(self))  
                 
-              grid.addWidget(printBtn,  4, 2)
-              printBtn.setFont(QFont("Arial",10))
-              printBtn.setFixedWidth(90)
-              printBtn.setStyleSheet("color: black;  background-color: gainsboro")    
+              grid.addWidget(viewBtn,  4, 2)
+              viewBtn.setFont(QFont("Arial",10))
+              viewBtn.setFixedWidth(90)
+              viewBtn.setStyleSheet("color: black;  background-color: gainsboro")    
                
               reslbl = QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl')
               reslbl.setFont(QFont("Arial",10))
@@ -2340,11 +2335,11 @@ def importItems(self):
                     newProducts()
                 elif mindex == 3:
                     path = "./forms/Imports/New/"
-                    mtitle = "View imports changed prices"
+                    mtitle = "View imports prices"
                     viewList(path, mtitle)
                 elif mindex == 4:
                     path = "./forms/Imports/Expired/"
-                    mtitle = "View imports expired products"
+                    mtitle = "View import expired"
                     viewList(path, mtitle)
                 elif mindex == 5:
                     path = "./forms/Imports/New/"
@@ -2573,7 +2568,7 @@ def purchasing(self):
                         path = '.\\forms\\Purchasing\\'
                     else:
                         path = './forms/Purchasing/'
-                    mtitle = 0
+                    mtitle = 'View purchasing lists'
                     viewList(path, mtitle)
                     #choose with QCombobox
                     #print os.startfile
@@ -2593,7 +2588,7 @@ def purchasing(self):
                         path = '.\\forms\\Deliveries\\'
                     else:
                         path = './forms/Deliveries/'
-                    mtitle = 1
+                    mtitle = 'View delivery lists'
                     viewList(path, mtitle)
                     #choose with QCombobox
                     #view with QTextEdit
