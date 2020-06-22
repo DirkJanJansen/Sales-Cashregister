@@ -68,11 +68,14 @@ def refresh(self):
     self.close()
     defParams(self)
     
-def viewFile(pathfile):
+def viewFile(pathfile, mtitle):
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            self.setWindowTitle("View purchase list for ordering")
+            if mtitle == 0:
+                self.setWindowTitle("View purchase orderlist")
+            else:
+                self.setWindowTitle("View delivery list")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinMaxButtonsHint)
@@ -94,7 +97,10 @@ def viewFile(pathfile):
             movie.start()
             grid.addWidget(pyqt, 0 ,0, 1, 1)
             
-            lblh = QLabel('View purchase list')
+            if mtitle == 0:
+                lblh = QLabel('View purchase orderlist')
+            else:
+                lblh = QLabel('View delivery list')
             grid.addWidget(lblh, 0, 0, 1, 2, Qt.AlignCenter)
             lblh.setStyleSheet("color:rgba(45, 83, 115, 255); font: 25pt Comic Sans MS")
             
@@ -131,7 +137,7 @@ def printFile(filename, path):
     else:
         os.system("lpr "+path+filename)
     
-def viewList(path):
+def viewList(path, mtitle):
     filelist = []
     for file in os.listdir(path):
         if file[-4:] == '.txt':
@@ -200,7 +206,7 @@ def viewList(path):
               
               def getfile(self):
                   filename = self.cb.currentText()
-                  viewFile(path+filename)
+                  viewFile(path+filename, mtitle)
           
     win = combo()
     win.exec_()
@@ -2393,7 +2399,8 @@ def purchasing(self):
                         path = '.\\forms\\Purchasing\\'
                     else:
                         path = './forms/Purchasing/'
-                    viewList(path)
+                    mtitle = 0
+                    viewList(path, mtitle)
                     #choose with QCombobox
                     #print os.startfile
                 elif mindex == 2:
@@ -2412,7 +2419,8 @@ def purchasing(self):
                         path = '.\\forms\\Deliveries\\'
                     else:
                         path = './forms/Deliveries/'
-                    viewList(path)
+                    mtitle = 1
+                    viewList(path, mtitle)
                     #choose with QCombobox
                     #view with QTextEdit
                 elif mindex == 5:
