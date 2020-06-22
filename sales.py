@@ -210,7 +210,6 @@ def viewList(path, mtitle):
     win = combo()
     win.exec_()
 
-
 def pickList(path):    
     filelist = []
     for file in os.listdir(path):
@@ -255,22 +254,22 @@ def pickList(path):
                   self.cb.setCurrentText(self.cb.currentText())
               self.cb.currentIndexChanged.connect(cbChanged)
               
-              aantalEdit = QLineEdit('1')
-              aantalEdit.setStyleSheet("background: #F8F7EE")
-              aantalEdit.setFixedWidth(30)
-              aantalEdit.setFont(QFont("Arial",10))
+              numberEdit = QLineEdit('1')
+              numberEdit.setStyleSheet("background: #F8F7EE")
+              numberEdit.setFixedWidth(30)
+              numberEdit.setFont(QFont("Arial",10))
               reg_ex = QRegExp("^[0-9]{1,2}$")
-              input_validator = QRegExpValidator(reg_ex, aantalEdit)
-              aantalEdit.setValidator(input_validator)
+              input_validator = QRegExpValidator(reg_ex, numberEdit)
+              numberEdit.setValidator(input_validator)
               
-              def aantalChanged():
-                  aantalEdit.setText(aantalEdit.text())
-              aantalEdit.textChanged.connect(aantalChanged)
+              def numberChanged():
+                  numberEdit.setText(numberEdit.text())
+              numberEdit.textChanged.connect(numberChanged)
                             
-              aantlbl = QLabel('Copies to print')
-              aantlbl.setFont(QFont("Arial", 10))
-              grid.addWidget(aantlbl, 3, 1, 1, 2)
-              grid.addWidget(aantalEdit, 3, 2, 1, 1, Qt.AlignRight)
+              nbrlbl = QLabel('Copies to print')
+              nbrlbl.setFont(QFont("Arial", 10))
+              grid.addWidget(nbrlbl, 3, 1, 1, 2)
+              grid.addWidget(numberEdit, 3, 2, 1, 1, Qt.AlignRight)
               
               plbl = QLabel()
               pmap = QPixmap('./thumbs/MG3650.jpg')
@@ -302,7 +301,7 @@ def pickList(path):
               
               def getfile(self):
                   filename = self.cb.currentText()
-                  mnumber = aantalEdit.text()
+                  mnumber = numberEdit.text()
                   for x in range(0, int(mnumber)):
                       printFile(filename,path)
                   printing()
@@ -2518,7 +2517,10 @@ def purchaseCollect(self):
     msg.setWindowIcon(QIcon('./logos/logo.jpg'))
     msg.setFont(QFont("Arial", 10))
     msg.setIcon(QMessageBox.Information)
-    msg.setText('The orderlist has been compiled\norder the products from the list!')
+    if mline > 0:
+        msg.setText('The orderlist has been compiled\norder the listed items!')
+    else:
+        msg.setText('No items matching the search criteria were found!')
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
   
