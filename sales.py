@@ -100,7 +100,7 @@ def viewFile(pathfile, mtitle):
             if mtitle == 0:
                 lblh = QLabel('View purchase orderlist')
             else:
-                lblh = QLabel('View delivery list')
+                lblh = QLabel('View deliveryies list')
             grid.addWidget(lblh, 0, 0, 1, 2, Qt.AlignCenter)
             lblh.setStyleSheet("color:rgba(45, 83, 115, 255); font: 25pt Comic Sans MS")
             
@@ -129,7 +129,6 @@ def viewFile(pathfile, mtitle):
             
     window = Widget()
     window.exec_()
-
     
 def printFile(filename, path):
     if sys.platform == 'win32':
@@ -2514,6 +2513,14 @@ def purchaseCollect(self):
         open(orderlist,'a').write('{:<14s}'.format(mbarcode)+'{:<46s}'.format(mdescr)+\
          '{:>12.2f}'.format(mprice)+'{:>12s}'.format(munit)+'{:>12.2f}'.format(mordersize)+'\n')
         mline += 1
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Information)
+    msg.setText('The orderlist has been compiled\norder the products from the list!')
+    msg.setWindowTitle('Payments instances')
+    msg.exec_() 
   
     # stel bestellijst samen en sla op
     # lees lijst in met goedgekeurde produkten en deblokkeer bestelstatus als > 90% geleverd
