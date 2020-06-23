@@ -65,3 +65,5 @@
 2020-06-22 documentation added parameters explanation VAT, ordercosts and surcharge on storage
 2020-06-22 documentation database structure screenshots added/changed
 2020-06-22 sales.py several registration marks changed
+2020-06-22 employees.png new print form with random barcode-accounts for security reasons random generated for printout and scanning.
+2020-06-22 cashregister.backup database changed new accountcodes 
