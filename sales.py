@@ -115,7 +115,6 @@ def expiredProducts():
     for filename in os.listdir(path):
         file = (open(path+filename, "r"))
         if filename[-4:] != '.txt':
-            print(filename[-4:])
             lists = file.readlines()
             item = len(lists)
             for line in range(0, item):
