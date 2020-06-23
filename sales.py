@@ -69,7 +69,17 @@ def notInserted():
     msg.setText('Not all fields are filled in!')
     msg.setWindowTitle('Insert records')
     msg.exec_() 
-            
+ 
+def importError():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Critical)
+    msg.setText('Import file error occured!')
+    msg.setWindowTitle('Insert records')
+    msg.exec_() 
+           
 def windowClose(self):
     self.close()
     sys.exit()
@@ -93,15 +103,20 @@ def changePrices():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            for line in range(0, item):
-                mbarcode = lists[line][:13].strip()
-                mprice =  float(lists[line][14:].strip())
-                updart = update(articles).where(articles.c.barcode == mbarcode).\
-                    values(item_price = mprice)
-                con.execute(updart)
-            file.close()
-            os.rename(path+filename,path+filename+'.txt')
-            importOK()
+            transaction = con.begin()
+            try:
+                for line in range(0, item):
+                    mbarcode = lists[line][:13].strip()
+                    mprice =  float(lists[line][14:].strip())
+                    updart = update(articles).where(articles.c.barcode == mbarcode).\
+                        values(item_price = mprice)
+                    con.execute(updart)
+                file.close()
+                os.rename(path+filename,path+filename+'.txt')
+                importOK()
+            except:
+                transaction.rollback()
+                importError()
             
 def expiredProducts():
     metadata = MetaData()
@@ -117,13 +132,18 @@ def expiredProducts():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            for line in range(0, item):
-                mbarcode = lists[line][:13].strip()
-                delart = delete(articles).where(articles.c.barcode == mbarcode)
-                con.execute(delart)
-            file.close()
-            os.rename(path+filename,path+filename+'.txt')
-            importOK()
+            transaction = con.begin()
+            try:
+                for line in range(0, item):
+                    mbarcode = lists[line][:13].strip()
+                    delart = delete(articles).where(articles.c.barcode == mbarcode)
+                    con.execute(delart)
+                file.close()
+                os.rename(path+filename,path+filename+'.txt')
+                importOK()
+            except:
+                transaction.rollback()
+                importError()
 
 def newProducts():
     metadata = MetaData()
@@ -139,22 +159,27 @@ def newProducts():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            for line in range(0, item):
-                mbarcode = lists[line][:13].strip()           #0-12 +13 , 
-                mdescr = lists[line][14:54].strip()           #14-53 50 pos +54 ,
-                mprice =  float(lists[line][55:67].strip())   #55-66 +67 ,
-                munit = lists[line][68:74].strip()            #68-73 +74 ,
-                mgroup = lists[line][75:115].strip()          #75-114 +115 ,
-                thumb = lists[line][116:166].strip()          #116-165 +166 ,
-                mcat = int(lists[line][167:168].strip())      #167- 167 +168 ,
-                mvat = lists[line][169:173].strip()           #169 - 172
-                insart = insert(articles).values(barcode = mbarcode,description=mdescr,\
-                 item_price=mprice,item_unit=munit,article_group=mgroup,thumbnail=thumb,\
-                 category=mcat,VAT=mvat)
-                con.execute(insart)
-            file.close()
-            os.rename(path+filename,path+filename+'.txt')
-            importOK()
+            transaction = con.begin()
+            try:
+                for line in range(0, item):
+                    mbarcode = lists[line][:13].strip()           #0-12 +13 , 
+                    mdescr = lists[line][14:54].strip()           #14-53 50 pos +54 ,
+                    mprice =  float(lists[line][55:67].strip())   #55-66 +67 ,
+                    munit = lists[line][68:74].strip()            #68-73 +74 ,
+                    mgroup = lists[line][75:115].strip()          #75-114 +115 ,
+                    thumb = lists[line][116:166].strip()          #116-165 +166 ,
+                    mcat = int(lists[line][167:168].strip())      #167- 167 +168 ,
+                    mvat = lists[line][169:173].strip()           #169 - 172
+                    insart = insert(articles).values(barcode = mbarcode,description=mdescr,\
+                     item_price=mprice,item_unit=munit,article_group=mgroup,thumbnail=thumb,\
+                     category=mcat,VAT=mvat)
+                    con.execute(insart)
+                file.close()
+                os.rename(path+filename,path+filename+'.txt')
+                importOK()
+            except:
+                transaction.rollback()
+                importError()
        
 def viewFile(pathfile, mtitle):
     class Widget(QDialog):
@@ -438,6 +463,8 @@ def calculationStock():
                 values(annual_consumption_2 = 0, minimum_stock = minstock, order_size = mordersize)
             con.execute(updart)
     elif myear%2 == 0 and int(rppar[3][2]) == 1:
+        selarticles = select([articles]).order_by(articles.c.barcode)
+        rparticles = con.execute(selarticles)
         updpar = update(params).where(params.c.paramID == 4).values(value = 0)
         con.execute(updpar)
                    
@@ -2708,17 +2735,23 @@ def deliveryImport():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            for line in range(0, item):
-                mbarcode = lists[line][:13].strip()
-                mdeliver =  float(lists[line][14:].strip())
-                updart = update(articles).where(articles.c.barcode == mbarcode).\
-                    values(item_stock=articles.c.item_stock+mdeliver,\
-                    order_balance=articles.c.order_balance-mdeliver,\
-                    order_status = True)
-                con.execute(updart)
-            file.close()
-            os.rename(path+filename,path+filename+'.txt')
-            importOK()
+            transaction = con.begin()
+            try:
+                for line in range(0, item):
+                    mbarcode = lists[line][:13].strip()
+                    mdeliver =  float(lists[line][14:].strip())
+                   
+                    updart = update(articles).where(articles.c.barcode == mbarcode).\
+                        values(item_stock=articles.c.item_stock+mdeliver,\
+                        order_balance=articles.c.order_balance-mdeliver,\
+                        order_status = True)
+                    con.execute(updart)
+                file.close()
+                os.rename(path+filename,path+filename+'.txt')
+                importOK()
+            except:
+                transaction.rollback()
+                importError()
       
 def defParams(self):
     class Widget(QDialog):
