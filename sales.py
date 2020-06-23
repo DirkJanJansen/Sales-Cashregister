@@ -424,15 +424,15 @@ def calculationStock():
             mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
             mjrverbr = row[4]
             if row[3] == 1:
-                minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
+                minstock = round(mjrverbr*1/17, 0) # < 3 weeks deliverytime
             elif row[3] == 2:
-                minstock = round(mjrverbr*2/17, 0) # < 6 weken levertijd
+                minstock = round(mjrverbr*2/17, 0) # < 6 weeks deliverytime
             elif row[3] == 3:
-                minstock = round(mjrverbr*4/17, 0) # < 12 weken levertijd
+                minstock = round(mjrverbr*4/17, 0) # < 12 weeks deliverytime
             elif row[3] == 4: 
-                minstock = round(mjrverbr*8/17, 0) # < 26 weken levertijd
+                minstock = round(mjrverbr*8/17, 0) # < 26 weeks deliverytime
             elif row[3] == 5: 
-                minstock = round(mjrverbr*16/17,0) # < 52 weken levertijd
+                minstock = round(mjrverbr*16/17,0) # < 52 weeks deliverytime
                 
             updart = update(articles).where(articles.c.barcode == row[0]).\
                 values(annual_consumption_2 = 0, minimum_stock = minstock, order_size = mordersize)
@@ -445,15 +445,15 @@ def calculationStock():
             mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
             mjrverbr = row[5]
             if row[3] == 1:
-                minstock = round(mjrverbr*1/17, 0) # < 3 weken levertijd
+                minstock = round(mjrverbr*1/17, 0) # < 3 weeks deliverytime
             elif row[3] == 2:
-                minstock = round(mjrverbr*2/17, 0) # < 6 weken levertijd
+                minstock = round(mjrverbr*2/17, 0) # < 6 weeks deliverytime
             elif row[3] == 3:
-                minstock = round(mjrverbr*4/17, 0) # < 12 weken levertijd
+                minstock = round(mjrverbr*4/17, 0) # < 12 weeks deliverytime
             elif row[3] == 4: 
-                minstock = round(mjrverbr*8/17, 0) # < 26 weken levertijd
+                minstock = round(mjrverbr*8/17, 0) # < 26 weeks deliverytime
             elif row[3] == 5: 
-                minstock = round(mjrverbr*16/17,0) # < 52 weken levertijd
+                minstock = round(mjrverbr*16/17,0) # < 52 weeks deliverytime
                 
             updart = update(articles).where(articles.c.barcode == row[0]).\
                 values(annual_consumption_1 = 0, minimum_stock = minstock, order_size = mordersize)
