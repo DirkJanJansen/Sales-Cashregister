@@ -60,3 +60,5 @@
 2020-06-22 sales.py changed headtext for viewlistfiles
 2020-06-22 sales.py added module for deliveryImport.
 2020-06-22 documentation Sales_CashRegister.pdf adjusted
+2020-06-22 comments removed 
+2020-06-22 sales.py unnecessary print statement removed
