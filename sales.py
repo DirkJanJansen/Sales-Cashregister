@@ -280,7 +280,7 @@ def viewList(path, mtitle):
               viewBtn.setFixedWidth(90)
               viewBtn.setStyleSheet("color: black;  background-color: gainsboro")    
                
-              reslbl = QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl')
+              reslbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
               reslbl.setFont(QFont("Arial",10))
               grid.addWidget(reslbl, 5, 0, 1, 3, Qt.AlignCenter)
                 
@@ -376,7 +376,7 @@ def pickList(path):
               printBtn.setFixedWidth(90)
               printBtn.setStyleSheet("color: black;  background-color: gainsboro")    
                
-              reslbl = QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl')
+              reslbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
               reslbl.setFont(QFont("Arial",10))
               grid.addWidget(reslbl, 5, 0, 1, 3, Qt.AlignCenter)
                 
@@ -2773,7 +2773,7 @@ def defParams(self):
             
             grid.addWidget(sluitBtn, 1, 4, 1, 1, Qt.AlignRight | Qt.AlignBottom)
             
-            grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 1, 2, 1, 1, Qt.AlignBottom)
+            grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 1, 2, 1, 1, Qt.AlignBottom)
             
             self.setLayout(grid)
             self.setGeometry(300, 50, 900, 900)
