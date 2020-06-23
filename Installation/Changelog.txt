@@ -64,3 +64,4 @@
 2020-06-22 sales.py unnecessary print statement removed
 2020-06-22 documentation added parameters explanation VAT, ordercosts and surcharge on storage
 2020-06-22 documentation database structure screenshots added/changed
+2020-06-22 sales.py several registration marks changed
