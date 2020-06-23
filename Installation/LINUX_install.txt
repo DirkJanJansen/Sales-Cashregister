@@ -64,6 +64,6 @@ in terminal sudo fc-cache -r -f
 install Ubuntu tweak tools and increase font  size for optimal views
    
 startup files in Linux:
-Copy register.png from folder LINUX in folder /home/postgres/.icons
-Copy Sales.desktop from folder LINUX in /home/postgres/.local/share/applications
+Copy register.png from folder Installation in folder /home/postgres/.icons
+Copy Sales.desktop from folder Installation in /home/postgres/.local/share/applications
 
