@@ -1,6 +1,0 @@
-The project is still in development
-The front end is ready.
-The backend modules for Articles-list import, Write off loss, 
-purchase products and par of articles change are on todo list.
-
- 
