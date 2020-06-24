@@ -20,13 +20,23 @@ def paySuccess():
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
     
-def importOK():
+def noBarcode(mbarcode):
     msg = QMessageBox()
     msg.setStyleSheet("color: black;  background-color: gainsboro")
     msg.setWindowIcon(QIcon('./logos/logo.jpg'))
     msg.setFont(QFont("Arial", 10))
-    msg.setIcon(QMessageBox.Information)
-    msg.setText('Import of list is succeeded!')
+    msg.setIcon(QMessageBox.Warning)
+    msg.setText('No barcode '+mbarcode+' found!')
+    msg.setWindowTitle('Import list')
+    msg.exec_() 
+    
+def barcodeExist(mbarcode):
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Warning)
+    msg.setText('Barcode '+mbarcode+' exists already!')
     msg.setWindowTitle('Import list')
     msg.exec_() 
  
@@ -69,16 +79,6 @@ def notInserted():
     msg.setText('Not all fields are filled in!')
     msg.setWindowTitle('Insert records')
     msg.exec_() 
- 
-def importError():
-    msg = QMessageBox()
-    msg.setStyleSheet("color: black;  background-color: gainsboro")
-    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
-    msg.setFont(QFont("Arial", 10))
-    msg.setIcon(QMessageBox.Critical)
-    msg.setText('Import file error occured!')
-    msg.setWindowTitle('Insert records')
-    msg.exec_() 
            
 def windowClose(self):
     self.close()
@@ -103,21 +103,19 @@ def changePrices():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            transaction = con.begin()
-            try:
-                for line in range(0, item):
-                    mbarcode = lists[line][:13].strip()
-                    mprice =  float(lists[line][14:].strip())
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()
+                mprice =  float(lists[line][14:].strip())
+                sel = select([articles]).where(articles.c.barcode == mbarcode)
+                if con.execute(sel).fetchone():                    
                     updart = update(articles).where(articles.c.barcode == mbarcode).\
                         values(item_price = mprice)
                     con.execute(updart)
-                file.close()
-                os.rename(path+filename,path+filename+'.txt')
-                importOK()
-            except:
-                transaction.rollback()
-                importError()
-            
+                else:
+                    noBarcode(mbarcode)
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+                             
 def expiredProducts():
     metadata = MetaData()
     articles = Table('articles', metadata,
@@ -132,19 +130,17 @@ def expiredProducts():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            transaction = con.begin()
-            try:
-                for line in range(0, item):
-                    mbarcode = lists[line][:13].strip()
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()
+                sel = select([articles]).where(articles.c.barcode == mbarcode)
+                if con.execute(sel).fetchone():
                     delart = delete(articles).where(articles.c.barcode == mbarcode)
                     con.execute(delart)
-                file.close()
-                os.rename(path+filename,path+filename+'.txt')
-                importOK()
-            except:
-                transaction.rollback()
-                importError()
-
+                else:
+                    noBarcode(mbarcode)
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+ 
 def newProducts():
     metadata = MetaData()
     articles = Table('articles', metadata,
@@ -159,28 +155,26 @@ def newProducts():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            transaction = con.begin()
-            try:
-                for line in range(0, item):
-                    mbarcode = lists[line][:13].strip()           #0-12 +13 , 
-                    mdescr = lists[line][14:54].strip()           #14-53 50 pos +54 ,
-                    mprice =  float(lists[line][55:67].strip())   #55-66 +67 ,
-                    munit = lists[line][68:74].strip()            #68-73 +74 ,
-                    mgroup = lists[line][75:115].strip()          #75-114 +115 ,
-                    thumb = lists[line][116:166].strip()          #116-165 +166 ,
-                    mcat = int(lists[line][167:168].strip())      #167- 167 +168 ,
-                    mvat = lists[line][169:173].strip()           #169 - 172
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()           #0-12 +13 , 
+                mdescr = lists[line][14:54].strip()           #14-53 50 pos +54 ,
+                mprice =  float(lists[line][55:67].strip())   #55-66 +67 ,
+                munit = lists[line][68:74].strip()            #68-73 +74 ,
+                mgroup = lists[line][75:115].strip()          #75-114 +115 ,
+                thumb = lists[line][116:166].strip()          #116-165 +166 ,
+                mcat = int(lists[line][167:168].strip())      #167- 167 +168 ,
+                mvat = lists[line][169:173].strip()           #169 - 172
+                sel = select(articles).where(articles.c.barcode == mbarcode)
+                if con.execute(sel):
+                    barcodeExist(mbarcode)
+                else:
                     insart = insert(articles).values(barcode = mbarcode,description=mdescr,\
                      item_price=mprice,item_unit=munit,article_group=mgroup,thumbnail=thumb,\
                      category=mcat,VAT=mvat)
                     con.execute(insart)
-                file.close()
-                os.rename(path+filename,path+filename+'.txt')
-                importOK()
-            except:
-                transaction.rollback()
-                importError()
-       
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+      
 def viewFile(pathfile, mtitle):
     class Widget(QDialog):
         def __init__(self, parent=None):
@@ -2735,24 +2729,21 @@ def deliveryImport():
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
-            transaction = con.begin()
-            try:
-                for line in range(0, item):
-                    mbarcode = lists[line][:13].strip()
-                    mdeliver =  float(lists[line][14:].strip())
-                   
+            for line in range(0, item):
+                mbarcode = lists[line][:13].strip()
+                mdeliver =  float(lists[line][14:].strip())
+                sel = select([articles]).where(articles.c.barcode == mbarcode)
+                if con.execute(sel).fetchone():
                     updart = update(articles).where(articles.c.barcode == mbarcode).\
                         values(item_stock=articles.c.item_stock+mdeliver,\
                         order_balance=articles.c.order_balance-mdeliver,\
                         order_status = True)
                     con.execute(updart)
+                else:
+                    noBarcode(mbarcode)
                 file.close()
                 os.rename(path+filename,path+filename+'.txt')
-                importOK()
-            except:
-                transaction.rollback()
-                importError()
-      
+     
 def defParams(self):
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
