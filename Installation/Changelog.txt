@@ -70,3 +70,4 @@
 2020-06-22 sales.py try - except by imports with rollback procedure applied by importerrors prices, deleted, new items and deliveries.
 2020-06-23 sales.py message implied by imports if no barcode is found in database by prices, expired product and delivery, 
            message barcode found in database by new products. try except method removed.
+2020-06-23 templates for import items added and new importfiles for new-items, change price-items and expired-items in folder Forms/Import
