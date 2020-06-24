@@ -68,3 +68,5 @@
 2020-06-22 employees.png new print form with random barcode-accounts for security reasons random generated for printout and scanning.
 2020-06-22 cashregister.backup database changed new accountcodes 
 2020-06-22 sales.py try - except by imports with rollback procedure applied by importerrors prices, deleted, new items and deliveries.
+2020-06-23 sales.py message implied by imports if no barcode is found in database by prices, expired product and delivery, 
+           message barcode found in database by new products. try except method removed.
