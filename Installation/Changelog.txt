@@ -71,3 +71,4 @@
 2020-06-23 sales.py message implied by imports if no barcode is found in database by prices, expired product and delivery, 
            message barcode found in database by new products. try except method removed.
 2020-06-23 sales.py changed layout for import new items, new import files copied in directory forms and templates added for import
+2020-06-23 sales.py messages added by import deliveries.
