@@ -20,6 +20,16 @@ def paySuccess():
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
     
+def noImports():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Information)
+    msg.setText('No new import available!')
+    msg.setWindowTitle('Import')
+    msg.exec_()   
+    
 def importDone():
     msg = QMessageBox()
     msg.setStyleSheet("color: black;  background-color: gainsboro")
@@ -126,6 +136,8 @@ def changePrices():
             importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
+        else:
+            noImports()
                              
 def expiredProducts():
     metadata = MetaData()
@@ -152,6 +164,8 @@ def expiredProducts():
             importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
+        else:
+            noImports()
  
 def newProducts():
     metadata = MetaData()
@@ -196,6 +210,8 @@ def newProducts():
             importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
+        else:
+            noImports()
       
 def viewFile(pathfile, mtitle):
     class Widget(QDialog):
@@ -2753,7 +2769,7 @@ def deliveryImport():
             item = len(lists)
             for line in range(0, item):
                 mbarcode = lists[line][:13].strip()
-                mdeliver =  float(lists[line][14:].strip())
+                mdeliver =  float(lists[line][14:26].strip())
                 sel = select([articles]).where(articles.c.barcode == mbarcode)
                 if con.execute(sel).fetchone():
                     updart = update(articles).where(articles.c.barcode == mbarcode).\
@@ -2763,8 +2779,11 @@ def deliveryImport():
                     con.execute(updart)
                 else:
                     noBarcode(mbarcode)
-                file.close()
-                os.rename(path+filename,path+filename+'.txt')
+            file.close()
+            os.rename(path+filename,path+filename+'.txt')
+            importDone()
+        else:
+            noImports()
      
 def defParams(self):
     class Widget(QDialog):
