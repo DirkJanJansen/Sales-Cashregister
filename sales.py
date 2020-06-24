@@ -20,6 +20,16 @@ def paySuccess():
     msg.setWindowTitle('Payments instances')
     msg.exec_() 
     
+def importDone():
+    msg = QMessageBox()
+    msg.setStyleSheet("color: black;  background-color: gainsboro")
+    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
+    msg.setFont(QFont("Arial", 10))
+    msg.setIcon(QMessageBox.Information)
+    msg.setText('Import done!')
+    msg.setWindowTitle('Import')
+    msg.exec_() 
+
 def noBarcode(mbarcode):
     msg = QMessageBox()
     msg.setStyleSheet("color: black;  background-color: gainsboro")
@@ -105,7 +115,7 @@ def changePrices():
             item = len(lists)
             for line in range(0, item):
                 mbarcode = lists[line][:13].strip()
-                mprice =  float(lists[line][14:].strip())
+                mprice =  float(lists[line][14:26].strip())
                 sel = select([articles]).where(articles.c.barcode == mbarcode)
                 if con.execute(sel).fetchone():                    
                     updart = update(articles).where(articles.c.barcode == mbarcode).\
@@ -113,6 +123,7 @@ def changePrices():
                     con.execute(updart)
                 else:
                     noBarcode(mbarcode)
+            importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
                              
@@ -138,13 +149,21 @@ def expiredProducts():
                     con.execute(delart)
                 else:
                     noBarcode(mbarcode)
+            importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
  
 def newProducts():
     metadata = MetaData()
     articles = Table('articles', metadata,
-        Column('barcode', String, primary_key=True))
+        Column('barcode', String, primary_key=True),
+        Column('description', String),
+        Column('item_price', Float),
+        Column('item_unit', String),
+        Column('article_group', String),
+        Column('thumbnail', String),
+        Column('category', Integer),
+        Column('VAT', String))
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
@@ -156,22 +175,25 @@ def newProducts():
             lists = file.readlines()
             item = len(lists)
             for line in range(0, item):
-                mbarcode = lists[line][:13].strip()           #0-12 +13 , 
-                mdescr = lists[line][14:54].strip()           #14-53 50 pos +54 ,
-                mprice =  float(lists[line][55:67].strip())   #55-66 +67 ,
-                munit = lists[line][68:74].strip()            #68-73 +74 ,
-                mgroup = lists[line][75:115].strip()          #75-114 +115 ,
-                thumb = lists[line][116:166].strip()          #116-165 +166 ,
-                mcat = int(lists[line][167:168].strip())      #167- 167 +168 ,
-                mvat = lists[line][169:173].strip()           #169 - 172
-                sel = select(articles).where(articles.c.barcode == mbarcode)
-                if con.execute(sel):
+                mbarcode = lists[line][:13].strip()           #0-12  +13 , 
+                mdescr = lists[line][14:64].strip()           #14-63 +64 ,
+                mprice =  float(lists[line][66:78].strip())   #66-77 +78 ,
+                munit = lists[line][79:85].strip()            #79-84 +85 ,
+                mgroup = lists[line][86:126].strip()          #86-125 +126 ,
+                thumb = lists[line][127:178].strip()          #127-177 +178 ,
+                mcat = int(lists[line][179:180].strip())      #179- 179 +180 ,
+                mvat = lists[line][181:185].strip()           #181 - 184 +185 ,
+         
+                sel = select([articles]).where(articles.c.barcode == mbarcode)
+                if con.execute(sel).fetchone():
                     barcodeExist(mbarcode)
                 else:
                     insart = insert(articles).values(barcode = mbarcode,description=mdescr,\
                      item_price=mprice,item_unit=munit,article_group=mgroup,thumbnail=thumb,\
                      category=mcat,VAT=mvat)
                     con.execute(insart)
+       
+            importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
       
