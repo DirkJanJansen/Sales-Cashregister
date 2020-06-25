@@ -3113,8 +3113,9 @@ def logon(self, barcodenr):
     self.maccess = rpacc[2]
     self.logon = self.q1Edit.text()
     self.q1Edit.setText('')
-    self.logonstate.setText(self.mcallname +' logged in.')
-    self.plusminBtn.setStyleSheet("color: black;  background-color: gainsboro")
+    self.pixmap = QPixmap('./logos/green.jpg')
+    self.logonstate.setPixmap(self.pixmap.scaled(20,20))
+    self.plusminBtn.setStyleSheet("color: black;  background-color: #FFD700")
     if self.maccess < 2:
         self.plusminBtn.setText('+')
         self.plusminBtn.setChecked(False)
@@ -3346,11 +3347,11 @@ def nextClient(self):
              ovorderID = int(self.mreceipt), accountnumber = 'NL10 ABNA 9999999977')
         con.execute(insdr)
         self.closeBtn.setEnabled(True)
-        self.closeBtn.setStyleSheet("color: black; background-color: gainsboro")
+        self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
         self.printBtn.setDisabled(True)
-        self.printBtn.setStyleSheet("color: grey; background-color: gainsboro")
+        self.printBtn.setStyleSheet("color: grey; background-color: #00FFFF")
         self.nextBtn.setDisabled(True)
-        self.nextBtn.setStyleSheet("color: grey; background-color: gainsboro")
+        self.nextBtn.setStyleSheet("color: grey; background-color: #00FFFF")
         
         self.mtotal = 0.00
         self.mtotvat = 0.00
@@ -3361,7 +3362,7 @@ def nextClient(self):
     else:
         noData()
         self.closeBtn.setEnabled(True)
-        self.closeBtn.setStyleSheet("color: black; background-color: gainsboro")
+        self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
 
 def giveAlarm():
     if sys.platform == 'win32':
@@ -3492,18 +3493,19 @@ def set_barcodenr(self):
             giveAlarm()
                   
         self.closeBtn.setDisabled(True)
-        self.closeBtn.setStyleSheet("color: grey; background-color: gainsboro")
+        self.closeBtn.setStyleSheet("color: grey; background-color: #B0C4DE")
         self.printBtn.setEnabled(True)
-        self.printBtn.setStyleSheet("color: black; background-color: gainsboro")
+        self.printBtn.setStyleSheet("color: black;  background-color: #00FFFF")
         self.nextBtn.setEnabled(True)
-        self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: gainsboro")
+        self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: #00BFFF")
     elif len(barcodenr) == 8:
         if barcodenr == self.checknr:
             self.maccess = 0
             self.plusminBtn.setHidden(True)
             self.adminBtn.setHidden(True)
             self.q1Edit.setText('')
-            self.logonstate.setText('Logged out')
+            self.pixmap = QPixmap('./logos/red.jpg')
+            self.logonstate.setPixmap(self.pixmap.scaled(20,20))
         else:
             self.checknr = barcodenr
             logon(self, barcodenr)
@@ -3525,7 +3527,7 @@ def barcodeScan():
         def __init__(self):
             super(widget,self).__init__()
             
-            self.setWindowTitle("Sales")
+            self.setWindowTitle("Cashregister Sales")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -3578,27 +3580,14 @@ def barcodeScan():
             grid = QGridLayout()
             grid.setSpacing(10)
           
-            koplbl = QLabel('Cashregister System')
-            koplbl.setStyleSheet("color:rgba(45, 83, 115, 255); font: 30pt Comic Sans MS")
-            grid.addWidget(koplbl, 0, 0, 1, 12, Qt.AlignCenter)
-        
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 0 ,0, 1, 3)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 0, 11, 1 ,1, Qt.AlignRight)
+            grid = QGridLayout()
+            grid.setSpacing(0)
             
-            self.logtext = 'Logged out'
-            self.logonstate = QLabel(self.logtext)
-            self.logonstate.setFont(QFont("Arial", 12))
-            grid.addWidget(self.logonstate, 9, 10, 1, 3)
-            
+            self.logonstate = QLabel()
+            self.pixmap = QPixmap('./logos/red.jpg')
+            self.logonstate.setPixmap(self.pixmap.scaled(20,20))
+            grid.addWidget(self.logonstate, 5, 11, 1, 1, Qt.AlignRight | Qt.AlignVCenter)
+                     
             mkop = QLineEdit()
             mkoptext = 'Articlenumber Description                              Number  Item_price    Subtotal         VAT'
             mkop.setText(mkoptext)
@@ -3614,7 +3603,7 @@ def barcodeScan():
             self.view.setText('')
             self.view.setFont(QFont("Consolas", 12, 75))
             self.view.setFocusPolicy(Qt.NoFocus)
-            self.view.setFixedSize(1110, 450)  
+            self.view.setFixedSize(1110, 380)  
             
             self.mtotal = 0.00
             self.mtotvat = 0.00
@@ -3633,14 +3622,15 @@ def barcodeScan():
             
             self.albl = QLabel('')
             self.albl.setStyleSheet("font: bold 18px; color: red")
+            self.albl.setFixedHeight(40)
             grid.addWidget(self.albl, 5, 0, 1, 12, Qt.AlignCenter)
 
             lbl1 = QLabel('Barcodescan')
             lbl1.setFont(QFont("Arial", 12))
-            grid.addWidget(lbl1, 7, 9, 1, 4, Qt.AlignCenter)
+            grid.addWidget(lbl1, 7, 8, 1, 4, Qt.AlignCenter)
             grid.addWidget(self.q1Edit , 7, 2, 1, 11, Qt.AlignRight)
             
-            lbl2 = QLabel('      Number')
+            lbl2 = QLabel('Number')
             lbl2.setFont(QFont("Arial", 12))
             grid.addWidget(lbl2, 8, 9, 1, 4, Qt.AlignCenter)
             grid.addWidget(self.qspin, 8, 11, 1, 1, Qt.AlignRight)
@@ -3661,23 +3651,23 @@ def barcodeScan():
             rpbtn = con.execute(selbtn)
   
             # insert 32 programmable articlebuttons
-            btnlist = []
             a = 0
+            btnlist = []
             for row in rpbtn:
                 aBtn = QPushButton(row[1].strip())
-                btnlist.append(row[2].strip())
-                aBtn.setFont(QFont("Times", 8, 75))
-                aBtn.setStyleSheet('color: black; background-color: gainsboro')
+                aBtn.setFont(QFont("Times", 10, 75))
+                aBtn.setStyleSheet('color: black; background-color:  #FFFFF0')
                 aBtn.setFocusPolicy(Qt.NoFocus)
-                aBtn.setFixedSize(65, 40)
-                if a < 8:
-                    grid.addWidget(aBtn, 7, a+1)
-                elif a < 16:
-                    grid.addWidget(aBtn, 8, a%8+1)
-                elif a < 24:
-                    grid.addWidget(aBtn, 9, a%8+1)
-                elif a < 32:
-                    grid.addWidget(aBtn, 10, a%8+1)
+                aBtn.setFixedSize(90, 90)
+                btnlist.append(row[2].strip())
+                if a < 10:
+                    grid.addWidget(aBtn, 7, a)
+                elif a < 20:
+                    grid.addWidget(aBtn, 8, a%10)
+                elif a < 30:
+                    grid.addWidget(aBtn, 9, a%10)
+                elif a < 40:
+                    grid.addWidget(aBtn, 10,a%10)
                  
                 aBtn.clicked.connect(lambda checked, btn = btnlist[a] : getbarcode(btn))
                 a += 1
@@ -3685,71 +3675,66 @@ def barcodeScan():
             def getbarcode(btn):
                 self.q1Edit.setText(btn)
                 keyboard.write('\n')
-                        
-            kassa = QLabel()
-            pixmap = QPixmap('./logos/register.png')
-            kassa.setPixmap(pixmap.scaled(150, 150))
-            grid.addWidget(kassa, 7, 0, 4, 1)
-                
+                   
             self.plusminBtn = QPushButton('+')
             self.plusminBtn.setCheckable(True)
+            self.plusminBtn.setStyleSheet("color: black;  background-color: #FFD700")
             self.plusminBtn.setHidden(True)
-            self.plusminBtn.setStyleSheet("color: grey;  background-color: gainsboro")
             self.plusminBtn.clicked.connect(lambda: plusminChange(self))
             self.plusminBtn.setFocusPolicy(Qt.NoFocus)
             self.plusminBtn.setFixedSize(20, 30)
-            self.plusminBtn.setStyleSheet("color: black;  background-color: gainsboro")
-      
+                 
             grid.addWidget(self.plusminBtn, 8, 11)
             
             self.printBtn = QPushButton('Printing')
             self.printBtn.clicked.connect(lambda: printBon(self))
             self.printBtn.setFont(QFont("Arial",12))
             self.printBtn.setFocusPolicy(Qt.NoFocus)
-            self.printBtn.setFixedWidth(120)
-            self.printBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            self.printBtn.setFixedSize(150,90)
+            self.printBtn.setStyleSheet("color: black;  background-color: #00FFFF")
       
-            grid.addWidget(self.printBtn, 10, 11, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.printBtn, 10, 10, 1, 1, Qt.AlignRight)
             
             self.adminBtn = QPushButton('Administration')
             self.adminBtn.setFocusPolicy(Qt.NoFocus)
             self.adminBtn.setHidden(True)
             self.adminBtn.setFont(QFont("Arial",12))
-            self.adminBtn.setFixedSize(160, 40) 
-            self.adminBtn.setStyleSheet("color: black; background-color: gainsboro")
+            self.adminBtn.setFixedWidth(140) 
+            self.adminBtn.setStyleSheet("color: black; background-color: #FFD700")
             self.adminBtn.clicked.connect(lambda: adminMenu(self)) 
     
-            grid.addWidget(self.adminBtn, 9, 9, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.adminBtn, 5, 10, 1, 1, Qt.AlignRight)
                                                    
             self.closeBtn = QPushButton('Exit')
             self.closeBtn.clicked.connect(lambda: windowClose(self))
             self.closeBtn.setFont(QFont("Arial",12))
             self.closeBtn.setFocusPolicy(Qt.NoFocus)
-            self.closeBtn.setFixedWidth(120)
-            self.closeBtn.setStyleSheet("color: black; background-color: gainsboro")
+            self.closeBtn.setFixedSize(150,90)
+            self.closeBtn.setStyleSheet("color: black; background-color: #B0C4DE")
 
-            grid.addWidget(self.closeBtn, 10, 10, 1, 1, Qt.AlignCenter)
+            grid.addWidget(self.closeBtn, 9, 11, 1, 1, Qt.AlignRight)
                                   
             infoBtn = QPushButton('Information')
             infoBtn.clicked.connect(lambda: info())
             infoBtn.setFont(QFont("Arial",12))
             infoBtn.setFocusPolicy(Qt.NoFocus)
-            infoBtn.setFixedWidth(120)
-            infoBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            infoBtn.setFixedSize(150,90)
+            infoBtn.setStyleSheet("color: black;  background-color: #B0E0E6")
     
-            grid.addWidget(infoBtn, 10, 9, 1, 1, Qt.AlignRight )
+            grid.addWidget(infoBtn, 9, 10, 1, 1, Qt.AlignRight )
            
-            self.nextBtn = QPushButton('Next customer')
+            self.nextBtn = QPushButton('Next\nCustomer')
             self.nextBtn.clicked.connect(lambda: nextClient(self))
             self.nextBtn.setFont(QFont("Arial",12))
             self.nextBtn.setFocusPolicy(Qt.NoFocus)
-            self.nextBtn.setFixedSize(160, 60)            
-            self.nextBtn.setStyleSheet("color:black; background-color: gainsboro")
+            self.nextBtn.setFixedSize(150,90)            
+            self.nextBtn.setStyleSheet("color:black; background-color: #00BFFF")
     
-            grid.addWidget(self.nextBtn, 8, 9, 1, 1, Qt.AlignRight)   
+            grid.addWidget(self.nextBtn, 10, 11, 1, 1, Qt.AlignRight)   
             
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
+            lbl3.setFixedHeight(40)
             grid.addWidget(lbl3, 11, 0, 1, 12, Qt.AlignCenter)
                                       
             self.setLayout(grid)
