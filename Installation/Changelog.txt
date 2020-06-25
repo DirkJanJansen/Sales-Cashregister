@@ -76,3 +76,4 @@
            unnessary logos removed adminbutton placed message bar.
 2020-06-25 cashregister.backup changed for more buttons (32 - 40)
 2020-06-25 red.jpg and green.jpg copied in logos for logon logoff.
+2020-06-25 documentation removed few type errors.
