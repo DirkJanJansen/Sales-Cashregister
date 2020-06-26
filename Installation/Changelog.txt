@@ -77,8 +77,7 @@
 2020-06-25 cashregister.backup changed for more buttons (23 - 40)
 2020-06-25 red.jpg and green.jpg copied in logos for logon logoff.
 2020-06-26 sales.py added 3 switchable buttongroups with each 39 productbuttons buttons with programmable groupname in table params.
-2020-06-26 documentation adjusted for explanation 3 buttongroups.
-2020-06-26 sorry with last changes the backup did not get copied, while github see this as not changed, now restored by deleting and uploading
 2020-06-26 cashregister backup changed accordingly for extended buttongroups.
-
-           
+2020-06-26 sales.py groups extended to 5.
+2020-06-26 cashregister.backup database extended for 5 groups
+2020-06-26 documentation adjusted for above changes.          
