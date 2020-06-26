@@ -2804,6 +2804,8 @@ def defParams(self):
             font = QFont("Arial", 10)
             table_view.setFont(font)
             table_view.resizeColumnsToContents()
+            table_view.setColumnWidth(4, 110)
+            table_view.verticalHeader().setDefaultSectionSize(75)
             table_view.setSelectionBehavior(QTableView.SelectRows)
             table_view.clicked.connect(showSelection)
             grid.addWidget(table_view, 0, 0, 1, 7)
@@ -2870,13 +2872,14 @@ def defParams(self):
                 return self.header[col]
             return None
              
-    header = ['ParamID', 'Item', 'Tarief']
+    header = ['ParamID', 'Item', 'Value', 'Buttongroup-text']
     
     metadata = MetaData()
     params = Table('params', metadata,
         Column('paramID', Integer(), primary_key=True),
         Column('item', String),
-        Column('value', Float))
+        Column('value', Float),
+        Column('buttongroup', String))
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
@@ -2927,6 +2930,13 @@ def defParams(self):
                     input_validator = QRegExpValidator(reg_ex, self.q2Edit)
                     self.q2Edit.setValidator(input_validator)
                     
+                    #buttongroup
+                    self.q3Edit = QTextEdit(rppar[3])
+                    self.q3Edit.setFixedSize(110,75)
+                    self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+                    self.q3Edit.setFont(QFont("Arial",10))
+                    self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    
                     def q1Changed():
                         self.q1Edit.setText(self.q1Edit.text())
                     self.q1Edit.textChanged.connect(q1Changed)
@@ -2934,31 +2944,44 @@ def defParams(self):
                     def q2Changed():
                         self.q2Edit.setText(self.q2Edit.text())
                     self.q2Edit.textChanged.connect(q2Changed)
-                    
+                                     
                     def updparams(self):
                          mitem = self.q1Edit.text()   
                          mvalue = self.q2Edit.text()
-                         updpar = update(params).where(params.c.paramID == paramnr).\
-                           values(item = mitem, value = float(mvalue))
-                         con.execute(updpar)
-                         insertOK()
-                         self.close()
+                         mbuttontext = self.q3Edit.toPlainText()
+                         if len(mbuttontext) > 30:
+                            alertText()
+                         else:
+                             updpar = update(params).where(params.c.paramID == paramnr).\
+                               values(item = mitem, value = float(mvalue), buttongroup = mbuttontext)
+                             con.execute(updpar)
+                             insertOK()
+                             self.close()
                                                       
                     grid = QGridLayout()
                     grid.setSpacing(20)
                     
-                    lbl1 = QLabel('Parameter')  
+                    lbl1 = QLabel('Parameter')
+                    lbl1.setFont(QFont("Arial",10))
                     grid.addWidget(lbl1, 1, 0)
                     lbl2 = QLabel(str(paramnr))
+                    lbl2.setFont(QFont("Arial",10))
                     grid.addWidget(lbl2, 1, 1)
                            
-                    lbl3 = QLabel('Item')  
+                    lbl3 = QLabel('Item') 
+                    lbl3.setFont(QFont("Arial",10))
                     grid.addWidget(lbl3, 2, 0)
                     grid.addWidget(self.q1Edit, 2, 1, 1, 2) 
                                                          
-                    lbl4 = QLabel('Value')  
+                    lbl4 = QLabel('Value') 
+                    lbl4.setFont(QFont("Arial",10))
                     grid.addWidget(lbl4, 3, 0)
                     grid.addWidget(self.q2Edit, 3, 1)
+                    
+                    lbl5 = QLabel('Buttongroup-text')
+                    lbl5.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl5, 4, 0, 3, 1, Qt.AlignVCenter)
+                    grid.addWidget(self.q3Edit, 4, 1, 3, 1)
                     
                     pyqt = QLabel()
                     movie = QMovie('./logos/pyqt.gif')
@@ -2972,14 +2995,14 @@ def defParams(self):
                     logo.setPixmap(pixmap.scaled(70,70))
                     grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
                                                      
-                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 5, 0, 1, 3, Qt.AlignCenter)                  
+                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 8, 0, 1, 3, Qt.AlignCenter)                  
                     self.setLayout(grid)
                     self.setGeometry(500, 300, 150, 150)
             
                     applyBtn = QPushButton('Change')
                     applyBtn.clicked.connect(lambda: updparams(self))
             
-                    grid.addWidget(applyBtn, 4, 2, 1, 1, Qt.AlignRight)
+                    grid.addWidget(applyBtn, 7, 2, 1, 1, Qt.AlignRight)
                     applyBtn.setFont(QFont("Arial",10))
                     applyBtn.setFixedWidth(100)
                     applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
@@ -2987,7 +3010,7 @@ def defParams(self):
                     cancelBtn = QPushButton('Close')
                     cancelBtn.clicked.connect(self.close)
             
-                    grid.addWidget(cancelBtn, 4, 1, 1, 1, Qt.AlignRight)
+                    grid.addWidget(cancelBtn, 7, 1, 1, 1, Qt.AlignRight)
                     cancelBtn.setFont(QFont("Arial",10))
                     cancelBtn.setFixedWidth(100)
                     cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
