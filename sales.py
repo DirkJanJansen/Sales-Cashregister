@@ -648,7 +648,7 @@ def articleRequest(self, mflag):
                     pyqt.setMovie(movie)
                     movie.setScaledSize(QSize(240,80))
                     movie.start()
-                    grid.addWidget(pyqt, 0 ,0, 1, 2)
+                    grid.addWidget(pyqt, 0 ,0, 1, 1)
                
                     logo = QLabel()
                     pixmap = QPixmap('./logos/logo.jpg')
@@ -673,7 +673,7 @@ def articleRequest(self, mflag):
                     
                     #button-text
                     self.q3Edit = QTextEdit()
-                    self.q3Edit.setFixedSize(200,40)
+                    self.q3Edit.setFixedSize(110,62)
                     self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     self.q3Edit.setFont(QFont("Arial",10))
                     self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
@@ -684,17 +684,17 @@ def articleRequest(self, mflag):
                     
                     lbl1 = QLabel('Barcodenummer')
                     lbl1.setFont(QFont("Arial", 10))
-                    grid.addWidget(lbl1, 1, 0)
+                    grid.addWidget(lbl1, 1, 0, 1, 1, Qt.AlignRight)
                     grid.addWidget(self.q1Edit, 1, 1)
                      
                     lbl2 = QLabel('Button-Number')
                     lbl2.setFont(QFont("Arial", 10))
-                    grid.addWidget(lbl2, 2, 0)
+                    grid.addWidget(lbl2, 2, 0, 1, 1, Qt.AlignRight)
                     grid.addWidget(self.q2Edit, 2, 1)
                     
                     lbl3 = QLabel('Button-Text')
                     lbl3.setFont(QFont("Arial", 10))
-                    grid.addWidget(lbl3, 3, 0)
+                    grid.addWidget(lbl3, 3, 0, 1, 1, Qt.AlignRight)
                     grid.addWidget(self.q3Edit, 3, 1)
                     
                     applyBtn = QPushButton('Insert')
@@ -1813,7 +1813,7 @@ def newBarcode(self):
             
             #button-text
             self.q14Edit = QTextEdit()
-            self.q14Edit.setFixedSize(200,40)
+            self.q14Edit.setFixedSize(110,62)
             self.q14Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
             self.q14Edit.setFont(QFont("Arial",10))
             self.q14Edit.setStyleSheet('color: black; background-color: #F8F7EE')
