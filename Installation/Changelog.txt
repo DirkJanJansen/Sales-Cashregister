@@ -80,4 +80,6 @@
 2020-06-26 cashregister backup changed accordingly for extended buttongroups.
 2020-06-26 sales.py groups extended to 5.
 2020-06-26 cashregister.backup database extended for 5 groups
-2020-06-26 documentation adjusted for above changes.          
+2020-06-26 documentation adjusted for above changes.  
+2020-06-26 sales.py fields for buttontext insert adjusted for 3 lines and 10 characters per line maximum.
+2020-06-26 documentation changed for displaying scanned lines (19 to 16) and some explanations added.        
