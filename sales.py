@@ -3540,7 +3540,8 @@ def barcodeScan():
             params = Table('params', metadata,
                 Column('paramID', Integer(), primary_key=True),
                 Column('item', String),
-                Column('value', Float))
+                Column('value', Float),
+                Column('buttongroup', String))
                         
             engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
             con = engine.connect()
@@ -3644,7 +3645,7 @@ def barcodeScan():
             
             #insert 39 x3 programmable articlebuttons
             def btngroupChange(btngroup):
-                if btngroup == 3:
+                if btngroup == 5:
                    btngroup = 1
                 else:
                    btngroup += 1
@@ -3653,20 +3654,32 @@ def barcodeScan():
                     index = 0
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                      .order_by(buttons.c.buttonID)
-                    hBtn = QPushButton(rppar[5][1].strip())
+                    hBtn = QPushButton(rppar[6][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #16a085')
                 elif btngroup == 2:
                     index = 40
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
-                    hBtn = QPushButton(rppar[6][1].strip())
+                    hBtn = QPushButton(rppar[7][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #f39c12')
                 elif btngroup == 3:
                     index = 80
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
-                    hBtn = QPushButton(rppar[7][1].strip())
+                    hBtn = QPushButton(rppar[8][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #ca6f1e')
+                elif btngroup == 4:
+                    index = 120
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
+                      .order_by(buttons.c.buttonID)
+                    hBtn = QPushButton(rppar[9][3].strip())
+                    hBtn.setStyleSheet('color: black; background-color:    #c0392b')
+                elif btngroup == 5:
+                    index = 160
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
+                      .order_by(buttons.c.buttonID)
+                    hBtn = QPushButton(rppar[10][3].strip())
+                    hBtn.setStyleSheet('color: black; background-color:   #f1c40f')
                 hBtn.setFont(QFont("Times", 10, 75))
                 hBtn.setFocusPolicy(Qt.NoFocus)
                 hBtn.setFixedSize(90, 90)
