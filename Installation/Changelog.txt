@@ -74,6 +74,10 @@
 2020-06-23 sales.py messages added by import deliveries.
 2020-06-25 sales.py logos removed login message replaced by red (logout) or green (logged on) sign, 40 bigger buttons for products 
            unnessary logos removed adminbutton placed message bar.
-2020-06-25 cashregister.backup changed for more buttons (32 - 40)
+2020-06-25 cashregister.backup changed for more buttons (23 - 40)
 2020-06-25 red.jpg and green.jpg copied in logos for logon logoff.
-2020-06-25 documentation removed few type errors.
+2020-06-26 sales.py added 3 switchable buttongroups with each 39 productbuttons buttons with programmable groupname in table params.
+2020-06-26 documentation adjusted for explanation 3 buttongroups.
+2020-06-26 cashregister backup changed accordingly for extended buttongroups.
+
+           
