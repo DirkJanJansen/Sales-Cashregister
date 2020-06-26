@@ -16,7 +16,8 @@ Link to changelog: https://github.com/DirkJanJansen/Sales/blob/master/Installati
 
 Barcode testlabels for employees logon and product testlabels included
 
-40 programmable buttons for unpackaged products
+3 programmable button-groups with each 39 programmable buttons for unpackaged products.
+
 
  
 
