@@ -721,7 +721,7 @@ def articleRequest(self, mflag):
                     def insBtnText():
                         mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
-                        if len(mbtntext) > 20:
+                        if len(mbtntext) > 30:
                             alertText()
                         elif mbtnnr and mbtntext:
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
@@ -1951,7 +1951,7 @@ def newBarcode(self):
                 mvat = self.q12Edit.currentText()
                 mbtnnr = int(self.q13Edit.text())
                 mbtntext = self.q14Edit.toPlainText()
-                if len(mbtntext) > 20:
+                if len(mbtntext) > 30:
                     alertText()
                 elif mdescr and mprice and mcat and mbtnnr and mbtntext:
                     insart = insert(articles).values(barcode=str(mbarcode),\
@@ -3634,48 +3634,76 @@ def barcodeScan():
             lbl2.setFont(QFont("Arial", 12))
             grid.addWidget(lbl2, 8, 9, 1, 4, Qt.AlignCenter)
             grid.addWidget(self.qspin, 8, 11, 1, 1, Qt.AlignRight)
-            
-            metadata = MetaData()
-            params = Table('params', metadata,
-                Column('paramID', Integer(), primary_key=True),
-                Column('item', String),
-                Column('value', Float))
-                  
+                    
             metadata = MetaData()
             buttons = Table('buttons', metadata,
                 Column('buttonID', Integer(), primary_key=True),
                 Column('buttontext', String),
                 Column('barcode',  None, ForeignKey('articles.barcode')))
-                                          
-            selbtn = select([buttons]).order_by(buttons.c.buttonID)
-            rpbtn = con.execute(selbtn)
-  
-            # insert 32 programmable articlebuttons
-            a = 0
-            btnlist = []
-            for row in rpbtn:
-                aBtn = QPushButton(row[1].strip())
-                aBtn.setFont(QFont("Times", 10, 75))
-                aBtn.setStyleSheet('color: black; background-color:  #FFFFF0')
-                aBtn.setFocusPolicy(Qt.NoFocus)
-                aBtn.setFixedSize(90, 90)
-                btnlist.append(row[2].strip())
-                if a < 10:
-                    grid.addWidget(aBtn, 7, a)
-                elif a < 20:
-                    grid.addWidget(aBtn, 8, a%10)
-                elif a < 30:
-                    grid.addWidget(aBtn, 9, a%10)
-                elif a < 40:
-                    grid.addWidget(aBtn, 10,a%10)
-                 
-                aBtn.clicked.connect(lambda checked, btn = btnlist[a] : getbarcode(btn))
-                a += 1
+            btngroup = 0
+            
+            #insert 39 x3 programmable articlebuttons
+            def btngroupChange(btngroup):
+                if btngroup == 3:
+                   btngroup = 1
+                else:
+                   btngroup += 1
                 
+                if btngroup == 1:
+                    index = 0
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
+                     .order_by(buttons.c.buttonID)
+                    hBtn = QPushButton(rppar[5][1].strip())
+                    hBtn.setStyleSheet('color: black; background-color:  #16a085')
+                elif btngroup == 2:
+                    index = 40
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
+                      .order_by(buttons.c.buttonID)
+                    hBtn = QPushButton(rppar[6][1].strip())
+                    hBtn.setStyleSheet('color: black; background-color:  #f39c12')
+                elif btngroup == 3:
+                    index = 80
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
+                      .order_by(buttons.c.buttonID)
+                    hBtn = QPushButton(rppar[7][1].strip())
+                    hBtn.setStyleSheet('color: black; background-color:  #ca6f1e')
+                hBtn.setFont(QFont("Times", 10, 75))
+                hBtn.setFocusPolicy(Qt.NoFocus)
+                hBtn.setFixedSize(90, 90)
+                grid.addWidget(hBtn, 7, 0)
+                
+                hBtn.clicked.connect(lambda: btngroupChange(btngroup))
+                
+                a = index
+                rpbtn = con.execute(selbtn)
+                
+                btnlist = []
+                for row in rpbtn:
+                    aBtn = QPushButton(row[1].strip())
+                    aBtn.setFont(QFont("Times", 10, 75))
+                    aBtn.setStyleSheet('color: black; background-color:  #FFFFF0')
+                    aBtn.setFocusPolicy(Qt.NoFocus)
+                    aBtn.setFixedSize(90, 90)
+                    btnlist.append(row[2].strip())
+                    if a < index+10 and (a%10 > 0):
+                        grid.addWidget(aBtn, 7, a%10)
+                    elif a < index+20:
+                        grid.addWidget(aBtn, 8, a%10)
+                    elif a < index+30:
+                        grid.addWidget(aBtn, 9, a%10)
+                    elif a < index+40:
+                        grid.addWidget(aBtn, 10, a%10)
+                         
+                    aBtn.clicked.connect(lambda checked, btn = btnlist[a%40] : getbarcode(btn))
+                    a += 1
+                    
+            btngroup = 0  
+            btngroupChange(btngroup)
+                                         
             def getbarcode(btn):
                 self.q1Edit.setText(btn)
                 keyboard.write('\n')
-                   
+                                   
             self.plusminBtn = QPushButton('+')
             self.plusminBtn.setCheckable(True)
             self.plusminBtn.setStyleSheet("color: black;  background-color: #FFD700")
@@ -3693,7 +3721,7 @@ def barcodeScan():
             self.printBtn.setFixedSize(150,90)
             self.printBtn.setStyleSheet("color: black;  background-color: #00FFFF")
       
-            grid.addWidget(self.printBtn, 10, 10, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.printBtn, 9, 11, 1, 1, Qt.AlignRight)
             
             self.adminBtn = QPushButton('Administration')
             self.adminBtn.setFocusPolicy(Qt.NoFocus)
@@ -3710,16 +3738,16 @@ def barcodeScan():
             self.closeBtn.setFont(QFont("Arial",12))
             self.closeBtn.setFocusPolicy(Qt.NoFocus)
             self.closeBtn.setFixedSize(150,90)
-            self.closeBtn.setStyleSheet("color: black; background-color: #B0C4DE")
+            self.closeBtn.setStyleSheet("color: black; background-color:   #45b39d")
 
-            grid.addWidget(self.closeBtn, 9, 11, 1, 1, Qt.AlignRight)
+            grid.addWidget(self.closeBtn, 10, 10, 1, 1, Qt.AlignRight)
                                   
             infoBtn = QPushButton('Information')
             infoBtn.clicked.connect(lambda: info())
             infoBtn.setFont(QFont("Arial",12))
             infoBtn.setFocusPolicy(Qt.NoFocus)
             infoBtn.setFixedSize(150,90)
-            infoBtn.setStyleSheet("color: black;  background-color: #B0E0E6")
+            infoBtn.setStyleSheet("color: black;  background-color: #00BFFF")
     
             grid.addWidget(infoBtn, 9, 10, 1, 1, Qt.AlignRight )
            
@@ -3728,7 +3756,7 @@ def barcodeScan():
             self.nextBtn.setFont(QFont("Arial",12))
             self.nextBtn.setFocusPolicy(Qt.NoFocus)
             self.nextBtn.setFixedSize(150,90)            
-            self.nextBtn.setStyleSheet("color:black; background-color: #00BFFF")
+            self.nextBtn.setStyleSheet("color:black; background-color: #3498db")
     
             grid.addWidget(self.nextBtn, 10, 11, 1, 1, Qt.AlignRight)   
             
