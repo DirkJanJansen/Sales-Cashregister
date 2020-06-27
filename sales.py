@@ -879,6 +879,7 @@ def articleRequest(self, mflag):
                     self.q12Edit.setFont(QFont("Arial",10))
                     self.q12Edit.addItem('high')
                     self.q12Edit.addItem('low')
+                    self.q12Edit.addItem('zero')
                     self.q12Edit.setCurrentIndex(self.q12Edit.findText(rparticle[16]))
                     
                     #order-balance
@@ -1801,6 +1802,7 @@ def newBarcode(self):
             self.q12Edit.setFont(QFont("Arial",10))
             self.q12Edit.addItem('high')
             self.q12Edit.addItem('low')
+            self.q12Edit.addItem('zero')
                         
             #button-number
             self.q13Edit = QLineEdit('0')
@@ -2211,6 +2213,7 @@ def insertArticles(self):
             self.q12Edit.setFont(QFont("Arial",10))
             self.q12Edit.addItem('high')
             self.q12Edit.addItem('low')
+            self.q12Edit.addItem('zero')
             
             def q2Changed():
                 self.q2Edit.setText(self.q2Edit.text())
@@ -3459,8 +3462,10 @@ def set_barcodenr(self):
         rpbal = con.execute(selbal).first()
         if rpart[4] == 'high':      
             self.mvat = self.mvath
-        else: 
+        elif rpart[4] == 'low': 
             self.mvat = self.mvatl
+        else:
+            self.mvat = self.mvatz
         if rpart and rpart[3] < mnumber:
             self.albl.setText('Error message: '+str(int(rpart[3]))+' in stock!')
             giveAlarm()
@@ -3571,6 +3576,7 @@ def barcodeScan():
             self.mreceipt = int(rppar[2][2])
             self.mvath = rppar[1][2]
             self.mvatl = rppar[0][2]
+            self.mvatz = 0
             self.mcallname = '' 
             self.maccess = 0
             self.checknr = ''
