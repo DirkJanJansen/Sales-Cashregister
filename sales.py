@@ -2823,7 +2823,7 @@ def defParams(self):
             logo.setPixmap(pixmap.scaled(70,70))
             grid.addWidget(logo , 1, 6, 1 ,1, Qt.AlignRight)
                   
-            freshBtn = QPushButton('Verversen')
+            freshBtn = QPushButton('Refresh')
             freshBtn.clicked.connect(lambda: refresh(self))
 
             freshBtn.setFont(QFont("Arial",10))
