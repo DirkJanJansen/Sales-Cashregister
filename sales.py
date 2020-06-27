@@ -3676,7 +3676,7 @@ def barcodeScan():
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                      .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[6][3].strip())
-                    hBtn.setStyleSheet('color: black; background-color:  #16a085')
+                    hBtn.setStyleSheet('color: white; background-color:  #16a085')
                     btngroup = 2
                 elif btngroup == 2:
                     index = 40
@@ -3690,14 +3690,14 @@ def barcodeScan():
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[8][3].strip())
-                    hBtn.setStyleSheet('color: black; background-color:  #ca6f1e')
+                    hBtn.setStyleSheet('color: white; background-color:  #ca6f1e')
                     btngroup = 4
                 elif btngroup == 4:
                     index = 120
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[9][3].strip())
-                    hBtn.setStyleSheet('color: black; background-color:    #c0392b')
+                    hBtn.setStyleSheet('color: white; background-color:    #c0392b')
                     btngroup = 5
                 elif btngroup == 5:
                     index = 160
