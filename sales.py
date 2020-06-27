@@ -2645,8 +2645,6 @@ def purchasing(self):
                         path = './forms/Deliveries/'
                     mtitle = 'View delivery lists'
                     viewList(path, mtitle)
-                    #choose with QCombobox
-                    #view with QTextEdit
                 elif mindex == 5:
                     if sys.platform == 'win32':
                         path = '.\\forms\\Deliveries\\'
@@ -2932,7 +2930,7 @@ def defParams(self):
                     
                     #buttongroup
                     self.q3Edit = QTextEdit(rppar[3])
-                    self.q3Edit.setFixedSize(110,75)
+                    self.q3Edit.setFixedSize(110,62)
                     self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     self.q3Edit.setFont(QFont("Arial",10))
                     self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
