@@ -87,4 +87,6 @@
 2020-06-27 sales.py buttontext items changed in params
 2020-06-27 cashregister.backup changed for paramtext
 2020-06-27 sales.py VAT added zero rate besides high and low, for in some countries zero rate is used.
-2020-06-27 sales.py indexing by buttongroups went wrong due to forgotten sort. Reapaired!
+2020-06-27 sales.py indexing by buttongroups went wrong due to forgotten sort. Repaired!
+2020-06-27 sales.py keyboard worked only as root in linux, so for linux i used subprocess.call(["xdotool", "key", "Return"])
+           install xdotool on linux with sudo apt install xdotool
