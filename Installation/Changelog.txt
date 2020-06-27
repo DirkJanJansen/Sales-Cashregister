@@ -90,5 +90,6 @@
 2020-06-27 sales.py indexing by buttongroups went wrong due to forgotten sort. Repaired!
 2020-06-27 sales.py keyboard worked only as root in linux, so for linux i used subprocess.call(["xdotool", "key", "Return"])
            install xdotool on linux with sudo apt install xdotool
-2020-06-27 sales.py buttongrouptext color changed.
-2020-06-27 Sales_cashregister.pdf documentation tables articles changed
+2020-06-27 sales.py groupbuttontext color changed.
+2020-06-27 documentation screenshot table articles changed. (column photo removed and default columntext high for VAT)
+2020-06-27 sales.py if same employee who logged on, logged out, was blocked for logon, untill other employee logged on. Recovered!
