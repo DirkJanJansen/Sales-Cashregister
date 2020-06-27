@@ -1,4 +1,4 @@
-import sys, random, barcode, datetime, keyboard, os
+import sys, random, barcode, datetime, keyboard, os, subprocess
 from math import sqrt
 from barcode.writer import ImageWriter 
 
@@ -3741,8 +3741,10 @@ def barcodeScan():
                                                      
             def getbarcode(btn):
                 self.q1Edit.setText(btn)
-                keyboard.write('\n')
-                                   
+                if sys.platform == 'win32':
+                    keyboard.write('\n')
+                else:
+                    subprocess.call(["xdotool", "key", "Return"])                                 
             self.plusminBtn = QPushButton('+')
             self.plusminBtn.setCheckable(True)
             self.plusminBtn.setStyleSheet("color: black;  background-color: #FFD700")
