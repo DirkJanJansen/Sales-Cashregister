@@ -3571,7 +3571,7 @@ def barcodeScan():
                         
             engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
             con = engine.connect()
-            selpar = select([params])
+            selpar = select([params]).order_by(params.c.paramID)
             rppar = con.execute(selpar).fetchall()
             self.mreceipt = int(rppar[2][2])
             self.mvath = rppar[1][2]
@@ -3668,52 +3668,51 @@ def barcodeScan():
                 Column('buttonID', Integer(), primary_key=True),
                 Column('buttontext', String),
                 Column('barcode',  None, ForeignKey('articles.barcode')))
-            btngroup = 0
-            
+                        
             #insert 39 x3 programmable articlebuttons
             def btngroupChange(btngroup):
-                if btngroup == 5:
-                   btngroup = 1
-                else:
-                   btngroup += 1
-                
                 if btngroup == 1:
                     index = 0
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                      .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[6][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #16a085')
+                    btngroup = 2
                 elif btngroup == 2:
                     index = 40
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[7][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #f39c12')
+                    btngroup = 3
                 elif btngroup == 3:
                     index = 80
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[8][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #ca6f1e')
+                    btngroup = 4
                 elif btngroup == 4:
                     index = 120
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[9][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:    #c0392b')
+                    btngroup = 5
                 elif btngroup == 5:
                     index = 160
                     selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
                       .order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[10][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:   #f1c40f')
+                    btngroup = 1
                 hBtn.setFont(QFont("Times", 10, 75))
                 hBtn.setFocusPolicy(Qt.NoFocus)
                 hBtn.setFixedSize(90, 90)
                 grid.addWidget(hBtn, 7, 0)
-                
+                                                            
                 hBtn.clicked.connect(lambda: btngroupChange(btngroup))
-                
+                          
                 a = index
                 rpbtn = con.execute(selbtn)
                 
@@ -3736,10 +3735,10 @@ def barcodeScan():
                          
                     aBtn.clicked.connect(lambda checked, btn = btnlist[a%40] : getbarcode(btn))
                     a += 1
-                    
-            btngroup = 0  
+            
+            btngroup = 1
             btngroupChange(btngroup)
-                                         
+                                                     
             def getbarcode(btn):
                 self.q1Edit.setText(btn)
                 keyboard.write('\n')
