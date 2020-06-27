@@ -84,3 +84,5 @@
 2020-06-26 sales.py fields for buttontext insert adjusted for 3 lines and 10 characters per line maximum.
 2020-06-26 documentation changed for displaying scanned lines (19 to 16) and some explanations added.   
 2020-06-26 sales.py params buttongrouptext changed to QTextedit for 3 lines.
+2020-06-27 sales.py buttontext items changed in params
+2020-06-27 cashregister.backup changed for paramtext
