@@ -51,6 +51,9 @@ sudo chmod +x /etc/rc.local
 Enable error sounds in linux terminal:
 sudo apt install sox
 
+for keyboard enter command (keyboard does nonly work for root) in Linux install:
+sudo apt install xdotool 
+
 Installing database:
 In pgadmin4 tree create a server LocalHost and a empty database:  cashregister, right click databases (login with postgres45) 
 set password in pgadmin4: postgres45 with making tree cashregister
