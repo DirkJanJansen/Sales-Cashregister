@@ -3525,7 +3525,7 @@ def set_barcodenr(self):
         self.nextBtn.setEnabled(True)
         self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: #00BFFF")
     elif len(barcodenr) == 8:
-        if barcodenr == self.checknr:
+        if barcodenr == self.checknr and self.maccess > 0:
             self.maccess = 0
             self.plusminBtn.setHidden(True)
             self.adminBtn.setHidden(True)
