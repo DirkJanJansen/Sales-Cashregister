@@ -86,3 +86,4 @@
 2020-06-26 sales.py params buttongrouptext changed to QTextedit for 3 lines.
 2020-06-27 sales.py buttontext items changed in params
 2020-06-27 cashregister.backup changed for paramtext
+2020-06-27 sales.py Vat added zero rate besides high and low, for in some countries zero rate is used.
