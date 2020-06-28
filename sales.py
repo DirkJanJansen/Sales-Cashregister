@@ -1330,7 +1330,8 @@ def articleRequest(mflag):
                 super(Widget, self).__init__(parent)
                 self.setWindowTitle("Booking loss products")
                 self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                Qt.WindowMinMaxButtonsHint)
+                        Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                self.setWindowFlag(Qt.WindowCloseButtonHint, False)
             
                 self.setStyleSheet("background-color: #D9E1DF")
                 self.setFont(QFont('Arial', 10))
@@ -2798,7 +2799,7 @@ def bookingLoss():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            self.setWindowTitle("Define Buttons")
+            self.setWindowTitle("Booking loss")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -3056,7 +3057,7 @@ def deliveryImport():
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
     
-    path = "./forms/Delivery/"
+    path = "./forms/Deliveries/"
     for filename in os.listdir(path):
         file = (open(path+filename, "r"))
         if filename[-4:] != '.txt':
