@@ -106,7 +106,7 @@ def windowClose(self):
     
 def refresh(self):
     self.close()
-    defParams(self)
+    defParams()
  
 def accountMenu():
     class Widget(QDialog):
