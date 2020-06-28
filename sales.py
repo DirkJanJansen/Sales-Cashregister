@@ -3727,8 +3727,11 @@ def checkBarcode(c):
 def set_barcodenr(self):
     barcodenr = self.q1Edit.text()
     mnumber = float(self.qspin.value())
+    if len(barcodenr) == 8:
+        self.q1Edit.setStyleSheet("color:#F8F7EE;  background-color: #F8F7EE")
+    else:
+        self.q1Edit.setStyleSheet("color:black;  background-color: #F8F7EE")
     self.albl.setText('')
-    self.q1Edit.setEchoMode(QLineEdit.Normal)
     myear = int(str(datetime.datetime.now())[0:4])
     if len(barcodenr) == 13 and checkBarcode(barcodenr) and self.mcallname:
         metadata = MetaData()
@@ -3825,7 +3828,6 @@ def set_barcodenr(self):
         self.nextBtn.setEnabled(True)
         self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: #00BFFF")
     elif len(barcodenr) == 8:
-        self.q1Edit.setEchoMode(QLineEdit.Password)
         self.q1Edit.setText('')
         if barcodenr == self.checknr and self.maccess > 0:
             self.maccess = 0
@@ -3883,7 +3885,7 @@ def barcodeScan():
             self.checknr = ''
                       
             self.q1Edit = QLineEdit('')
-            self.q1Edit.setStyleSheet("color: black;  background-color: #F8F7EE")
+            self.q1Edit.setStyleSheet("color: #F8F7EE;  background-color: #F8F7EE")
             self.q1Edit.setFont(QFont("Arial", 12))
             self.q1Edit.setFixedSize(155, 30)
             self.q1Edit.setFocus(True)
@@ -4045,7 +4047,8 @@ def barcodeScan():
                 if sys.platform == 'win32':
                     keyboard.write('\n')
                 else:
-                    subprocess.call(["xdotool", "key", "Return"])                                 
+                    subprocess.call(["xdotool", "key", "Return"]) 
+                                
             self.plusminBtn = QPushButton('+')
             self.plusminBtn.setCheckable(True)
             self.plusminBtn.setStyleSheet("color: black;  background-color: #FFD700")
