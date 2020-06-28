@@ -95,3 +95,4 @@
 2020-06-27 sales.py if same employee who logged on, logged out, was blocked for logon, untill other employee logged on. Recovered!
 2020-06-28 sales.py make barcode with logon inviseble (bullets) for security reasons.
 2020-06-28 cashregister.backup replaced due to VAT column error. (high)
+2020-06-28 sales.py buttonnumber range changed so buttons can be numbered until 120
