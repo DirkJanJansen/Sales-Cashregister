@@ -667,7 +667,7 @@ def articleRequest(self, mflag):
                     self.q2Edit.setFixedWidth(40)
                     self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q2Edit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^[1-9]{1}[0-9]{0,2}$")
+                    reg_ex = QRegExp("^[1-9]{1}|[1-9]{1}[0-9]{1}|[1]{1}[01]{1}[0-9]{1}$")
                     input_validator = QRegExpValidator(reg_ex, self.q2Edit)
                     self.q2Edit.setValidator(input_validator)
                     
@@ -1809,7 +1809,7 @@ def newBarcode(self):
             self.q13Edit.setFixedWidth(40)
             self.q13Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q13Edit.setFont(QFont("Arial",10))
-            reg_ex = QRegExp("^[1-9]{1}[0-9]{0,2}$")
+            reg_ex = QRegExp("^[1-9]{1}|[1-9]{1}[0-9]{1}|[1]{1}[01]{1}[0-9]{1}$")
             input_validator = QRegExpValidator(reg_ex, self.q13Edit)
             self.q13Edit.setValidator(input_validator)
             
