@@ -107,6 +107,301 @@ def windowClose(self):
 def refresh(self):
     self.close()
     defParams(self)
+ 
+def accountMenu():
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("AccountMenu")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(280)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Accounts new')
+            self.k0Edit.addItem('Accounts - Request / Change')
+                           
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    emplAccess()
+                elif mindex == 1:
+                    emplRequest()
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))  
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_()  
+    
+def emplRequest():
+    class Widget(QDialog):
+        def __init__(self, data_list, header, *args):
+            QWidget.__init__(self, *args,)
+            self.setGeometry(500, 50, 600, 800)
+            self.setWindowTitle('Employees requesting')
+            self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                              Qt.WindowMinMaxButtonsHint)
+            table_model = MyTableModel(self, data_list, header)
+            table_view = QTableView()
+            table_view.setModel(table_model)
+            font = QFont("Arial", 10)
+            table_view.setFont(font)
+            table_view.resizeColumnsToContents()
+            table_view.setSelectionBehavior(QTableView.SelectRows)
+            layout = QVBoxLayout(self)
+            layout.addWidget(table_view)
+            self.setLayout(layout)
+            table_view.clicked.connect(changeAccounts)
+
+    class MyTableModel(QAbstractTableModel):
+        def __init__(self, parent, mylist, header, *args):
+            QAbstractTableModel.__init__(self, parent, *args)
+            self.mylist = mylist
+            self.header = header
+        def rowCount(self, parent):
+            return len(self.mylist)
+        def columnCount(self, parent):
+            return len(self.mylist[0])
+        def data(self, index, role):
+            veld = self.mylist[index.row()][index.column()]
+            if not index.isValid():
+                return None
+            elif role == Qt.TextAlignmentRole and (type(veld) == float or type(veld) == int):
+                return Qt.AlignRight | Qt.AlignVCenter
+            elif role != Qt.DisplayRole:
+                return None
+            if type(veld) == float:
+                return '{:12.2f}'.format(veld)
+            else:
+                return veld
+        def headerData(self, col, orientation, role):
+            if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+                return self.header[col]
+            return None
+        
+    metadata = MetaData()
+    accounts = Table('accounts', metadata,
+         Column('barcodeID', String, primary_key=True),
+         Column('firstname', String),
+         Column('lastname', String),
+         Column('access', Integer),
+         Column('callname', String))
+        
+    engine = create_engine('postgresql+psycopg2://postgres:@localhost/cashregister')
+    con = engine.connect()
+        
+    selacc = select([accounts]).order_by(accounts.c.lastname)
+    rpacc = con.execute(selacc)
+        
+    header = ['ID','Firstname','Lastname','Acceslevel','Callname']                                       
+        
+    data_list=[]
+    for row in rpacc:
+        data_list += [(row)] 
+        
+    def changeAccounts(idx):
+        emplnr = idx.data()
+        selempl = select([accounts]).where(accounts.c.barcodeID == emplnr)
+        rpempl = con.execute(selempl).first()
+        if idx.column() == 0:
+            class Window(QDialog):
+                def __init__(self, parent=None):
+                    super(Window, self).__init__(parent)
+                    
+                    self.setWindowTitle("Employees change")
+                    self.setWindowIcon(QIcon('./logos/logo.jpg'))
+                    self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                        Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                    self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                           
+                    self.setFont(QFont('Arial', 10))
+                    self.setStyleSheet("background-color: #D9E1DF")  
+            
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 ,0, 1, 2)
+               
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+                    
+                    q1Edit = QLineEdit(rpempl[0])
+                    q1Edit.setFixedWidth(100)
+                    q1Edit.setFont(QFont("Arial",10))
+                    q1Edit.setStyleSheet("color: black")
+                    q1Edit.setDisabled(True)
+                                    
+                    q2Edit = QLineEdit(rpempl[1])     #firstname
+                    q2Edit.setFixedWidth(200)
+                    q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    q2Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^.{1,20}$")
+                    input_validator = QRegExpValidator(reg_ex, q2Edit)
+                    q2Edit.setValidator(input_validator)
+                     
+                    q3Edit = QLineEdit(rpempl[2])   #lastname
+                    q3Edit.setFixedWidth(200)
+                    q3Edit.setFont(QFont("Arial",10))
+                    q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    reg_ex = QRegExp("^.{1,20}$")
+                    input_validator = QRegExpValidator(reg_ex, q3Edit)
+                    q3Edit.setValidator(input_validator)
+                     
+                    q4Edit = QLineEdit(rpempl[4])   #callname
+                    q4Edit.setFixedWidth(200)
+                    q4Edit.setFont(QFont("Arial",10))
+                    q4Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    reg_ex = QRegExp("^.{1,20}$")
+                    input_validator = QRegExpValidator(reg_ex, q4Edit)
+                    q4Edit.setValidator(input_validator)
+                    
+                    q5Edit = QLineEdit(str(rpempl[3]))   #access
+                    q5Edit.setFixedWidth(30)
+                    q5Edit.setFont(QFont("Arial",10))
+                    q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    reg_ex = QRegExp("^[123]{1}$")
+                    input_validator = QRegExpValidator(reg_ex, q5Edit)
+                    q5Edit.setValidator(input_validator)
+                    
+                    def q2Changed():
+                        q2Edit.setText(q2Edit.text())
+                    q2Edit.textChanged.connect(q2Changed)
+                     
+                    def q3Changed():
+                        q3Edit.setText(q3Edit.text())
+                    q3Edit.textChanged.connect(q3Changed)  
+                    
+                    def q4Changed():
+                        q4Edit.setText(q4Edit.text())
+                    q4Edit.textChanged.connect(q4Changed)  
+                    
+                    def q5Changed():
+                        q5Edit.setText(q5Edit.text())
+                    q5Edit.textChanged.connect(q5Changed)
+        
+                    lbl1 = QLabel('Accountbarcode')
+                    lbl1.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl1, 4, 0, 1, 1, Qt.AlignRight)
+                    grid.addWidget(q1Edit, 4, 1)
+                              
+                    lbl2 = QLabel('First name')
+                    lbl2.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl2, 5, 0, 1, 1, Qt.AlignRight)
+                    grid.addWidget(q2Edit, 5, 1)
+                    
+                    lbl3 = QLabel('Last name')
+                    lbl3.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl3, 6, 0, 1, 1, Qt.AlignRight)
+                    grid.addWidget(q3Edit, 6, 1)
+                    
+                    lbl4 = QLabel('Call name')
+                    lbl4.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl4, 7, 0, 1, 1, Qt.AlignRight)
+                    grid.addWidget(q4Edit, 7, 1)
+                    
+                    lbl5 = QLabel('Access level')
+                    lbl5.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl5, 8, 0, 1, 1, Qt.AlignRight)
+                    grid.addWidget(q5Edit, 8, 1)
+                    
+                    applyBtn = QPushButton('Update')
+                    applyBtn.clicked.connect(lambda: updateAcc())
+                       
+                    applyBtn.setFont(QFont("Arial",10))
+                    applyBtn.setFixedWidth(100)
+                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro") 
+                        
+                    grid.addWidget(applyBtn,9, 2, 1 , 1, Qt.AlignRight)
+                        
+                    cancelBtn = QPushButton('Close')
+                    cancelBtn.clicked.connect(self.close) 
+            
+                    grid.addWidget(cancelBtn, 9, 1, 1, 1, Qt.AlignRight)
+                    cancelBtn.setFont(QFont("Arial",10))
+                    cancelBtn.setFixedWidth(100)
+                    cancelBtn.setStyleSheet("color: black; background-color: gainsboro") 
+                    
+                    lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+                    lbl3.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl3, 10, 0, 1, 3, Qt.AlignCenter)
+                  
+                    def updateAcc():
+                        fname = q2Edit.text()
+                        lname = q3Edit.text()
+                        cname = q4Edit.text()
+                        maccess = q5Edit.text()
+                        updacc = update(accounts).where(accounts.c.barcodeID == emplnr).\
+                        values(firstname = fname,lastname = lname, callname = cname,\
+                               access = int(maccess))
+                        con.execute(updacc)
+                        insertOK()
+                        self.close()
+                                          
+                    self.setLayout(grid)
+                    self.setGeometry(600, 200, 150, 100)
+                    
+            window = Window()
+            window.exec_()
+           
+    win = Widget(data_list, header)
+    win.exec_()
     
 def changePrices():
     metadata = MetaData()
@@ -449,8 +744,7 @@ def pickList(path):
           
     win = combo()
     win.exec_()
-     
-    
+   
 def calculationStock():
     metadata = MetaData()
     params = Table('params', metadata,
@@ -518,7 +812,7 @@ def calculationStock():
                 values(annual_consumption_1 = 0, minimum_stock = minstock, order_size = mordersize)
             con.execute(updart)
   
-def articleRequest(self, mflag):
+def articleRequest(mflag):
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -1006,7 +1300,7 @@ def articleRequest(self, mflag):
                         self.close()
                                  
                     applyBtn = QPushButton('Insert')
-                    applyBtn.clicked.connect(lambda: updArticle(self))
+                    applyBtn.clicked.connect(lambda: updArticle())
             
                     grid.addWidget(applyBtn, 9, 3, 1, 1, Qt.AlignRight)
                     applyBtn.setFont(QFont("Arial",10))
@@ -1161,7 +1455,7 @@ def articleRequest(self, mflag):
     win = Mainwindow(data_list, header)
     win.exec_()
     
-def salesRequest(self):
+def salesRequest():
     metadata = MetaData()
     sales = Table('sales', metadata,
         Column('ID', Integer, primary_key=True),
@@ -1237,7 +1531,7 @@ def salesRequest(self):
     win = MyWindow(data_list, header)
     win.exec_()
                
-def paymentsRequest(self):
+def paymentsRequest():
     metadata = MetaData()
     payments = Table('payments', metadata,
         Column('payID', Integer, primary_key=True),
@@ -1451,7 +1745,7 @@ def paymentsRequest(self):
                 grid.addWidget(q12Edit, 13, 1)
                
                 payBtn = QPushButton('Paying')
-                payBtn.clicked.connect(lambda: updPayment(self))
+                payBtn.clicked.connect(lambda: updPayment())
         
                 grid.addWidget(payBtn, 14, 1, 1 , 1, Qt.AlignRight)
                 payBtn.setFont(QFont("Arial",10))
@@ -1477,7 +1771,7 @@ def paymentsRequest(self):
     win = MyWindow(data_list, header)
     win.exec_()
     
-def emplAccess(self):
+def emplAccess():
     metadata = MetaData()
     accounts = Table('accounts', metadata,
          Column('barcodeID', String, primary_key=True),
@@ -1653,7 +1947,7 @@ def emplAccess(self):
     window = Widget()
     window.exec_()
     
-def newBarcode(self):
+def newBarcode():
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -1981,11 +2275,11 @@ def newBarcode(self):
     win = Widget()
     win.exec_()
     
-def existingBarcode(self):
+def existingBarcode():
     mflag = 1
-    articleRequest(self, mflag)
+    articleRequest(mflag)
         
-def defButtons(self):
+def defButtons():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
@@ -2029,9 +2323,9 @@ def defButtons(self):
             def menuChoice(self):
                 mindex = self.k0Edit.currentIndex()
                 if mindex == 0:
-                    newBarcode(self)
+                    newBarcode()
                 elif mindex == 1:
-                    existingBarcode(self)
+                    existingBarcode()
                                    
             closeBtn = QPushButton('Close')
             closeBtn.clicked.connect(self.close)  
@@ -2059,7 +2353,7 @@ def defButtons(self):
     window = Widget()
     window.exec_()  
     
-def insertArticles(self):
+def insertArticles():
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -2317,7 +2611,7 @@ def insertArticles(self):
                     self.close()
  
             applyBtn = QPushButton('Insert')
-            applyBtn.clicked.connect(lambda: insArticle(self))
+            applyBtn.clicked.connect(lambda: insArticle())
     
             grid.addWidget(applyBtn, 8, 3, 1, 1, Qt.AlignRight)
             applyBtn.setFont(QFont("Arial",10))
@@ -2341,7 +2635,7 @@ def insertArticles(self):
     window = Widget()
     window.exec_()
     
-def importItems(self):
+def importItems():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
@@ -2433,7 +2727,7 @@ def importItems(self):
     window = Widget()
     window.exec_() 
      
-def requestLoss(self):
+def requestLoss():
     metadata = MetaData()
     loss = Table('loss', metadata,
        Column('lossID', Integer, primary_key=True),
@@ -2500,7 +2794,7 @@ def requestLoss(self):
     win = Widget(data_list, header)
     win.exec_()
     
-def bookingLoss(self):
+def bookingLoss():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
@@ -2545,9 +2839,9 @@ def bookingLoss(self):
                 mindex = self.k0Edit.currentIndex()
                 if mindex == 0:
                     flag = 2
-                    articleRequest(self, flag)
+                    articleRequest(flag)
                 elif mindex == 1:
-                    requestLoss(self)
+                    requestLoss()
                                    
             closeBtn = QPushButton('Close')
             closeBtn.clicked.connect(self.close)  
@@ -2575,7 +2869,7 @@ def bookingLoss(self):
     window = Widget()
     window.exec_() 
     
-def purchasing(self):
+def purchasing():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
@@ -2683,7 +2977,7 @@ def purchasing(self):
     window = Widget()
     window.exec_() 
     
-def purchaseCollect(self):
+def purchaseCollect():
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True),
@@ -2786,7 +3080,7 @@ def deliveryImport():
         else:
             noImports()
      
-def defParams(self):
+def defParams():
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
@@ -2841,7 +3135,9 @@ def defParams(self):
             
             grid.addWidget(sluitBtn, 1, 4, 1, 1, Qt.AlignRight | Qt.AlignBottom)
             
-            grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 1, 2, 1, 1, Qt.AlignBottom)
+            reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            reglbl.setFont(QFont("Arial", 10))
+            grid.addWidget(reglbl, 2, 2, 1, 1, Qt.AlignBottom)
             
             self.setLayout(grid)
             self.setGeometry(300, 50, 900, 900)
@@ -2914,7 +3210,7 @@ def defParams(self):
                     #item
                     self.q1Edit = QLineEdit(rppar[1])
                     self.q1Edit.setCursorPosition(0)
-                    self.q1Edit.setFixedWidth(150)
+                    self.q1Edit.setFixedWidth(220)
                     self.q1Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q1Edit.setFont(QFont("Arial",10))
                     reg_ex = QRegExp("^.{0,20}$")
@@ -2995,13 +3291,15 @@ def defParams(self):
                     pixmap = QPixmap('./logos/logo.jpg')
                     logo.setPixmap(pixmap.scaled(70,70))
                     grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
-                                                     
-                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 8, 0, 1, 3, Qt.AlignCenter)                  
+                    
+                    reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+                    reglbl.setFont(QFont("Arial",10))                               
+                    grid.addWidget(reglbl, 8, 0, 1, 3, Qt.AlignCenter)                  
                     self.setLayout(grid)
                     self.setGeometry(500, 300, 150, 150)
             
                     applyBtn = QPushButton('Change')
-                    applyBtn.clicked.connect(lambda: updparams(self))
+                    applyBtn.clicked.connect(lambda: updparams())
             
                     grid.addWidget(applyBtn, 7, 2, 1, 1, Qt.AlignRight)
                     applyBtn.setFont(QFont("Arial",10))
@@ -3022,7 +3320,7 @@ def defParams(self):
     win = Widget(data_list, header)
     win.exec_()
     
-def adminMenu(self):
+def adminMenu():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
@@ -3051,15 +3349,15 @@ def adminMenu(self):
             grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
             
             self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(260)
+            self.k0Edit.setFixedWidth(280)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('Articles - request / change')
             self.k0Edit.addItem('Sales - request')
             self.k0Edit.addItem('Payments - request / payments')
-            self.k0Edit.addItem('Accounts - insert')
+            self.k0Edit.addItem('Accounts - new / request / change')
             self.k0Edit.addItem('Buttons - define')
-            self.k0Edit.addItem('Articles - insert')
+            self.k0Edit.addItem('Articles - new')
             self.k0Edit.addItem('Articleslist - import / processing')
             self.k0Edit.addItem('Loss items - booking / request')
             self.k0Edit.addItem('Purchase / Delivery')
@@ -3076,25 +3374,25 @@ def adminMenu(self):
 
                 if mindex == 0:
                     mflag = 0
-                    articleRequest(self, mflag)
+                    articleRequest(mflag)
                 elif mindex == 1:
-                    salesRequest(self)                
+                    salesRequest()                
                 elif mindex == 2:
-                    paymentsRequest(self)  
+                    paymentsRequest()  
                 elif mindex == 3:
-                    emplAccess(self) 
+                    accountMenu() 
                 elif mindex == 4:
-                    defButtons(self)
+                    defButtons()
                 elif mindex == 5:
-                    insertArticles(self)
+                    insertArticles()
                 elif mindex == 6:
-                    importItems(self)
+                    importItems()
                 elif mindex == 7:
-                    bookingLoss(self)
+                    bookingLoss()
                 elif mindex == 8:
-                    purchasing(self)
+                    purchasing()
                 elif mindex == 9:
-                    defParams(self)
+                    defParams()
             
             closeBtn = QPushButton('Close')
             closeBtn.clicked.connect(self.close)  
@@ -3772,7 +4070,7 @@ def barcodeScan():
             self.adminBtn.setFont(QFont("Arial",12))
             self.adminBtn.setFixedWidth(140) 
             self.adminBtn.setStyleSheet("color: black; background-color: #FFD700")
-            self.adminBtn.clicked.connect(lambda: adminMenu(self)) 
+            self.adminBtn.clicked.connect(lambda: adminMenu()) 
     
             grid.addWidget(self.adminBtn, 5, 10, 1, 1, Qt.AlignRight)
                                                    
