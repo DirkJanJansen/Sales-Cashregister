@@ -3152,7 +3152,7 @@ def logon(self, barcodenr):
     elif self.maccess == 3:
         self.plusminBtn.setHidden(False)
         self.adminBtn.setHidden(False)
-         
+             
 def info():
     class Widget(QDialog):
         def __init__(self, parent=None):
@@ -3429,6 +3429,7 @@ def set_barcodenr(self):
     barcodenr = self.q1Edit.text()
     mnumber = float(self.qspin.value())
     self.albl.setText('')
+    self.q1Edit.setEchoMode(QLineEdit.Normal)
     myear = int(str(datetime.datetime.now())[0:4])
     if len(barcodenr) == 13 and checkBarcode(barcodenr) and self.mcallname:
         metadata = MetaData()
@@ -3525,11 +3526,12 @@ def set_barcodenr(self):
         self.nextBtn.setEnabled(True)
         self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: #00BFFF")
     elif len(barcodenr) == 8:
+        self.q1Edit.setEchoMode(QLineEdit.Password)
+        self.q1Edit.setText('')
         if barcodenr == self.checknr and self.maccess > 0:
             self.maccess = 0
             self.plusminBtn.setHidden(True)
             self.adminBtn.setHidden(True)
-            self.q1Edit.setText('')
             self.pixmap = QPixmap('./logos/red.jpg')
             self.logonstate.setPixmap(self.pixmap.scaled(20,20))
         else:
@@ -3669,7 +3671,7 @@ def barcodeScan():
                 Column('buttontext', String),
                 Column('barcode',  None, ForeignKey('articles.barcode')))
                         
-            #insert 39 x3 programmable articlebuttons
+            #insert 39 x5 programmable articlebuttons
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
