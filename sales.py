@@ -162,7 +162,7 @@ def accountMenu():
             closeBtn.setFixedWidth(100)
             closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
-            grid.addWidget(closeBtn, 2, 1)
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
