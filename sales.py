@@ -211,19 +211,19 @@ def articleMenu():
             grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
             
             self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(280)
+            self.k0Edit.setFixedWidth(300)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('Articles insert new')
             self.k0Edit.addItem('Articles - Request / Change')
-            self.k0Edit.addItem('Articlelist import new')
-            self.k0Edit.addItem('Articlelist import prices')
-            self.k0Edit.addItem('Articlelist import expired products')
-            self.k0Edit.addItem('View lists import new products')
-            self.k0Edit.addItem('View lists import prices')
-            self.k0Edit.addItem('View lists import expired products')
-            self.k0Edit.addItem('Articles booking loss items')
-            self.k0Edit.addItem('Articles request loss items')
+            self.k0Edit.addItem('Articlelist import new articles')
+            self.k0Edit.addItem('Articlelist import price changes articles')
+            self.k0Edit.addItem('Articlelist import expired articles')
+            self.k0Edit.addItem('View lists import new articles')
+            self.k0Edit.addItem('View lists import price changes articles')
+            self.k0Edit.addItem('View lists import expired articles')
+            self.k0Edit.addItem('Articles booking loss articles')
+            self.k0Edit.addItem('Articles request loss articles')
                                          
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -268,7 +268,7 @@ def articleMenu():
             closeBtn.setFixedWidth(100)
             closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
-            grid.addWidget(closeBtn, 2, 1)
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
@@ -372,7 +372,7 @@ def purchaseMenu():
             closeBtn.setFixedWidth(100)
             closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
-            grid.addWidget(closeBtn, 2, 1)
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))
@@ -446,7 +446,7 @@ def buttonMenu():
             closeBtn.setFixedWidth(100)
             closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
-            grid.addWidget(closeBtn, 2, 1)
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
@@ -776,7 +776,7 @@ def adminMenu():
             closeBtn.setFixedWidth(100)
             closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
-            grid.addWidget(closeBtn, 2, 1)
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
             
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
@@ -1047,8 +1047,8 @@ def changePrices():
             file.close()
             os.rename(path+filename,path+filename+'.txt')
             mcount += 1
-        elif mcount == 0:
-            noImports()
+    if mcount == 0:
+        noImports()
                              
 def expiredProducts():
     metadata = MetaData()
@@ -1077,8 +1077,8 @@ def expiredProducts():
             file.close()
             os.rename(path+filename,path+filename+'.txt')
             mcount += 1
-        elif mcount == 0:
-            noImports()
+    if mcount == 0:
+        noImports()
  
 def newProducts():
     metadata = MetaData()
@@ -1125,8 +1125,8 @@ def newProducts():
             file.close()
             os.rename(path+filename,path+filename+'.txt')
             mcount += 1
-        elif mcount == 0:
-            noImports()
+    if mcount == 0:
+        noImports()
       
 def viewFile(pathfile, mtitle):
     class Widget(QDialog):
@@ -3426,8 +3426,8 @@ def deliveryImport():
             os.rename(path+filename,path+filename+'.txt')
             importDone()
             mcount += 1
-        elif mcount == 0:
-            noImports()
+    if mcount == 0:
+        noImports()
   
 def logon(self, barcodenr):
     metadata = MetaData()
