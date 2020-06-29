@@ -1257,7 +1257,7 @@ def viewList(path, mtitle):
               grid.addWidget(reslbl, 5, 0, 1, 3, Qt.AlignCenter)
                 
               self.setLayout(grid)
-              self.setGeometry(550, 400, 150, 150)
+              self.setGeometry(550, 200, 150, 150)
               
               def getfile(self):
                   filename = self.cb.currentText()
