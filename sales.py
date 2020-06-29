@@ -292,7 +292,7 @@ def purchaseMenu():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            self.setWindowTitle("Define Buttons")
+            self.setWindowTitle("Purchase Submenu")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -470,7 +470,7 @@ def paramMenu():
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
-            self.setWindowTitle('Parameters changing')
+            self.setWindowTitle('Parameters requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                     Qt.WindowMinMaxButtonsHint)
@@ -587,7 +587,7 @@ def paramMenu():
                     
                     grid = QGridLayout()
                     grid.setSpacing(20)
-                    self.setWindowTitle("Changing parameters")
+                    self.setWindowTitle("Parameters changing")
                     self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
                     
                     self.setStyleSheet("background-color: #D9E1DF")
@@ -801,7 +801,7 @@ def emplRequest():
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
             self.setGeometry(500, 50, 600, 800)
-            self.setWindowTitle('Employees requesting')
+            self.setWindowTitle('Accounts requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                               Qt.WindowMinMaxButtonsHint)
@@ -857,7 +857,7 @@ def emplRequest():
     selacc = select([accounts]).order_by(accounts.c.lastname)
     rpacc = con.execute(selacc)
         
-    header = ['ID','Firstname','Lastname','Acceslevel','Callname']                                       
+    header = ['AccountID','Firstname','Lastname','Acceslevel','Callname']                                       
         
     data_list=[]
     for row in rpacc:
@@ -872,7 +872,7 @@ def emplRequest():
                 def __init__(self, parent=None):
                     super(Window, self).__init__(parent)
                     
-                    self.setWindowTitle("Employees change")
+                    self.setWindowTitle("Account changing")
                     self.setWindowIcon(QIcon('./logos/logo.jpg'))
                     self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                         Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -1948,7 +1948,7 @@ def articleRequest(mflag):
         class Widget(QDialog):
             def __init__(self, parent=None):
                 super(Widget, self).__init__(parent)
-                self.setWindowTitle("Booking loss products")
+                self.setWindowTitle("Booking loss articles")
                 self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                         Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
                 self.setWindowFlag(Qt.WindowCloseButtonHint, False)
@@ -2422,7 +2422,7 @@ def emplAccess():
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
             
-            self.setWindowTitle("Access Employees")
+            self.setWindowTitle("Access Accounts")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -2938,7 +2938,7 @@ def insertArticles():
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
             
-            self.setWindowTitle("Article insert")
+            self.setWindowTitle("Articles new insert")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -3199,7 +3199,7 @@ def requestLoss():
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
             self.setGeometry(600, 50, 600, 800)
-            self.setWindowTitle('Loss items Requesting')
+            self.setWindowTitle('Loss articles requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                               Qt.WindowMinMaxButtonsHint)
@@ -3253,7 +3253,7 @@ def bookingLoss():
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            self.setWindowTitle("Booking loss")
+            self.setWindowTitle("Booking loss articles")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
