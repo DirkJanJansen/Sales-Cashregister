@@ -2366,7 +2366,7 @@ def paymentsRequest():
                 grid.addWidget(q12Edit, 13, 1)
                
                 payBtn = QPushButton('Paying')
-                payBtn.clicked.connect(lambda: updPayment())
+                payBtn.clicked.connect(lambda: updPayment(self))
         
                 grid.addWidget(payBtn, 14, 1, 1 , 1, Qt.AlignRight)
                 payBtn.setFont(QFont("Arial",10))
@@ -3980,40 +3980,40 @@ def barcodeScan():
                 Column('buttontext', String),
                 Column('barcode',  None, ForeignKey('articles.barcode')))
                         
-            #insert 39 x5 programmable articlebuttons
+            #choose 1 groupbutton from 5
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
-                     .order_by(buttons.c.buttonID)
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
+                     buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[6][3].strip())
                     hBtn.setStyleSheet('color: white; background-color:  #16a085')
                     btngroup = 2
                 elif btngroup == 2:
                     index = 40
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
-                      .order_by(buttons.c.buttonID)
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
+                        buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[7][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #f39c12')
                     btngroup = 3
                 elif btngroup == 3:
                     index = 80
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
-                      .order_by(buttons.c.buttonID)
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
+                       buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[8][3].strip())
                     hBtn.setStyleSheet('color: white; background-color:  #ca6f1e')
                     btngroup = 4
                 elif btngroup == 4:
                     index = 120
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
-                      .order_by(buttons.c.buttonID)
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
+                       buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[9][3].strip())
                     hBtn.setStyleSheet('color: white; background-color:    #c0392b')
                     btngroup = 5
                 elif btngroup == 5:
                     index = 160
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1, buttons.c.buttonID<index+40))\
-                      .order_by(buttons.c.buttonID)
+                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
+                       buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[10][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:   #f1c40f')
                     btngroup = 1
@@ -4027,6 +4027,7 @@ def barcodeScan():
                 a = index
                 rpbtn = con.execute(selbtn)
                 
+                #place 9 buttons on thirst row and 10 buttons on 2nd 3thrd and 4thd row
                 btnlist = []
                 for row in rpbtn:
                     aBtn = QPushButton(row[1].strip())
@@ -4053,9 +4054,9 @@ def barcodeScan():
             def getbarcode(btn):
                 self.q1Edit.setText(btn)
                 if sys.platform == 'win32':
-                    keyboard.write('\n')
+                    keyboard.write('\n')                          #Windows
                 else:
-                    subprocess.call(["xdotool", "key", "Return"]) 
+                    subprocess.call(["xdotool", "key", "Return"]) #Linux
                                 
             self.plusminBtn = QPushButton('+')
             self.plusminBtn.setCheckable(True)
