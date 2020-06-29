@@ -685,7 +685,7 @@ def paramMenu():
                     self.setGeometry(500, 300, 150, 150)
             
                     applyBtn = QPushButton('Change')
-                    applyBtn.clicked.connect(lambda: updparams())
+                    applyBtn.clicked.connect(lambda: updparams(self))
             
                     grid.addWidget(applyBtn, 7, 2, 1, 1, Qt.AlignRight)
                     applyBtn.setFont(QFont("Arial",10))
