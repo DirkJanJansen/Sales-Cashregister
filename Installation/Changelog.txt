@@ -100,3 +100,4 @@
 2020-06-28 sales.py wrong path by import deliveries restored.
 2020-06-28 sales.py password showed by frist time logon. Changed made invisible by password logons.
 2020-06-28 sales.py admin Menu realised more structured submenus for accounts, articles, purchase and buttons.
+2020-06-28 sales.py import error message captured if no import files available
