@@ -177,7 +177,7 @@ def accountMenu():
             grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
            
             self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
+            self.setGeometry(600, 200, 150, 100)
                 
     window = Widget()
     window.exec_() 
@@ -283,7 +283,7 @@ def articleMenu():
             grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
            
             self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
+            self.setGeometry(600, 200, 150, 100)
                 
     window = Widget()
     window.exec_()
@@ -387,7 +387,7 @@ def purchaseMenu():
             grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
            
             self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
+            self.setGeometry(600, 200, 150, 100)
                 
     window = Widget()
     window.exec_() 
@@ -461,7 +461,7 @@ def buttonMenu():
             grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
            
             self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
+            self.setGeometry(600, 200, 150, 100)
                 
     window = Widget()
     window.exec_()    
@@ -682,7 +682,7 @@ def paramMenu():
                     reglbl.setFont(QFont("Arial",10))                               
                     grid.addWidget(reglbl, 8, 0, 1, 3, Qt.AlignCenter)                  
                     self.setLayout(grid)
-                    self.setGeometry(500, 300, 150, 150)
+                    self.setGeometry(500, 200, 150, 150)
             
                     applyBtn = QPushButton('Change')
                     applyBtn.clicked.connect(lambda: updparams(self))
@@ -791,7 +791,7 @@ def adminMenu():
             grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
            
             self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
+            self.setGeometry(600, 200, 150, 100)
                 
     window = Widget()
     window.exec_()  
@@ -1938,7 +1938,7 @@ def articleRequest(mflag):
                     grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 10, 0, 1, 4, Qt.AlignCenter)
              
                     self.setLayout(grid)
-                    self.setGeometry(500, 300, 150, 100)
+                    self.setGeometry(500, 200, 150, 100)
          
             window = Widget()
             window.exec_()
@@ -2048,7 +2048,7 @@ def articleRequest(mflag):
                         self.close()
                                                  
                 self.setLayout(grid)
-                self.setGeometry(600, 400, 150, 150)
+                self.setGeometry(600, 200, 150, 150)
         
                 applyBtn = QPushButton('Change')
                 applyBtn.clicked.connect(lambda: insertLoss())
@@ -3177,7 +3177,7 @@ def insertArticles():
             
     
             self.setLayout(grid)
-            self.setGeometry(500, 300, 150, 100)
+            self.setGeometry(500, 200, 150, 100)
  
     window = Widget()
     window.exec_()
@@ -3319,7 +3319,7 @@ def bookingLoss():
             grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
            
             self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
+            self.setGeometry(600, 200, 150, 100)
                 
     window = Widget()
     window.exec_() 
