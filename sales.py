@@ -26,7 +26,7 @@ def noImports():
     msg.setWindowIcon(QIcon('./logos/logo.jpg'))
     msg.setFont(QFont("Arial", 10))
     msg.setIcon(QMessageBox.Information)
-    msg.setText('No new import available!')
+    msg.setText('No imports available!')
     msg.setWindowTitle('Import')
     msg.exec_()   
     
@@ -344,8 +344,6 @@ def purchaseMenu():
                         path = './forms/Purchasing/'
                     mtitle = 'View purchasing lists'
                     viewList(path, mtitle)
-                    #choose with QCombobox
-                    #print os.startfile
                 elif mindex == 2:
                     if sys.platform == 'win32':
                         path = '.\\forms\\Purchasing\\'
@@ -367,9 +365,7 @@ def purchaseMenu():
                     else:
                         path = './forms/Deliveries/'
                     pickList(path)
-                    #choose with QCombobox
-                    #print with os.startfile
-                                   
+                                         
             closeBtn = QPushButton('Close')
             closeBtn.clicked.connect(self.close)  
             closeBtn.setFont(QFont("Arial",10))
@@ -1031,6 +1027,7 @@ def changePrices():
     con = engine.connect()
     
     path = "./forms/Imports/Prices/"
+    mcount = 0
     for filename in os.listdir(path):
         file = (open(path+filename, "r"))
         if filename[-4:] != '.txt':
@@ -1049,7 +1046,8 @@ def changePrices():
             importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
-        else:
+            mcount += 1
+        elif mcount == 0:
             noImports()
                              
 def expiredProducts():
@@ -1063,6 +1061,7 @@ def expiredProducts():
     path = "./forms/Imports/Expired/"
     for filename in os.listdir(path):
         file = (open(path+filename, "r"))
+        mcount = 0
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
@@ -1077,7 +1076,8 @@ def expiredProducts():
             importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
-        else:
+            mcount += 1
+        elif mcount == 0:
             noImports()
  
 def newProducts():
@@ -1098,6 +1098,7 @@ def newProducts():
     path = "./forms/Imports/New/"
     for filename in os.listdir(path):
         file = (open(path+filename, "r"))
+        mcount = 0
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
@@ -1123,7 +1124,8 @@ def newProducts():
             importDone()
             file.close()
             os.rename(path+filename,path+filename+'.txt')
-        else:
+            mcount += 1
+        elif mcount == 0:
             noImports()
       
 def viewFile(pathfile, mtitle):
@@ -3179,98 +3181,6 @@ def insertArticles():
  
     window = Widget()
     window.exec_()
-    
-def importItems():
-    class Widget(QDialog):
-        def __init__(self, parent=None):
-            super(Widget, self).__init__(parent)
-            self.setWindowTitle("Import lists and processing")
-            self.setWindowIcon(QIcon('./logos/logo.jpg'))
-            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                   
-            self.setFont(QFont('Arial', 10))
-            self.setStyleSheet("background-color: #D9E1DF") 
-                
-            grid = QGridLayout()
-            grid.setSpacing(20)      
-                
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 0 ,0, 1, 3)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
-            
-            self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(280)
-            self.k0Edit.setFont(QFont("Arial",10))
-            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Import change product prices')
-            self.k0Edit.addItem('Import delete expired products')
-            self.k0Edit.addItem('Import insert new products')
-            self.k0Edit.addItem('View lists import prices')
-            self.k0Edit.addItem('View lists import expired products')
-            self.k0Edit.addItem('View lists import new products')
-                           
-            def k0Changed():
-                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
-            self.k0Edit.currentIndexChanged.connect(k0Changed)
-            
-            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
-                           
-            def menuChoice(self):
-                mindex = self.k0Edit.currentIndex()
-                if mindex == 0:
-                    changePrices()
-                elif mindex == 1:
-                    expiredProducts()
-                elif mindex == 2:
-                    newProducts()
-                elif mindex == 3:
-                    path = "./forms/Imports/New/"
-                    mtitle = "View imports prices"
-                    viewList(path, mtitle)
-                elif mindex == 4:
-                    path = "./forms/Imports/Expired/"
-                    mtitle = "View import expired"
-                    viewList(path, mtitle)
-                elif mindex == 5:
-                    path = "./forms/Imports/New/"
-                    mtitle = "View import new products"
-                    viewList(path, mtitle)
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1)
-                     
-            applyBtn = QPushButton('Select')
-            applyBtn.clicked.connect(lambda: menuChoice(self))
-            applyBtn.setFont(QFont("Arial",10))
-            applyBtn.setFixedWidth(100)
-            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(applyBtn, 2, 2)
-                 
-            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-            lbl3.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
-           
-            self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
-                
-    window = Widget()
-    window.exec_() 
      
 def requestLoss():
     metadata = MetaData()
@@ -3496,6 +3406,7 @@ def deliveryImport():
     path = "./forms/Deliveries/"
     for filename in os.listdir(path):
         file = (open(path+filename, "r"))
+        mcount = 0
         if filename[-4:] != '.txt':
             lists = file.readlines()
             item = len(lists)
@@ -3514,7 +3425,8 @@ def deliveryImport():
             file.close()
             os.rename(path+filename,path+filename+'.txt')
             importDone()
-        else:
+            mcount += 1
+        elif mcount == 0:
             noImports()
   
 def logon(self, barcodenr):
