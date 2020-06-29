@@ -24,7 +24,7 @@ https://tecadmin.net/install-postgresql-server-on-ubuntu/
 additional set password in psql with \password   (postgres45)
 Install pgadmin4 follow steps in:
 https://tecadmin.net/install-pgadmin4-on-ubuntu/
-install pgadmin with:
+install pgadmin other then described with:
 sudo apt-get install pgadmin4 (without apache)
 
 Printer settings in linux for printing listings:
@@ -42,7 +42,7 @@ sudo modprobe usbkbd
 To make it permanent:
 in terminal Ctrl+Alt+t:
 sudo nano /etc/rc.local
-add line:
+add line in nano:
 modprobe usbkbd
 save /etc/rc.local
 in terminal:
@@ -51,8 +51,8 @@ sudo chmod +x /etc/rc.local
 Enable error sounds in linux terminal:
 sudo apt install sox
 
-for keyboard enter command (keyboard does nonly work for root) in Linux install:
-sudo apt install xdotool 
+for keyboard enter command (keyboard does only work for root) in Linux install:
+sudo apt install xdotool
 
 Installing database:
 In pgadmin4 tree create a server LocalHost and a empty database:  cashregister, right click databases (login with postgres45) 
@@ -70,3 +70,4 @@ startup files in Linux:
 Copy register.png from folder Installation in folder /home/postgres/.icons
 Copy Sales.desktop from folder Installation in /home/postgres/.local/share/applications
 
+All settings that differ from executing in Windows are automatically adjusted for Ubuntu
