@@ -106,7 +106,7 @@ def windowClose(self):
     
 def refresh(self):
     self.close()
-    defParams()
+    paramMenu()
  
 def accountMenu():
     class Widget(QDialog):
@@ -142,7 +142,7 @@ def accountMenu():
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('Accounts new')
             self.k0Edit.addItem('Accounts - Request / Change')
-                           
+                                       
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
             self.k0Edit.currentIndexChanged.connect(k0Changed)
@@ -164,6 +164,624 @@ def accountMenu():
             
             grid.addWidget(closeBtn, 2, 1)
                      
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))  
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_() 
+    
+def articleMenu():
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("ArticleMenu")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(280)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Articles insert new')
+            self.k0Edit.addItem('Articles - Request / Change')
+            self.k0Edit.addItem('Articlelist import new')
+            self.k0Edit.addItem('Articlelist import prices')
+            self.k0Edit.addItem('Articlelist import expired products')
+            self.k0Edit.addItem('View lists import new products')
+            self.k0Edit.addItem('View lists import prices')
+            self.k0Edit.addItem('View lists import expired products')
+            self.k0Edit.addItem('Articles booking loss items')
+            self.k0Edit.addItem('Articles request loss items')
+                                         
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    insertArticles()
+                elif mindex == 1:
+                    mflag = 0
+                    articleRequest(mflag)
+                elif mindex == 2:
+                    newProducts()
+                elif mindex == 3:
+                    changePrices()
+                elif mindex == 4:
+                    expiredProducts() 
+                elif mindex == 5:
+                    path = "./forms/Imports/New/"
+                    mtitle = "View import new products"
+                    viewList(path, mtitle)
+                elif mindex == 6:
+                    path = "./forms/Imports/Prices/"
+                    mtitle = "View imports prices"
+                    viewList(path, mtitle)
+                elif mindex == 7:
+                    path = "./forms/Imports/Expired/"
+                    mtitle = "View import expired"
+                    viewList(path, mtitle)
+                elif mindex == 8:
+                    flag = 2
+                    articleRequest(flag)
+                elif mindex == 9:
+                    requestLoss()
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))  
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_()
+    
+def purchaseMenu():
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Define Buttons")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(230)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Collecting purchases')
+            self.k0Edit.addItem('View purchases list')
+            self.k0Edit.addItem('Printing purchases list')
+            self.k0Edit.addItem('Processing deliverylist')
+            self.k0Edit.addItem('View deliverylist')
+            self.k0Edit.addItem('Printing deliverylist')
+                             
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    purchaseCollect()
+                elif mindex == 1:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Purchasing\\'
+                    else:
+                        path = './forms/Purchasing/'
+                    mtitle = 'View purchasing lists'
+                    viewList(path, mtitle)
+                    #choose with QCombobox
+                    #print os.startfile
+                elif mindex == 2:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Purchasing\\'
+                    else:
+                        path = './forms/Purchasing/'
+                    pickList(path)
+                elif mindex == 3:
+                    deliveryImport()
+                elif mindex == 4:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Deliveries\\'
+                    else:
+                        path = './forms/Deliveries/'
+                    mtitle = 'View delivery lists'
+                    viewList(path, mtitle)
+                elif mindex == 5:
+                    if sys.platform == 'win32':
+                        path = '.\\forms\\Deliveries\\'
+                    else:
+                        path = './forms/Deliveries/'
+                    pickList(path)
+                    #choose with QCombobox
+                    #print with os.startfile
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_() 
+    
+def buttonMenu():
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Define Buttons")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(220)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('New barcode')
+            self.k0Edit.addItem('Existing barcode')
+                           
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+                           
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                if mindex == 0:
+                    newBarcode()
+                elif mindex == 1:
+                    existingBarcode()
+                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))  
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 400, 150, 100)
+                
+    window = Widget()
+    window.exec_()    
+    
+def paramMenu():
+    class Widget(QDialog):
+        def __init__(self, data_list, header, *args):
+            QWidget.__init__(self, *args,)
+            self.setWindowTitle('Parameters changing')
+            self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                    Qt.WindowMinMaxButtonsHint)
+            self.setFont(QFont('Arial', 10))
+            
+            grid = QGridLayout()
+            grid.setSpacing(20)
+            
+            table_model = MyTableModel(self, data_list, header)
+            table_view = QTableView()
+            table_view.setModel(table_model)
+            font = QFont("Arial", 10)
+            table_view.setFont(font)
+            table_view.resizeColumnsToContents()
+            table_view.setColumnWidth(4, 110)
+            table_view.verticalHeader().setDefaultSectionSize(75)
+            table_view.setSelectionBehavior(QTableView.SelectRows)
+            table_view.clicked.connect(showSelection)
+            grid.addWidget(table_view, 0, 0, 1, 7)
+            
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 1 , 0 , 1, 2)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 1, 6, 1 ,1, Qt.AlignRight)
+                  
+            freshBtn = QPushButton('Refresh')
+            freshBtn.clicked.connect(lambda: refresh(self))
+
+            freshBtn.setFont(QFont("Arial",10))
+            freshBtn.setFixedWidth(100) 
+            freshBtn.setStyleSheet("color: black;  background-color: gainsboro")
+   
+            grid.addWidget(freshBtn, 1, 5, 1, 1, Qt.AlignRight | Qt.AlignBottom)
+        
+            sluitBtn = QPushButton('Close')
+            sluitBtn.clicked.connect(self.close)
+
+            sluitBtn.setFont(QFont("Arial",10))
+            sluitBtn.setFixedWidth(100) 
+            sluitBtn.setStyleSheet("color: black;  background-color: gainsboro") 
+            
+            grid.addWidget(sluitBtn, 1, 4, 1, 1, Qt.AlignRight | Qt.AlignBottom)
+            
+            reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            reglbl.setFont(QFont("Arial", 10))
+            grid.addWidget(reglbl, 2, 2, 1, 1, Qt.AlignBottom)
+            
+            self.setLayout(grid)
+            self.setGeometry(300, 50, 900, 900)
+            self.setLayout(grid)
+    
+    class MyTableModel(QAbstractTableModel):
+        def __init__(self, parent, mylist, header, *args):
+            QAbstractTableModel.__init__(self, parent, *args)
+            self.mylist = mylist
+            self.header = header
+        def rowCount(self, parent):
+            return len(self.mylist)
+        def columnCount(self, parent):
+            return len(self.mylist[0])
+        def data(self, index, role):
+            veld = self.mylist[index.row()][index.column()]
+            if not index.isValid():
+                return None
+            elif role == Qt.TextAlignmentRole and (type(veld) == float or type(veld) == int):
+                return Qt.AlignRight | Qt.AlignVCenter
+            elif role != Qt.DisplayRole:
+                return None
+            if type(veld) == float:
+                return '{:12.2f}'.format(veld)
+            else:
+                return veld
+        def headerData(self, col, orientation, role):
+            if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+                return self.header[col]
+            return None
+             
+    header = ['ParamID', 'Item', 'Value', 'Buttongroup-text']
+    
+    metadata = MetaData()
+    params = Table('params', metadata,
+        Column('paramID', Integer(), primary_key=True),
+        Column('item', String),
+        Column('value', Float),
+        Column('buttongroup', String))
+    
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+        
+    sel = select([params]).order_by(params.c.paramID)
+    
+    rp = con.execute(sel)
+    
+    data_list=[]
+    for row in rp:
+        data_list += [(row)]
+        
+    def showSelection(idx):
+        paramnr = idx.data()
+        if idx.column() == 0: 
+            selpar = select([params]).where(params.c.paramID == paramnr)
+            rppar = con.execute(selpar).first()
+            
+            class MainWindow(QDialog):
+                def __init__(self):
+                    QDialog.__init__(self)
+                    
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    self.setWindowTitle("Changing parameters")
+                    self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
+                    
+                    self.setStyleSheet("background-color: #D9E1DF")
+                    self.setFont(QFont('Arial', 10))  
+                    
+                    #item
+                    self.q1Edit = QLineEdit(rppar[1])
+                    self.q1Edit.setCursorPosition(0)
+                    self.q1Edit.setFixedWidth(220)
+                    self.q1Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q1Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^.{0,20}$")
+                    input_validator = QRegExpValidator(reg_ex, self.q1Edit)
+                    self.q1Edit.setValidator(input_validator)
+                                    
+                    #value
+                    self.q2Edit = QLineEdit(str(round(float(rppar[2]),2)))
+                    self.q2Edit.setFixedWidth(100)
+                    self.q2Edit.setAlignment(Qt.AlignRight)
+                    self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q2Edit.setFont(QFont("Arial",10))
+                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, self.q2Edit)
+                    self.q2Edit.setValidator(input_validator)
+                    
+                    #buttongroup
+                    self.q3Edit = QTextEdit(rppar[3])
+                    self.q3Edit.setFixedSize(110,62)
+                    self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+                    self.q3Edit.setFont(QFont("Arial",10))
+                    self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    
+                    def q1Changed():
+                        self.q1Edit.setText(self.q1Edit.text())
+                    self.q1Edit.textChanged.connect(q1Changed)
+                    
+                    def q2Changed():
+                        self.q2Edit.setText(self.q2Edit.text())
+                    self.q2Edit.textChanged.connect(q2Changed)
+                                     
+                    def updparams(self):
+                         mitem = self.q1Edit.text()   
+                         mvalue = self.q2Edit.text()
+                         mbuttontext = self.q3Edit.toPlainText()
+                         if len(mbuttontext) > 30:
+                            alertText()
+                         else:
+                             updpar = update(params).where(params.c.paramID == paramnr).\
+                               values(item = mitem, value = float(mvalue), buttongroup = mbuttontext)
+                             con.execute(updpar)
+                             insertOK()
+                             self.close()
+                                                      
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                    
+                    lbl1 = QLabel('Parameter')
+                    lbl1.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl1, 1, 0)
+                    lbl2 = QLabel(str(paramnr))
+                    lbl2.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl2, 1, 1)
+                           
+                    lbl3 = QLabel('Item') 
+                    lbl3.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl3, 2, 0)
+                    grid.addWidget(self.q1Edit, 2, 1, 1, 2) 
+                                                         
+                    lbl4 = QLabel('Value') 
+                    lbl4.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl4, 3, 0)
+                    grid.addWidget(self.q2Edit, 3, 1)
+                    
+                    lbl5 = QLabel('Buttongroup-text')
+                    lbl5.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl5, 4, 0, 3, 1, Qt.AlignVCenter)
+                    grid.addWidget(self.q3Edit, 4, 1, 3, 1)
+                    
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 , 0 , 1, 2)
+               
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
+                    
+                    reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+                    reglbl.setFont(QFont("Arial",10))                               
+                    grid.addWidget(reglbl, 8, 0, 1, 3, Qt.AlignCenter)                  
+                    self.setLayout(grid)
+                    self.setGeometry(500, 300, 150, 150)
+            
+                    applyBtn = QPushButton('Change')
+                    applyBtn.clicked.connect(lambda: updparams())
+            
+                    grid.addWidget(applyBtn, 7, 2, 1, 1, Qt.AlignRight)
+                    applyBtn.setFont(QFont("Arial",10))
+                    applyBtn.setFixedWidth(100)
+                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+ 
+                    cancelBtn = QPushButton('Close')
+                    cancelBtn.clicked.connect(self.close)
+            
+                    grid.addWidget(cancelBtn, 7, 1, 1, 1, Qt.AlignRight)
+                    cancelBtn.setFont(QFont("Arial",10))
+                    cancelBtn.setFixedWidth(100)
+                    cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                                      
+            window = MainWindow()
+            window.exec_()
+            
+    win = Widget(data_list, header)
+    win.exec_()
+    
+def adminMenu():
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Administrator Menu")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+  
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(280)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE') 
+            self.k0Edit.addItem('Accounts Submenu')
+            self.k0Edit.addItem('Articles Submenu')
+            self.k0Edit.addItem('Sales - Request')
+            self.k0Edit.addItem('Payments - Request / Paying')
+            self.k0Edit.addItem('Purchase Submenu')
+            self.k0Edit.addItem('Buttons Submenu')
+            self.k0Edit.addItem('Parameters - Request / Change')
+            
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+            
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                
+                if mindex == 0:
+                    accountMenu()
+                elif mindex == 1:
+                    articleMenu()
+                elif mindex == 2:
+                    salesRequest()
+                elif mindex == 3:
+                    paymentsRequest()
+                elif mindex == 4:
+                    purchaseMenu()
+                elif mindex == 5:
+                    buttonMenu()
+                elif mindex == 6:
+                    paramMenu()
+
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1)
+            
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
             applyBtn.setFont(QFont("Arial",10))
@@ -2279,80 +2897,6 @@ def newBarcode():
 def existingBarcode():
     mflag = 1
     articleRequest(mflag)
-        
-def defButtons():
-    class Widget(QDialog):
-        def __init__(self, parent=None):
-            super(Widget, self).__init__(parent)
-            self.setWindowTitle("Define Buttons")
-            self.setWindowIcon(QIcon('./logos/logo.jpg'))
-            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                   
-            self.setFont(QFont('Arial', 10))
-            self.setStyleSheet("background-color: #D9E1DF") 
-                
-            grid = QGridLayout()
-            grid.setSpacing(20)      
-                
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 0 ,0, 1, 3)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
-            
-            self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(220)
-            self.k0Edit.setFont(QFont("Arial",10))
-            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('New barcode')
-            self.k0Edit.addItem('Existing barcode')
-                           
-            def k0Changed():
-                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
-            self.k0Edit.currentIndexChanged.connect(k0Changed)
-            
-            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
-                           
-            def menuChoice(self):
-                mindex = self.k0Edit.currentIndex()
-                if mindex == 0:
-                    newBarcode()
-                elif mindex == 1:
-                    existingBarcode()
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1)
-                     
-            applyBtn = QPushButton('Select')
-            applyBtn.clicked.connect(lambda: menuChoice(self))  
-            applyBtn.setFont(QFont("Arial",10))
-            applyBtn.setFixedWidth(100)
-            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(applyBtn, 2, 2)
-                 
-            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-            lbl3.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
-           
-            self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
-                
-    window = Widget()
-    window.exec_()  
     
 def insertArticles():
     metadata = MetaData()
@@ -2870,114 +3414,6 @@ def bookingLoss():
     window = Widget()
     window.exec_() 
     
-def purchasing():
-    class Widget(QDialog):
-        def __init__(self, parent=None):
-            super(Widget, self).__init__(parent)
-            self.setWindowTitle("Define Buttons")
-            self.setWindowIcon(QIcon('./logos/logo.jpg'))
-            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                   
-            self.setFont(QFont('Arial', 10))
-            self.setStyleSheet("background-color: #D9E1DF") 
-                
-            grid = QGridLayout()
-            grid.setSpacing(20)      
-                
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 0 ,0, 1, 3)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
-            
-            self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(230)
-            self.k0Edit.setFont(QFont("Arial",10))
-            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Collecting purchases')
-            self.k0Edit.addItem('View purchases list')
-            self.k0Edit.addItem('Printing purchases list')
-            self.k0Edit.addItem('Processing deliverylist')
-            self.k0Edit.addItem('View deliverylist')
-            self.k0Edit.addItem('Printing deliverylist')
-                             
-            def k0Changed():
-                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
-            self.k0Edit.currentIndexChanged.connect(k0Changed)
-            
-            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
-                           
-            def menuChoice(self):
-                mindex = self.k0Edit.currentIndex()
-                if mindex == 0:
-                    purchaseCollect(self)
-                elif mindex == 1:
-                    if sys.platform == 'win32':
-                        path = '.\\forms\\Purchasing\\'
-                    else:
-                        path = './forms/Purchasing/'
-                    mtitle = 'View purchasing lists'
-                    viewList(path, mtitle)
-                    #choose with QCombobox
-                    #print os.startfile
-                elif mindex == 2:
-                    if sys.platform == 'win32':
-                        path = '.\\forms\\Purchasing\\'
-                    else:
-                        path = './forms/Purchasing/'
-                    pickList(path)
-                elif mindex == 3:
-                    deliveryImport()
-                elif mindex == 4:
-                    if sys.platform == 'win32':
-                        path = '.\\forms\\Deliveries\\'
-                    else:
-                        path = './forms/Deliveries/'
-                    mtitle = 'View delivery lists'
-                    viewList(path, mtitle)
-                elif mindex == 5:
-                    if sys.platform == 'win32':
-                        path = '.\\forms\\Deliveries\\'
-                    else:
-                        path = './forms/Deliveries/'
-                    pickList(path)
-                    #choose with QCombobox
-                    #print with os.startfile
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1)
-                     
-            applyBtn = QPushButton('Select')
-            applyBtn.clicked.connect(lambda: menuChoice(self))
-            applyBtn.setFont(QFont("Arial",10))
-            applyBtn.setFixedWidth(100)
-            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(applyBtn, 2, 2)
-                 
-            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-            lbl3.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
-           
-            self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
-                
-    window = Widget()
-    window.exec_() 
-    
 def purchaseCollect():
     metadata = MetaData()
     articles = Table('articles', metadata,
@@ -3080,346 +3516,6 @@ def deliveryImport():
             importDone()
         else:
             noImports()
-     
-def defParams():
-    class Widget(QDialog):
-        def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
-            self.setWindowTitle('Parameters changing')
-            self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
-            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                    Qt.WindowMinMaxButtonsHint)
-            self.setFont(QFont('Arial', 10))
-            
-            grid = QGridLayout()
-            grid.setSpacing(20)
-            
-            table_model = MyTableModel(self, data_list, header)
-            table_view = QTableView()
-            table_view.setModel(table_model)
-            font = QFont("Arial", 10)
-            table_view.setFont(font)
-            table_view.resizeColumnsToContents()
-            table_view.setColumnWidth(4, 110)
-            table_view.verticalHeader().setDefaultSectionSize(75)
-            table_view.setSelectionBehavior(QTableView.SelectRows)
-            table_view.clicked.connect(showSelection)
-            grid.addWidget(table_view, 0, 0, 1, 7)
-            
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 1 , 0 , 1, 2)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 1, 6, 1 ,1, Qt.AlignRight)
-                  
-            freshBtn = QPushButton('Refresh')
-            freshBtn.clicked.connect(lambda: refresh(self))
-
-            freshBtn.setFont(QFont("Arial",10))
-            freshBtn.setFixedWidth(100) 
-            freshBtn.setStyleSheet("color: black;  background-color: gainsboro")
-   
-            grid.addWidget(freshBtn, 1, 5, 1, 1, Qt.AlignRight | Qt.AlignBottom)
-        
-            sluitBtn = QPushButton('Close')
-            sluitBtn.clicked.connect(self.close)
-
-            sluitBtn.setFont(QFont("Arial",10))
-            sluitBtn.setFixedWidth(100) 
-            sluitBtn.setStyleSheet("color: black;  background-color: gainsboro") 
-            
-            grid.addWidget(sluitBtn, 1, 4, 1, 1, Qt.AlignRight | Qt.AlignBottom)
-            
-            reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-            reglbl.setFont(QFont("Arial", 10))
-            grid.addWidget(reglbl, 2, 2, 1, 1, Qt.AlignBottom)
-            
-            self.setLayout(grid)
-            self.setGeometry(300, 50, 900, 900)
-            self.setLayout(grid)
-    
-    class MyTableModel(QAbstractTableModel):
-        def __init__(self, parent, mylist, header, *args):
-            QAbstractTableModel.__init__(self, parent, *args)
-            self.mylist = mylist
-            self.header = header
-        def rowCount(self, parent):
-            return len(self.mylist)
-        def columnCount(self, parent):
-            return len(self.mylist[0])
-        def data(self, index, role):
-            veld = self.mylist[index.row()][index.column()]
-            if not index.isValid():
-                return None
-            elif role == Qt.TextAlignmentRole and (type(veld) == float or type(veld) == int):
-                return Qt.AlignRight | Qt.AlignVCenter
-            elif role != Qt.DisplayRole:
-                return None
-            if type(veld) == float:
-                return '{:12.2f}'.format(veld)
-            else:
-                return veld
-        def headerData(self, col, orientation, role):
-            if orientation == Qt.Horizontal and role == Qt.DisplayRole:
-                return self.header[col]
-            return None
-             
-    header = ['ParamID', 'Item', 'Value', 'Buttongroup-text']
-    
-    metadata = MetaData()
-    params = Table('params', metadata,
-        Column('paramID', Integer(), primary_key=True),
-        Column('item', String),
-        Column('value', Float),
-        Column('buttongroup', String))
-    
-    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
-    con = engine.connect()
-        
-    sel = select([params]).order_by(params.c.paramID)
-    
-    rp = con.execute(sel)
-    
-    data_list=[]
-    for row in rp:
-        data_list += [(row)]
-        
-    def showSelection(idx):
-        paramnr = idx.data()
-        if idx.column() == 0: 
-            selpar = select([params]).where(params.c.paramID == paramnr)
-            rppar = con.execute(selpar).first()
-            
-            class MainWindow(QDialog):
-                def __init__(self):
-                    QDialog.__init__(self)
-                    
-                    grid = QGridLayout()
-                    grid.setSpacing(20)
-                    self.setWindowTitle("Changing parameters")
-                    self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
-                    
-                    self.setStyleSheet("background-color: #D9E1DF")
-                    self.setFont(QFont('Arial', 10))  
-                    
-                    #item
-                    self.q1Edit = QLineEdit(rppar[1])
-                    self.q1Edit.setCursorPosition(0)
-                    self.q1Edit.setFixedWidth(220)
-                    self.q1Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-                    self.q1Edit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^.{0,20}$")
-                    input_validator = QRegExpValidator(reg_ex, self.q1Edit)
-                    self.q1Edit.setValidator(input_validator)
-                                    
-                    #value
-                    self.q2Edit = QLineEdit(str(round(float(rppar[2]),2)))
-                    self.q2Edit.setFixedWidth(100)
-                    self.q2Edit.setAlignment(Qt.AlignRight)
-                    self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-                    self.q2Edit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
-                    input_validator = QRegExpValidator(reg_ex, self.q2Edit)
-                    self.q2Edit.setValidator(input_validator)
-                    
-                    #buttongroup
-                    self.q3Edit = QTextEdit(rppar[3])
-                    self.q3Edit.setFixedSize(110,62)
-                    self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-                    self.q3Edit.setFont(QFont("Arial",10))
-                    self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-                    
-                    def q1Changed():
-                        self.q1Edit.setText(self.q1Edit.text())
-                    self.q1Edit.textChanged.connect(q1Changed)
-                    
-                    def q2Changed():
-                        self.q2Edit.setText(self.q2Edit.text())
-                    self.q2Edit.textChanged.connect(q2Changed)
-                                     
-                    def updparams(self):
-                         mitem = self.q1Edit.text()   
-                         mvalue = self.q2Edit.text()
-                         mbuttontext = self.q3Edit.toPlainText()
-                         if len(mbuttontext) > 30:
-                            alertText()
-                         else:
-                             updpar = update(params).where(params.c.paramID == paramnr).\
-                               values(item = mitem, value = float(mvalue), buttongroup = mbuttontext)
-                             con.execute(updpar)
-                             insertOK()
-                             self.close()
-                                                      
-                    grid = QGridLayout()
-                    grid.setSpacing(20)
-                    
-                    lbl1 = QLabel('Parameter')
-                    lbl1.setFont(QFont("Arial",10))
-                    grid.addWidget(lbl1, 1, 0)
-                    lbl2 = QLabel(str(paramnr))
-                    lbl2.setFont(QFont("Arial",10))
-                    grid.addWidget(lbl2, 1, 1)
-                           
-                    lbl3 = QLabel('Item') 
-                    lbl3.setFont(QFont("Arial",10))
-                    grid.addWidget(lbl3, 2, 0)
-                    grid.addWidget(self.q1Edit, 2, 1, 1, 2) 
-                                                         
-                    lbl4 = QLabel('Value') 
-                    lbl4.setFont(QFont("Arial",10))
-                    grid.addWidget(lbl4, 3, 0)
-                    grid.addWidget(self.q2Edit, 3, 1)
-                    
-                    lbl5 = QLabel('Buttongroup-text')
-                    lbl5.setFont(QFont("Arial",10))
-                    grid.addWidget(lbl5, 4, 0, 3, 1, Qt.AlignVCenter)
-                    grid.addWidget(self.q3Edit, 4, 1, 3, 1)
-                    
-                    pyqt = QLabel()
-                    movie = QMovie('./logos/pyqt.gif')
-                    pyqt.setMovie(movie)
-                    movie.setScaledSize(QSize(240,80))
-                    movie.start()
-                    grid.addWidget(pyqt, 0 , 0 , 1, 2)
-               
-                    logo = QLabel()
-                    pixmap = QPixmap('./logos/logo.jpg')
-                    logo.setPixmap(pixmap.scaled(70,70))
-                    grid.addWidget(logo , 0, 2, 1, 1, Qt.AlignRight)
-                    
-                    reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-                    reglbl.setFont(QFont("Arial",10))                               
-                    grid.addWidget(reglbl, 8, 0, 1, 3, Qt.AlignCenter)                  
-                    self.setLayout(grid)
-                    self.setGeometry(500, 300, 150, 150)
-            
-                    applyBtn = QPushButton('Change')
-                    applyBtn.clicked.connect(lambda: updparams())
-            
-                    grid.addWidget(applyBtn, 7, 2, 1, 1, Qt.AlignRight)
-                    applyBtn.setFont(QFont("Arial",10))
-                    applyBtn.setFixedWidth(100)
-                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
- 
-                    cancelBtn = QPushButton('Close')
-                    cancelBtn.clicked.connect(self.close)
-            
-                    grid.addWidget(cancelBtn, 7, 1, 1, 1, Qt.AlignRight)
-                    cancelBtn.setFont(QFont("Arial",10))
-                    cancelBtn.setFixedWidth(100)
-                    cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
-                                      
-            window = MainWindow()
-            window.exec_()
-            
-    win = Widget(data_list, header)
-    win.exec_()
-    
-def adminMenu():
-    class Widget(QDialog):
-        def __init__(self, parent=None):
-            super(Widget, self).__init__(parent)
-            self.setWindowTitle("Administrator Menu")
-            self.setWindowIcon(QIcon('./logos/logo.jpg'))
-            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                   
-            self.setFont(QFont('Arial', 10))
-            self.setStyleSheet("background-color: #D9E1DF") 
-                
-            grid = QGridLayout()
-            grid.setSpacing(20)      
-                
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 0 ,0, 1, 3)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
-            
-            self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(280)
-            self.k0Edit.setFont(QFont("Arial",10))
-            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Articles - request / change')
-            self.k0Edit.addItem('Sales - request')
-            self.k0Edit.addItem('Payments - request / payments')
-            self.k0Edit.addItem('Accounts - new / request / change')
-            self.k0Edit.addItem('Buttons - define')
-            self.k0Edit.addItem('Articles - new')
-            self.k0Edit.addItem('Articleslist - import / processing')
-            self.k0Edit.addItem('Loss items - booking / request')
-            self.k0Edit.addItem('Purchase / Delivery')
-            self.k0Edit.addItem('Parameters - change')
-            
-            def k0Changed():
-                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
-            self.k0Edit.currentIndexChanged.connect(k0Changed)
-            
-            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
-            
-            def menuChoice(self):
-                mindex = self.k0Edit.currentIndex()
-
-                if mindex == 0:
-                    mflag = 0
-                    articleRequest(mflag)
-                elif mindex == 1:
-                    salesRequest()                
-                elif mindex == 2:
-                    paymentsRequest()  
-                elif mindex == 3:
-                    accountMenu() 
-                elif mindex == 4:
-                    defButtons()
-                elif mindex == 5:
-                    insertArticles()
-                elif mindex == 6:
-                    importItems()
-                elif mindex == 7:
-                    bookingLoss()
-                elif mindex == 8:
-                    purchasing()
-                elif mindex == 9:
-                    defParams()
-            
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1)
-            
-            applyBtn = QPushButton('Select')
-            applyBtn.clicked.connect(lambda: menuChoice(self))  
-            applyBtn.setFont(QFont("Arial",10))
-            applyBtn.setFixedWidth(100)
-            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(applyBtn, 2, 2)
-                 
-            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-            lbl3.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
-           
-            self.setLayout(grid)
-            self.setGeometry(600, 400, 150, 100)
-                
-    window = Widget()
-    window.exec_()  
   
 def logon(self, barcodenr):
     metadata = MetaData()
