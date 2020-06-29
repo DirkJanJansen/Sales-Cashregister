@@ -3158,7 +3158,7 @@ def insertArticles():
                     self.close()
  
             applyBtn = QPushButton('Insert')
-            applyBtn.clicked.connect(lambda: insArticle(self))
+            applyBtn.clicked.connect(lambda: insArticle())
     
             grid.addWidget(applyBtn, 8, 3, 1, 1, Qt.AlignRight)
             applyBtn.setFont(QFont("Arial",10))
@@ -3964,7 +3964,7 @@ def barcodeScan():
             self.albl.setFixedHeight(40)
             grid.addWidget(self.albl, 5, 0, 1, 12, Qt.AlignCenter)
 
-            lbl1 = QLabel('Barcodescan')
+            lbl1 = QLabel('       Barcodescan')
             lbl1.setFont(QFont("Arial", 12))
             grid.addWidget(lbl1, 7, 8, 1, 4, Qt.AlignCenter)
             grid.addWidget(self.q1Edit , 7, 2, 1, 11, Qt.AlignRight)
