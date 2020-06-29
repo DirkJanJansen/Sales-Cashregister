@@ -3158,7 +3158,7 @@ def insertArticles():
                     self.close()
  
             applyBtn = QPushButton('Insert')
-            applyBtn.clicked.connect(lambda: insArticle())
+            applyBtn.clicked.connect(lambda: insArticle(self))
     
             grid.addWidget(applyBtn, 8, 3, 1, 1, Qt.AlignRight)
             applyBtn.setFont(QFont("Arial",10))
