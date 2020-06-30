@@ -18,6 +18,8 @@ Barcode testlabels for employees logon and product testlabels included
 
 5 programmable button-groups with each 39 programmable buttons for unpackaged products.
 
+Equipped with inventory management system
+
 
  
 
