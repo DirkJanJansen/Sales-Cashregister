@@ -104,4 +104,4 @@
 2020-06-29 sales.py buttons in submenu's replaced.
 2020-06-29 LINUX_install.txt adjusted on several points.
 2020-06-29 sales.py namingconvention straightened out
-2020-06-29 sales.py 2x bug repaired self as a argument
+2020-07-03 sales.py several menu's naming conventions changed more unambiguously.
