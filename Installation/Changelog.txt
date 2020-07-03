@@ -105,3 +105,4 @@
 2020-06-29 LINUX_install.txt adjusted on several points.
 2020-06-29 sales.py namingconvention straightened out
 2020-07-03 sales.py several menu's naming conventions changed more unambiguously.
+2020-07-03 documentation changed according to menu naming
