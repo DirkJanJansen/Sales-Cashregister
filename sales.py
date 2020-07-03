@@ -140,8 +140,8 @@ def accountMenu():
             self.k0Edit.setFixedWidth(280)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Accounts new')
-            self.k0Edit.addItem('Accounts - Request / Change')
+            self.k0Edit.addItem('New account')
+            self.k0Edit.addItem('View / Change Accounts')
                                        
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -214,16 +214,16 @@ def articleMenu():
             self.k0Edit.setFixedWidth(300)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Insert new')
-            self.k0Edit.addItem('Request / Change')
-            self.k0Edit.addItem('List import new')
-            self.k0Edit.addItem('List import price changes')
-            self.k0Edit.addItem('List import expired')
-            self.k0Edit.addItem('View list import new')
-            self.k0Edit.addItem('View list import price-changes')
-            self.k0Edit.addItem('View list import expired')
-            self.k0Edit.addItem('Booking loss')
-            self.k0Edit.addItem('Request loss')
+            self.k0Edit.addItem('Insert new articles')
+            self.k0Edit.addItem('View / Change articles')
+            self.k0Edit.addItem('Imports new articles')
+            self.k0Edit.addItem('Imports price-changes articles')
+            self.k0Edit.addItem('Imports expired articles')
+            self.k0Edit.addItem('View imports new articles')
+            self.k0Edit.addItem('View imports price-changes articles')
+            self.k0Edit.addItem('View imports expired articles')
+            self.k0Edit.addItem('Booking loss articles')
+            self.k0Edit.addItem('View loss articles')
                                          
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -321,11 +321,11 @@ def purchaseMenu():
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('Collecting purchases')
-            self.k0Edit.addItem('View purchases list')
-            self.k0Edit.addItem('Printing purchases list')
-            self.k0Edit.addItem('Processing deliverylist')
-            self.k0Edit.addItem('View deliverylist')
-            self.k0Edit.addItem('Printing deliverylist')
+            self.k0Edit.addItem('View purchases')
+            self.k0Edit.addItem('Printing purchases')
+            self.k0Edit.addItem('Processing deliveries')
+            self.k0Edit.addItem('View deliveries')
+            self.k0Edit.addItem('Printing deliveries')
                              
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -424,8 +424,8 @@ def buttonMenu():
             self.k0Edit.setFixedWidth(220)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('New barcode')
-            self.k0Edit.addItem('Existing barcode')
+            self.k0Edit.addItem('Button new barcode')
+            self.k0Edit.addItem('Button existing barcode')
                            
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -740,11 +740,11 @@ def adminMenu():
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE') 
             self.k0Edit.addItem('Accounts Submenu')
             self.k0Edit.addItem('Articles Submenu')
-            self.k0Edit.addItem('Sales - Request')
-            self.k0Edit.addItem('Payments - Request / Paying')
-            self.k0Edit.addItem('Purchase Submenu')
+            self.k0Edit.addItem('Sales - View')
+            self.k0Edit.addItem('Payments - View / Pay')
+            self.k0Edit.addItem('Purchases Submenu')
             self.k0Edit.addItem('Buttons Submenu')
-            self.k0Edit.addItem('Parameters - Request / Change')
+            self.k0Edit.addItem('Parameters - View / Change')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -3980,40 +3980,30 @@ def barcodeScan():
                 Column('buttontext', String),
                 Column('barcode',  None, ForeignKey('articles.barcode')))
                         
-            #choose 1 groupbutton from 5
+            #choose next groupbutton (from 5) and start with group 1
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
-                     buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[6][3].strip())
                     hBtn.setStyleSheet('color: white; background-color:  #16a085')
                     btngroup = 2
                 elif btngroup == 2:
                     index = 40
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
-                        buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[7][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:  #f39c12')
                     btngroup = 3
                 elif btngroup == 3:
                     index = 80
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
-                       buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[8][3].strip())
                     hBtn.setStyleSheet('color: white; background-color:  #ca6f1e')
                     btngroup = 4
                 elif btngroup == 4:
                     index = 120
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
-                       buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[9][3].strip())
                     hBtn.setStyleSheet('color: white; background-color:    #c0392b')
                     btngroup = 5
                 elif btngroup == 5:
                     index = 160
-                    selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
-                       buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                     hBtn = QPushButton(rppar[10][3].strip())
                     hBtn.setStyleSheet('color: black; background-color:   #f1c40f')
                     btngroup = 1
@@ -4025,6 +4015,8 @@ def barcodeScan():
                 hBtn.clicked.connect(lambda: btngroupChange(btngroup))
                           
                 a = index
+                selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
+                     buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
                 rpbtn = con.execute(selbtn)
                 
                 #place 9 buttons on thirst row and 10 buttons on 2nd 3thrd and 4thd row
