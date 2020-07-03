@@ -1054,6 +1054,8 @@ def expiredProducts():
     metadata = MetaData()
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True))
+    loss = Table('loss', metadata,
+        Column('barcode', String))
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
@@ -1067,6 +1069,10 @@ def expiredProducts():
             item = len(lists)
             for line in range(0, item):
                 mbarcode = lists[line][:13].strip()
+                selloss = select([loss]).where(loss.c.barcode == mbarcode)
+                if con.execute(selloss).fetchone():
+                    delloss = delete(loss).where(loss.c.barcode == mbarcode)
+                    con.execute(delloss)
                 sel = select([articles]).where(articles.c.barcode == mbarcode)
                 if con.execute(sel).fetchone():
                     delart = delete(articles).where(articles.c.barcode == mbarcode)
