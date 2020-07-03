@@ -51,7 +51,7 @@ sudo chmod +x /etc/rc.local
 Enable error sounds in linux terminal:
 sudo apt install sox
 
-for keyboard enter command (keyboard does only work for root) in Linux install:
+for keyboard enter command (module keyboard does only work for root) in Linux install:
 sudo apt install xdotool
 
 Installing database:
@@ -70,4 +70,4 @@ startup files in Linux:
 Copy register.png from folder Installation in folder /home/postgres/.icons
 Copy Sales.desktop from folder Installation in /home/postgres/.local/share/applications
 
-All settings that differ from executing in Windows are automatically adjusted for Ubuntu
+All settings that differ from executing in Windows are automatically adjusted for Ubuntu in the program.
