@@ -141,7 +141,7 @@ def accountMenu():
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.k0Edit.addItem('New account')
-            self.k0Edit.addItem('View / Change Accounts')
+            self.k0Edit.addItem('View / Change accounts')
                                        
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -3190,15 +3190,20 @@ def requestLoss():
        Column('number', Float),
        Column('bookdate', String),
        Column('category', String))
+    articles = Table('articles', metadata,
+       Column('barcode', String, primary_key=True),
+       Column('description', String),
+       Column('item_price', Float))
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
-    selloss = select([loss]).order_by(loss.c.category, loss.c.bookdate)
+    selloss = select([loss, articles]).where(articles.c.barcode==loss.c.barcode).\
+        order_by(loss.c.category, loss.c.bookdate)
     rploss = con.execute(selloss)
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
-            self.setGeometry(600, 50, 600, 800)
+            self.setGeometry(600, 50, 1000, 800)
             self.setWindowTitle('Loss articles requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
@@ -3210,6 +3215,7 @@ def requestLoss():
             table_view.setFont(font)
             table_view.resizeColumnsToContents()
             table_view.setSelectionBehavior(QTableView.SelectRows)
+            table_view.setColumnHidden(5,True)
             layout = QVBoxLayout(self)
             layout.addWidget(table_view)
             self.setLayout(layout)
@@ -3240,7 +3246,7 @@ def requestLoss():
                 return self.header[col]
             return None
 
-    header = ['ID','Barcode','Amount','Bookdate','Category']                                       
+    header = ['ID','Barcode','Amount','Bookdate','Category','','Description', 'Item-Price']                                       
     
     data_list=[]
     for row in rploss:
