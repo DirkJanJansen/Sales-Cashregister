@@ -106,3 +106,5 @@
 2020-06-29 sales.py namingconvention straightened out
 2020-07-03 sales.py several menu's naming conventions changed more unambiguously.
 2020-07-03 documentation changed according to menu naming
+2020-07-03 sales.py in view loss added columns description and item_price.
+2020-07-03 cashregister.backup changed for setting foreignkey barcode to table articles for above additions.
