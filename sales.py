@@ -1126,6 +1126,11 @@ def newProducts():
                      item_price=mprice,item_unit=munit,article_group=mgroup,thumbnail=thumb,\
                      category=mcat,VAT=mvat)
                     con.execute(insart)
+                    ean = barcode.get('ean13',mbarcode, writer=ImageWriter())
+                    if sys.platform == 'win32':
+                        ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
+                    else:
+                        ean.save('./Barcodes/Articles/'+str(mbarcode))
        
             importDone()
             file.close()
