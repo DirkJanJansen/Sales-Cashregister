@@ -108,6 +108,8 @@
 2020-07-03 documentation changed according to menu naming
 2020-07-03 sales.py in view loss added columns description and item_price.
 2020-07-03 cashregister.backup changed for setting foreignkey barcode to table articles for above additions.
-2020-07-03 sales.py tabledefinitions loss changed according to ForeignKey barcode. 
-           (neccesary due to delete barcode items first table loss then table articles.
-2020-07-03 documentation changed according ForeignKey structure table loss barcode.
+2020-07-04 sales.py tabledefinitions loss changed according to ForeignKey barcode. 
+           (neccessary due to delete barcode items first table loss then table articles.
+2020-07-04 documentation changed according ForeignKey structure table loss barcode.
+2020-07-04 sales.py barcodes png also saved for imports new articles in ./forms/Barcodes/Articles/
+2020-07-04 LINUX_install.txt added warning import files from windows, due to controlcharacters.
