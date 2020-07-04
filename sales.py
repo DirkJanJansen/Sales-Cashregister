@@ -1931,7 +1931,7 @@ def articleRequest(mflag):
                         self.close()
                                  
                     applyBtn = QPushButton('Insert')
-                    applyBtn.clicked.connect(lambda: updArticle())
+                    applyBtn.clicked.connect(lambda: updArticle(self))
             
                     grid.addWidget(applyBtn, 9, 3, 1, 1, Qt.AlignRight)
                     applyBtn.setFont(QFont("Arial",10))
