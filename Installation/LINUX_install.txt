@@ -72,4 +72,4 @@ Copy Sales.desktop from folder Installation in /home/postgres/.local/share/appli
 
 All settings that differ from executing in Windows are automatically adjusted for Ubuntu
 
-By problems reading importfiles from windows, copy these lines in Linux plain text, because windows adds control characters.
+By problems reading importfiles made in windows, save the lines in Linux nautilus text, because windows adds control characters.
