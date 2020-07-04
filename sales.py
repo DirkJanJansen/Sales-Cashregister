@@ -1055,7 +1055,7 @@ def expiredProducts():
     articles = Table('articles', metadata,
         Column('barcode', String, primary_key=True))
     loss = Table('loss', metadata,
-        Column('barcode', String))
+        Column('barcode', None, ForeignKey('articles.barcode')))
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
@@ -2029,7 +2029,7 @@ def articleRequest(mflag):
                     metadata = MetaData()
                     loss = Table('loss', metadata,
                        Column('lossID', Integer, primary_key=True),
-                       Column('barcode', String),
+                       Column('barcode', None, ForeignKey('articles.barcode')),
                        Column('number', Float),
                        Column('bookdate', String),
                        Column('category', String))
@@ -3192,7 +3192,7 @@ def requestLoss():
     metadata = MetaData()
     loss = Table('loss', metadata,
        Column('lossID', Integer, primary_key=True),
-       Column('barcode', String),
+       Column('barcode', None, ForeignKey('articles.barcode')),
        Column('number', Float),
        Column('bookdate', String),
        Column('category', String))
