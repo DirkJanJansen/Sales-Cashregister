@@ -1930,7 +1930,7 @@ def articleRequest(mflag):
                         insertOK()
                         self.close()
                                  
-                    applyBtn = QPushButton('Insert')
+                    applyBtn = QPushButton('Update')
                     applyBtn.clicked.connect(lambda: updArticle(self))
             
                     grid.addWidget(applyBtn, 9, 3, 1, 1, Qt.AlignRight)
