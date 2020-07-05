@@ -3257,7 +3257,7 @@ def requestLoss():
                 return self.header[col]
             return None
 
-    header = ['ID','Barcode','Amount','Bookdate','Category','','Description', 'Item-Price']                                       
+    header = ['ID','Barcode','Amount','Bookdate','Category','','Description','Item-Price']                                       
     
     data_list=[]
     for row in rploss:
@@ -3995,7 +3995,7 @@ def barcodeScan():
             buttons = Table('buttons', metadata,
                 Column('buttonID', Integer(), primary_key=True),
                 Column('buttontext', String),
-                Column('barcode',  None, ForeignKey('articles.barcode')))
+                Column('barcode',  String))
                         
             #choose next groupbutton (from 5) and start with group 1
             def btngroupChange(btngroup):
