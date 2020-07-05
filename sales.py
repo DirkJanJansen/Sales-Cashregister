@@ -633,13 +633,10 @@ def paramMenu():
                          mvalue = self.q2Edit.text()
                          mbuttontext = self.q3Edit.toPlainText()
                          if len(mbuttontext) > 30:
-                            message = 'Text too long, no buttontext inserted'
+                            message = 'Text too long, maximum 3 lines with 9 characters!'
                             alertText(message)
-                         elif mbuttontext.count('\n') == 0 and len(mbuttontext) > 9:
-                            message = 'Maximum 9 characters per line,\nperform linefeed after 9 characters!'
-                            alertText(message) 
                          elif mbuttontext.count('\n') > 2:
-                            message = 'More then 3 lines not allowed!'
+                            message = 'No more then 3 lines allowed!'
                             alertText(message)
                          else:
                              updpar = update(params).where(params.c.paramID == paramnr).\
@@ -1628,7 +1625,7 @@ def articleRequest(mflag):
                     lbl3.setFont(QFont("Arial", 10))
                     grid.addWidget(lbl3, 3, 0, 1, 1, Qt.AlignRight)
                     grid.addWidget(self.q3Edit, 3, 1)
-                    
+                                 
                     applyBtn = QPushButton('Insert')
                     applyBtn.clicked.connect(lambda: insBtnText())
                        
@@ -1654,13 +1651,10 @@ def articleRequest(mflag):
                         mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
                         if len(mbtntext) > 30:
-                            message = 'Text too long, no buttontext inserted'
+                            message = 'Text too long, maximum 3 lines with 9 characters '
                             alertText(message)
-                        elif mbtntext.count('\n') == 0 and len(mbtntext) > 9:
-                            message = 'Maximum 9 characters per line,\nperform linefeed after 9 characters!'
-                            alertText(message) 
                         elif mbtntext.count('\n') > 2:
-                            message = 'More then 3 lines not allowed!'
+                            message = 'No more then 3 lines allowed!'
                             alertText(message)
                         elif mbtnnr and mbtntext:
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
