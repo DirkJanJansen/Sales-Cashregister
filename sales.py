@@ -60,13 +60,13 @@ def barcodeExist(mbarcode):
     msg.setWindowTitle('Import list')
     msg.exec_() 
  
-def alertText():
+def alertText(message):
     msg = QMessageBox()
     msg.setStyleSheet("color: black;  background-color: gainsboro")
     msg.setWindowIcon(QIcon('./logos/logo.jpg'))
     msg.setFont(QFont("Arial", 10))
     msg.setIcon(QMessageBox.Warning)
-    msg.setText('Buttontext to long, no records inserted!')
+    msg.setText(message)
     msg.setWindowTitle('Transactions')
     msg.exec_() 
 
@@ -633,7 +633,14 @@ def paramMenu():
                          mvalue = self.q2Edit.text()
                          mbuttontext = self.q3Edit.toPlainText()
                          if len(mbuttontext) > 30:
-                            alertText()
+                            message = 'Text too long, no buttontext inserted'
+                            alertText(message)
+                         elif mbuttontext.count('\n') == 0 and len(mbuttontext) > 9:
+                            message = 'Maximum 9 characters per line,\nperform linefeed after 9 characters!'
+                            alertText(message) 
+                         elif mbuttontext.count('\n') > 2:
+                            message = 'More then 3 lines not allowed!'
+                            alertText(message)
                          else:
                              updpar = update(params).where(params.c.paramID == paramnr).\
                                values(item = mitem, value = float(mvalue), buttongroup = mbuttontext)
@@ -1647,7 +1654,14 @@ def articleRequest(mflag):
                         mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
                         if len(mbtntext) > 30:
-                            alertText()
+                            message = 'Text too long, no buttontext inserted'
+                            alertText(message)
+                        elif mbtntext.count('\n') == 0 and len(mbtntext) > 9:
+                            message = 'Maximum 9 characters per line,\nperform linefeed after 9 characters!'
+                            alertText(message) 
+                        elif mbtntext.count('\n') > 2:
+                            message = 'More then 3 lines not allowed!'
+                            alertText(message)
                         elif mbtnnr and mbtntext:
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
                              values(barcode=str(mbarcode), buttontext=mbtntext)
@@ -1963,8 +1977,6 @@ def articleRequest(mflag):
                 self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                         Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
                 self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-            
-                self.setStyleSheet("background-color: #D9E1DF")
                 self.setFont(QFont('Arial', 10))
                 
                 q1Edit = QLineEdit(mbarcode)
