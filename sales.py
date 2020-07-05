@@ -637,12 +637,10 @@ def paramMenu():
                              if len(line) > 9:
                                  message = 'No more then 9 characters per line allowed'
                                  alertText(message)
-                                 self.close()
                                  break
                              elif len(mlist) > 3:
                                  message= 'No more then 3 lines allowed'
                                  alertText(message)
-                                 self.close()
                                  break
                          else:
                              updpar = update(params).where(params.c.paramID == paramnr).\
@@ -1654,19 +1652,20 @@ def articleRequest(mflag):
                     grid.addWidget(lbl3, 5, 0, 1, 3, Qt.AlignCenter)
                    
                     def insBtnText():
-                        mbtnnr = int(self.q2Edit.text())
+                        if self.q2Edit.text():
+                            mbtnnr = int(self.q2Edit.text())
+                        else:
+                            return
                         mbtntext = self.q3Edit.toPlainText()
                         mlist = mbtntext.split('\n')
                         for line in mlist:
                              if len(line) > 9:
                                  message = 'No more then 9 characters per line allowed'
                                  alertText(message)
-                                 self.close()
                                  break
                              elif len(mlist) > 3:
                                  message= 'No more then 3 lines allowed'
                                  alertText(message)
-                                 self.close()
                                  break
                         else:
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
