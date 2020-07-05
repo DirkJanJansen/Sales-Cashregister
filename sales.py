@@ -632,12 +632,18 @@ def paramMenu():
                          mitem = self.q1Edit.text()   
                          mvalue = self.q2Edit.text()
                          mbuttontext = self.q3Edit.toPlainText()
-                         if len(mbuttontext) > 30:
-                            message = 'Text too long, maximum 3 lines with 9 characters!'
-                            alertText(message)
-                         elif mbuttontext.count('\n') > 2:
-                            message = 'No more then 3 lines allowed!'
-                            alertText(message)
+                         mlist = mbuttontext.split('\n')
+                         for line in mlist:
+                             if len(line) > 9:
+                                 message = 'No more then 9 characters per line allowed'
+                                 alertText(message)
+                                 self.close()
+                                 break
+                             elif len(mlist) > 3:
+                                 message= 'No more then 3 lines allowed'
+                                 alertText(message)
+                                 self.close()
+                                 break
                          else:
                              updpar = update(params).where(params.c.paramID == paramnr).\
                                values(item = mitem, value = float(mvalue), buttongroup = mbuttontext)
@@ -1650,22 +1656,25 @@ def articleRequest(mflag):
                     def insBtnText():
                         mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
-                        if len(mbtntext) > 30:
-                            message = 'Text too long, maximum 3 lines with 9 characters '
-                            alertText(message)
-                        elif mbtntext.count('\n') > 2:
-                            message = 'No more then 3 lines allowed!'
-                            alertText(message)
-                        elif mbtnnr and mbtntext:
+                        mlist = mbtntext.split('\n')
+                        for line in mlist:
+                             if len(line) > 9:
+                                 message = 'No more then 9 characters per line allowed'
+                                 alertText(message)
+                                 self.close()
+                                 break
+                             elif len(mlist) > 3:
+                                 message= 'No more then 3 lines allowed'
+                                 alertText(message)
+                                 self.close()
+                                 break
+                        else:
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
                              values(barcode=str(mbarcode), buttontext=mbtntext)
                             con.execute(updbtn)
                             insertOK()
                             self.close()
-                        else:
-                            notInserted()
-                            self.close() 
-                    
+                                            
                     self.setLayout(grid)
                     self.setGeometry(600, 200, 150, 100)
     
