@@ -2372,7 +2372,7 @@ def paymentsRequest():
                         paySuccess()  
                         self.close()
                     else:
-                        message = "Not all fields are filled in!'
+                        message = 'Not all fields are filled in!'
                         alertText(message)
                         self.close()
                                                                            
