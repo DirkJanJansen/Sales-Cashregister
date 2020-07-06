@@ -118,3 +118,4 @@
 2020-07-05 sales.py improved capture for button text errorlines.
 2020-07-06 sales.py params fields hidden column_text and values if not applicable
 2020-07-06 sales.py improved wordwrap on hardcoded newlines for buttontext and blocking if no btnnumber is filled in.
+2020-07-06 sales.py errormessages unified.
