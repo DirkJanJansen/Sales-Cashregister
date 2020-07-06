@@ -69,16 +69,6 @@ def alertText(message):
     msg.setText(message)
     msg.setWindowTitle('Transactions')
     msg.exec_() 
-
-def noData():
-    msg = QMessageBox()
-    msg.setStyleSheet("color: black;  background-color: gainsboro")
-    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
-    msg.setFont(QFont("Arial", 10))
-    msg.setIcon(QMessageBox.Warning)
-    msg.setText('There are no transactions yet!')
-    msg.setWindowTitle('Transactions')
-    msg.exec_() 
     
 def insertOK():
     msg = QMessageBox()
@@ -89,16 +79,6 @@ def insertOK():
     msg.setText('Insert succeeded!')
     msg.setWindowTitle('Insert records')
     msg.exec_()
-    
-def notInserted():
-    msg = QMessageBox()
-    msg.setStyleSheet("color: black;  background-color: gainsboro")
-    msg.setWindowIcon(QIcon('./logos/logo.jpg'))
-    msg.setFont(QFont("Arial", 10))
-    msg.setIcon(QMessageBox.Warning)
-    msg.setText('Not all fields are filled in!')
-    msg.setWindowTitle('Insert records')
-    msg.exec_() 
            
 def windowClose(self):
     self.close()
@@ -2088,7 +2068,8 @@ def articleRequest(mflag):
                         insertOK()
                         self.close()
                     else:
-                        notInserted()
+                        message = 'Not all fields are filled in!'
+                        alertText(message)
                         self.close()
                                                  
                 self.setLayout(grid)
@@ -2391,7 +2372,8 @@ def paymentsRequest():
                         paySuccess()  
                         self.close()
                     else:
-                        notInserted()
+                        message = "Not all fields are filled in!'
+                        alertText(message)
                         self.close()
                                                                            
                 lbl7 = QLabel('Instance')  
@@ -2603,7 +2585,8 @@ def emplAccess():
                     insertOK()
                     self.close()
                 else:
-                    notInserted()
+                    message = 'Not all fields are filled in!'
+                    alertText()
                     self.close() 
            
             self.setLayout(grid)
@@ -3219,7 +3202,8 @@ def insertArticles():
                     insertOK()
                     self.close()
                 else:
-                    notInserted()
+                    message = 'Not all fields are filled in!'
+                    alertText(message)
                     self.close()
  
             applyBtn = QPushButton('Insert')
@@ -3700,7 +3684,8 @@ def printBon(self):
                 system("lpr "+fbarc)
             printing()
         else:
-            noData()
+            message = 'There are no transactions yet!'
+            alertText(message)
     
 def nextClient(self):
     mbookd = str(datetime.datetime.now())[0:10]
@@ -3762,7 +3747,8 @@ def nextClient(self):
         self.qtailtext = 'Total  incl. VAT'+'\u2000'*57+'{:\u2000>12.2f}'.format(self.mtotal)+'{:\u2000>12.2f}'.format(self.mtotvat)
         self.qtailEdit.setText(self.qtailtext)
     else:
-        noData()
+        message = 'There are no transactions yet!'
+        alertText(message)
         self.closeBtn.setEnabled(True)
         self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
 
