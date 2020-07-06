@@ -116,3 +116,4 @@
 2020-07-04 sales.py bug repaired updArticle(self) .
 2020-07-04 sales.py more control added inserting buttontext maximum lines and positions per line.
 2020-07-05 sales.py improved capture for button text errorlines.
+2020-07-06 sales.py params fields hidden column_text and values if not applicable.
