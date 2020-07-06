@@ -485,8 +485,7 @@ def paramMenu():
             font = QFont("Arial", 10)
             table_view.setFont(font)
             table_view.resizeColumnsToContents()
-            table_view.setColumnWidth(4, 110)
-            table_view.verticalHeader().setDefaultSectionSize(75)
+            table_view.setColumnHidden(3, True)
             table_view.setSelectionBehavior(QTableView.SelectRows)
             table_view.clicked.connect(showSelection)
             grid.addWidget(table_view, 0, 0, 1, 7)
@@ -555,7 +554,7 @@ def paramMenu():
                 return self.header[col]
             return None
              
-    header = ['ParamID', 'Item', 'Value', 'Buttongroup-text']
+    header = ['ParamID', 'Item', 'Value', 'Button-Text']
     
     metadata = MetaData()
     params = Table('params', metadata,
@@ -607,6 +606,8 @@ def paramMenu():
                     self.q2Edit = QLineEdit(str(round(float(rppar[2]),2)))
                     self.q2Edit.setFixedWidth(100)
                     self.q2Edit.setAlignment(Qt.AlignRight)
+                    if rppar[0] > 6:
+                        self.q2Edit.setHidden(True)
                     self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q2Edit.setFont(QFont("Arial",10))
                     reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
@@ -616,6 +617,8 @@ def paramMenu():
                     #buttongroup
                     self.q3Edit = QTextEdit(rppar[3])
                     self.q3Edit.setFixedSize(110,62)
+                    if rppar[0] < 7:
+                        self.q3Edit.setHidden(True)
                     self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     self.q3Edit.setFont(QFont("Arial",10))
                     self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
@@ -665,12 +668,16 @@ def paramMenu():
                     grid.addWidget(self.q1Edit, 2, 1, 1, 2) 
                                                          
                     lbl4 = QLabel('Value') 
+                    if rppar[0] > 6:
+                        lbl4.setHidden(True)
                     lbl4.setFont(QFont("Arial",10))
                     grid.addWidget(lbl4, 3, 0)
                     grid.addWidget(self.q2Edit, 3, 1)
                     
                     lbl5 = QLabel('Buttongroup-text')
                     lbl5.setFont(QFont("Arial",10))
+                    if rppar[0] < 7:
+                        lbl5.setHidden(True)
                     grid.addWidget(lbl5, 4, 0, 3, 1, Qt.AlignVCenter)
                     grid.addWidget(self.q3Edit, 4, 1, 3, 1)
                     
@@ -1652,10 +1659,18 @@ def articleRequest(mflag):
                     grid.addWidget(lbl3, 5, 0, 1, 3, Qt.AlignCenter)
                    
                     def insBtnText():
-                        if self.q2Edit.text():
-                            mbtnnr = int(self.q2Edit.text())
-                        else:
+                        if self.q2Edit.text() == '0' or self.q2Edit.text() == '40'\
+                         or self.q2Edit.text() == '80' or self.q2Edit.text() == '120'\
+                         or self.q2Edit.text() == '160' or self.q2Edit.text() == '200':
+                            message = 'This button is reserved for groupbuttons!'
+                            alertText(message)
                             return
+                        elif not self.q2Edit.text():
+                            message = 'No buttonnumber filled in!'
+                            alertText(message)
+                            return
+                        else:
+                            mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
                         mlist = mbtntext.split('\n')
                         for line in mlist:
@@ -2891,30 +2906,51 @@ def newBarcode():
                 mthumb = self.q10Edit.text()
                 mcat = int(self.q11Edit.currentIndex())+1
                 mvat = self.q12Edit.currentText()
-                mbtnnr = int(self.q13Edit.text())
+                mbtnnr =self.q13Edit.text()
                 mbtntext = self.q14Edit.toPlainText()
-                if len(mbtntext) > 30:
-                    alertText()
-                elif mdescr and mprice and mcat and mbtnnr and mbtntext:
-                    insart = insert(articles).values(barcode=str(mbarcode),\
-                       description = mdescr,item_price=mprice, item_unit=munit,\
-                       order_size=msize,location_warehouse=mloc, article_group=mgroup,\
-                       thumbnail=mthumb,category=mcat,VAT=mvat)
-                    con.execute(insart)
-                    updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
-                     values(barcode=str(mbarcode), buttontext=mbtntext)
-                    con.execute(updbtn)
-                        
-                    if sys.platform == 'win32':
-                        ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
-                    else:
-                        ean.save('./Barcodes/Articles/'+str(mbarcode))
-                    insertOK()
-                    self.close()
+                if self.q13Edit.text() == '0' or self.q13Edit.text() == '40'\
+                 or self.q13Edit.text() == '80' or self.q13Edit.text() == '120'\
+                 or self.q13Edit.text() == '160' or self.q13Edit.text() == '200':
+                    message = 'This button is reserved for groupbuttons!'
+                    alertText(message)
+                    return
+                elif not self.q13Edit.text():
+                    message = 'No buttonnumber filled in!'
+                    alertText(message)
+                    return
                 else:
-                    notInserted()
-                    self.close() 
-            
+                    mbtnnr = int(self.q13Edit.text())
+                    mbtntext = self.q14Edit.toPlainText()
+                    mlist = mbtntext.split('\n')
+                    for line in mlist:
+                         if len(line) > 9:
+                             message = 'No more then 9 characters per line allowed'
+                             alertText(message)
+                             break
+                         elif len(mlist) > 3:
+                             message = 'No more then 3 lines allowed'
+                             alertText(message)
+                             break
+                         elif not (mdescr and mprice and mcat):
+                             message = 'Not all neccessary fields filled in!'
+                             alertText(message)
+                             break
+                    else:
+                        insart = insert(articles).values(barcode=str(mbarcode),\
+                           description = mdescr,item_price=mprice, item_unit=munit,\
+                           order_size=msize,location_warehouse=mloc, article_group=mgroup,\
+                           thumbnail=mthumb,category=mcat,VAT=mvat)
+                        con.execute(insart)
+                        updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
+                         values(barcode=str(mbarcode), buttontext=mbtntext)
+                        con.execute(updbtn)
+                        if sys.platform == 'win32':
+                            ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
+                        else:
+                            ean.save('./Barcodes/Articles/'+str(mbarcode))
+                        insertOK()
+                        self.close()
+                
             self.setLayout(grid)
             self.setGeometry(600, 200, 150, 100)
 
