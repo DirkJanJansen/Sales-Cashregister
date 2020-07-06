@@ -1643,9 +1643,8 @@ def articleRequest(mflag):
                     grid.addWidget(lbl3, 5, 0, 1, 3, Qt.AlignCenter)
                    
                     def insBtnText():
-                        if self.q2Edit.text() == '0' or self.q2Edit.text() == '40'\
-                         or self.q2Edit.text() == '80' or self.q2Edit.text() == '120'\
-                         or self.q2Edit.text() == '160' or self.q2Edit.text() == '200':
+                        if self.q2Edit.text() == '40' or self.q2Edit.text() == '80'\
+                        or self.q2Edit.text() == '120' or self.q2Edit.text() == '160':
                             message = 'This button is reserved for groupbuttons!'
                             alertText(message)
                             return
@@ -2895,9 +2894,8 @@ def newBarcode():
                 mvat = self.q12Edit.currentText()
                 mbtnnr =self.q13Edit.text()
                 mbtntext = self.q14Edit.toPlainText()
-                if self.q13Edit.text() == '0' or self.q13Edit.text() == '40'\
-                 or self.q13Edit.text() == '80' or self.q13Edit.text() == '120'\
-                 or self.q13Edit.text() == '160' or self.q13Edit.text() == '200':
+                if self.q13Edit.text() == '40' or self.q13Edit.text() == '80'\
+                or self.q13Edit.text() == '120' or self.q13Edit.text() == '160':
                     message = 'This button is reserved for groupbuttons!'
                     alertText(message)
                     return
