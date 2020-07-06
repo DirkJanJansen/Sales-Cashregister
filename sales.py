@@ -619,7 +619,7 @@ def paramMenu():
                     self.q2Edit.setValidator(input_validator)
                     
                     #buttongroup
-                    self.q3Edit = QTextEdit(rppar[3])
+                    self.q3Edit = QPlainTextEdit(rppar[3])
                     self.q3Edit.setFixedSize(110,62)
                     if rppar[0] < 7:
                         self.q3Edit.setHidden(True)
@@ -1616,7 +1616,7 @@ def articleRequest(mflag):
                     self.q2Edit.setValidator(input_validator)
                     
                     #button-text
-                    self.q3Edit = QTextEdit()
+                    self.q3Edit = QPlainTextEdit()
                     self.q3Edit.setFixedSize(110,62)
                     self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     self.q3Edit.setFont(QFont("Arial",10))
@@ -2773,7 +2773,7 @@ def newBarcode():
             self.q13Edit.setValidator(input_validator)
             
             #button-text
-            self.q14Edit = QTextEdit()
+            self.q14Edit = QPlainTextEdit()
             self.q14Edit.setFixedSize(110,62)
             self.q14Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
             self.q14Edit.setFont(QFont("Arial",10))
