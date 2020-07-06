@@ -86,7 +86,7 @@ def windowClose(self):
     
 def refresh(self):
     self.close()
-    paramMenu()
+    paramChange()
  
 def accountMenu():
     class Widget(QDialog):
@@ -446,7 +446,7 @@ def buttonMenu():
     window = Widget()
     window.exec_()    
     
-def paramMenu():
+def paramChange():
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
             QWidget.__init__(self, *args,)
@@ -767,7 +767,7 @@ def adminMenu():
                 elif mindex == 5:
                     buttonMenu()
                 elif mindex == 6:
-                    paramMenu()
+                    paramChange()
 
             closeBtn = QPushButton('Close')
             closeBtn.clicked.connect(self.close)  
@@ -1644,7 +1644,7 @@ def articleRequest(mflag):
                    
                     def insBtnText():
                         if self.q2Edit.text() == '40' or self.q2Edit.text() == '80'\
-                        or self.q2Edit.text() == '120' or self.q2Edit.text() == '160':
+                         or self.q2Edit.text() == '120' or self.q2Edit.text() == '160':
                             message = 'This button is reserved for groupbuttons!'
                             alertText(message)
                             return
@@ -2895,7 +2895,7 @@ def newBarcode():
                 mbtnnr =self.q13Edit.text()
                 mbtntext = self.q14Edit.toPlainText()
                 if self.q13Edit.text() == '40' or self.q13Edit.text() == '80'\
-                or self.q13Edit.text() == '120' or self.q13Edit.text() == '160':
+                 or self.q13Edit.text() == '120' or self.q13Edit.text() == '160':
                     message = 'This button is reserved for groupbuttons!'
                     alertText(message)
                     return
