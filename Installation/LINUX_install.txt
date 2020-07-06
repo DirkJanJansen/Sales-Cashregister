@@ -37,16 +37,39 @@ lpoptions -o page-left=18 -o page-right=0 -o page-top=25 -o page-bottom=80 -o cp
 Follow these settings exactly for printlists with more pages
 
 Barcode enabling in linux:
+rc.local seems not working anymore
+so replace
+sudo rm /etc/rc.local
+
 Open terminal Ctrl+Alt+t and  apply command:
-sudo modprobe usbkbd
-To make it permanent:
+
 in terminal Ctrl+Alt+t:
-sudo nano /etc/rc.local
-add line in nano:
+sudo nano /etc/systemd/system/usb.service
+add or copy lines in nano:
+
+[Unit]
+Description=usb script
+
+[Service]
+ExecStart=/etc/usb.sh
+
+[Install]
+WantedBy=multi-user.target
+
+Save in nano and leave nano
+
+chmod +x /etc/systemd/system/usb.service
+
+in terminal Ctrl+Alt+t:
+sudo nano /etc/usb.sh
+in nano add lines:
+
+modprobe usbmouse
 modprobe usbkbd
-save /etc/rc.local
-in terminal:
-sudo chmod +x /etc/rc.local
+
+save in nano and leave nano
+
+chmod +x /etc/usb.sh
 
 Enable error sounds in linux terminal:
 sudo apt install sox
@@ -72,4 +95,4 @@ Copy Sales.desktop from folder Installation in /home/postgres/.local/share/appli
 
 All settings that differ from executing in Windows are automatically adjusted for Ubuntu
 
-By problems reading importfiles made in windows, save the lines in Linux nano text, because windows adds control characters.
+By problems reading importfiles from windows, copy these lines in Linux plain text, because windows adds control characters.
