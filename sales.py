@@ -608,7 +608,11 @@ def paramMenu():
                     self.q2Edit.setAlignment(Qt.AlignRight)
                     if rppar[0] > 6:
                         self.q2Edit.setHidden(True)
-                    self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    if rppar[0] == 3 or rppar[0] == 4:
+                        self.q2Edit.setDisabled(True)
+                        self.q2Edit.setStyleSheet('color: black')
+                    else:
+                        self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q2Edit.setFont(QFont("Arial",10))
                     reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q2Edit)
