@@ -83,10 +83,6 @@ def insertOK():
 def windowClose(self):
     self.close()
     sys.exit()
-    
-def refresh(self):
-    self.close()
-    paramChange()
  
 def accountMenu():
     class Widget(QDialog):
@@ -465,47 +461,18 @@ def paramChange():
             font = QFont("Arial", 10)
             table_view.setFont(font)
             table_view.resizeColumnsToContents()
+            table_view.setColumnHidden(2, True)
             table_view.setColumnHidden(3, True)
             table_view.setSelectionBehavior(QTableView.SelectRows)
             table_view.clicked.connect(showSelection)
-            grid.addWidget(table_view, 0, 0, 1, 7)
-            
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 1 , 0 , 1, 2)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 1, 6, 1 ,1, Qt.AlignRight)
-                  
-            freshBtn = QPushButton('Refresh')
-            freshBtn.clicked.connect(lambda: refresh(self))
-
-            freshBtn.setFont(QFont("Arial",10))
-            freshBtn.setFixedWidth(100) 
-            freshBtn.setStyleSheet("color: black;  background-color: gainsboro")
-   
-            grid.addWidget(freshBtn, 1, 5, 1, 1, Qt.AlignRight | Qt.AlignBottom)
-        
-            sluitBtn = QPushButton('Close')
-            sluitBtn.clicked.connect(self.close)
-
-            sluitBtn.setFont(QFont("Arial",10))
-            sluitBtn.setFixedWidth(100) 
-            sluitBtn.setStyleSheet("color: black;  background-color: gainsboro") 
-            
-            grid.addWidget(sluitBtn, 1, 4, 1, 1, Qt.AlignRight | Qt.AlignBottom)
-            
+            grid.addWidget(table_view, 0, 0)
+                       
             reglbl = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             reglbl.setFont(QFont("Arial", 10))
-            grid.addWidget(reglbl, 2, 2, 1, 1, Qt.AlignBottom)
+            grid.addWidget(reglbl, 1, 0)
             
             self.setLayout(grid)
-            self.setGeometry(300, 50, 900, 900)
+            self.setGeometry(300, 50, 400, 600)
             self.setLayout(grid)
     
     class MyTableModel(QAbstractTableModel):
@@ -600,7 +567,7 @@ def paramChange():
                     
                     #buttongroup
                     self.q3Edit = QPlainTextEdit(rppar[3])
-                    self.q3Edit.setFixedSize(110,62)
+                    self.q3Edit.setFixedSize(110,65)
                     if rppar[0] < 7:
                         self.q3Edit.setHidden(True)
                     self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -1597,7 +1564,7 @@ def articleRequest(mflag):
                     
                     #button-text
                     self.q3Edit = QPlainTextEdit()
-                    self.q3Edit.setFixedSize(110,62)
+                    self.q3Edit.setFixedSize(110,65)
                     self.q3Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     self.q3Edit.setFont(QFont("Arial",10))
                     self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
@@ -2756,7 +2723,7 @@ def newBarcode():
             
             #button-text
             self.q14Edit = QPlainTextEdit()
-            self.q14Edit.setFixedSize(110,62)
+            self.q14Edit.setFixedSize(110,65)
             self.q14Edit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
             self.q14Edit.setFont(QFont("Arial",10))
             self.q14Edit.setStyleSheet('color: black; background-color: #F8F7EE')
