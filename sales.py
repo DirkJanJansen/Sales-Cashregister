@@ -445,7 +445,7 @@ def buttonMenu():
 def paramChange():
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
+            QWidget.__init__(self, *args)
             self.setWindowTitle('Parameters requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
@@ -765,7 +765,7 @@ def adminMenu():
 def emplRequest():
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
+            QWidget.__init__(self, *args)
             self.setGeometry(500, 50, 600, 800)
             self.setWindowTitle('Accounts requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
@@ -1438,7 +1438,7 @@ def articleRequest(mflag):
             
     class Mainwindow(QDialog):
         def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
+            QWidget.__init__(self, *args)
             self.setGeometry(100, 50, 1800, 900)
             self.setWindowTitle('Articles requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
@@ -2089,7 +2089,7 @@ def salesRequest():
     
     class MyWindow(QDialog):
         def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
+            QWidget.__init__(self, *args)
             self.setGeometry(100, 50, 1300, 900)
             
             self.setWindowTitle('Sales requesting')
@@ -2163,7 +2163,7 @@ def paymentsRequest():
     
     class MyWindow(QDialog):
         def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
+            QWidget.__init__(self, *args)
             self.setGeometry(500, 50, 900, 900)
             self.setWindowTitle('Sales requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
@@ -3216,7 +3216,7 @@ def requestLoss():
     rploss = con.execute(selloss)
     class Widget(QDialog):
         def __init__(self, data_list, header, *args):
-            QWidget.__init__(self, *args,)
+            QWidget.__init__(self, *args)
             self.setGeometry(600, 50, 1000, 800)
             self.setWindowTitle('Loss articles requesting')
             self.setWindowIcon(QIcon('./images/logos/logo.jpg')) 
