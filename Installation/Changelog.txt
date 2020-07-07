@@ -118,4 +118,6 @@
 2020-07-05 sales.py improved capture for button text errorlines.
 2020-07-06 sales.py params fields hidden column_text and values if not applicable
 2020-07-06 sales.py improved wordwrap on hardcoded newlines for buttontext and blocking if no btnnumber is filled in.
-2020-07-06 LINUX_install.txt procedure for barcode eanabling changed for rc.local stopped working changed by procedure systemd.
+2020-07-06 LINUX_install.txt enabling barcodescanner changed for rc.local does not work anymore changed to systemd procedure.
+2020-07-06 sales.py buttontext area increased 110 x 65 pixels, param request display changed
+2020-07-06 documentation buttontext explanation adjusted.
