@@ -1,2 +1,2 @@
-python -m compileall ./
+python3 -m compileall ./
 pause
