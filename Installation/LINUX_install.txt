@@ -36,7 +36,12 @@ set fonts and margins for printing (A4) with:
 lpoptions -o page-left=18 -o page-right=0 -o page-top=25 -o page-bottom=80 -o cpi=13 -o lpi=6
 Follow these settings exactly for printlists with more pages
 
-Buy a barcodescanner that proved to work in Ubuntu.
+Barcode enabling in linux:
+
+The solution for barcodescanner in Linux is not reliable for all barcodescanners and
+distro's from Ubuntu and don't work anymore with Ubuntu 20.04.
+I found a good working solution for Ubuntu 20.04 and my scanner.
+If interested send me e-mail dj.jansen@casema.nl
 
 Enable error sounds in linux terminal:
 sudo apt install sox
@@ -66,5 +71,7 @@ By problems reading importfiles from windows, copy these lines in Linux plain te
 
 To compile Sales.py script in Python:
 Open Terminal Ctrl+Alt+t
+
 cd Sales
 python3 -m compileall ./
+
