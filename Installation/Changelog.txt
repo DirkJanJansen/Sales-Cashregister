@@ -121,6 +121,6 @@
 2020-07-06 LINUX_install.txt enabling barcodescanner changed for rc.local does not work anymore changed to systemd procedure.
 2020-07-06 sales.py buttontext area increased 110 x 65 pixels, param request display changed
 2020-07-06 documentation buttontext explanation adjusted.
-2020-07-06 LINUX_installation.txt removed procedure for barcodescanner installation, for is related to much on LINUX version
+2020-07-06 LINUX_install.txt removed procedure for barcodescanner installation, for is related to much on LINUX version
            and brand of barcodescanner. So buy a scanner that is proven to function well in LINUX.
 2020-07-06 Found a new solution for linux 20.04 if interested send me e-mail see LINUX_install.txt
