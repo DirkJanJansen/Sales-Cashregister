@@ -17,7 +17,7 @@ appdata is hidden soo you will type it yourself or make hidden folders temporare
 programdata is also hidden see next lines
 
 Environment in Windows advanced system settings
-PGDATABASE sales
+PGDATABASE cashregister
 PGPORT 5432
 PGUSER postgres
 
