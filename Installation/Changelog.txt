@@ -122,3 +122,5 @@
 2020-07-06 sales.py buttontext area increased 110 x 65 pixels, param request display changed
 2020-07-06 documentation buttontext explanation adjusted.
 2020-07-10 LINUX_install.txt procedure enabling barcodescanner changed.
+2020-07-10 added script .usbkbd.sh
+2020-07-10 sales.py added call by starting scipt for enabling barcodescanner
