@@ -4142,6 +4142,8 @@ def barcodeScan():
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle("Windows")
+    if sys.platform == "linux":
+        os.system("../.usbkbd.sh")
     barcodeScan()
     app.exec_()
     
