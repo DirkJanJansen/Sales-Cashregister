@@ -6,11 +6,9 @@ sudo apt install python3-pip
 sudo pip3 install pyqt5
 sudo pip3 install python-barcode
 sudo pip3 install pillow
-sudo pip3 install keyboard
 or if you want spyder as ide
 (sudo apt install python3-pip
 sudo pip3 install pillow
-sudo pip3 install keyboard
 sudo pip3 install python-barcode
 sudo pip3 install spyder==3.3.6)
 
@@ -48,7 +46,7 @@ Thats all. The script is called with starting Sales.py and the barcodescanner wo
 Enable error sounds in linux terminal:
 sudo apt install sox
 
-for keyboard enter command (keyboard does only work for root) in Linux install:
+For Return adding by buttons in Linux install:
 sudo apt install xdotool
 
 Installing database:
