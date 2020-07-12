@@ -1,4 +1,4 @@
-import sys, random, barcode, datetime, keyboard, os, subprocess
+import sys, random, barcode, datetime, os, subprocess
 from math import sqrt
 from barcode.writer import ImageWriter 
 
@@ -4068,6 +4068,7 @@ def barcodeScan():
             def getbarcode(btn):
                 self.q1Edit.setText(btn)
                 if sys.platform == 'win32':
+                    import keyboard
                     keyboard.write('\n')                          #Windows
                 else:
                     subprocess.call(["xdotool", "key", "Return"]) #Linux
