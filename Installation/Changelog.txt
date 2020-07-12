@@ -125,4 +125,4 @@
 2020-07-10 added script .usbkbd.sh
 2020-07-10 sales.py added call by starting script for enabling barcodescanner
 2020-07-12 sales.py keyboard import moved to section for windows, for it's not needed for LINUX.
-2020-07-12 LINUX_install.txt import keyboard for LINUX removed, for it's extablished by xdotool
+2020-07-12 LINUX_install.txt import keyboard for LINUX removed, for it's established by xdotool
