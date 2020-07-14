@@ -183,6 +183,7 @@ def countTurnover(mindex):
                     totalvat += row[7]               
                  
                 lbl2 = QLabel('Totals: '+'{:12.2f}'.format(total)+'           Totals-VAT: '+'{:12.2f}'.format(totalvat)) 
+                lbl2.setFont(QFont("Arial", 10))
                 grid.addWidget(lbl2, 2, 0, 1, 3) 
                 
             closeBtn = QPushButton('Close')
