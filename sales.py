@@ -104,7 +104,7 @@ def countTurnover(mindex):
     class Widget(QDialog):
         def __init__(self, parent=None):
             super(Widget, self).__init__(parent)
-            self.setWindowTitle("Countings turnovers")
+            self.setWindowTitle("Countings gross turnover")
             self.setWindowIcon(QIcon('./logos/logo.jpg'))
             self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
                                 Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
@@ -244,15 +244,16 @@ def turnoverMenu():
             self.k0Edit.setFixedWidth(300)
             self.k0Edit.setFont(QFont("Arial",10))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Daily turnover')
-            self.k0Edit.addItem('Monthly turnover')
-            self.k0Edit.addItem('Yearly turnover')
+            self.k0Edit.addItem('Daily gross turnover')
+            self.k0Edit.addItem('Monthly gross turnover')
+            self.k0Edit.addItem('Yearly gross turnover')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
             self.k0Edit.currentIndexChanged.connect(k0Changed)
             
             grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+            
             def menuChoice(self):
                 mindex = self.k0Edit.currentIndex()
                 countTurnover(mindex)
@@ -910,7 +911,7 @@ def adminMenu():
             self.k0Edit.addItem('Purchases Submenu')
             self.k0Edit.addItem('Buttons Submenu')
             self.k0Edit.addItem('Parameters - View / Change')
-            self.k0Edit.addItem('Request turnovers')
+            self.k0Edit.addItem('Request gross turnover')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
