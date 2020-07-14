@@ -125,4 +125,5 @@
 2020-07-10 sales.py added call by starting script for enabling barcodescanner
 2020-07-12 sales.py keyboard import moved to section for windows, for it's not needed for LINUX.
 2020-07-12 LINUX_install.txt import keyboard for LINUX removed, for it's established by xdotool
-2020-07-13 sales.py adminMenu choice added for requesting totals daily / monthly or yearly turnover totals and VAT totals.
+2020-07-14 sales.py adminMenu choice added for requesting totals daily / monthly or yearly turnover totals and VAT totals.
+2020-07-14 Sales_CahsRegister.pdf documentation added menuchoice for gross turnover countings
