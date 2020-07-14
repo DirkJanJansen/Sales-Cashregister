@@ -83,7 +83,205 @@ def insertOK():
 def windowClose(self):
     self.close()
     sys.exit()
+    
+def countTurnover(mindex):
+    metadata = MetaData()
+    sales = Table('sales', metadata,
+        Column('ID', Integer, primary_key=True),
+        Column('receiptnumber', Integer),
+        Column('barcode', String),
+        Column('description', String),
+        Column('number', Float),
+        Column('item_price', Float),
+        Column('sub_total', Float),
+        Column('sub_vat', Float),
+        Column('callname', String),
+        Column('mutation_date', String))
+      
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
  
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Countings turnovers")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            q1Edit = QLineEdit('20')
+            q1Edit.setFixedWidth(100)
+            q1Edit.setFont(QFont("Arial",10))
+            q1Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            
+            lbl4 = QLabel('')
+            grid.addWidget(lbl4, 2, 0)
+
+            def q1Changed():
+                q1Edit.setText(q1Edit.text())
+            q1Edit.textChanged.connect(q1Changed)
+            
+            if mindex == 0:
+                reg_ex = QRegExp("^[2]{1}[0]{1}[0-9]{2}-[01]{1}[0-9]{1}-[0123]{1}[0-9]{1}$")
+                input_validator = QRegExpValidator(reg_ex, q1Edit)
+                q1Edit.setValidator(input_validator)
+                lbl1 = QLabel('Daily <yyyy-mm-dd>')
+                grid.addWidget(lbl1, 1, 0)
+                grid.addWidget(q1Edit, 1, 1)
+            elif mindex == 1:
+                reg_ex = QRegExp("^[2]{1}[0]{1}[0-9]{2}-[01]{1}[0-9]{1}$")
+                input_validator = QRegExpValidator(reg_ex, q1Edit)
+                q1Edit.setValidator(input_validator)
+                lbl1 = QLabel('Monthly <yyyy-mm>')
+                grid.addWidget(lbl1, 1, 0)
+                grid.addWidget(q1Edit, 1, 1)
+            elif mindex == 2:
+                reg_ex = QRegExp("^[2]{1}[0]{1}[0-9]{2}$")
+                input_validator = QRegExpValidator(reg_ex, q1Edit)
+                q1Edit.setValidator(input_validator)
+                lbl1 = QLabel('Yearly <yyyy>')
+                grid.addWidget(lbl1, 1, 0)
+                grid.addWidget(q1Edit, 1, 1)
+                          
+            def counting(mindex):
+                mdate = str(q1Edit.text())
+
+                if mindex == 0 and len(mdate) == 10:
+                    selsales = select([sales]).where(sales.c.mutation_date == mdate)
+                elif mindex == 1 and len(mdate) == 7:
+                    selsales = select([sales]).where(sales.c.mutation_date.like(mdate+'%'))
+                elif mindex == 2 and len(mdate) == 4:
+                    selsales = select([sales]).where(sales.c.mutation_date.like(mdate+'%'))
+                else:
+                    return
+                
+                rpsales = con.execute(selsales)
+                
+                total = 0
+                totalvat = 0
+                for row in rpsales:
+                    total += row[6]
+                    totalvat += row[7]               
+                 
+                lbl2 = QLabel('Totals: '+'{:12.2f}'.format(total)+'           Totals-VAT: '+'{:12.2f}'.format(totalvat)) 
+                grid.addWidget(lbl2, 2, 0, 1, 3) 
+                
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 4, 1, 1, 1, Qt.AlignRight)
+                     
+            applyBtn = QPushButton('Count')
+            applyBtn.clicked.connect(lambda: counting(mindex))  
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 4, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 5, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 200, 150, 100)
+                
+    window = Widget()
+    window.exec_() 
+             
+def turnoverMenu():
+    class Widget(QDialog):
+        def __init__(self, parent=None):
+            super(Widget, self).__init__(parent)
+            self.setWindowTitle("Turnover Menu")
+            self.setWindowIcon(QIcon('./logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                   
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF") 
+                
+            grid = QGridLayout()
+            grid.setSpacing(20)      
+                
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240,80))
+            movie.start()
+            grid.addWidget(pyqt, 0 ,0, 1, 3)
+       
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap.scaled(70,70))
+            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
+            
+            self.k0Edit = QComboBox()
+            self.k0Edit.setFixedWidth(300)
+            self.k0Edit.setFont(QFont("Arial",10))
+            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+            self.k0Edit.addItem('Daily turnover')
+            self.k0Edit.addItem('Monthly turnover')
+            self.k0Edit.addItem('Yearly turnover')
+            
+            def k0Changed():
+                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
+            self.k0Edit.currentIndexChanged.connect(k0Changed)
+            
+            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
+            def menuChoice(self):
+                mindex = self.k0Edit.currentIndex()
+                countTurnover(mindex)
+                                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
+                     
+            applyBtn = QPushButton('Select')
+            applyBtn.clicked.connect(lambda: menuChoice(self))  
+            applyBtn.setFont(QFont("Arial",10))
+            applyBtn.setFixedWidth(100)
+            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(applyBtn, 2, 2)
+                 
+            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+            lbl3.setFont(QFont("Arial", 10))
+            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
+           
+            self.setLayout(grid)
+            self.setGeometry(600, 200, 150, 100)
+                
+    window = Widget()
+    window.exec_() 
+
 def accountMenu():
     class Widget(QDialog):
         def __init__(self, parent=None):
@@ -291,7 +489,7 @@ def purchaseMenu():
             pixmap = QPixmap('./logos/logo.jpg')
             logo.setPixmap(pixmap.scaled(70,70))
             grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
-            
+ 
             self.k0Edit = QComboBox()
             self.k0Edit.setFixedWidth(230)
             self.k0Edit.setFont(QFont("Arial",10))
@@ -711,6 +909,7 @@ def adminMenu():
             self.k0Edit.addItem('Purchases Submenu')
             self.k0Edit.addItem('Buttons Submenu')
             self.k0Edit.addItem('Parameters - View / Change')
+            self.k0Edit.addItem('Request turnovers')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
@@ -735,6 +934,8 @@ def adminMenu():
                     buttonMenu()
                 elif mindex == 6:
                     paramChange()
+                elif mindex == 7:
+                    turnoverMenu()
 
             closeBtn = QPushButton('Close')
             closeBtn.clicked.connect(self.close)  
@@ -2552,7 +2753,7 @@ def emplAccess():
                     self.close()
                 else:
                     message = 'Not all fields are filled in!'
-                    alertText()
+                    alertText(message)
                     self.close() 
            
             self.setLayout(grid)
