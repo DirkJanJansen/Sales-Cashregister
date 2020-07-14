@@ -185,14 +185,6 @@ def countTurnover(mindex):
                 lbl2 = QLabel('Totals: '+'{:12.2f}'.format(total)+'           Totals-VAT: '+'{:12.2f}'.format(totalvat)) 
                 lbl2.setFont(QFont("Arial", 10))
                 grid.addWidget(lbl2, 2, 0, 1, 3) 
-                
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 4, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Count')
             applyBtn.clicked.connect(lambda: counting(mindex))  
@@ -201,7 +193,15 @@ def countTurnover(mindex):
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 4, 2)
-                 
+
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 4, 1, 1, 1, Qt.AlignRight)                 
+
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
             grid.addWidget(lbl3, 5, 0, 1, 3, Qt.AlignCenter)
@@ -257,14 +257,6 @@ def turnoverMenu():
             def menuChoice(self):
                 mindex = self.k0Edit.currentIndex()
                 countTurnover(mindex)
-                                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
@@ -273,6 +265,14 @@ def turnoverMenu():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+                                                   
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
@@ -331,15 +331,7 @@ def accountMenu():
                     emplAccess()
                 elif mindex == 1:
                     emplRequest()
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
-                     
+
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
             applyBtn.setFont(QFont("Arial",10))
@@ -347,6 +339,14 @@ def accountMenu():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+            
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
@@ -437,15 +437,7 @@ def articleMenu():
                     articleRequest(flag)
                 elif mindex == 9:
                     requestLoss()
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
-                     
+
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
             applyBtn.setFont(QFont("Arial",10))
@@ -453,6 +445,14 @@ def articleMenu():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+            
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
@@ -541,14 +541,6 @@ def purchaseMenu():
                     else:
                         path = './forms/Deliveries/'
                     pickList(path)
-                                         
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))
@@ -557,6 +549,14 @@ def purchaseMenu():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+            
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
@@ -615,14 +615,6 @@ def buttonMenu():
                     newBarcode()
                 elif mindex == 1:
                     existingBarcode()
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                      
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
@@ -631,6 +623,14 @@ def buttonMenu():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+            
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
@@ -939,14 +939,6 @@ def adminMenu():
                 elif mindex == 7:
                     turnoverMenu()
 
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
-            
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
             applyBtn.setFont(QFont("Arial",10))
@@ -954,6 +946,14 @@ def adminMenu():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+            
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+            
+            grid.addWidget(closeBtn, 2, 1, 1, 1, Qt.AlignRight)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
@@ -3520,15 +3520,7 @@ def bookingLoss():
                     articleRequest(flag)
                 elif mindex == 1:
                     requestLoss()
-                                   
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(closeBtn, 2, 1)
-                     
+     
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))
             applyBtn.setFont(QFont("Arial",10))
@@ -3536,6 +3528,14 @@ def bookingLoss():
             applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
             
             grid.addWidget(applyBtn, 2, 2)
+            
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)  
+            closeBtn.setFont(QFont("Arial",10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+             
+            grid.addWidget(closeBtn, 2, 1)
                  
             lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
             lbl3.setFont(QFont("Arial", 10))
