@@ -1,4 +1,4 @@
-Sales - Purchaselist: 2020-06-21 Pagenumber 1 
+Sales - Purchaselist: 2020-06-23 Pagenumber 1 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -56,7 +56,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000043843 Pakkingbus,mess.,PG21KT,ring 11-18mm                 18.37        stuk      192.00
 8002000044024 Pakkingbus,mess.,PG13,5 KT                           12.46        stuk      270.00
 8002000044147 Pakkingbus,mess.,PG16 KT                             19.33        stuk      191.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 2 
+Sales - Purchaselist: 2020-06-23 Pagenumber 2 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -114,7 +114,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000089735 Merkkrijt,gl,doos 12st                               97.56        stuk       34.00
 8002000089858 Hoes,transp.,PVC,235x160mm                           94.97        stuk       38.00
 8002000090724 Afsluitdop,GPN 300-F14                              152.32        stuk       19.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 3 
+Sales - Purchaselist: 2020-06-23 Pagenumber 3 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -172,7 +172,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000143659 Fundering,v dwergsein,beton,75mm                   1790.89        stuk        2.00
 8002000143772 Fundering,beton                                    2758.96        stuk        1.00
 8002000143895 Fundering,v lichtbaken,beton                       6450.32        stuk        0.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 4 
+Sales - Purchaselist: 2020-06-23 Pagenumber 4 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -230,7 +230,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000149002 Ring,v lens,neopreen,213mm                         3364.67        stuk        1.00
 8002000149125 Zonnekap,v lamph.                                  7337.90        stuk        0.00
 8002000149248 Achtergrondplaat,rond,3-asp.,hoofdsein             7488.44        stuk        0.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 5 
+Sales - Purchaselist: 2020-06-23 Pagenumber 5 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -288,7 +288,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000154488 Bord,snelheidverm.,10,GL/ZW,SR313                  3075.90        stuk        0.00
 8002000154501 Bord,snelheidverm.,GL/ZW,opgave,SR286              2097.23        stuk        2.00
 8002000154617 Bord,snelheidverm.,opgave,SR313                    2233.60        stuk        2.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 6 
+Sales - Purchaselist: 2020-06-23 Pagenumber 6 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -346,7 +346,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000159896 Bord,facultatief stop,SR301                        3809.60        stuk        1.00
 8002000159902 Bord,opdracht...,opgave,SR301                      6417.83        stuk        1.00
 8002000160038 Bord,opschrift,v blokbord,opgave,SR331             2360.02        stuk        2.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 7 
+Sales - Purchaselist: 2020-06-23 Pagenumber 7 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -404,7 +404,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000165200 Trekstang,nr.2861,1388mm                           1059.97        stuk        2.00
 8002000165323 Controlestang,nr.4420,144mm                        1244.85        stuk        3.00
 8002000165446 Controlestang,nr.4430,144mm                        1428.61        stuk        2.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 8 
+Sales - Purchaselist: 2020-06-23 Pagenumber 8 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -462,7 +462,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000170709 Stangenset, Eng wl 1:9, v NSE2 beton,L             1170.86         set        1.00
 8002000170815 Stangenset,Eng wl 1:9,v NSE2 beton,R               1287.23         set        2.00
 8002000170938 Stangenset, wl 1:9-1:15, NSE2-HL,L/R                911.02         set        1.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 9 
+Sales - Purchaselist: 2020-06-23 Pagenumber 9 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -520,7 +520,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000179252 Hendel,M8,120mm                                     408.27        stuk        4.00
 8002000179375 Hendel,M10,200mm                                    353.29        stuk        5.00
 8002000179498 Acculader,28V,v LPM                                 339.35        stuk        9.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 10 
+Sales - Purchaselist: 2020-06-23 Pagenumber 10 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -578,7 +578,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000198925 Accuset,14V,115Ah                                  1054.47         set        3.00
 8002000199090 Verbinder,v accu OE4,237x15x1mm                    1382.98        stuk        2.00
 8002000199106 Branderpijp,L,7 baks,300mbar,Heatpoint              744.97        stuk        4.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 11 
+Sales - Purchaselist: 2020-06-23 Pagenumber 11 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -636,7 +636,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000205593 Condensator,548Gr2,2,25µF 800V                     1426.54        stuk        3.00
 8002000205609 Condensator,MKT20,1000µF 200V                      1054.32        stuk        3.00
 8002000205722 Condensator,MKT20,2000uF 200V                      1439.57        stuk        1.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 12 
+Sales - Purchaselist: 2020-06-23 Pagenumber 12 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -694,7 +694,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000212171 Klem,spanningsmeting,VTB                           1051.59        stuk        4.00
 8002000212294 Moer,v stroommeetklem,16x9,6mm                      388.14        stuk        7.00
 8002000212300 Terminal,v plugboard,B-relais,zak 100              1068.81         100        2.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 13 
+Sales - Purchaselist: 2020-06-23 Pagenumber 13 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -752,7 +752,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000218012 Codeplaat,penbezetting, v ATB-CT 220                717.11        stuk        5.00
 8002000218258 Afdekplaat,blind,v relaiskast 44/45                  26.36        stuk      126.00
 8002000218371 Plank,v klemmenstrook,kort                          557.20        stuk        4.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 14 
+Sales - Purchaselist: 2020-06-23 Pagenumber 14 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -810,7 +810,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000227755 Relais,interface type D,24V,wand                   1275.59        stuk        1.00
 8002000227878 Relais,interface type D,12V                        1196.68        stuk        3.00
 8002000227991 Relais,interface type D,24V                        1209.92        stuk        3.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 15 
+Sales - Purchaselist: 2020-06-23 Pagenumber 15 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -868,7 +868,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000238096 Klem,ophang v alum. kabel,240mm²,IT3404A            428.75        stuk        8.00
 8002000238102 Klem,ophang v alum. kabel,240mm²,IT3404             449.62        stuk        7.00
 8002000238225 Klem,ophang v hangisolator,70mm²                    510.07        stuk        8.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 16 
+Sales - Purchaselist: 2020-06-23 Pagenumber 16 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -926,7 +926,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000244493 Drukpijp,DPE 3000,OVS00024-5.1                      608.56        stuk        3.00
 8002000244509 Drukpijp,DPD 3000 OVS00024-5.1                     1145.21        stuk        1.00
 8002000244622 Drukpijp,DPB,dubb.bev.,isol.,3000mm                 640.04        stuk        6.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 17 
+Sales - Purchaselist: 2020-06-23 Pagenumber 17 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -984,7 +984,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000250166 Beugelbout,v draagk.ophanging,M20                  1189.60        stuk        2.00
 8002000250289 Afspanbalansplaat,m 2 dubb.gaffels                  465.16        stuk        6.00
 8002000250302 Afspanbalansplaat,v afsp.,60x19mm                  1230.22        stuk        2.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 18 
+Sales - Purchaselist: 2020-06-23 Pagenumber 18 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1042,7 +1042,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000256243 Kerfverbinder,v kabel,10mm²                         928.52        stuk        4.00
 8002000256366 Kerfverbinder,v kabel,25mm²                         649.82        stuk        6.00
 8002000256489 Vulling,kabel,120mm²                               1201.18        stuk        1.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 19 
+Sales - Purchaselist: 2020-06-23 Pagenumber 19 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1100,7 +1100,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000261858 Spanschroef,v regulatie,M8,nieuw                   1476.03        stuk        1.00
 8002000261971 Schakelaarstoel,v 1 schak.,HE200B..                 977.95        stuk        4.00
 8002000262039 Schakelaarstoel,v 2 schak.,HE200B..                1207.25        stuk        1.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 20 
+Sales - Purchaselist: 2020-06-23 Pagenumber 20 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1158,7 +1158,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000267812 Aansluitkabel,v Bowthorpe,35mm²                    1426.24        stuk        1.00
 8002000267935 Bevestiging,ijzerwerk,v afl.,240-320mm             1485.97        stuk        2.00
 8002000268000 Bevestiging,kabelbesch.pijp,32mm,HE220B.            572.96        stuk        2.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 21 
+Sales - Purchaselist: 2020-06-23 Pagenumber 21 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1216,7 +1216,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000273592 Nood paal-spoorstaafverb.,4m                       1346.89        stuk        2.00
 8002000273608 Nood paal-spoorstaafverb.,10m                       471.42        stuk        4.00
 8002000273721 Merkbeugel,EV,alum.,170x30 mm                      1023.31        stuk        4.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 22 
+Sales - Purchaselist: 2020-06-23 Pagenumber 22 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1274,7 +1274,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000279808 Wisselhout,3600x250x150mm                           280.17        stuk       12.00
 8002000279921 Kunststof ligger,HS202-3600x250x150mm               316.56        stuk       11.00
 8002000280781 Wisselhout,4400x250x150mm                           244.47        stuk        6.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 23 
+Sales - Purchaselist: 2020-06-23 Pagenumber 23 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1332,7 +1332,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000310419 Glijstoel 54E1,m hiel/hefinr.,R                     198.09        stuk       13.00
 8002000310655 Glijstoel 54E1,m hiel,sch.igk,450mm                  85.79        stuk       42.00
 8002000310891 Glijstoel 54E1,z hiel,sch igk,475mm                  83.55        stuk       44.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 24 
+Sales - Purchaselist: 2020-06-23 Pagenumber 24 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1390,7 +1390,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000352907 Lasplaat 54E1,vlak,wd bor,v ES,2mm dgz              103.34        paar       33.00
 8002000353683 Ekos V-2,v 54E1                                      28.40        stuk      110.00
 8002000354727 Sluitring,vlak,elvz,M16,DIN125A,Ekos                 30.73        stuk       94.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 25 
+Sales - Purchaselist: 2020-06-23 Pagenumber 25 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1448,7 +1448,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000361299 Spoorstaaf 54E5 R260Mn,180.000mm ?0,7mm             519.47        stuk        6.00
 8002000361305 Spoorstaaf 54E1 R260Mn,30.000mm ?0,7mm              736.83        stuk        3.00
 8002000361428 Spoorstaaf 54E5 R260Mn,30.000mm ?0,7mm              608.67        stuk        6.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 26 
+Sales - Purchaselist: 2020-06-23 Pagenumber 26 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1506,7 +1506,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000366836 Tongbeweging,kwart 46E3 1:9Lbn                      945.71        stuk        3.00
 8002000366959 Tongbeweging,kwart 46E3 1:9Rbn                      989.41        stuk        3.00
 8002000367017 Tongbeweging,kwart 46E3 1:9Rbt                     1204.60        stuk        3.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 27 
+Sales - Purchaselist: 2020-06-23 Pagenumber 27 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
@@ -1564,7 +1564,7 @@ Barcode       Description                                     Item-Price   Item-
 8002000372370 Tongbeweging,kwart 54E1 1:9Lbt                     1096.93        stuk        1.00
 8002000372493 Tongbeweging,kwart 54E1 1:9Lbt,ht,tap              1222.90        stuk        3.00
 8002000372509 Tongbeweging,kwart 54E1 1:9Lbt,bet,tap              866.40        stuk        4.00
-Sales - Purchaselist: 2020-06-21 Pagenumber 28 
+Sales - Purchaselist: 2020-06-23 Pagenumber 28 
 ==================================================================================================
 Barcode       Description                                     Item-Price   Item-Unit   Ordersize  
 ==================================================================================================
