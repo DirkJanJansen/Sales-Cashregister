@@ -128,5 +128,5 @@
 2020-07-14 sales.py adminMenu choice added for requesting totals daily / monthly or yearly turnover totals and VAT totals.
 2020-07-14 Sales_CahsRegister.pdf documentation added menuchoice for gross turnover countings
 2020-07-15 sales.py error with article not in product range repaired. Menu changed for turnover changed
-2020-07-15 Sales_CashRegister changed according turnover.
+2020-07-15 Sales_CashRegister.pdf changed according turnover.
 
