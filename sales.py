@@ -3996,16 +3996,16 @@ def set_barcodenr(self):
                 sales.c.receiptnumber == self.mreceipt))
         rpart = con.execute(selart).first()
         rpbal = con.execute(selbal).first()
-        if rpart[4] == 'high':      
-            self.mvat = self.mvath
-        elif rpart[4] == 'low': 
-            self.mvat = self.mvatl
-        else:
-            self.mvat = self.mvatz
         if rpart and rpart[3] < mnumber:
             self.albl.setText('Error message: '+str(int(rpart[3]))+' in stock!')
             giveAlarm()
         elif rpart and self.maccess:
+            if rpart[4] == 'high':      
+                self.mvat = self.mvath
+            elif rpart[4] == 'low': 
+                self.mvat = self.mvatl
+            else:
+                self.mvat = self.mvatz
             martnr = rpart[0]
             mdescr = rpart[1]
             mdescr = mdescr[:40] if len(mdescr) > 40 else mdescr
