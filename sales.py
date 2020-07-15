@@ -911,7 +911,7 @@ def adminMenu():
             self.k0Edit.addItem('Purchases Submenu')
             self.k0Edit.addItem('Buttons Submenu')
             self.k0Edit.addItem('Parameters - View / Change')
-            self.k0Edit.addItem('Request gross turnover')
+            self.k0Edit.addItem('Turnover Submenu')
             
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
