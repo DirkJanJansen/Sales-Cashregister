@@ -1,8 +1,8 @@
 8002000388258,01234567890123456789012345678901234567890123456789,012345678901,012345,0123456789012345678901234567890123456789,01234567890123456789012345678901234567890123456789,0,0123,
 
 barcode,description,item_price,item_unit,article_group,thumbnail,category,VAT  per line.
- 13    1   50      1     12    1    6   1      40     1    50   1    1   1 4
-
+   13  1    50     1     12   1    6    1      40     1    50   1    1   1 4
+ 
 examples:
 
 8002000388371,insert itemnumber 1                               ,000000003.23,stuk  ,computer                                ,./thumbs/Pandora.jpg                               ,1,low ,
