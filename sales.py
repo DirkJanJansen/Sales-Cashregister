@@ -1099,7 +1099,7 @@ def emplRequest():
                     q5Edit.setFixedWidth(30)
                     q5Edit.setFont(QFont("Arial",10))
                     q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-                    reg_ex = QRegExp("^[123]{1}$")
+                    reg_ex = QRegExp("^[0123]{1}$")
                     input_validator = QRegExpValidator(reg_ex, q5Edit)
                     q5Edit.setValidator(input_validator)
                     
@@ -2675,7 +2675,7 @@ def emplAccess():
             q5Edit.setFixedWidth(30)
             q5Edit.setFont(QFont("Arial",10))
             q5Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            reg_ex = QRegExp("^[123]{1}$")
+            reg_ex = QRegExp("^[0123]{1}$")
             input_validator = QRegExpValidator(reg_ex, q5Edit)
             q5Edit.setValidator(input_validator)
             
