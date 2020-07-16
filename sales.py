@@ -4248,6 +4248,7 @@ def barcodeScan():
                 rpbtn = con.execute(selbtn)
                 
                 #place 9 buttons on thirst row and 10 buttons on 2nd 3thrd and 4thd row
+                #determine grouprange from index
                 btnlist = []
                 for row in rpbtn:
                     aBtn = QPushButton(row[1].strip())
