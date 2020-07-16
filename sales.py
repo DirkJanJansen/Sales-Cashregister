@@ -4047,6 +4047,9 @@ def set_barcodenr(self):
             self.qtailEdit.setText(self.qtailtext)
             
             self.view.append(self.mlist[-1])
+        elif self.maccess == 0 and self.mcallname:
+            self.albl.setText('Errormessage: No permission to execute!')
+            giveAlarm()   
         elif self.maccess == 0:
             self.albl.setText('Errormessage:  Please logon with your barcodecard!')
             giveAlarm() 
