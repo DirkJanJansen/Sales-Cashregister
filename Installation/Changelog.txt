@@ -131,4 +131,5 @@
 2020-07-15 Sales_CashRegister changed according turnover.
 2020-07-16 sales.py accounts added accesslevel 0 for new and change accounts for block processing by employee.
 2020-07-16 Sales_CashRegister.pdf documentation adjusted for accesslevel 0.
+2020-07-22 sales.py info adjusted for accesslevel 0 No operation allowed.
 
