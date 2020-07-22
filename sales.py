@@ -3710,11 +3710,12 @@ def info():
             infolbl = QLabel('''\t\t\t\t\t\t\t\t\t\t\t
         Instruction barcode scan.
         
-        Logging in takes place with a barcode card with 3 access levels.
+        Logging in takes place with a barcode card with 4 access levels.
         Level 1. Selling, scanning, printing (normal cash register usage).
         Level 2. Return bookings, a checkable ± button is shown, with which return bookings can be made.
         Level 3. Administration, a button Adminstration is shown, for assigning productbuttons,
                  creating accounts, administration, perform stock management and imports.
+        level 0. Employee is not allowed for operation.
         Employee first time scan barcode  = logon, second time = logout.
         Other employee scanning = switching employee (for return booking, or replacement).
                          
@@ -3726,12 +3727,13 @@ def info():
         When scanning is started, the close button is blocked until the button 'Next customer' is pressed.
         The print button and the customer button are blocked until the first transaction is posted.
         In the following cases, an error message appears in red below the display screen. An acoustic alarm 
-        will also sound for the following 4 cases.  
+        will also sound for the following 5 cases.  
         
         1. If a read error occurs when scanning the barcode.
         2. If there is insufficient stock to deliver the order, current stock will also been showed.
         3. If the product is not (yet) included in the range.
         4. If not logged in.
+        5. If the employee is not allowed for operation.
              
         If the item cannot be scanned, it is possible to insert the barcode manually after inserting press 
         <Enter> on the keyboard.
@@ -4208,7 +4210,8 @@ def barcodeScan():
                 Column('buttontext', String),
                 Column('barcode',  String))
                         
-            #choose next groupbutton (from 5) and start with group 1
+            #choose next groupbutton (from 5) see line 4244 and start with group 1
+            #see line 4274 and 4275
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
@@ -4238,42 +4241,43 @@ def barcodeScan():
                 hBtn.setFont(QFont("Times", 10, 75))
                 hBtn.setFocusPolicy(Qt.NoFocus)
                 hBtn.setFixedSize(90, 90)
-                grid.addWidget(hBtn, 7, 0)
+                grid.addWidget(hBtn, 7, 0) #position groupbutton on first position from thirst row
                                                             
-                hBtn.clicked.connect(lambda: btngroupChange(btngroup))
+                hBtn.clicked.connect(lambda: btngroupChange(btngroup)) # switch group if button 1 clicked
                           
-                a = index
+                a = index   #freeze index at startposition and use a as pointer
                 selbtn = select([buttons]).where(and_(buttons.c.buttonID>index-1,\
                      buttons.c.buttonID<index+40)).order_by(buttons.c.buttonID)
-                rpbtn = con.execute(selbtn)
+                rpbtn = con.execute(selbtn) #select buttonrange from chosen group
                 
                 #place 9 buttons on thirst row and 10 buttons on 2nd 3thrd and 4thd row
-                #determine grouprange from index
+                #choose buttontext and position buttons on grid
                 btnlist = []
                 for row in rpbtn:
-                    aBtn = QPushButton(row[1].strip())
+                    aBtn = QPushButton(row[1].strip()) #choose buttontext
                     aBtn.setFont(QFont("Times", 10, 75))
                     aBtn.setStyleSheet('color: black; background-color:  #FFFFF0')
                     aBtn.setFocusPolicy(Qt.NoFocus)
                     aBtn.setFixedSize(90, 90)
-                    btnlist.append(row[2].strip())
+                    btnlist.append(row[2].strip()) #compile list with barcodenumbers
                     if a < index+10 and (a%10 > 0):
-                        grid.addWidget(aBtn, 7, a%10)
+                        grid.addWidget(aBtn, 7, a%10) #row 1 buttons minus first position for buttongroup
                     elif a < index+20:
-                        grid.addWidget(aBtn, 8, a%10)
+                        grid.addWidget(aBtn, 8, a%10) #row 2 buttons
                     elif a < index+30:
-                        grid.addWidget(aBtn, 9, a%10)
+                        grid.addWidget(aBtn, 9, a%10) #row 3 buttons
                     elif a < index+40:
-                        grid.addWidget(aBtn, 10, a%10)
-                         
+                        grid.addWidget(aBtn, 10, a%10) #row 4 buttons
+                    
+                    #choose barcodenumber linked with clicked button
                     aBtn.clicked.connect(lambda checked, btn = btnlist[a%40] : getbarcode(btn))
                     a += 1
             
-            btngroup = 1
+            btngroup = 1     # start with buttongroup 1
             btngroupChange(btngroup)
                                                      
             def getbarcode(btn):
-                self.q1Edit.setText(btn)
+                self.q1Edit.setText(btn)   #set choosen barcode to variable and add return
                 if sys.platform == 'win32':
                     import keyboard
                     keyboard.write('\n')                          #Windows
