@@ -4211,7 +4211,7 @@ def barcodeScan():
                 Column('barcode',  String))
                         
             #choose next groupbutton (from 5) see line 4244 and start with group 1
-            #see line 4274 and 4275
+            #see line 4276 and 4277
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
