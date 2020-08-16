@@ -3941,10 +3941,10 @@ def plusminChange(self):
         self.plusminBtn.setText('+')
         self.qspin.setRange(1, 99)
         
-def checkLogoncode(c):
-    checksum = int(c[0])+int(c[2])+int(c[4])+int(c[6])+(int(c[1])+
-                int(c[3])+int(c[5]))*3
-    checkdigit = (10-(checksum%10))%10
+def checkEan8(c):
+    checksum = (int(c[0])+int(c[2])+int(c[4])+int(c[6]))*3+(int(c[1])+
+                int(c[3])+int(c[5]))
+    checkdigit = (10-(checksum%10))
     if checkdigit == int(c[7]):
         return True
     else:
@@ -4065,7 +4065,7 @@ def set_barcodenr(self):
         self.printBtn.setStyleSheet("color: black;  background-color: #00FFFF")
         self.nextBtn.setEnabled(True)
         self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: #00BFFF")
-    elif len(barcodenr) == 8:
+    elif len(barcodenr) == 8 and checkEan8(barcodenr):
         self.q1Edit.setText('')
         if barcodenr == self.checknr and self.maccess > 0:
             self.maccess = 0
@@ -4211,7 +4211,7 @@ def barcodeScan():
                 Column('barcode',  String))
                         
             #choose next groupbutton (from 5) see line 4244 and start with group 1
-            #see line 4276 and 4277
+            #see line 4274 and 4275
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
