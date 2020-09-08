@@ -135,5 +135,5 @@
 2020-08-16 sales.py check ean logon repaired
 202009-08 sales.py version2.0 released. Improved buttons with pageselect and colors. Linking with clicked buttons for text and colors as admin.
           articles inserts by barcode for commercial products or generating in reserved part. purchasing modules included +imports by csv files
-          for new items, price changes or delting expired items. Also imports for deliveries possible.
+          for new items, price changes or deleting expired items. Also imports for deliveries possible.
 
