@@ -1,4 +1,18 @@
-# *Cash Register*  Sales
+# *Cash Register*  Sales version 2.0
+
+New improved version
+
+Features:
+
+Buttonpages changeable from 1 until 8 pages with 23 buttons per page.
+
+Productbuttons as administrator clickable for text and color change.
+
+Extended system for purchasing and deliveries with invoices module.
+
+Imports with csv format files.
+
+Barcodes inserts for new products in own range generating and in commercial range by barcode scan.
 
 ![Sales Cash Register Screenshot](https://raw.githubusercontent.com/DirkJanJansen/Sales/master/Cashregister.png)
 
@@ -12,11 +26,9 @@ Link to documentation: https://github.com/DirkJanJansen/Sales/blob/master/Instal
 
 Link to changelog: https://github.com/DirkJanJansen/Sales/blob/master/Installation/Changelog.txt
 
-3 Entrance security levels
+4 Entrance security levels
 
 Barcode testlabels for employees logon and product testlabels included
-
-5 programmable button-groups with each 39 programmable buttons for unpackaged products.
 
 Equipped with inventory management system
 
