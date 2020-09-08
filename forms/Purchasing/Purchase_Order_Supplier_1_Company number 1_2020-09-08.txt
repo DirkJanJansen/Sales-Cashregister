@@ -1,0 +1,441 @@
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 1 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+     1 2800000000035 Router Asus RT-N66U               47.00 stuk               56.55     2657.85
+     6 2800000000097 Midi Tower Antec GX500            81.00 stuk               45.90     3717.90
+     8 2800000000134 Harddisk Seagate Barracuda 2TB    43.00 stuk               86.90     3736.70
+     9 2800000000141 Video Kaart Sapphire Radeon R7    21.00 stuk              136.80     2872.80
+    10 2800000000165 Cooler Scythe Mugen 4             75.00 stuk               37.99     2849.25
+    12 2800000000196 SD Geheugenkaartje 2GB           709.00 stuk                4.55     3225.95
+    18 2800000000264 Kruisfitting 3/4" messing warm   164.00 stuk               13.45     2205.80
+    19 2800000000288 Haakse fitting 3/4 met bev. me   468.00 stuk                6.67     3121.56
+    20 2800000000295 Thermostaathuis kunstof spuitg   115.00 stuk               23.45     2696.75
+    25 2800000000356 Doorvoer huis kunststof spuitg   365.00 stuk                8.34     3044.10
+    27 2800000000370 Kraagstuk kunsstof spuitgietwe   260.00 stuk                7.23     1879.80
+    30 2800000000783 Zeskantbout,RVS A4,M8x16,DIN93   399.00 stuk                6.93     2765.07
+    32 2800000001315 Sluitring,RVS A4,M6,DIN125A      495.00 100                 7.16     3544.20
+    37 2800000002718 Reinigingsmiddel,Citron,1lt      265.00 stuk               13.46     3566.90
+    42 2800000003401 Lamp,gloei,E27,mat,60W 130V      135.00 stuk               27.28     3682.80
+    46 2800000003753 Kabelschoen,AMP 0320565,M4 1,0   196.00 100                19.64     3849.44
+    47 2800000003852 Kabelschoen,kerf 10mm²,z vulst   147.00 stuk               22.21     3264.87
+    51 2800000004309 Kabelschoen,WKW 13256,M16 240m   267.00 stuk               13.02     3476.34
+    58 2800000005030 Kabelmerklabel,gr,60mm           253.00 stuk               12.96     3278.88
+    61 2800000005146 Merkplaat,7,wt/zw,6x38mm         269.00 stuk               13.71     3687.99
+    62 2800000005313 Merkplaat,24,wt/zw,6x38mm        229.00 stuk               14.85     3400.65
+    63 2800000005351 Merkplaat,28,wt/zw,6x38mm        151.00 stuk               21.30     3216.30
+    67 2800000005740 Merkplaat,67,wt/zw,6x38mm        278.00 stuk               13.03     3622.34
+    69 2800000005788 Merkplaat,1/33,wt/zw,6x38mm      120.00 stuk               23.75     2850.00
+    70 2800000005917 Merkplaat,F,6x38mm               140.00 stuk               21.84     3057.60
+    82 2800000007409 Krimpmof,overgang,NS1,50/16      243.00 stuk               13.71     3331.53
+    92 2800000008147 Lader,accu,v ZKL II               22.00 stuk              121.73     2678.06
+    94 2800000008369 Kabelschoen v Cu soepel,120mm²    35.00 stuk              105.51     3692.85
+    97 2800000008512 Persbus,150/120mm²,v Al/Cu kab    25.00 stuk              145.41     3635.25
+    98 2800000008529 Krimpkous,m lijm,19/6,1000 mm     27.00 stuk              130.34     3519.18
+   108 2800000009076 Afsluitdop,GPN 300-F14            19.00 stuk              152.32     2894.08
+   110 2800000009182 Kabelbeugel,nikkel,12mm           24.00 stuk              141.52     3396.48
+   112 2800000009205 Kabelbeugel,nikkel,15mm           44.00 stuk               77.45     3407.80
+   116 2800000009762 Tinsoldeer,m koper,60/40,1mm 1    42.00 stuk               86.14     3617.88
+   119 2800000010171 Aardkabel,gl/gn,70mm²            391.00 meter               8.58     3354.78
+   131 2800000012403 Vertelbare poot,v bordes,600-1    49.00 stuk               50.79     2488.71
+   141 2800000012946 Boom,ahob,3a,led,5,25-5,75m       23.00 stuk               92.56     2128.88
+   142 2800000012991 Boom,ahob,5b,led,9,00-9,50m       60.00 stuk               44.79     2687.40
+   146 2800000013295 Schak.,ZB4BG4K 1244E,contacten    31.00 stuk              101.23     3138.13
+   149 2800000013561 Sleutel C33142,gegraveerd,opga    43.00 stuk               53.38     2295.34
+   152 2800000013745 Schak.,ZB4BG4K 4241A,contacten    25.00 stuk              112.26     2806.50
+   155 2800000014131 Bevestigingsset,schrikhekpl,19    29.00 stuk              121.53     3524.37
+   156 2800000014209 Verdeelkast,m inrichting en fu    33.00 stuk               94.25     3110.25
+   160 2800000014353 Fundering,v dwergsein,beton,75     2.00 stuk             1790.89     3581.78
+   161 2800000014360 Fundering,beton                    1.00 stuk             2758.96     2758.96
+   162 2800000014377 Fundering,v lichtbaken,beton       0.00 stuk             6450.32        0.00
+   165 2800000014407 Bevestigingsbeugel, v nummerbo     1.00 stuk             4944.42     4944.42
+   166 2800000014414 Bevestigingsbeugel,v nummerbor     0.00 stuk             6603.00        0.00
+   171 2800000014469 Laddersteun,onder                  2.00 stuk             2403.65     4807.30
+   172 2800000014476 Laddersteun,boven                  0.00 stuk             7278.64        0.00
+   175 2800000014506 Ladder,verbreed,5985mm             1.00 stuk             2768.42     2768.42
+   179 2800000014544 Laddersteun,verbr.,compl.ond.      2.00 stuk             1653.23     3306.46
+   180 2800000014551 Bordes, m laddersteun compl.       0.00 stuk             5692.08        0.00
+   181 2800000014568 Vertreksein,paal,R                 0.00 stuk             7060.33        0.00
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 2 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+   185 2800000014605 Bord,V,zw/wt,103-627,220x250mm     0.00 stuk             6194.91        0.00
+   191 2800000014667 Hangslot,z sleutels (12),mess.     1.00 stuk             3350.09     3350.09
+   192 2800000014674 Beschermrooster,MF                 1.00 stuk             6624.61     6624.61
+   196 2800000014711 Lens,v lamphuis,rd,140mm,MF/AY     0.00 stuk             6206.16        0.00
+   197 2800000014728 Lens,v lamphuis,20°,helder,gla     1.00 stuk             2642.54     2642.54
+   202 2800000014773 Zonnekap,v lamph. MF sein          2.00 stuk             1446.50     2893.00
+   203 2800000014780 IJzerwerk,v wandbev.,MF sein       1.00 stuk             3483.00     3483.00
+   204 2800000014797 Trafo-eenheid,10,2V,15W            1.00 stuk             2767.46     2767.46
+   205 2800000014803 Trafo-eenheid,10,2V/30W            1.00 stuk             4475.90     4475.90
+   211 2800000014865 Led-unit,gl v MF-sein              1.00 stuk             3613.16     3613.16
+   213 2800000014889 Led-unit,wt v MF-sein              0.00 stuk             7745.76        0.00
+   215 2800000014902 Zonnekap,v lamph.                  0.00 stuk             7337.90        0.00
+   218 2800000014933 Lenshouder,v lichtbak,100mm        0.00 stuk             6376.32        0.00
+   225 2800000015008 Plaatbevestiging,m 2 refl.         1.00 stuk             3163.26     3163.26
+   230 2800000015053 Plaatbevestiging.,v 2 refl.        1.00 stuk             2750.15     2750.15
+   236 2800000015114 Baak,drieplank,vert.,500mm,SR2     0.00 stuk             6568.78        0.00
+   240 2800000015152 Bord,zig-zag,driehoek,SR312A       1.00 stuk             5428.74     5428.74
+   245 2800000015206 Bord,snelheid,500x500mm,SR314      2.00 stuk             1203.36     2406.72
+   246 2800000015213 Bord,snelheid,1,500x500mm,SR31     1.00 stuk             4939.45     4939.45
+   247 2800000015220 Bord,snelheid,10,500x500mm,SR3     1.00 stuk             1555.28     1555.28
+   250 2800000015251 Bord,snelheid,13,500x500mm,SR3     0.00 stuk             6174.90        0.00
+   257 2800000015329 Bord,adviessnelheid,opgave,SR2     1.00 stuk             4462.18     4462.18
+   259 2800000015343 Bord,adviessnelheid,5,SR282        1.00 stuk             5980.52     5980.52
+   261 2800000015367 Bord,entreesnelheid,opgave,SR1     2.00 stuk             1404.74     2809.48
+   263 2800000015381 Bord,baanvaksnelheid gr/zw,10,     1.00 stuk             2881.91     2881.91
+   266 2800000015411 Bord,baanvaksnelheid,opgave,SR     0.00 stuk             6950.96        0.00
+   268 2800000015435 Bord,snelheidverm.,10,GL/ZW,SR     0.00 stuk             3075.90        0.00
+   273 2800000015480 Bord,snelheidverm.,13,SR313        1.00 stuk             6975.92     6975.92
+   278 2800000015534 Bord,cijfer,250x250mm              3.00 stuk             1202.46     3607.38
+   279 2800000015541 Bord,eind,500x500mm,SR304          0.00 stuk             6978.11        0.00
+   282 2800000015572 Bord,4,SR304                       1.00 stuk             1635.91     1635.91
+   283 2800000015589 Bord,6,SR304                       1.00 stuk             3211.76     3211.76
+   289 2800000015640 Bord,perron,2/4,SR304              1.00 stuk             6588.61     6588.61
+   293 2800000015688 Bord,aankondiging,overweg,600m     2.00 stuk             2215.87     4431.74
+   298 2800000015732 Bord,cijfer of letter              0.00 stuk             4649.86        0.00
+   303 2800000015787 Bord,einde 1500V,SR320             1.00 stuk             5681.30     5681.30
+   305 2800000015800 Bord,P,500x300mm                   1.00 stuk             5519.48     5519.48
+   306 2800000015817 Bord,pijl,L,300x250mm              0.00 stuk             5734.31        0.00
+   307 2800000015824 Bord,pijl,R,300x250mm              0.00 stuk             4950.01        0.00
+   308 2800000015831 Bord,pijl,dubb.,300x250mm          1.00 stuk             2338.29     2338.29
+   310 2800000015855 Bord,verken S,440x980mm,SR305      1.00 stuk             1794.85     1794.85
+   314 2800000015893 Bord,ATB-code,500x500mm            2.00 stuk             1511.02     3022.04
+   325 2800000016005 Paal,v afsluitbord, m spaninr.     1.00 stuk             1890.02     1890.02
+   326 2800000016012 Paal,v plaatsing seinbord,48x1     0.00 stuk             6068.49        0.00
+   327 2800000016029 Paal,v seinbord,48x1600mm          0.00 stuk             5528.00        0.00
+   328 2800000016036 Paal,v seinbord,76/48x2300mm       0.00 stuk             7373.66        0.00
+   332 2800000016074 Beugel,v paal,Fixstop              1.00 stuk             1645.90     1645.90
+   333 2800000016081 Beugel,v paal,Fixstop V2           1.00 stuk             4132.35     4132.35
+   336 2800000016111 Bevestigingsbeugel,v bord,a pa     1.00 stuk             6565.93     6565.93
+   339 2800000016142 Scharnierbeugel,Durabo,51mm        1.00 stuk             2105.99     2105.99
+   343 2800000016180 Bevestigingsset,v letterbord       1.00 stuk             2798.35     2798.35
+   344 2800000016197 Bord,einde perron,300x300mm        1.00 stuk             3980.53     3980.53
+   346 2800000016210 Bord,afsluit,500x500mm,SR243PD     1.00 stuk             3652.24     3652.24
+   347 2800000016227 Bord,rangeer/stop,300x300mm,SR     1.00 stuk             6218.44     6218.44
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 3 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+   359 2800000016340 Trekstang,nr.2370,182mm            1.00 stuk             1189.21     1189.21
+   362 2800000016371 Trekstang,nr.2450,1002mm           4.00 stuk             1058.84     4235.36
+   371 2800000016463 Trekstang,nr.2610,980mm            2.00 stuk             1533.67     3067.34
+   373 2800000016487 Trekstang,nr.2690,1010mm           2.00 stuk              933.80     1867.60
+   380 2800000016555 Controlestang,nr.4800,1719mm       1.00 stuk             1684.43     1684.43
+   382 2800000016579 Controlestang,nr.4861,2104mm       3.00 stuk             1249.82     3749.46
+   385 2800000016609 Controlestang,nr.4881,960mm        1.00 stuk             1570.73     1570.73
+   389 2800000016647 Trekstang,nr.6863,2133mm           2.00 stuk             1214.49     2428.98
+   393 2800000016685 Controlestang,nr.8790,350mm        2.00 stuk             1160.46     2320.92
+   394 2800000016692 Schuifstang,CKA305-13              1.00 stuk             1482.44     1482.44
+   395 2800000016708 Schuifstang,CKA305-12              2.00 stuk             1530.13     3060.26
+   396 2800000016715 Schuifstang,CKA305-11              2.00 stuk             1182.02     2364.04
+   399 2800000016746 Isolatieset,v stang,geïs.uitv.     2.00 stuk             1098.27     2196.54
+   402 2800000016784 Bout,v contr./verbindingstang,     2.00 stuk             1562.89     3125.78
+   404 2800000016807 Walterbus,27x20x19mm               2.00 stuk             1626.65     3253.30
+   406 2800000016821 Walterbus,compl.,B-19,32x25x19     2.00 stuk             1322.32     2644.64
+   413 2800000016890 Spie,walterbus,5x3x55mm            3.00 stuk              911.98     2735.94
+   417 2800000016937 Bout,v trek/controlestang,28x4     2.00 stuk             1514.01     3028.02
+   418 2800000016944 Bout,v trek/controlestang,28x5     2.00 stuk             1294.06     2588.12
+   426 2800000017026 Stelbout, W3/8x22,5                1.00 stuk             1572.31     1572.31
+   437 2800000017132 Stangenset,gew wl,46 E3 NSE-2      2.00 set              1695.41     3390.82
+   441 2800000017170 Wisselsteller,NSE2,L,120VDC        0.00 stuk            56987.45        0.00
+   442 2800000017187 Wisselsteller,NSE2,R,120VDC        0.00 stuk            34876.67        0.00
+   446 2800000017262 Contacthouder,v brug,75x30x18m     9.00 stuk              401.70     3615.30
+   447 2800000017279 Doorverbinder,v gespl.dubb.con     5.00 stuk              408.18     2040.90
+   449 2800000017293 Contactvinger,controle             2.00 stuk              426.21      852.42
+   452 2800000017354 Stijgstuk,v w.-aansl.kast,beto     5.00 stuk              401.35     2006.75
+   456 2800000017415 Kabel,v wst.,10x2,5mm²             7.00 stuk              402.48     2817.36
+   459 2800000017453 Kabel EMC,v WAK,EBI,12x1,5/4x4     8.00 stuk              361.04     2888.32
+   461 2800000017484 IJzerwerkset,552-246.1/4 (beto     9.00 stuk              402.82     3625.38
+   466 2800000017569 Vulplaat,v wst.                    7.00 stuk              370.92     2596.44
+   477 2800000017828 Holle knie,v EHOM                 10.00 stuk              341.05     3410.50
+   481 2800000017873 Olie,Tellus Artic 32,5 lt          9.00 stuk              402.03     3618.27
+   484 2800000017910 Hendel,M8,120mm                    4.00 stuk              408.27     1633.08
+   497 2800000018160 Spie,stel,KL21                     7.00 stuk              400.53     2803.71
+   499 2800000018191 Spie,stel,KL24                     8.00 stuk              309.59     2476.72
+   500 2800000018207 Opvulplaat,v vergrendelhuis,1m     5.00 stuk              328.37     1641.85
+   502 2800000018221 Opvulplaat,v vergrendelhuis,3m     9.00 stuk              371.39     3342.51
+   505 2800000018269 Huis,v vergrendelhaak,R,CKA418     2.00 stuk              431.27      862.54
+   508 2800000018290 Handkruk,v wls,KCA17-1             8.00 stuk              350.63     2805.04
+   510 2800000018313 Contactveer,KCD8-4                 8.00 stuk              417.93     3343.44
+   512 2800000018368 Deksel,compl.,v railspoel          8.00 stuk              432.45     3459.60
+   513 2800000018450 Zijblok, 2 kabels,2x150mm²        13.00 stuk              160.06     2080.78
+   514 2800000018542 Stootverbinder,v flex.kabel,50    25.00 stuk              140.63     3515.75
+   519 2800000018832 OPUS,indicatieled v IBO           17.00 stuk              151.74     2579.58
+   521 2800000018917 OPUS,klemmenset sensor 2, 46E3    19.00 stuk              143.07     2718.33
+   522 2800000019013 Condensator,4700µF 63V            21.00 stuk              154.66     3247.86
+   525 2800000019112 Railaansluitpot,320mm             23.00 stuk              147.18     3385.14
+   526 2800000019259 Kabelklem,022-010,16mm,46E3       23.00 stuk              145.02     3335.46
+   527 2800000019273 Kabelklem,022-014,16mm,46E3       23.00 stuk              150.66     3465.18
+   532 2800000019754 Print,input                       18.00 stuk              159.30     2867.40
+   535 2800000019839 Zendkop,R                         27.00 stuk              142.91     3858.57
+   536 2800000019846 Ontvangkop,L                      20.00 stuk              155.35     3107.00
+   541 2800000019914 Branderpijp,R,7 baks,300mbar,H     2.00 stuk             1390.10     2780.20
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 4 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+   543 2800000019938 Branderpijp,L,7 baks,Adhetec       4.00 stuk             1084.23     4336.92
+   544 2800000019945 Branderpijp,R,7 baks,Adhetec       7.00 stuk              576.94     4038.58
+   548 2800000019983 Alphi 11,vat 25lt,Adhetec          3.00 stuk              990.10     2970.30
+   554 2800000020057 Klembeugel,m veer klemblok,Pin     3.00 stuk              907.44     2722.32
+   556 2800000020088 Trafo,pr.110V,12V 30VA             4.00 stuk              730.24     2920.96
+   558 2800000020118 Trafo,pr.115V,250VA,2x15V          1.00 stuk             1211.52     1211.52
+   562 2800000020170 Moer,laag,speciaal,4,7mm           4.00 stuk              914.71     3658.84
+   566 2800000020217 Gelijkrichter,GLTZ158,25V 0,2A     2.00 stuk             1019.55     2039.10
+   568 2800000020231 e-POR-eenheid, Bender 24-24V       1.00 stuk             1377.11     1377.11
+   569 2800000020248 e-POR-eenheid, Bender 110-12V      2.00 stuk             1255.41     2510.82
+   571 2800000020262 e-POR-eenheid, Nieaf 110-12V       2.00 stuk             1185.70     2371.40
+   576 2800000020378 Houder,v weerstand,60x25mm         9.00 stuk              390.53     3514.77
+   588 2800000020507 Condensator,2 µF 600 V,type 97     5.00 stuk              517.52     2587.60
+   591 2800000020538 Condensator,566444Gr1,0,05µF 1     3.00 stuk             1173.79     3521.37
+   604 2800000020705 Buiszekering,14x120mm,6,25A 60     1.00 stuk             1110.18     1110.18
+   605 2800000020712 Buiszekering,20A 600V              3.00 stuk             1225.44     3676.32
+   607 2800000020736 Reactantie,42100-6Gr1,90x150x1     4.00 stuk              889.35     3557.40
+   611 2800000020781 Statische omvormer,5               2.00 stuk             1364.08     2728.16
+   615 2800000020835 Contactbrug,KH11,150mm             4.00 stuk              782.18     3128.72
+   624 2800000020941 Relais,B1,56001-803Gr4             8.00 stuk              402.36     3218.88
+   625 2800000020958 Relais,B1,56001-803Gr5             5.00 stuk              694.17     3470.85
+   628 2800000020989 Relais,B1,56001-822Gr1             4.00 stuk              825.71     3302.84
+   632 2800000021047 Relais,B2,tijd,57263-802Gr2        3.00 stuk              702.77     2108.31
+   634 2800000021061 Relais,B2,tijd,57263-806Gr2        0.00 stuk             1367.32        0.00
+   640 2800000021139 Sticker,B1-relais,2017,l.grijs     3.00 stuk             1264.22     3792.66
+   643 2800000021160 Plugboard,B2,59686-1Gr1            7.00 stuk              430.48     3013.36
+   644 2800000021184 Stroommeetklem,v B-relais          5.00 stuk              674.21     3371.05
+   649 2800000021238 Moer,v B-plugboard,16x9,5mm        5.00 stuk              810.86     4054.30
+   650 2800000021245 Moer,plat,v B-plugboard,12,6mm     1.00 stuk             1026.95     1026.95
+   651 2800000021252 Ontstoringinrichting,1uF 12 Oh     3.00 stuk              746.61     2239.83
+   657 2800000021320 Houder,v arrestor                  6.00 stuk              663.54     3981.24
+   658 2800000021337 Arrestor,700V                      3.00 stuk             1332.25     3996.75
+   662 2800000021382 Profiel,v klemmenblok              1.00 stuk              962.38      962.38
+   668 2800000021443 Snubber,set van 2                  2.00 stuk              948.14     1896.28
+   679 2800000021559 Codeplaat,v B1,PX15904/15907       4.00 stuk              816.20     3264.80
+   686 2800000021641 Codeplaat,v B2,PX45128             3.00 stuk              863.46     2590.38
+   687 2800000021665 Codeplaat,v VTB,PX17893           26.00 stuk              144.72     3762.72
+   690 2800000021696 Codeplaat,penbezetting, v ATB-     5.00 stuk              668.06     3340.30
+   692 2800000021719 Codeplaat,penbezetting, v FE-C     3.00 stuk             1178.66     3535.98
+   695 2800000021740 Codeplaat,v eletr.codegever AT     3.00 stuk             1230.01     3690.03
+   697 2800000021764 Codeplaat,v electr.codegever A     6.00 stuk              425.07     2550.42
+   701 2800000021818 Afdekplaat,blind,v relaiskast    126.00 stuk               26.36     3321.36
+   704 2800000021849 Beugel,v bevestiging klemmenst     8.00 stuk              213.73     1709.84
+   716 2800000021962 Kabeldoorvoerstrip,40x114mm,2x     9.00 stuk              392.14     3529.26
+   719 2800000022006 Kast,19A                           2.00 stuk             1435.65     2871.30
+   728 2800000022129 Trafo,5KVA,3kV/110V                7.00 stuk              388.54     2719.78
+   735 2800000022303 Bakenbevestiging,NS90,m opslui    39.00 stuk               76.11     2968.29
+   736 2800000022358 Fundering kast ATB-Vv, complee    48.00 stuk               79.74     3827.52
+   742 2800000022648 Montageplaat, v compo IR           2.00 stuk             1252.02     2504.04
+   746 2800000022686 Kastje,bedien IR                   4.00 stuk              788.85     3155.40
+   747 2800000022693 Lenskap wit v IRAB bedienkast      2.00 stuk             1229.53     2459.06
+   763 2800000022969 Bord,NIET SCHAKELEN,magn.148x9    40.00 stuk               84.17     3366.80
+   768 2800000023201 Huls,bescherm,v draagk.            6.00 stuk              502.80     3016.80
+   772 2800000023287 IJzerwerk,m scharnier              5.00 stuk              430.74     2153.70
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 5 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+   773 2800000023294 Uithouder,recht,dubb.,1300mm,H     4.00 stuk              396.01     1584.04
+   782 2800000023423 Uithouder,v starre isolator,24     4.00 stuk              647.67     2590.68
+   786 2800000023461 Uithouder,v starre isolator,2x     8.00 stuk              478.90     3831.20
+   787 2800000023478 Klemming,v hangisolator,250x25     6.00 stuk              434.59     2607.54
+   791 2800000023553 Bevestiging equi niet uitgeb.,     4.00 stuk              625.42     2501.68
+   795 2800000023638 Balansplaat                        2.00 stuk              427.70      855.40
+   799 2800000023683 Afstandhouder v alum. kabel,24     4.00 stuk              628.18     2512.72
+   804 2800000023751 Klem,eind, rijdraad,100mm²,IT3    14.00 stuk              260.09     3641.26
+   816 2800000023911 Klemplaat, v paaltopisolator       4.00 stuk              425.17     1700.68
+   819 2800000023942 Afspanisolator                     5.00 stuk              468.54     2342.70
+   820 2800000023959 Berijdbare isolator,100mm²        18.00 stuk              204.14     3674.52
+   823 2800000023997 Afspanisolator,FCI                 9.00 stuk              371.94     3347.46
+   835 2800000024147 Slede,11,660mm                     5.00 set               534.98     2674.90
+   837 2800000024161 Trekschoor,TRB-1,12.150mm          2.00 stuk             1473.82     2947.64
+   839 2800000024185 Tussenstuk,v trekstang,800mm       2.00 stuk             1393.20     2786.40
+   848 2800000024284 Ombouwset,klem,v draagk.bok,2-     2.00 stuk              566.32     1132.64
+   851 2800000024314 Bevestiging draagkabelbok a RH     1.00 stuk              985.84      985.84
+   853 2800000024345 Bev.,1 sch.haak a paal HE300B      3.00 stuk              635.82     1907.46
+   855 2800000024369 Bev.,1 sch.haak a betonpl SP1      4.00 stuk              447.79     1791.16
+   867 2800000024482 Pijphouder,42mm                    3.00 stuk             1312.24     3936.72
+   874 2800000024574 Pijpklem,m dubbele gaffel,42mm     4.00 stuk              669.76     2679.04
+   875 2800000024581 Afsluitdop,v pijp,42mm             2.00 stuk             1021.21     2042.42
+   879 2800000024628 Oog,scharnier,m stelbout           2.00 stuk             1238.25     2476.50
+   881 2800000024642 Uithouder,enk.,23,1500mm,HE220     1.00 stuk             1082.92     1082.92
+   888 2800000024710 Klemhouder,rijdr.,laag z rijdr     4.00 stuk              639.61     2558.44
+   890 2800000024734 Pijp,bochtaftrek,compl.,alum.,     2.00 set              1450.38     2900.76
+   891 2800000024741 Begrenzingspijp,v open spaninr     2.00 stuk             1442.21     2884.42
+   895 2800000024789 Klem,m oog,v bochtaftrek           2.00 stuk             1018.26     2036.52
+   896 2800000024796 Afsp.,vast,1,v draagk.bok,HE22     3.00 stuk             1099.29     3297.87
+   898 2800000024819 Afsp.,vast,1,v draagk.bok,HE30     3.00 stuk              821.77     2465.31
+   899 2800000024826 Afsp.,draagk.,open spaninr.,32     3.00 stuk              910.89     2732.67
+   900 2800000024833 Afsp.,draagk.,spaninr.,320mm,U     3.00 stuk              851.91     2555.73
+   901 2800000024840 Afsp.,vast,a,SLO                   1.00 stuk             1204.19     1204.19
+   902 2800000024857 Afsp.,vast,1,a balk,HE220          3.00 stuk             1438.66     4315.98
+   910 2800000024949 Bev.,1 stang,v gew.gel.,HE300B     1.00 stuk             1216.50     1216.50
+   919 2800000025038 Lasplaat,dubb.,m splitpenbout,     2.00 stuk             1030.29     2060.58
+   920 2800000025045 Lasplaat,dubb.,m bout,100mm        1.00 stuk             1230.16     1230.16
+   921 2800000025069 Gewicht,rechthoekig,25kg           3.00 stuk             1122.92     3368.76
+   927 2800000025137 Klauw,M20 14-20mm                  7.00 stuk              490.94     3436.58
+   930 2800000025182 Klem,las,v draagk.,70-95mm²        7.00 stuk              515.32     3607.24
+   933 2800000025212 Reparatiespiraal,v draagk.,150     5.00 stuk              753.39     3766.95
+   939 2800000025274 Klembeugel,dubb.,70mm²             3.00 stuk              778.88     2336.64
+   948 2800000025366 Bout,splitpen,RVS A2,14x60mm       6.00 stuk              578.36     3470.16
+   949 2800000025373 Klem,rijdr./hangdraad,A03,moer     4.00 stuk              768.91     3075.64
+   951 2800000025397 Klem,kruising, v rijdr.            4.00 stuk              755.45     3021.80
+   964 2800000025533 Klem,aansl.,v rijdr.               3.00 stuk             1411.21     4233.63
+   968 2800000025595 Isolatiekous,v hangdraad,9mm       5.00 stuk              605.97     3029.85
+   971 2800000025625 Kerfverbinder,v kabel,25mm²        6.00 stuk              649.82     3898.92
+   974 2800000025656 Klemvulling,v draagk.bok,2,5mm     2.00 stuk             1147.10     2294.20
+   980 2800000025717 Isolatiestang,v demp.verb.,315     4.00 stuk              858.67     3434.68
+   982 2800000025731 Isolator,klok,enk.                 2.00 stuk              939.04     1878.08
+   987 2800000025793 Staafisolator,v bev.tunnelarm      7.00 stuk              471.02     3297.14
+   988 2800000025816 Staafisolator,m 1-oog,G3/4 27x     7.00 stuk              509.00     3563.00
+   996 2800000025892 Steunisolator,VST 10 MK,270mm      3.00 stuk              580.87     1742.61
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 6 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+   999 2800000025922 Draadeind,verbinding,RVS,M16       2.00 stuk             1472.01     2944.02
+  1002 2800000025953 Glijloper,03-475/3,150mm²          2.00 stuk             1084.99     2169.98
+  1004 2800000025977 Loopbare ophanging,1,660mm         3.00 stuk             1319.58     3958.74
+  1006 2800000025991 Loopbare ophanging,3               3.00 stuk             1391.73     4175.19
+  1012 2800000026059 Beugel,v stroomrail,22-068         3.00 stuk              749.37     2248.11
+  1013 2800000026066 Beugelbout,m 2 klemstroken,M16     2.00 stuk             1386.49     2772.98
+  1014 2800000026073 Klem,draagk.,instelb.,2x150mm²     6.00 stuk              530.99     3185.94
+  1020 2800000026134 Glijschaats,kort                   2.00 stuk              660.76     1321.52
+  1025 2800000026189 Schakelaarstoel,v 1 schak.,HE2     4.00 stuk              977.95     3911.80
+  1028 2800000026219 Schakelaarstoel,v 1 schak.,UNP     6.00 stuk              589.34     3536.04
+  1032 2800000026257 Bovenleidingschakelaar,enk.,L,     5.00 stuk              672.04     3360.20
+  1036 2800000026295 Plaat,IN                           6.00 stuk              634.24     3805.44
+  1039 2800000026332 Bevestiging,letterbord,uitv.1      3.00 stuk              995.25     2985.75
+  1045 2800000026400 Slinger,v Siemens mkt              1.00 stuk             1093.35     1093.35
+  1050 2800000026455 Bevestiging,v 2-motoraandr.,HE     1.00 stuk             1365.35     1365.35
+  1051 2800000026462 Geleiding,v stang m drukstuk,4     3.00 stuk              473.06     1419.18
+  1055 2800000026516 Schakelaarstang,v Faba mkt,o b     3.00 set               485.12     1455.36
+  1060 2800000026561 Zeskante sok,v kopp.schak.stan     4.00 stuk              600.25     2401.00
+  1061 2800000026578 Oog,scharnier,v schak.stang,10     2.00 stuk              995.18     1990.36
+  1069 2800000026653 Geleideoog,m kabelbev.,500mm²,     3.00 stuk             1235.08     3705.24
+  1071 2800000026677 Beugel,v kabelbev.,boven uitv      3.00 stuk             1155.58     3466.74
+  1076 2800000026745 Invoertule,1 1/4 v beschermpij     2.00 stuk             1446.13     2892.26
+  1078 2800000026776 Aansluitkabel,v Bowthorpe,35mm     1.00 stuk             1426.24     1426.24
+  1081 2800000026806 Bevestiging,kabelbesch.pijp,32     3.00 stuk              973.07     2919.21
+  1083 2800000026820 Bevestiging,besch.pijp,08-043,     5.00 stuk              629.68     3148.40
+  1084 2800000026837 Bevestiging,besch.pijp,32mm,UN     2.00 stuk             1359.33     2718.66
+  1086 2800000026851 Gebogen pijp, m meetpunt,32mm      7.00 stuk              542.54     3797.78
+  1090 2800000026905 Overspanningsafleider,Soule 81     5.00 stuk              780.52     3902.60
+  1092 2800000026929 Overspanningsafleider,Bowthorp     4.00 stuk              954.79     3819.16
+  1100 2800000027018 Trekontlasting,6x50mm²             6.00 stuk              656.62     3939.72
+  1102 2800000027032 Aansluitvlag,enk.eindsl.           1.00 stuk             1464.73     1464.73
+  1106 2800000027070 Steekmof,dubb.,63mm                2.00 stuk              964.91     1929.82
+  1107 2800000027087 Buis PE-100,63x3,6mmx6m            3.00 stuk             1243.38     3730.14
+  1109 2800000027100 Buis,PE-100,63x3,8mmx950mm         6.00 stuk              586.41     3518.46
+  1111 2800000027124 Buis PE-80,63x3,6mmx3m             6.00 stuk              490.25     2941.50
+  1113 2800000027148 Bord,v mkt bvl-schak.              3.00 stuk             1014.21     3042.63
+  1114 2800000027155 Montageset,v NB64000               4.00 set               763.89     3055.56
+  1121 2800000027223 Uithouder,recht,v schak.,320mm     3.00 stuk             1345.10     4035.30
+  1125 2800000027261 Laspatroon,Cadweld 32F80,14x9x     1.00 doos             1000.71     1000.71
+  1127 2800000027285 Laspatroon,Cadweld 65F80           2.00 doos             1299.15     2598.30
+  1132 2800000027346 Nood paal-spoorstaafverb.,4m       2.00 stuk             1346.89     2693.78
+  1134 2800000027360 Merkbeugel,EV,alum.,170x30 mm      4.00 stuk             1023.31     4093.24
+  1140 2800000027421 Y-draad,compl.,25mm²x16m           3.00 stuk             1062.05     3186.15
+  1143 2800000027452 Kabel,geïs.,35mm²                  6.00 stuk              573.01     3438.06
+  1149 2800000027513 Plaat,1,inzetbaar                  4.00 stuk              619.04     2476.16
+  1159 2800000027612 Plaat,C,inzetbaar                  2.00 stuk             1360.81     2721.62
+  1160 2800000027629 Plaat,D,inzetbaar                  5.00 stuk              748.71     3743.55
+  1162 2800000027643 Plaat,F,inzetbaar                  3.00 stuk             1433.55     4300.65
+  1163 2800000027650 Plaat,G,inzetbaar                  6.00 stuk              563.19     3379.14
+  1173 2800000027766 Kabelbescherming,v draagk.,70m     1.00 stuk             1311.47     1311.47
+  1174 2800000027773 Kabelbescherming,v draagk.,150     4.00 stuk              830.16     3320.64
+  1176 2800000027797 Bord,AANRAKEN DRADEN,420x85mm      3.00 stuk             1091.78     3275.34
+  1179 2800000027858 Kunststof ligger,HS202-2600x25     9.00 stuk              316.91     2852.19
+  1182 2800000027919 Wisselhout,3200x250x150mm         12.00 stuk              258.33     3099.96
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 7 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+  1183 2800000027933 Wisselhout,gkp,3200x500x150mm     27.00 stuk              127.14     3432.78
+  1190 2800000028183 Wisselhout,6500x250x150mm         12.00 stuk              264.90     3178.80
+  1198 2800000028596 Spoorplaatje/vulstrip,2mm         88.00 stuk               36.53     3214.64
+  1200 2800000028763 Dwarsligger,gevlakt,260x30x21c    49.00 stuk               75.81     3714.69
+  1208 2800000029166 Overwegplaat,Harmelen,54E1,6.0     4.00 stuk              788.61     3154.44
+  1217 2800000029258 Overwegplaat,0,12/0,2m,1.800x0     5.00 stuk              597.25     2986.25
+  1218 2800000029265 Overwegplaat,0,12/0,2m,1.200x0     4.00 stuk              715.91     2863.64
+  1220 2800000029289 Strijkregel,bev. 46E3 1:9R,r-b     1.00 stuk              737.84      737.84
+  1225 2800000029432 Rughellingplaat 54E1,gegoten      13.00 stuk              233.44     3034.72
+  1230 2800000029791 Rugplaat 54E1,igk,L               28.00 stuk               96.72     2708.16
+  1235 2800000030728 Brake parts cleaner II,spray 7    16.00 stuk              217.53     3480.48
+  1239 2800000030995 Glijstoel 54E1,m hiel,Links,50    91.00 stuk               41.92     3814.72
+  1241 2800000031053 Glijstoel 54E1,m hiel,sch.igk,    42.00 stuk               85.79     3603.18
+  1245 2800000031954 Dwarsligger,NS90,v 2 geleideba    24.00 stuk              149.84     3596.16
+  1254 2800000032838 Groefvulling,buiten,54E1,lg 1.   242.00 stuk               15.99     3869.58
+  1255 2800000032999 Vulring,hout,31/35x40mm          227.00 stuk               12.80     2905.60
+  1256 2800000033279 Interflon,Fin Degreaser EM 56,   327.00 stuk               10.59     3462.93
+  1258 2800000033774 Beddingplaat,kurkr.,FC20,200x1   616.00 stuk                6.04     3720.64
+  1264 2800000034306 Kruisstuk 54E1 1:9,gec.            2.00 stuk             1633.39     3266.78
+  1265 2800000034313 Kruisstuk 54E1 1:10,gec.           2.00 stuk             1379.49     2758.98
+  1268 2800000034344 Kruisstuk 54E1 1:444,gec.,v kr     0.00 stuk             2273.66        0.00
+  1273 2800000034399 Puntstuk Vo-49 1:4,5,gec.,v KR     2.00 stuk             1233.70     2467.40
+  1274 2800000034405 Puntstuk 54E1 1:15L,gec.           3.00 stuk             1078.17     3234.51
+  1291 2800000034931 Wisselhout,gkp,7500x500x150mm      9.00 stuk              225.95     2033.55
+  1294 2800000035280 Lasplaat 54E1,vlak,wd bor,v ES    33.00 paar              103.34     3410.22
+  1299 2800000035587 Spoorstaaf 54E5 MHH,180.000mm      4.00 stuk              812.28     3249.12
+  1300 2800000035594 Spoorstaaf 54E5 MHH,108.000mm      3.00 stuk              803.92     2411.76
+  1304 2800000035648 Spoorstaaf 54E5 MHH,18.000mm ?     3.00 stuk              961.67     2885.01
+  1305 2800000035655 Spoorstaaf 54E5 MHH,15.000mm ?     2.00 stuk              930.41     1860.82
+  1306 2800000035662 Spoorstaaf 54E5 MHH,12.000mm ?     4.00 stuk              773.64     3094.56
+  1307 2800000035679 Spoorstaaf 54E5 MHH,9.000mm ?0     3.00 stuk             1143.60     3430.80
+  1312 2800000035723 Spoorstaaf 54E5 R370LHT,120.00     3.00 stuk             1055.12     3165.36
+  1318 2800000035785 Spoorstaaf 54E5 R370LHT,18.000     2.00 stuk              868.66     1737.32
+  1326 2800000035860 Spoorstaaf 46E3 R260Mn,180.000     8.00 stuk              476.00     3808.00
+  1327 2800000035877 Spoorstaaf 46E3 R260Mn,60.000m     2.00 stuk              822.45     1644.90
+  1329 2800000035891 Spoorstaaf 46E3 R260Mn,30.000m     6.00 stuk              584.11     3504.66
+  1330 2800000035907 Spoorstaaf 46E3 R260Mn,24.000m     4.00 stuk              770.15     3080.60
+  1336 2800000035976 Spoorstaaf 54E1 R260Mn,28.000m     3.00 stuk              739.31     2217.93
+  1337 2800000035983 Spoorstaaf 54E1 R260Mn,240.000     2.00 stuk              460.07      920.14
+  1338 2800000035990 Spoorstaaf 54E1 R260Mn,360.000     9.00 stuk              409.57     3686.13
+  1340 2800000036010 Spoorstaaf 54E1 R260Mn,60.000m     3.00 stuk              747.73     2243.19
+  1341 2800000036027 Spoorstaaf 54E5 R260Mn,60.000m     7.00 stuk              561.05     3927.35
+  1342 2800000036041 Spoorstaaf 54E5 R260Mn,90.000m     6.00 stuk              611.93     3671.58
+  1347 2800000036102 Spoorstaaf 54E1 R260Mn,180.000     7.00 stuk              433.61     3035.27
+  1350 2800000036133 Spoorstaaf 54E5 R260Mn,30.000m     6.00 stuk              608.67     3652.02
+  1353 2800000036164 Spoorstaaf 54E1 R260Mn,26.000m     5.00 stuk              598.85     2994.25
+  1355 2800000036188 Spoorstaaf 54E1 R260Mn,24.000m     4.00 stuk              791.56     3166.24
+  1364 2800000036270 Spoorstaaf 54E5 R260Mn,12.000m     6.00 stuk              589.37     3536.22
+  1366 2800000036294 Spoorstaaf 54E1 R260Mn,20.000m     4.00 stuk              469.19     1876.76
+  1371 2800000036348 Spoorstaaf 54E5 R260Mn,9.000mm     2.00 stuk              800.03     1600.06
+  1372 2800000036355 Spoorstaaf 54E1 R350HT,30.000m     4.00 stuk              719.48     2877.92
+  1373 2800000036362 Spoorstaaf 54E1 R350HT,36.000m     5.00 stuk              409.67     2048.35
+  1374 2800000036379 Spoorstaaf 54E1 R350HT,120.000     4.00 stuk              682.88     2731.52
+  1375 2800000036386 Spoorstaaf 54E1 R350HT,360.000     5.00 stuk              419.47     2097.35
+Purchase Order Supplier 1  Company number 1 Date : 2020-09-08 Pagenumber 8 
+==================================================================================================
+Order  Barcode       Description                      Number Unit               Price    Subtotal 
+==================================================================================================
+  1382 2800000036461 Steenslag,0/45-1,6 ton in Big      6.00 stuk              547.64     3285.84
+  1383 2800000036485 Steenslag,22/40,gewassen           4.00 ton               564.85     2259.40
+  1385 2800000036508 Tongbeweging,halve 46E3 1:7/1:     3.00 stuk             1110.35     3331.05
+  1387 2800000036522 Tongbeweging,halve 46E3 1:7/1:     3.00 stuk             1292.31     3876.93
+  1393 2800000036584 Tongbeweging,halve 46E3 1:7/1:     3.00 stuk             1328.34     3985.02
+  1396 2800000036614 Tongbeweging,halve 46E3 1:7/1:     3.00 stuk             1145.68     3437.04
+  1398 2800000036638 Tongbeweging,halve 46E3 1:7/1:     1.00 stuk             1101.89     1101.89
+  1399 2800000036645 Tongbeweging,halve 46E3 1:7/1:     2.00 stuk             1013.88     2027.76
+  1404 2800000036690 Tongbeweging,kwart 46E3 1:9Rbt     3.00 stuk             1204.60     3613.80
+  1405 2800000036706 Tongbeweging,halve 54E1 1:9/1:     2.00 stuk             1238.14     2476.28
+  1407 2800000036720 Tongbeweging,halve 54E1 1:9/1:     2.00 stuk             1367.28     2734.56
+  1412 2800000036775 Tongbeweging,halve 54E1 1:9/1:     4.00 stuk             1006.14     4024.56
+  1420 2800000036850 Tongbeweging,halve 54E1 1:9Lr      2.00 stuk             1251.03     2502.06
+  1424 2800000036898 Tongbeweging,halve 54E1 1:9Rl,     1.00 stuk             1126.13     1126.13
+  1428 2800000036935 Tongbeweging,halve 54E1 1:9Rr,     3.00 stuk             1351.48     4054.44
+  1430 2800000036966 Tongbeweging,halve 54E1 1:12Ll     2.00 stuk             1113.33     2226.66
+  1434 2800000037000 Tongbeweging,halve 54E1 1:12Rl     3.00 stuk              992.30     2976.90
+  1441 2800000037079 Tongbeweging,kwart 54E1 1:10Lb     1.00 stuk             1183.03     1183.03
+  1453 2800000037192 Tongbeweging,halve 54E1 1:15Rr     3.00 stuk             1304.88     3914.64
+  1455 2800000037215 Tongbeweging,halve 54E1 1:15Rr     2.00 stuk             1081.72     2163.44
+  1463 2800000037291 Tongbeweging,kwart 54E1 1:9Rbn     1.00 stuk             1176.35     1176.35
+  1465 2800000037314 Tongbeweging,kwart 54E1 1:9Rbt     3.00 stuk             1182.34     3547.02
+  1470 2800000037369 Bevestigingsvoeten,kist,v Fixs     1.00 stuk             1378.75     1378.75
+  1473 2800000037390 Ankerblok,versteviging spoorbe     3.00 stuk             1339.30     4017.90
+  1477 2800000037444 Strijkregel,gebogen,6.000mm        3.00 stuk              961.58     2884.74
+  1478 2800000037451 Strijkregel,gebogen,6.000mm R2     2.00 stuk             1158.50     2317.00
+  1486 2800000037635 Plaatstaal 4 mm 3x4 meter         73.00 m²                 32.56     2376.88
+  1488 2800000037734 Kraagstuk halffabrikaat           11.00 stuk              333.56     3669.12
+===================================================================================================
+Total price orders                                                                     1128333.62
+===================================================================================================

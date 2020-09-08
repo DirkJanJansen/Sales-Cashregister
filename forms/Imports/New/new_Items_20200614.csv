@@ -1,0 +1,12 @@
+barcode,description,short_descr,item_price,item_unit,article_group,thumbnail,category,VAT,supplierID
+8002000388371,"insert itemnumber 1",item 1,3.23,stuk,computer,./thumbs/Pandora.jpg,1,low,1
+8002000388494,"insert itemnumber 2",item 2,4.45,stuk,bevestiginsmiddelen,./thumbs/Pandora.jpg,2,high,2
+8002000388500,"insert itemnumber 3",item 3,06.41,stuk,halfabbrikaten,./thumbs/Pandora.jpg ,4,low,3
+8002000388623,"insert itemnumber 4",item 4,5.67,stuk,grondstoffen,./thumbs/Pandora.jpg,5,low,4
+8002000388746,"insert itemnumber 5",item 5,34.50,stuk,opslag,./thumbs/Pandora.jpg ,1,low,1
+8002000388869,"insert itemnumber 6",item 6,1.54,stuk,software,./thumbs/Pandora.jpg,2,low,2
+8002000388982,"insert itemnumber 7",item 7,0.46,stuk,spuitgietwerk,./thumbs/Pandora.jpg,4,low,3
+8002000389040,"insert itemnumber 8",item 8,9.86,stuk,witgoed,./thumbs/Pandora.jpg,1,low,2
+8002000389163,"insert itemnumber 9",item 9,6.84,stuk,warmperswerk,./thumbs/Pandora.jpg,3,low,5
+8002000389286,"insert itemnumber 10",item 10,0.99,stuk,gietwerk,./thumbs/Pandora.jpg,2,low,7
+8002000389309,"insert itemnumber 11",item 11,1.99,stuk,electronica,./thumbs/Pandora.jpg,4,low,6
