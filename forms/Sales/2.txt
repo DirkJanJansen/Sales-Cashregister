@@ -1,0 +1,24 @@
+Sales - Ordernumber: 2 Date : 2020-09-08 Pagenumber 1 
+==================================================================================================
+Artikelnr  Description                                  Number  Item_price    Subtotal         VAT
+==================================================================================================
+2800000000103  Cardreader Revoltec RZ060                     1       19.88       19.88        4.17
+2800000000141  Video Kaart Sapphire Radeon R7 265            1      191.52      191.52       40.22
+2800000000226  Klepzitting messing warmperswerk              1       78.88       78.88       16.56
+2800000000257  Rvs Badkraanhuis warmperswerk                 2      172.83      345.66       72.59
+2800000000264  Kruisfitting 3/4" messing warmperswerk        1       18.83       18.83        3.95
+2800000000295  Thermostaathuis kunstof spuitgietwerk         2       32.83       65.66       13.79
+2800000000325  Carterdesksel spuitgietwerk aluminium         1       48.38       48.38       10.16
+2800000037758  White Cabbage                                 1        2.51        2.51        0.23
+2800000037789  Oxheart Cabbage                               5        3.28       16.40        1.48
+2800000037826  Bell pepper Red                               5        1.22        6.10        0.55
+2800000037833  Bell pepper Green                             1        1.30        1.30        0.12
+2800000037857  Kaiser Bun                                    8        0.46        3.68        0.33
+2800000037864  Italian Bol                                   1        0.70        0.70        0.06
+2800000037871  Baguette                                      6        1.43        8.58        0.77
+2800000037918  Orange                                        1        0.77        0.77        0.07
+2800000037925  Pineapple                                     3        2.79        8.37        0.75
+===================================================================================================
+Total  amount to pay inclusive VAT and amount VAT                               342.77       67.25 
+===================================================================================================
+Employee : Mientje 
