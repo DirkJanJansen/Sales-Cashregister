@@ -5165,9 +5165,9 @@ def printBon(self):
         mpage = 0
         rgl = 0
         if sys.platform == 'win32':
-            fbarc = '.\\forms\\Barcodelists\\'+str(self.mreceipt)+'.txt'
+            fbarc = '.\\forms\\Sales\\'+str(self.mreceipt)+'.txt'
         else:
-            fbarc = './forms//Barcodelists/'+str(self.mreceipt)+'.txt'
+            fbarc = './forms//Sales/'+str(self.mreceipt)+'.txt'
         
         for row in rpb:
             rgl += 1
