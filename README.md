@@ -12,7 +12,7 @@ Extended system for purchasing and deliveries with invoices module.
 
 Imports with csv format files.
 
-Barcodes inserts for new products in own range generating and in commercial range by barcode scan.
+Barcodes inserts for new products in own range generated and in commercial range by barcode scan.
 
 ![Sales Cash Register Screenshot](https://raw.githubusercontent.com/DirkJanJansen/Sales/master/Cashregister.png)
 
