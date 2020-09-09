@@ -133,7 +133,10 @@
 2020-07-16 Sales_CashRegister.pdf documentation adjusted for accesslevel 0.
 2020-07-22 sales.py info adjusted for accesslevel 0 No operation allowed.
 2020-08-16 sales.py check ean logon repaired
-202009-08 sales.py version2.0 released. Improved buttons with pageselect and colors. Linking with clicked buttons for text and colors as admin.
-          articles inserts by barcode for commercial products or generating in reserved part. purchasing modules included +imports by csv files
-          for new items, price changes or deleting expired items. Also imports for deliveries possible.
+2020-09-08 sales.py version2.0 released. Improved buttons with pageselect and colors. Linking with clicked buttons for text and colors as admin.
+           articles inserts by barcode for commercial products or generating in reserved part. purchasing modules included +imports by csv files
+           for new items, price changes or deleting expired items. Also imports for deliveries possible.
+2020-09-09 sales.py import loss changed for booking expired items on table loss category Obsolete.
+2020-09-09 cashregister.backup and cashregister_empty.backup removed foreignkey link with table articles, for possibility booking on table loss for deleted items.
+
 
