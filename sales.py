@@ -5200,7 +5200,7 @@ def printBon(self):
         ('===================================================================================================\n'+
          'Total  amount to pay inclusive VAT and amount VAT                         '+'{:>12.2f}'.format(self.mtotal)+'{:>12.2f}'.format(self.mtotvat)+' \n'+
          '===================================================================================================\n'+\
-         'Employee : '+self.mcallname+' \n')
+         'Employee : '+self.mcallname+' *** Thank you for visiting us ***\n')
         if rgl > 0:
             open(fbarc,'a').write(tail) 
             if sys.platform == 'win32':
@@ -5825,7 +5825,7 @@ def barcodeScan():
             self.closeBtn.clicked.connect(lambda: windowClose(self))
             self.closeBtn.setFont(QFont("Arial",12))
             self.closeBtn.setFocusPolicy(Qt.NoFocus)
-            self.closeBtn.setFixedSize(150,124)
+            self.closeBtn.setFixedSize(150,128)
             self.closeBtn.setStyleSheet("color: black; background-color:   #45b39d")
 
             grid.addWidget(self.closeBtn, 0, 10, 4, 1, Qt.AlignTop)
