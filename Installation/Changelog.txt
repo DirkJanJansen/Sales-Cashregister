@@ -138,5 +138,6 @@
            for new items, price changes or deleting expired items. Also imports for deliveries possible.
 2020-09-09 sales.py import loss changed for booking expired items on table loss category Obsolete.
 2020-09-09 cashregister.backup and cashregister_empty.backup removed foreignkey link with table articles, for possibility booking on table loss for deleted items.
+2020-09-09 backups table loss extended with fiels item_price
 
 
