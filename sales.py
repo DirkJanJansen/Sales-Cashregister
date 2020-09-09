@@ -2344,7 +2344,11 @@ def paramChange():
                          mvalue = self.q2Edit.text()
                          mbuttontext = self.q3Edit.toPlainText()
                          mfgcolor = self.q4Edit.text()
+                         if len(mfgcolor) < 7:
+                             mfgcolor = '#000000'
                          mbgcolor = self.q5Edit.text()
+                         if len(mbgcolor) < 7:
+                             mbgcolor = '#F8F7EE'
                          mlist = mbuttontext.split('\n')
                          for line in mlist:
                              if len(line) > 10:
@@ -3428,7 +3432,11 @@ def articleRequest(mflag, btn):
                         mbtntext = self.q3Edit.toPlainText()
                         mlist = mbtntext.split('\n')
                         mfgcolor = self.q4Edit.text()
+                        if len(mfgcolor) < 7:
+                            mfgcolor = '#000000'
                         mbgcolor = self.q5Edit.text()
+                        if len(mbgcolor) < 7:
+                            mbgcolor = '#F8F7EE'
                         for line in mlist:
                              if len(line) > 10:
                                  message = 'No more then 10 characters per line allowed'
@@ -5690,8 +5698,8 @@ def barcodeScan():
                 Column('fg_color', String),
                 Column('bg_color', String))
                         
-            #choose next groupbutton (from 5) see line 4244 and start with group 1
-            #see line 4274 and 4275
+            #choose next groupbutton (from 8) see line 4244 and start with group 1
+            #see line 5779 and 5780
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
