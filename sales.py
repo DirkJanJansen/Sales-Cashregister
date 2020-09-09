@@ -2990,7 +2990,7 @@ def importMenu():
                                         except:
                                             lossnr = 1
                                         insloss = insert(loss).values(lossID=lossnr,barcode=rp[0],number=rp[11],\
-                                          category='Obsolete',bookdate=mtoday)
+                                          item_price=rp[3],category='Obsolete',bookdate=mtoday)
                                         con.execute(insloss)
                                         delart = delete(articles).where(articles.c.barcode == mbarcode)
                                         con.execute(delart)
