@@ -2981,12 +2981,18 @@ def importMenu():
                             for line in reader:
                                 if line[0].isnumeric():
                                     mbarcode = line[0] 
-                                    selloss = select([loss]).where(loss.c.barcode == mbarcode)
-                                    if con.execute(selloss).fetchone():
-                                        delloss = delete(loss).where(loss.c.barcode == mbarcode)
-                                        con.execute(delloss)
                                     sel = select([articles]).where(articles.c.barcode == mbarcode)
-                                    if con.execute(sel).fetchone():
+                                    rp = con.execute(sel).first()
+                                    if rp:
+                                        try:
+                                            lossnr = con.execute(select([func.max(loss.c.lossID, type_=Integer)])).scalar()
+                                            lossnr += 1
+                                        except:
+                                            lossnr = 1
+                                        insloss = insert(loss).where(loss.c.barcode == mbarcode).values(\
+                                          lossID=lossnr,barcode=rp[0],number=rp[11],\
+                                          category='Obsolete',bookdate=mtoday)
+                                        con.execute(insloss)
                                         delart = delete(articles).where(articles.c.barcode == mbarcode)
                                         con.execute(delart)
                                     else:
