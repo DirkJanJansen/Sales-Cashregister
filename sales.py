@@ -3891,7 +3891,7 @@ def articleRequest(mflag, btn):
                     metadata = MetaData()
                     loss = Table('loss', metadata,
                        Column('lossID', Integer, primary_key=True),
-                       Column('barcode', None, ForeignKey('articles.barcode')),
+                       Column('barcode', String),
                        Column('number', Float),
                        Column('bookdate', String),
                        Column('category', String))
@@ -4801,7 +4801,7 @@ def requestLoss():
     metadata = MetaData()
     loss = Table('loss', metadata,
        Column('lossID', Integer, primary_key=True),
-       Column('barcode', None, ForeignKey('articles.barcode')),
+       Column('barcode', String),
        Column('number', Float),
        Column('bookdate', String),
        Column('category', String))
@@ -5780,7 +5780,7 @@ def barcodeScan():
                     if self.maccess < 3:
                         aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbarcode(btn))
                     else:  #or as administrator buttonnumber and barcode linked
-                        aBtn.clicked.connect(lambda checked, btnnr = btnlist[a%24] : getbuttonnr(btnnr))
+                        aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbuttonnr(btn))
                                             
                     a += 1
             
