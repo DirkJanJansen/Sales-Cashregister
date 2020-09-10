@@ -3897,7 +3897,8 @@ def articleRequest(mflag, btn):
                        Column('number', Float),
                        Column('bookdate', String),
                        Column('category', String),
-                       Column('item_price', Float))
+                       Column('item_price', Float),
+                       Column('description', String))
                     
                     mcategory = qloss.currentText()
                     mnumber = qnumber.text()
@@ -4811,7 +4812,8 @@ def requestLoss():
        Column('number', Float),
        Column('bookdate', String),
        Column('category', String),
-       Column('item_price', Float))
+       Column('item_price', Float),
+       Column('description', String))
      
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
@@ -4871,7 +4873,7 @@ def requestLoss():
                 return self.header[col]
             return None
 
-    header = ['ID','Barcode','Amount','Bookdate','Category','Item-Price']                                       
+    header = ['ID','Barcode','Amount','Bookdate','Category','Item-Price','Description']                                       
     
     data_list=[]
     for row in rploss:
