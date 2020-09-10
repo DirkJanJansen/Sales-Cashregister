@@ -5654,7 +5654,7 @@ def barcodeScan():
             self.view.setText('')
             self.view.setFont(QFont("Consolas", 12, 75))
             self.view.setFocusPolicy(Qt.NoFocus)
-            self.view.setFixedSize(1110, 180)  
+            self.view.setFixedSize(1110, 190)  
             
             self.mtotal = 0.00
             self.mtotvat = 0.00
@@ -5833,7 +5833,7 @@ def barcodeScan():
             self.closeBtn.clicked.connect(lambda: windowClose(self))
             self.closeBtn.setFont(QFont("Arial",12))
             self.closeBtn.setFocusPolicy(Qt.NoFocus)
-            self.closeBtn.setFixedSize(150,128)
+            self.closeBtn.setFixedSize(150,137)
             self.closeBtn.setStyleSheet("color: black; background-color:   #45b39d")
 
             grid.addWidget(self.closeBtn, 0, 10, 4, 1, Qt.AlignTop)
