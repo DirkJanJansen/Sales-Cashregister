@@ -140,5 +140,7 @@
 2020-09-09 cashregister.backup and cashregister_empty.backup removed foreignkey link with table articles, for possibility booking on table loss for deleted items.
 2020-09-09 backups table loss extended with fiels item_price
 2020-09-10 sales.py scaling adjusted for orderlines view
+2020-09-10 sales.py request loss and book loss articles added fields item_price and description for uncoupling foreignkey articles
+2020-09-10 cashregister.backup and cashregister_empty.backup database changed due to adding fields item_price and description
 
 
