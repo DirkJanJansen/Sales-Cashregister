@@ -5442,7 +5442,7 @@ def set_barcodenr(self):
             giveAlarm()
                   
         self.closeBtn.setDisabled(True)
-        self.closeBtn.setStyleSheet("color: grey; background-color: #45b39d")
+        self.closeBtn.setStyleSheet("color: grey; background-color: #B0C4DE")
         self.printBtn.setEnabled(True)
         self.printBtn.setStyleSheet("color: black;  background-color: #d5bb55")
         self.nextBtn.setEnabled(True)
@@ -5706,7 +5706,7 @@ def barcodeScan():
                 Column('fg_color', String),
                 Column('bg_color', String))
                         
-            #choose next groupbutton (from 8) see line 4244 and start with group 1
+            #choose next groupbutton (from 8) and start with group 1
             #see line 5779 and 5780
             def btngroupChange(btngroup):
                 if btngroup == 1:
@@ -5770,7 +5770,7 @@ def barcodeScan():
                         btnlist.append(row[2].strip()) #compile list with barcodenumbers
                     else:    #showbuttonnumber and barcode for administrator
                         aBtn = QPushButton(str(row[0])+'\n'+row[2][0:6]+'\n'+row[2][6:13])
-                        btnlist.append(str(row[0]))    #choose buttonnumber
+                        btnlist.append(str(row[0]))    #compile list with buttonnumbers
                     aBtn.setFont(QFont("Times", 10, 75))
                     aBtn.setStyleSheet('color:'+row[3]+'; background-color:'+row[4])
                     aBtn.setFocusPolicy(Qt.NoFocus)
@@ -5842,7 +5842,7 @@ def barcodeScan():
             self.closeBtn.setFont(QFont("Arial",12))
             self.closeBtn.setFocusPolicy(Qt.NoFocus)
             self.closeBtn.setFixedSize(150,142)
-            self.closeBtn.setStyleSheet("color: black; background-color:   #45b39d")
+            self.closeBtn.setStyleSheet("color: black; background-color:   #B0C4DE")
 
             grid.addWidget(self.closeBtn, 0, 10, 4, 1, Qt.AlignTop)
                                   
