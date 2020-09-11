@@ -12,6 +12,8 @@ Extended system for purchasing and deliveries with invoices module.
 
 Imports with csv format files.
 
+Equipped with inventory management system and purchasing.
+
 Barcodes inserts for new products in own range generated and in commercial range by barcode scan.
 
 ![Sales Cash Register Screenshot](https://raw.githubusercontent.com/DirkJanJansen/Sales/master/Cashregister.png)
@@ -30,7 +32,7 @@ Link to changelog: https://github.com/DirkJanJansen/Sales/blob/master/Installati
 
 Barcode testlabels for employees logon and product testlabels included
 
-Equipped with inventory management system
+
 
 
  
