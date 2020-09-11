@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QLineEdit, QGridLayout, QDialog, QLabel, QPushButton
         QVBoxLayout, QTableView, QStyledItemDelegate, QCheckBox, QPlainTextEdit
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog
 from sqlalchemy import Table, Column, Integer, String, Boolean, MetaData, create_engine,\
-                     Float, select, update,insert, delete, func, and_, ForeignKey
+                     Float, select, update,insert, delete, func, and_
 
 def alertText(message):
     msg = QMessageBox()
@@ -5282,7 +5282,7 @@ def nextClient(self):
         self.closeBtn.setEnabled(True)
         self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
         self.printBtn.setDisabled(True)
-        self.printBtn.setStyleSheet("color: grey; background-color: #00FFFF")
+        self.printBtn.setStyleSheet("color: grey; background-color: #d5bb55")
         self.nextBtn.setDisabled(True)
         self.nextBtn.setStyleSheet("color: grey; background-color: #00FFFF")
         
@@ -5442,9 +5442,9 @@ def set_barcodenr(self):
             giveAlarm()
                   
         self.closeBtn.setDisabled(True)
-        self.closeBtn.setStyleSheet("color: grey; background-color: #B0C4DE")
+        self.closeBtn.setStyleSheet("color: grey; background-color: #45b39d")
         self.printBtn.setEnabled(True)
-        self.printBtn.setStyleSheet("color: black;  background-color: #00FFFF")
+        self.printBtn.setStyleSheet("color: black;  background-color: #d5bb55")
         self.nextBtn.setEnabled(True)
         self.nextBtn.setStyleSheet("font: 12pt Arial; color: black; background-color: #00BFFF")
     elif len(barcodenr) == 8 and checkEan8(barcodenr):
@@ -5823,7 +5823,7 @@ def barcodeScan():
             self.printBtn.setFont(QFont("Arial",12))
             self.printBtn.setFocusPolicy(Qt.NoFocus)
             self.printBtn.setFixedSize(150,140)
-            self.printBtn.setStyleSheet("color: black;  background-color: #00FFFF")
+            self.printBtn.setStyleSheet("color: black;  background-color: #d5bb55")
       
             grid.addWidget(self.printBtn, 6, 10, 4, 1, Qt.AlignTop)
             
@@ -5851,7 +5851,7 @@ def barcodeScan():
             infoBtn.setFont(QFont("Arial",12))
             infoBtn.setFocusPolicy(Qt.NoFocus)
             infoBtn.setFixedSize(150,140)
-            infoBtn.setStyleSheet("color: black;  background-color: #00BFFF")
+            infoBtn.setStyleSheet("color: black;  background-color: #00FFFF")
     
             grid.addWidget(infoBtn, 2, 10, 4, 1, Qt.AlignBottom)
            
@@ -5860,7 +5860,7 @@ def barcodeScan():
             self.nextBtn.setFont(QFont("Arial",12))
             self.nextBtn.setFocusPolicy(Qt.NoFocus)
             self.nextBtn.setFixedSize(150,140)            
-            self.nextBtn.setStyleSheet("color:black; background-color: #3498db")
+            self.nextBtn.setStyleSheet("color:black; background-color: #00BFFF")
     
             grid.addWidget(self.nextBtn, 8, 10)   
             
