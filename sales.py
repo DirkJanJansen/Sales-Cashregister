@@ -4848,7 +4848,6 @@ def requestLoss():
             table_view.setFont(font)
             table_view.resizeColumnsToContents()
             table_view.setSelectionBehavior(QTableView.SelectRows)
-            table_view.setColumnHidden(5,True)
             layout = QVBoxLayout(self)
             layout.addWidget(table_view)
             self.setLayout(layout)
@@ -4887,82 +4886,7 @@ def requestLoss():
 
     win = Widget(data_list, header)
     win.exec_()
-    
-def bookingLoss():
-    class Widget(QDialog):
-        def __init__(self, parent=None):
-            super(Widget, self).__init__(parent)
-            self.setWindowTitle("Booking loss articles")
-            self.setWindowIcon(QIcon('./logos/logo.jpg'))
-            self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                   
-            self.setFont(QFont('Arial', 10))
-            self.setStyleSheet("background-color: #D9E1DF") 
-                
-            grid = QGridLayout()
-            grid.setSpacing(20)      
-                
-            pyqt = QLabel()
-            movie = QMovie('./logos/pyqt.gif')
-            pyqt.setMovie(movie)
-            movie.setScaledSize(QSize(240,80))
-            movie.start()
-            grid.addWidget(pyqt, 0 ,0, 1, 3)
-       
-            logo = QLabel()
-            pixmap = QPixmap('./logos/logo.jpg')
-            logo.setPixmap(pixmap.scaled(70,70))
-            grid.addWidget(logo , 0, 2, 1 ,1, Qt.AlignRight)
-            
-            self.k0Edit = QComboBox()
-            self.k0Edit.setFixedWidth(230)
-            self.k0Edit.setFont(QFont("Arial",10))
-            self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            self.k0Edit.addItem('Booking loss')
-            self.k0Edit.addItem('Request loss items')
-                           
-            def k0Changed():
-                self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
-            self.k0Edit.currentIndexChanged.connect(k0Changed)
-            
-            grid.addWidget(self.k0Edit, 1, 1, 1, 2)
-                           
-            def menuChoice(self):
-                mindex = self.k0Edit.currentIndex()
-                if mindex == 0:
-                    mflag = 2
-                    articleRequest(mflag, 0)
-                elif mindex == 1:
-                    requestLoss()
-     
-            applyBtn = QPushButton('Select')
-            applyBtn.clicked.connect(lambda: menuChoice(self))
-            applyBtn.setFont(QFont("Arial",10))
-            applyBtn.setFixedWidth(100)
-            applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
-            
-            grid.addWidget(applyBtn, 2, 2)
-            
-            closeBtn = QPushButton('Close')
-            closeBtn.clicked.connect(self.close)  
-            closeBtn.setFont(QFont("Arial",10))
-            closeBtn.setFixedWidth(100)
-            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-             
-            grid.addWidget(closeBtn, 2, 1)
-                 
-            lbl3 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-            lbl3.setFont(QFont("Arial", 10))
-            grid.addWidget(lbl3, 3, 0, 1, 3, Qt.AlignCenter)
-           
-            self.setLayout(grid)
-            self.setGeometry(600, 200, 150, 100)
-                
-    window = Widget()
-    window.exec_() 
-    
+        
 def purchaseCollect(self):
     metadata = MetaData()
     articles = Table('articles', metadata,
