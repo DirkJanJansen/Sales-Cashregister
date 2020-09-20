@@ -5214,7 +5214,14 @@ def nextClient(self):
         self.mtotal = 0.00
         self.mtotvat = 0.00
         self.mlist = []
+        self.text = ''
         self.view.setText('')
+        self.qtotalEdit.setText('')
+        self.qtotalEdit.setPlaceholderText('TOTAL')
+        self.qcashEdit.setText('')
+        self.qcashEdit.setPlaceholderText('CASH')
+        self.qchangeEdit.setText('')
+        self.qchangeEdit.setPlaceholderText('CHANGE')
         self.qtailtext = 'Total  incl. VAT'+'\u2000'*57+'{:\u2000>12.2f}'.format(self.mtotal)+'{:\u2000>12.2f}'.format(self.mtotvat)
         self.qtailEdit.setText(self.qtailtext)
     else:
