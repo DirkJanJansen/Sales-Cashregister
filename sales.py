@@ -5210,8 +5210,9 @@ def nextClient(self):
         self.printBtn.setStyleSheet("color: grey; background-color: #d5bb55")
         self.nextBtn.setDisabled(True)
         self.nextBtn.setStyleSheet("color: grey; background-color: #00FFFF")
+        self.albl.setText('Transaction successful!')
     else:
-        self.albl.setText('There are no transactions yet!')
+        self.albl.setText('There are no transactions!')
     self.closeBtn.setEnabled(True)
     self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
     self.mtotal = 0.00
