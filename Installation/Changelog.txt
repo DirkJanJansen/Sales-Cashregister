@@ -145,5 +145,8 @@
 2020-09-20 sales.py module payment message added "Payment done!".
 2020-09-20 sales.py unused menu bookingLoss removed
 2020-09-20 sales.py cleanup caches modest calculator by pushing Next Client button.
+2020-09-20 sales.py modest calculator also removed caches by no transactions
+
+
 
 
