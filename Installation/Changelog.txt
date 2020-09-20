@@ -144,5 +144,6 @@
 2020-09-10 cashregister.backup and cashregister_empty.backup database changed due to adding fields item_price and description
 2020-09-20 sales.py module payment message added "Payment done!".
 2020-09-20 sales.py unused menu bookingLoss removed
+2020-09-20 sales.py cleanup caches modest calculator by pushing Next Client button.
 
 
