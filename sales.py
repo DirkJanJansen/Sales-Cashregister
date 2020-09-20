@@ -5214,11 +5214,11 @@ def nextClient(self):
         self.mtotal = 0.00
         self.mtotvat = 0.00
         self.mlist = []
-        self.text = ''
         self.view.setText('')
         self.qtotalEdit.setText('')
         self.qtotalEdit.setPlaceholderText('TOTAL')
-        self.qcashEdit.setText('')
+        self.text = ''
+        self.qcashEdit.setText(self.text)
         self.qcashEdit.setPlaceholderText('CASH')
         self.qchangeEdit.setText('')
         self.qchangeEdit.setPlaceholderText('CHANGE')
