@@ -4240,7 +4240,8 @@ def paymentsRequest():
                         updpay = update(payments).where(payments.c.payID == mpaynr).\
                         values(paydate = mpaydate)
                         con.execute(updpay)
-                        paySuccess()  
+                        message = 'Payment done!'
+                        actionOK(message) 
                         self.close()
                     else:
                         message = 'Not all fields are filled in!'
@@ -5881,6 +5882,4 @@ if __name__ == '__main__':
     if sys.platform == "linux":
         os.system("../.usbkbd.sh")
     barcodeScan()
-    app.exec_()
-    
-    
+    app.exec_()  
