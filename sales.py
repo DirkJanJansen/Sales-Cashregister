@@ -5210,25 +5210,23 @@ def nextClient(self):
         self.printBtn.setStyleSheet("color: grey; background-color: #d5bb55")
         self.nextBtn.setDisabled(True)
         self.nextBtn.setStyleSheet("color: grey; background-color: #00FFFF")
-        
-        self.mtotal = 0.00
-        self.mtotvat = 0.00
-        self.mlist = []
-        self.view.setText('')
-        self.qtotalEdit.setText('')
-        self.qtotalEdit.setPlaceholderText('TOTAL')
-        self.text = ''
-        self.qcashEdit.setText(self.text)
-        self.qcashEdit.setPlaceholderText('CASH')
-        self.qchangeEdit.setText('')
-        self.qchangeEdit.setPlaceholderText('CHANGE')
-        self.qtailtext = 'Total  incl. VAT'+'\u2000'*57+'{:\u2000>12.2f}'.format(self.mtotal)+'{:\u2000>12.2f}'.format(self.mtotvat)
-        self.qtailEdit.setText(self.qtailtext)
     else:
-        message = 'There are no transactions yet!'
-        alertText(message)
-        self.closeBtn.setEnabled(True)
-        self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
+        self.albl.setText('There are no transactions yet!')
+    self.closeBtn.setEnabled(True)
+    self.closeBtn.setStyleSheet("color: black; background-color:  #B0C4DE")
+    self.mtotal = 0.00
+    self.mtotvat = 0.00
+    self.mlist = []
+    self.view.setText('')
+    self.qtotalEdit.setText('')
+    self.qtotalEdit.setPlaceholderText('TOTAL')
+    self.text = ''
+    self.qcashEdit.setText(self.text)
+    self.qcashEdit.setPlaceholderText('CASH')
+    self.qchangeEdit.setText('')
+    self.qchangeEdit.setPlaceholderText('CHANGE')
+    self.qtailtext = 'Total  incl. VAT'+'\u2000'*57+'{:\u2000>12.2f}'.format(self.mtotal)+'{:\u2000>12.2f}'.format(self.mtotvat)
+    self.qtailEdit.setText(self.qtailtext)
 
 def giveAlarm():
     if sys.platform == 'win32':
