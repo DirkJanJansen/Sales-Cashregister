@@ -143,5 +143,6 @@
 2020-09-10 sales.py request loss and book loss articles added fields item_price and description for uncoupling foreignkey articles
 2020-09-10 cashregister.backup and cashregister_empty.backup database changed due to adding fields item_price and description
 2020-09-20 sales.py module payment message added "Payment done!".
+2020-09-20 sales.py unused menu bookingLoss removed
 
 
