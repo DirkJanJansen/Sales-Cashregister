@@ -847,9 +847,9 @@ def requestSupplier():
          
     def changeSupplier(idx):
         suppliernr = idx.data()
-        selsupl = select([suppliers]).where(suppliers.c.supplierID == suppliernr)
-        rpsupl = con.execute(selsupl).first()
         if idx.column()== 0:
+            selsupl = select([suppliers]).where(suppliers.c.supplierID == suppliernr)
+            rpsupl = con.execute(selsupl).first()
             class Widget(QDialog):
                 def __init__(self, parent=None):
                     super(Widget, self).__init__(parent)
@@ -1155,9 +1155,9 @@ def handleInvoices():
     
     def invoicePaying(idx):
         paynr=idx.data()
-        selinv = select([invoices]).where(invoices.c.invoiceID==paynr)
-        rpinv = con.execute(selinv).first()
         if idx.column()==0:
+            selinv = select([invoices]).where(invoices.c.invoiceID==paynr)
+            rpinv = con.execute(selinv).first()
             class Window(QDialog):
                 def __init__(self):
                     QDialog.__init__(self)
@@ -1783,29 +1783,29 @@ def purchaseMenu():
                                  
                 def orderHandle(idx):
                     orderlinenr = idx.data()
-                    if mconnect == 2:  #supplier unknown 
-                        selorderline = select([purchase_orderlines])\
-                         .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
-                          purchase_orderlines.c.supplierID==0))
-                        rporderline = con.execute(selorderline).first()
-                    elif mconnect == 3: #process deliveries
-                        selorderline = select([purchase_orderlines, suppliers])\
-                         .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
-                            purchase_orderlines.c.supplierID==suppliers.c.supplierID))\
-                            .order_by(suppliers.c.company_name)
-                        rporderline = con.execute(selorderline).first()
-                    elif mconnect == 4 or mconnect == 8: #orders generated all suppliers per supplier
-                        selorderline = select([purchase_orderlines, suppliers])\
-                         .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
-                            purchase_orderlines.c.supplierID==suppliers.c.supplierID)).order_by(suppliers.c.company_name)
-                        rporderline = con.execute(selorderline).first()
-                    else:
-                        selorderline = select([purchase_orderlines])\
-                         .where(purchase_orderlines.c.orderlineID==orderlinenr)\
-                            .order_by(purchase_orderlines.c.supplierID)
-                        rporderline = con.execute(selorderline).first()
-                                             
                     if idx.column()==0:
+                        if mconnect == 2:  #supplier unknown 
+                            selorderline = select([purchase_orderlines])\
+                             .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
+                              purchase_orderlines.c.supplierID==0))
+                            rporderline = con.execute(selorderline).first()
+                        elif mconnect == 3: #process deliveries
+                            selorderline = select([purchase_orderlines, suppliers])\
+                             .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
+                                purchase_orderlines.c.supplierID==suppliers.c.supplierID))\
+                                .order_by(suppliers.c.company_name)
+                            rporderline = con.execute(selorderline).first()
+                        elif mconnect == 4 or mconnect == 8: #orders generated all suppliers per supplier
+                            selorderline = select([purchase_orderlines, suppliers])\
+                             .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
+                                purchase_orderlines.c.supplierID==suppliers.c.supplierID)).order_by(suppliers.c.company_name)
+                            rporderline = con.execute(selorderline).first()
+                        else:
+                            selorderline = select([purchase_orderlines])\
+                             .where(purchase_orderlines.c.orderlineID==orderlinenr)\
+                                .order_by(purchase_orderlines.c.supplierID)
+                            rporderline = con.execute(selorderline).first()
+                                                 
                         class MainWindow(QDialog):
                             def __init__(self):
                                 QDialog.__init__(self)
@@ -3468,9 +3468,9 @@ def articleRequest(mflag, btn):
             
     def changeArticle(idx):
         mbarcode = idx.data() 
-        selarticle = select([articles]).where(articles.c.barcode == mbarcode)
-        rparticle = con.execute(selarticle).first()
         if idx.column() == 0:
+            selarticle = select([articles]).where(articles.c.barcode == mbarcode)
+            rparticle = con.execute(selarticle).first()
             class Widget(QDialog):
                 def __init__(self, parent=None):
                     super(Widget, self).__init__(parent)
@@ -3820,142 +3820,143 @@ def articleRequest(mflag, btn):
             
     def bookingLoss(idx):
         mbarcode = idx.data()
-        sel = select([articles]).where(articles.c.barcode == mbarcode)
-        rp = con.execute(sel).first()
-        class Widget(QDialog):
-            def __init__(self, parent=None):
-                super(Widget, self).__init__(parent)
-                self.setWindowTitle("Booking loss articles")
-                self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                        Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-                self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                self.setFont(QFont('Arial', 10))
-                
-                q1Edit = QLineEdit(mbarcode)
-                q1Edit.setFixedWidth(130)
-                q1Edit.setFont(QFont("Arial", 10))
-                q1Edit.setStyleSheet("color: black")
-                q1Edit.setDisabled(True)
-                                
-                #Loss description
-                qloss = QComboBox()
-                qloss.setFixedWidth(230)
-                qloss.setFont(QFont("Arial", 10))
-                qloss.setStyleSheet("color: black;  background-color: #F8F7EE")
-                qloss.addItem('Obsolete')
-                qloss.addItem('Warehouse differences.')
-                qloss.addItem('Damaged')
-                qloss.addItem('Shelf Life')
-                       
-                #number
-                qnumber = QLineEdit('0')
-                qnumber.setFixedWidth(150)
-                qnumber.setFont(QFont("Arial",10))
-                qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
-                reg_ex = QRegExp("^[+]?[0-9]*\.?[0-9]+$")
-                input_validator = QRegExpValidator(reg_ex, qnumber)
-                qnumber.setValidator(input_validator)
-                
-                grid = QGridLayout()
-                grid.setSpacing(20)
-                              
-                pyqt = QLabel()
-                movie = QMovie('./logos/pyqt.gif')
-                pyqt.setMovie(movie)
-                movie.setScaledSize(QSize(240,80))
-                movie.start()
-                grid.addWidget(pyqt, 0 ,0, 1, 2)
-           
-                logo = QLabel()
-                pixmap = QPixmap('./logos/logo.jpg')
-                logo.setPixmap(pixmap.scaled(70,70))
-                grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
-                
-                lbl1 = QLabel('Barcodenumber')  
-                lbl1.setFont(QFont("Arial",10))
-                grid.addWidget(lbl1, 1, 0)
-                grid.addWidget(q1Edit, 1, 1)
-                
-                lbl2 = QLabel('Loss description')  
-                lbl2.setFont(QFont("Arial",10))
-                grid.addWidget(lbl2, 2, 0)
-                grid.addWidget(qloss, 2, 1)
-                        
-                lbl3 = QLabel('Number')  
-                lbl3.setFont(QFont("Arial",10))
-                grid.addWidget(lbl3, 3, 0)
-                grid.addWidget(qnumber, 3, 1)
-                       
-                def qlossChanged():
-                    qloss.setCurrentText(qloss.currentText())
-                qloss.currentIndexChanged.connect(qlossChanged)
-                
-                def qnumberChanged():
-                    qnumber.setText(qnumber.text())
-                qnumber.textChanged.connect(qnumberChanged)
-                
-                def insertLoss():
-                    metadata = MetaData()
-                    loss = Table('loss', metadata,
-                       Column('lossID', Integer, primary_key=True),
-                       Column('barcode', String),
-                       Column('number', Float),
-                       Column('bookdate', String),
-                       Column('category', String),
-                       Column('item_price', Float),
-                       Column('description', String))
+        if idx.column()==0:
+            sel = select([articles]).where(articles.c.barcode == mbarcode)
+            rp = con.execute(sel).first()
+            class Widget(QDialog):
+                def __init__(self, parent=None):
+                    super(Widget, self).__init__(parent)
+                    self.setWindowTitle("Booking loss articles")
+                    self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                            Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                    self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                    self.setFont(QFont('Arial', 10))
                     
-                    mcategory = qloss.currentText()
-                    mnumber = qnumber.text()
-                    mprice = rp[3]
-                    mdescription = rp[1]
-                    try:
-                        lossnr = con.execute(select([func.max(loss.c.lossID, type_=Integer)])).scalar()
-                        lossnr += 1
-                    except:
-                        lossnr = 1
-                    mbookdate= str(datetime.datetime.now())[0:10]
-                    if float(mnumber) > 0:                 
-                        ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
-                            number = mnumber, category = mcategory, bookdate = mbookdate,\
-                            item_price = mprice, description = mdescription)
-                        con.execute(ins)
-                        upd = update(articles).where(articles.c.barcode == mbarcode).\
-                          values(item_stock = articles.c.item_stock - mnumber)
-                        con.execute(upd)
-                        message = 'Update succeeded!'
-                        actionOK(message)
-                        self.close()
-                    else:
-                        message = 'Not all fields are filled in!'
-                        alertText(message)
-                        self.close()
-                                                 
-                self.setLayout(grid)
-                self.setGeometry(600, 200, 150, 150)
-        
-                applyBtn = QPushButton('Change')
-                applyBtn.clicked.connect(lambda: insertLoss())
-        
-                grid.addWidget(applyBtn, 4, 1, 1, 1, Qt.AlignRight)
-                applyBtn.setFont(QFont("Arial",10))
-                applyBtn.setFixedWidth(100)
-                applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                    q1Edit = QLineEdit(mbarcode)
+                    q1Edit.setFixedWidth(130)
+                    q1Edit.setFont(QFont("Arial", 10))
+                    q1Edit.setStyleSheet("color: black")
+                    q1Edit.setDisabled(True)
+                                    
+                    #Loss description
+                    qloss = QComboBox()
+                    qloss.setFixedWidth(230)
+                    qloss.setFont(QFont("Arial", 10))
+                    qloss.setStyleSheet("color: black;  background-color: #F8F7EE")
+                    qloss.addItem('Obsolete')
+                    qloss.addItem('Warehouse differences.')
+                    qloss.addItem('Damaged')
+                    qloss.addItem('Shelf Life')
+                           
+                    #number
+                    qnumber = QLineEdit('0')
+                    qnumber.setFixedWidth(150)
+                    qnumber.setFont(QFont("Arial",10))
+                    qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
+                    reg_ex = QRegExp("^[+]?[0-9]*\.?[0-9]+$")
+                    input_validator = QRegExpValidator(reg_ex, qnumber)
+                    qnumber.setValidator(input_validator)
+                    
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                                  
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 ,0, 1, 2)
                
-                cancelBtn = QPushButton('Close')
-                cancelBtn.clicked.connect(self.close) 
-                
-                grid.addWidget(cancelBtn, 4, 1)
-                cancelBtn.setFont(QFont("Arial",10))
-                cancelBtn.setFixedWidth(100)
-                cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
-                
-                lbl4 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
-                lbl4.setFont(QFont("Arial", 10))
-                grid.addWidget(lbl4, 6, 0, 1, 2, Qt.AlignCenter)     
-          
-        win = Widget()
-        win.exec_()
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
+                    
+                    lbl1 = QLabel('Barcodenumber')  
+                    lbl1.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl1, 1, 0)
+                    grid.addWidget(q1Edit, 1, 1)
+                    
+                    lbl2 = QLabel('Loss description')  
+                    lbl2.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl2, 2, 0)
+                    grid.addWidget(qloss, 2, 1)
+                            
+                    lbl3 = QLabel('Number')  
+                    lbl3.setFont(QFont("Arial",10))
+                    grid.addWidget(lbl3, 3, 0)
+                    grid.addWidget(qnumber, 3, 1)
+                           
+                    def qlossChanged():
+                        qloss.setCurrentText(qloss.currentText())
+                    qloss.currentIndexChanged.connect(qlossChanged)
+                    
+                    def qnumberChanged():
+                        qnumber.setText(qnumber.text())
+                    qnumber.textChanged.connect(qnumberChanged)
+                    
+                    def insertLoss():
+                        metadata = MetaData()
+                        loss = Table('loss', metadata,
+                           Column('lossID', Integer, primary_key=True),
+                           Column('barcode', String),
+                           Column('number', Float),
+                           Column('bookdate', String),
+                           Column('category', String),
+                           Column('item_price', Float),
+                           Column('description', String))
+                        
+                        mcategory = qloss.currentText()
+                        mnumber = qnumber.text()
+                        mprice = rp[3]
+                        mdescription = rp[1]
+                        try:
+                            lossnr = con.execute(select([func.max(loss.c.lossID, type_=Integer)])).scalar()
+                            lossnr += 1
+                        except:
+                            lossnr = 1
+                        mbookdate= str(datetime.datetime.now())[0:10]
+                        if float(mnumber) > 0:                 
+                            ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
+                                number = mnumber, category = mcategory, bookdate = mbookdate,\
+                                item_price = mprice, description = mdescription)
+                            con.execute(ins)
+                            upd = update(articles).where(articles.c.barcode == mbarcode).\
+                              values(item_stock = articles.c.item_stock - mnumber)
+                            con.execute(upd)
+                            message = 'Update succeeded!'
+                            actionOK(message)
+                            self.close()
+                        else:
+                            message = 'Not all fields are filled in!'
+                            alertText(message)
+                            self.close()
+                                                     
+                    self.setLayout(grid)
+                    self.setGeometry(600, 200, 150, 150)
+            
+                    applyBtn = QPushButton('Change')
+                    applyBtn.clicked.connect(lambda: insertLoss())
+            
+                    grid.addWidget(applyBtn, 4, 1, 1, 1, Qt.AlignRight)
+                    applyBtn.setFont(QFont("Arial",10))
+                    applyBtn.setFixedWidth(100)
+                    applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                   
+                    cancelBtn = QPushButton('Close')
+                    cancelBtn.clicked.connect(self.close) 
+                    
+                    grid.addWidget(cancelBtn, 4, 1)
+                    cancelBtn.setFont(QFont("Arial",10))
+                    cancelBtn.setFixedWidth(100)
+                    cancelBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                    
+                    lbl4 = QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl')
+                    lbl4.setFont(QFont("Arial", 10))
+                    grid.addWidget(lbl4, 6, 0, 1, 2, Qt.AlignCenter)     
+              
+            win = Widget()
+            win.exec_()
         
     win = Mainwindow(data_list, header)
     win.exec_()
@@ -4121,171 +4122,172 @@ def paymentsRequest():
         
     def showSelection(idx):
         mpaynr = idx.data()
-        selp = select([payments]).where(payments.c.payID == mpaynr)
-        rpp = con.execute(selp).first()
-                  
-        class MainWindow(QDialog):
-            def __init__(self):
-                QDialog.__init__(self)
-                self.setWindowTitle("Payments instances")
-                self.setWindowIcon(QIcon('./logos/logo.jpg'))
-                self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
-                                    Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
-                self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-                       
-                self.setFont(QFont('Arial', 10))
-                self.setStyleSheet("background-color: #D9E1DF") 
-            
-                grid = QGridLayout()
-                grid.setSpacing(20)
-                                                    
-                pyqt = QLabel()
-                movie = QMovie('./logos/pyqt.gif')
-                pyqt.setMovie(movie)
-                movie.setScaledSize(QSize(240,80))
-                movie.start()
-                grid.addWidget(pyqt, 0 ,0, 1, 2)
-           
-                logo = QLabel()
-                pixmap = QPixmap('./logos/logo.jpg')
-                logo.setPixmap(pixmap.scaled(70,70))
-                grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
+        if idx.column()==0:
+            selp = select([payments]).where(payments.c.payID == mpaynr)
+            rpp = con.execute(selp).first()
+                      
+            class MainWindow(QDialog):
+                def __init__(self):
+                    QDialog.__init__(self)
+                    self.setWindowTitle("Payments instances")
+                    self.setWindowIcon(QIcon('./logos/logo.jpg'))
+                    self.setWindowFlags(self.windowFlags()| Qt.WindowSystemMenuHint |
+                                        Qt.WindowMinimizeButtonHint) #Qt.WindowMinMaxButtonsHint
+                    self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+                           
+                    self.setFont(QFont('Arial', 10))
+                    self.setStyleSheet("background-color: #D9E1DF") 
                 
-                #kind
-                q1Edit = QLineEdit(rpp[1])
-                q1Edit.setFixedWidth(250)
-                q1Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q1Edit.setDisabled(True)
-                                
-                #amount
-                q2Edit = QLineEdit(str(round(float(rpp[2]),2)))
-                q2Edit.setAlignment(Qt.AlignRight)
-                q2Edit.setFixedWidth(150)
-                q2Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q2Edit.setDisabled(True)
-                 
-                #bookdate
-                q3Edit = QLineEdit(str(rpp[3]))
-                q3Edit.setFixedWidth(150)
-                q3Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q3Edit.setDisabled(True)
-                
-                #paydate
-                q4Edit = QLineEdit(str(rpp[4]))
-                q4Edit.setFixedWidth(150)
-                q4Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q4Edit.setDisabled(True)
-                             
-                #instance
-                q5Edit = QLineEdit(rpp[5])
-                q5Edit.setFixedWidth(250)
-                q5Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q5Edit.setDisabled(True)
-                  
-                #accountnumber
-                q9Edit = QLineEdit(str(rpp[6]))
-                q9Edit.setFixedWidth(250)
-                q9Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q9Edit.setDisabled(True)
-                                 
-                #receiptnumber)
-                q12Edit = QLineEdit(str(rpp[7]))
-                q12Edit.setAlignment(Qt.AlignRight)
-                q12Edit.setFixedWidth(150)
-                q12Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
-                q12Edit.setDisabled(True)    
-                        
-                lbl3 = QLabel('Kind')  
-                lbl3.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl3, 2, 0)
-                grid.addWidget(q1Edit, 2, 1)
-                                                     
-                lbl4 = QLabel('Amount')  
-                lbl4.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl4, 3, 0)
-                grid.addWidget(q2Edit, 3, 1)
-                
-                lbl5 = QLabel('Bookdate')  
-                lbl5.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl5, 4, 0)
-                grid.addWidget(q3Edit, 4, 1)
-                
-                lbl6 = QLabel('Paydate')  
-                lbl6.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl6, 5, 0)
-                grid.addWidget(q4Edit, 5, 1)
-                
-                lbl7 = QLabel('Pay')
-                lbl7.setFont(QFont("Arial",10))
-                grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
+                    grid = QGridLayout()
+                    grid.setSpacing(20)
+                                                        
+                    pyqt = QLabel()
+                    movie = QMovie('./logos/pyqt.gif')
+                    pyqt.setMovie(movie)
+                    movie.setScaledSize(QSize(240,80))
+                    movie.start()
+                    grid.addWidget(pyqt, 0 ,0, 1, 2)
+               
+                    logo = QLabel()
+                    pixmap = QPixmap('./logos/logo.jpg')
+                    logo.setPixmap(pixmap.scaled(70,70))
+                    grid.addWidget(logo , 0, 1, 1 ,1, Qt.AlignRight)
+                    
+                    #kind
+                    q1Edit = QLineEdit(rpp[1])
+                    q1Edit.setFixedWidth(250)
+                    q1Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q1Edit.setDisabled(True)
+                                    
+                    #amount
+                    q2Edit = QLineEdit(str(round(float(rpp[2]),2)))
+                    q2Edit.setAlignment(Qt.AlignRight)
+                    q2Edit.setFixedWidth(150)
+                    q2Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q2Edit.setDisabled(True)
                      
-                self.cBox = QCheckBox()
-                self.cBox.setStyleSheet('color: black; background-color: #F8F7EE')
-                grid.addWidget(self.cBox, 6, 1)
-                if len(rpp[4])==10:
-                    lbl7 = QLabel('Payed')
+                    #bookdate
+                    q3Edit = QLineEdit(str(rpp[3]))
+                    q3Edit.setFixedWidth(150)
+                    q3Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q3Edit.setDisabled(True)
+                    
+                    #paydate
+                    q4Edit = QLineEdit(str(rpp[4]))
+                    q4Edit.setFixedWidth(150)
+                    q4Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q4Edit.setDisabled(True)
+                                 
+                    #instance
+                    q5Edit = QLineEdit(rpp[5])
+                    q5Edit.setFixedWidth(250)
+                    q5Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q5Edit.setDisabled(True)
+                      
+                    #accountnumber
+                    q9Edit = QLineEdit(str(rpp[6]))
+                    q9Edit.setFixedWidth(250)
+                    q9Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q9Edit.setDisabled(True)
+                                     
+                    #receiptnumber)
+                    q12Edit = QLineEdit(str(rpp[7]))
+                    q12Edit.setAlignment(Qt.AlignRight)
+                    q12Edit.setFixedWidth(150)
+                    q12Edit.setStyleSheet("QLineEdit { font-size: 10pt; font-family: Arial; color: black }")
+                    q12Edit.setDisabled(True)    
+                            
+                    lbl3 = QLabel('Kind')  
+                    lbl3.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl3, 2, 0)
+                    grid.addWidget(q1Edit, 2, 1)
+                                                         
+                    lbl4 = QLabel('Amount')  
+                    lbl4.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl4, 3, 0)
+                    grid.addWidget(q2Edit, 3, 1)
+                    
+                    lbl5 = QLabel('Bookdate')  
+                    lbl5.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl5, 4, 0)
+                    grid.addWidget(q3Edit, 4, 1)
+                    
+                    lbl6 = QLabel('Paydate')  
+                    lbl6.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl6, 5, 0)
+                    grid.addWidget(q4Edit, 5, 1)
+                    
+                    lbl7 = QLabel('Pay')
                     lbl7.setFont(QFont("Arial",10))
                     grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
-                    self.cBox.setStyleSheet('color: black')
-                    self.cBox.setEnabled(False)
+                         
+                    self.cBox = QCheckBox()
+                    self.cBox.setStyleSheet('color: black; background-color: #F8F7EE')
+                    grid.addWidget(self.cBox, 6, 1)
+                    if len(rpp[4])==10:
+                        lbl7 = QLabel('Payed')
+                        lbl7.setFont(QFont("Arial",10))
+                        grid.addWidget(lbl7, 6, 0, 1, 1, Qt.AlignRight)
+                        self.cBox.setStyleSheet('color: black')
+                        self.cBox.setEnabled(False)
+                        
+                    def cboxChanged():
+                        self.cBox.setCheckState(self.cBox.checkState())
+                    self.cBox.stateChanged.connect(cboxChanged)
                     
-                def cboxChanged():
-                    self.cBox.setCheckState(self.cBox.checkState())
-                self.cBox.stateChanged.connect(cboxChanged)
-                
-                def  updPayment(self):
-                    mstatus = self.cBox.checkState()
-                    if mstatus:
-                        mpaydate = str(datetime.datetime.now())[0:10]
-                        updpay = update(payments).where(payments.c.payID == mpaynr).\
-                        values(paydate = mpaydate)
-                        con.execute(updpay)
-                        message = 'Payment done!'
-                        actionOK(message) 
-                        self.close()
-                    else:
-                        message = 'Not all fields are filled in!'
-                        alertText(message)
-                        self.close()
-                                                                           
-                lbl7 = QLabel('Instance')  
-                lbl7.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl7, 7, 0)
-                grid.addWidget(q5Edit, 7, 1, 1, 2)
-                 
-                lbl20 = QLabel('Accountnumber')  
-                lbl20.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl20, 10, 0)
-                grid.addWidget(q9Edit, 10, 1, 1, 2)
-                      
-                lbl23 = QLabel('Receiptnumber')  
-                lbl23.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-                grid.addWidget(lbl23, 13, 0)
-                grid.addWidget(q12Edit, 13, 1)
-               
-                payBtn = QPushButton('Paying')
-                payBtn.clicked.connect(lambda: updPayment(self))
-        
-                grid.addWidget(payBtn, 14, 1, 1 , 1, Qt.AlignRight)
-                payBtn.setFont(QFont("Arial",10))
-                payBtn.setFixedWidth(100)
-                payBtn.setStyleSheet("color: black;  background-color: gainsboro")
-                
-                closeBtn = QPushButton('Close')
-                closeBtn.clicked.connect(self.close)
-        
-                grid.addWidget(closeBtn, 14, 1)
-                closeBtn.setFont(QFont("Arial",10))
-                closeBtn.setFixedWidth(100)
-                closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
-                
-                grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 15, 0, 1, 2, Qt.AlignCenter)
-                
-                self.setLayout(grid)
-                self.setGeometry(600, 200, 150, 150)
-                
-        window = MainWindow()
-        window.exec_()
+                    def  updPayment(self):
+                        mstatus = self.cBox.checkState()
+                        if mstatus:
+                            mpaydate = str(datetime.datetime.now())[0:10]
+                            updpay = update(payments).where(payments.c.payID == mpaynr).\
+                            values(paydate = mpaydate)
+                            con.execute(updpay)
+                            message = 'Payment done!'
+                            actionOK(message) 
+                            self.close()
+                        else:
+                            message = 'Not all fields are filled in!'
+                            alertText(message)
+                            self.close()
+                                                                               
+                    lbl7 = QLabel('Instance')  
+                    lbl7.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl7, 7, 0)
+                    grid.addWidget(q5Edit, 7, 1, 1, 2)
+                     
+                    lbl20 = QLabel('Accountnumber')  
+                    lbl20.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl20, 10, 0)
+                    grid.addWidget(q9Edit, 10, 1, 1, 2)
+                          
+                    lbl23 = QLabel('Receiptnumber')  
+                    lbl23.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    grid.addWidget(lbl23, 13, 0)
+                    grid.addWidget(q12Edit, 13, 1)
+                   
+                    payBtn = QPushButton('Paying')
+                    payBtn.clicked.connect(lambda: updPayment(self))
+            
+                    grid.addWidget(payBtn, 14, 1, 1 , 1, Qt.AlignRight)
+                    payBtn.setFont(QFont("Arial",10))
+                    payBtn.setFixedWidth(100)
+                    payBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                    
+                    closeBtn = QPushButton('Close')
+                    closeBtn.clicked.connect(self.close)
+            
+                    grid.addWidget(closeBtn, 14, 1)
+                    closeBtn.setFont(QFont("Arial",10))
+                    closeBtn.setFixedWidth(100)
+                    closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+                    
+                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 15, 0, 1, 2, Qt.AlignCenter)
+                    
+                    self.setLayout(grid)
+                    self.setGeometry(600, 200, 150, 150)
+                    
+            window = MainWindow()
+            window.exec_()
                                      
     win = MyWindow(data_list, header)
     win.exec_()
