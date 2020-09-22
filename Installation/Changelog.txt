@@ -146,6 +146,7 @@
 2020-09-20 sales.py unused menu bookingLoss removed
 2020-09-20 sales.py cleanup caches modest calculator by pushing Next Client button.
 2020-09-20 sales.py modest calculator also removed caches by no transactions
+2020-09-22 sales.py  by module change accounts  definition accountID moved after first column definition to avoid select errors.
 
 
 
