@@ -2629,9 +2629,9 @@ def emplRequest():
         
     def changeAccounts(idx):
         emplnr = idx.data()
-        selempl = select([accounts]).where(accounts.c.barcodeID == emplnr)
-        rpempl = con.execute(selempl).first()
         if idx.column() == 0:
+            selempl = select([accounts]).where(accounts.c.barcodeID == emplnr)
+            rpempl = con.execute(selempl).first()
             class Window(QDialog):
                 def __init__(self, parent=None):
                     super(Window, self).__init__(parent)
