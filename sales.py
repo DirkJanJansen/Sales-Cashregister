@@ -1763,7 +1763,7 @@ def purchaseMenu():
                         return None
                          
                 header = ['Orderlinenr','Barcode','Description','Item-price','Item-unit',\
-                          'Order-size','','Bookdate','Ordered','Order-date','Deliveries',\
+                          'Order-size','','Bookdate','Ordered amount','Order-date','Deliveries',\
                           'Delivery-date','Suppliernr','Company_name']
                 if mconnect == 2 or mconnect == 5 or mconnect == 7:
                     del header[-2:]
