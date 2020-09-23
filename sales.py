@@ -1643,7 +1643,6 @@ def purchaseMenu():
                         table_view.resizeColumnsToContents()
                         table_view.setSelectionBehavior(QTableView.SelectRows)
                         table_view.resizeColumnsToContents()
-                        table_view.setColumnWidth(6, 0)
                         table_view.clicked.connect(orderHandle)
                                       
                         grid.addWidget(table_view, 0, 0, 1, 6)
@@ -1763,7 +1762,7 @@ def purchaseMenu():
                         return None
                          
                 header = ['Orderlinenr','Barcode','Description','Item-price','Item-unit',\
-                          'Order-size','','Bookdate','Ordered amount','Order-date','Deliveries',\
+                          'Order-size','SupplierID','Bookdate','Ordered amount','Order-date','Deliveries',\
                           'Delivery-date','Suppliernr','Company_name']
                 if mconnect == 2 or mconnect == 5 or mconnect == 7:
                     del header[-2:]
