@@ -1800,7 +1800,13 @@ def purchaseMenu():
                              .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
                                 purchase_orderlines.c.supplierID==suppliers.c.supplierID)).order_by(suppliers.c.company_name)
                             rporderline = con.execute(selorderline).first()
-                        else:
+                        elif mconnect==6:
+                            selorderline = select([purchase_orderlines,suppliers])\
+                             .where(and_(purchase_orderlines.c.orderlineID==orderlinenr,\
+                                suppliers.c.supplierID==purchase_orderlines.c.supplierID)).\
+                                 order_by(suppliers.c.company_name)
+                            rporderline = con.execute(selorderline).first()
+                        elif mconnect==5 or mconnect==7:
                             selorderline = select([purchase_orderlines])\
                              .where(purchase_orderlines.c.orderlineID==orderlinenr)\
                                 .order_by(purchase_orderlines.c.supplierID)
