@@ -3858,7 +3858,7 @@ def articleRequest(mflag, btn):
                     qnumber.setFixedWidth(150)
                     qnumber.setFont(QFont("Arial",10))
                     qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
-                    reg_ex = QRegExp("^[+]?[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, qnumber)
                     qnumber.setValidator(input_validator)
                     
