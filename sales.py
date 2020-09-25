@@ -3854,7 +3854,7 @@ def articleRequest(mflag, btn):
                     qloss.addItem('Shelf Life')
                            
                     #number
-                    qnumber = QLineEdit('0')
+                    qnumber = QLineEdit('-')
                     qnumber.setFixedWidth(150)
                     qnumber.setFont(QFont("Arial",10))
                     qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
@@ -3921,13 +3921,13 @@ def articleRequest(mflag, btn):
                         except:
                             lossnr = 1
                         mbookdate= str(datetime.datetime.now())[0:10]
-                        if float(mnumber) > 0:                 
+                        if float(mnumber) > 0 or float(mnumber) < 0:                 
                             ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
                                 number = mnumber, category = mcategory, bookdate = mbookdate,\
                                 item_price = mprice, description = mdescription)
                             con.execute(ins)
                             upd = update(articles).where(articles.c.barcode == mbarcode).\
-                              values(item_stock = articles.c.item_stock - mnumber)
+                              values(item_stock = articles.c.item_stock + mnumber)
                             con.execute(upd)
                             message = 'Update succeeded!'
                             actionOK(message)
