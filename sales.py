@@ -3921,7 +3921,7 @@ def articleRequest(mflag, btn):
                         except:
                             lossnr = 1
                         mbookdate= str(datetime.datetime.now())[0:10]
-                        if float(mnumber) > 0 or float(mnumber) < 0:                
+                        if not(mnumber == '-' or mnumber == '-0'):                
                             ins = insert(loss).values(lossID = lossnr, barcode = mbarcode,\
                                 number = mnumber, category = mcategory, bookdate = mbookdate,\
                                 item_price = mprice, description = mdescription)
@@ -3933,7 +3933,7 @@ def articleRequest(mflag, btn):
                             actionOK(message)
                             self.close()
                         else:
-                            message = 'Not all fields are filled in!'
+                            message = 'Not valid amount!'
                             alertText(message)
                             self.close()
                                                      
