@@ -3003,7 +3003,7 @@ def importMenu():
                                             lossnr += 1
                                         except:
                                             lossnr = 1
-                                        insloss = insert(loss).values(lossID=lossnr,barcode=rp[0],number=rp[11],\
+                                        insloss = insert(loss).values(lossID=lossnr,barcode=rp[0],number=-rp[11],\
                                           item_price=rp[3],category='Obsolete',bookdate=mtoday, description=rp[1])
                                         con.execute(insloss)
                                         delart = delete(articles).where(articles.c.barcode == mbarcode)
@@ -3929,7 +3929,7 @@ def articleRequest(mflag, btn):
                             upd = update(articles).where(articles.c.barcode == mbarcode).\
                               values(item_stock = articles.c.item_stock + mnumber)
                             con.execute(upd)
-                            message = 'Update succeeded!'
+                            message = 'Booking loss succeeded!'
                             actionOK(message)
                             self.close()
                         else:
