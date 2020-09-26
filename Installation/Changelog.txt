@@ -151,6 +151,9 @@
 2020-09-23 sales.py view selections repaired purchasemenu all orders vies and yet to order views
 2020-09-25 sales.py module bookingLoss added possibility to book - for warehouse balance by differences
 2020-09-25 sales.py module bookingLoss default - placed by input to avoid misunderstandings
+2020-09-26 sales.py module imports/expired added prefix - number
+
+
 
 
 
