@@ -10,9 +10,9 @@ Productbuttons as administrator clickable for text and color change.
 
 Extended system for purchasing and deliveries with invoices module.
 
-Imports with csv format files.
+Imports with csv-format files.
 
-Equipped with inventory management system and purchasing.
+Equipped with inventory management system and purchasing module.
 
 Barcodes inserts for new products in own range generated and in commercial range by barcode scan.
 
