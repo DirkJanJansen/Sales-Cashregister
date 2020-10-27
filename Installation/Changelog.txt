@@ -152,6 +152,8 @@
 2020-09-25 sales.py module bookingLoss added possibility to book - for warehouse balance by differences
 2020-09-25 sales.py module bookingLoss default - placed by input to avoid misunderstandings
 2020-09-26 sales.py module imports/expired added prefix - number
+2020-10-27 LINUX_install.txt terminal commands applied for backup delete and restore database cashregister (commands for cashregister.backup)
+
 
 
 

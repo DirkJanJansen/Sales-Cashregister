@@ -34,10 +34,10 @@ set fonts and margins for printing (A4) with:
 lpoptions -o page-left=18 -o page-right=0 -o page-top=25 -o page-bottom=80 -o cpi=13 -o lpi=6
 Follow these settings exactly for printlists with more pages
 
-Barcode enabling in linux: (If your barcodescanner like mine is stopped scanning with first item)
+Barcode enabling in linux: (if your barcodescanner stops working by thirst scan like mine)
 
 The solution for enabling the barcodereader is changed for it's not working anymore for Ubuntu 20.04
-I changed as following.
+I changed as follows.
 Copy file .usbkbd.sh from folder installation in folder /home/postgres ($HOME)
 chmod 755 .usbkbd.sh
 If the password changed for Ubuntu from postgres45 change it too in .usbkbd.sh
@@ -74,4 +74,20 @@ Open Terminal Ctrl+Alt+t
 
 cd Sales
 python3 -m compileall ./
+
+Database backup and restore from terminal
+
+commands in terminal Ctrl+Alt+t
+
+backup database:
+pg_dump -v --verbose -d  cashregister -Fc -f  "/home/postgres/Sales/installation/cashregister.backup"
+
+delete database:
+dropdb cashregister
+
+create empty database:
+createdb cashregister
+
+restore database:
+pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/installation/cashregister.backup"
 
