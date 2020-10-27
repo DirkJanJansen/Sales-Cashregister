@@ -1,4 +1,4 @@
-For additional instructions for Linux see "LINUX_Install.txt".
+For additional instructions for Linux see folder Linux "LINUX Install.txt".
 For adjustments or  additions see "Changelog.txt".
 
 Install python3,  pyqt5, pyqt5, sqlalchemy, psycopg2 and pypiwin32, pillow, python-barcode and keyboard
@@ -17,13 +17,14 @@ appdata is hidden soo you will type it yourself or make hidden folders temporare
 programdata is also hidden see next lines
 
 Environment in Windows advanced system settings
-PGDATABASE cashregister
+PGDATABASE sales
 PGPORT 5432
 PGUSER postgres
 
 Install postgresql in folder C:\programdata\postgres with password: postgres45 localhost port:5432 user: postgres
 set password in pgadmin4: postgres45
 
+Rename folder Sales-Cashregister to Sales
 Copy folder Sales to C:\ProgramData\Sales
 Import data with pgrestore-custom.bat run as administrator (change pathnames to your own pathname, if you changed path PostgreSQL)
 The database cashregister is imported in postgresql.

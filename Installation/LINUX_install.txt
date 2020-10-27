@@ -14,6 +14,8 @@ sudo pip3 install spyder==3.3.6)
 
 sqlalchemy and psycopg2 is installed with postgreSQL-contrib see next lines
 
+
+Rename folder Sales-Cashregister to Sales
 Installation Sales as user postgres with password postgres45:
 Copy .pgpass in /home/postgres  
 in terminal chmod 600 .pgpass
