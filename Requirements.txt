@@ -1,7 +1,7 @@
 Python3
 pillow
 python-barcode
-keyboard (only windows)
+keyboard 
 PyQt5
 psycopg2
 sqlalchemy
