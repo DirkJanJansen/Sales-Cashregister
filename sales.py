@@ -5371,6 +5371,8 @@ def set_barcodenr(self):
             self.view.append(self.mlist[-1])
         elif self.maccess == 0 and self.mcallname:
             self.albl.setText('Errormessage: No permission to execute!')
+            self.pixmap = QPixmap('./logos/red.png')
+            self.logonstate.setPixmap(self.pixmap.scaled(30,30))
             giveAlarm()   
         elif self.maccess == 0:
             self.albl.setText('Errormessage:  Please logon with your barcodecard!')
@@ -5645,7 +5647,7 @@ def barcodeScan():
                 Column('bg_color', String))
                         
             #choose next groupbutton (from 8) and start with group 1
-            #see line 5779 and 5780
+            #see line 5733 and 5734
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
