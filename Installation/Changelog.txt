@@ -154,6 +154,7 @@
 2020-09-26 sales.py module imports/expired added prefix - number
 2020-10-27 LINUX_install.txt terminal commands applied for backup delete and restore database cashregister (commands for cashregister.backup)
 2020-11-26 sales.py by no access employee show red sign
+2021-01-03 Sales.py changed copyright message
 
 
 
