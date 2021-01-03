@@ -43,7 +43,7 @@ def printEan(self, x1 ,y1):
     msgBox.setWindowTitle("Printing barcodeID")
     msgBox.setIcon(QMessageBox.Information)
     msgBox.setFont(QFont("Arial", 10))
-    msgBox.setText("Do you want to print the barcode for scanning?");
+    msgBox.setText("Do you want to print the barcode for scanning?")
     msgBox.setStandardButtons(QMessageBox.Yes)
     msgBox.addButton(QMessageBox.No)
     msgBox.setStyleSheet("color: black;  background-color: gainsboro")
@@ -149,7 +149,7 @@ def reprintForms(path):
               printBtn.setFixedWidth(90)
               printBtn.setStyleSheet("color: black;  background-color: gainsboro")    
                   
-              grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 4, 0, 1, 3, Qt.AlignCenter)
+              grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 4, 0, 1, 3, Qt.AlignCenter)
                 
               self.setLayout(grid)
               self.setGeometry(900, 200, 150, 150)
@@ -1334,7 +1334,7 @@ def handleInvoices():
                     applyBtn.setFixedWidth(120)
                     applyBtn.setStyleSheet("color: black;  background-color: gainsboro")
                     
-                    grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 9, 0, 1, 4, Qt.AlignCenter)
+                    grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 9, 0, 1, 4, Qt.AlignCenter)
                     
             mainWin = Window()
             mainWin.exec_() 
@@ -5510,7 +5510,6 @@ def barcodeScan():
             calcBtn.setFocusPolicy(Qt.NoFocus)
             calcBtn.setFixedSize(150, 90)
             calcBtn.setStyleSheet("font: bold 24px; color: white;  background-color: #7f8371")
-            
             calcBtn.clicked.connect(lambda: calcChange(self))
             grid.addWidget(calcBtn, 9, 10, 2, 1, Qt.AlignVCenter | Qt.AlignRight)
             
@@ -5647,7 +5646,7 @@ def barcodeScan():
                 Column('bg_color', String))
                         
             #choose next groupbutton (from 8) and start with group 1
-            #see line 5733 and 5734
+            #see line 5734 and 5735
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
