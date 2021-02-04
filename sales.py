@@ -5713,9 +5713,13 @@ def barcodeScan():
                     if self.maccess < 3:               
                         aBtn = QPushButton(row[1].strip()) #choose buttontext
                         btnlist.append(row[2].strip()) #compile list with barcodenumbers
+                        #choose barcodenumber linked with clicked button
+                        aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbarcode(btn))
                     else:    #showbuttonnumber and barcode for administrator
                         aBtn = QPushButton(str(row[0])+'\n'+row[2][0:6]+'\n'+row[2][6:13])
                         btnlist.append(str(row[0]))    #compile list with buttonnumbers
+                        #or as administrator buttonnumber and barcode linked
+                        aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbuttonnr(btn))
                     aBtn.setFont(QFont("Times", 10, 75))
                     aBtn.setStyleSheet('color:'+row[3]+'; background-color:'+row[4])
                     aBtn.setFocusPolicy(Qt.NoFocus)
@@ -5728,13 +5732,7 @@ def barcodeScan():
                         grid.addWidget(aBtn, 9, a%6) #row 3 buttons
                     elif a < index+24:
                         grid.addWidget(aBtn, 10, a%6) #row 4 buttons
-                    
-                    #choose barcodenumber linked with clicked button
-                    if self.maccess < 3:
-                        aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbarcode(btn))
-                    else:  #or as administrator buttonnumber and barcode linked
-                        aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbuttonnr(btn))
-                                            
+                                                                   
                     a += 1
             
             btngroup = 1     # start with buttongroup 1
