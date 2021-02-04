@@ -3136,8 +3136,11 @@ def calculationStock():
         con.execute(updpar)
                      
         for row in rparticles:
-            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-            mjrverbr = row[4]
+            try:
+                mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+                mjrverbr = row[4]
+            except:
+                mjrverbr = 0
             if row[3] == 1:
                 minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
             elif row[3] == 2:
@@ -3165,8 +3168,11 @@ def calculationStock():
         con.execute(updpar)
                    
         for row in rparticles:
-            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-            mjrverbr = row[5]
+            try:
+                mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+                mjrverbr = row[5]
+            except:
+                mjrverbr = 0
             if row[3] == 1:
                 minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
             elif row[3] == 2:
