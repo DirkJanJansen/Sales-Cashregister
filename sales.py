@@ -5710,15 +5710,19 @@ def barcodeScan():
                 #choose buttontext and position buttons on grid
                 btnlist = []
                 for row in rpbtn:
-                    if self.maccess < 3:               
-                        aBtn = QPushButton(row[1].strip()) #choose buttontext
-                        btnlist.append(row[2].strip()) #compile list with barcodenumbers
+                    if self.maccess < 3: 
+                        #choose buttontext
+                        aBtn = QPushButton(row[1].strip())
+                        #compile list with barcodenumbers
+                        btnlist.append(row[2].strip()) 
                         #choose barcodenumber linked with clicked button
                         aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbarcode(btn))
-                    else:    #showbuttonnumber and barcode for administrator
+                    else:
+                        #showbuttonnumber and barcode for administrator
                         aBtn = QPushButton(str(row[0])+'\n'+row[2][0:6]+'\n'+row[2][6:13])
-                        btnlist.append(str(row[0]))    #compile list with buttonnumbers
-                        #or as administrator buttonnumber and barcode linked
+                        #compile list with buttonnumbers
+                        btnlist.append(str(row[0]))    
+                        #as administrator show buttonnumber and barcode linked
                         aBtn.clicked.connect(lambda checked, btn = btnlist[a%24] : getbuttonnr(btn))
                     aBtn.setFont(QFont("Times", 10, 75))
                     aBtn.setStyleSheet('color:'+row[3]+'; background-color:'+row[4])
@@ -5739,7 +5743,8 @@ def barcodeScan():
             btngroupChange(btngroup)
                                                      
             def getbarcode(btn):
-                self.q1Edit.setText(btn)   #set choosen barcode to variable and add return
+                #set choosen barcode to variable and add return
+                self.q1Edit.setText(btn)   
                 if sys.platform == 'win32':
                     import keyboard
                     keyboard.write('\n')                          #Windows
