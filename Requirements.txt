@@ -5,5 +5,5 @@ keyboard
 PyQt5
 psycopg2
 sqlalchemy
-pypiwin32 (only windows)
+pypiwin32 #(only windows)
 postgreSQL
