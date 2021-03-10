@@ -1,0 +1,166 @@
+2020-06-15 cashregister.backup paths in columns thumbnail and photo changed
+2020-06-15 install.txt added
+2020-06-15 LINUX_install.txt added
+2020-06-15 changelog.txt added
+2020-06-15 pgpass.conf added
+2020-06-15 Notepad_HKCU.reg added
+2020-06-15 pgdump-custom.bat path changed
+2020-06-15 pgrestore-custom.bat path changed
+2020-06-15 .pgpass added for linux
+2020-06-15 register.png and Sales.desktop added for startup linux
+2020-06-15 folder Backup changed in Installation
+2020-06-15 sales.py changed info for logon procedure.
+2020-06-15 sales.py function added insert and generating accounts + barcodelabel saved for logon
+2020-06-15 Documentation first document Sales_Cashregister.pdf added in folder Installation more explanation follows!
+2020-06-15 sales.py typererror corrected
+2020-06-15 cashregister.backup added callname column in table sales
+2020-06-16 cashregister.backup added records for button products
+2020-06-16 sales.py linked programmable buttons, working now for input separate products, module for changing buttons follows!
+2020-06-16 pip install keyboard added for generating keyboard buffer for enter key by buttons
+2020-06-16 added compile.bat for precompling program
+2020-06-16 requirements.txt changed with keyboard module
+2020-06-16 install.txt and LINUX_install.txt added keyboard and pillow and python-barcode requirements.
+2020-06-16 cashregister.backup added column mutation_date in table sales
+2020-06-16 sales.py administration buttontext assign for buttons ready for new barcode items, todo buttontext for existing barcode items
+2020-06-18 sales.py programmable buttontext 2 lines insert possible with check on maximum length 16 characters
+2020-06-18 sales.py field VAT changed in combobox
+2020-06-18 sales.py adminstration also ready buttontext buttons assign for existing barcode items
+2020-06-18 Documentation Sales_CashRegister.pdf added module descriptions for so far.
+2020-06-18 sales.py in  payments request module added for paying instances (by clicking on first field)
+2020-06-18 LINUX_install.txt changed install keyboard added
+2020-06-19 sales.py buttontext length changed to max 20 positions
+2020-06-19 documentation changed according 20 positions and payments instances procedure added
+2020-06-19 documentation changed according payments procedure
+2020-06-19 sales.py articles categoy removed reservation items
+2020-06-19 database cashregister.backup category column values changed according revervation values
+2020-06-19 LINUX_install.txt install keyboard added
+2020-06-19 documentation added button procedure besides scanning.
+2020-06-19 sales.py added parameter request and change module
+2020-06-19 documentation Sales_CashRegister.pdf added procedure for params
+2020-06-19 sales.py module insertArticles added
+2020-06-19 sales.py save barcodelabel in module insertArticles added
+2020-06-19 sales.py procedure payments cbox improved
+2020-06-19 sales.py procedure insertArticles layout adjusted and field minimum-stock added.
+2020-06-20 sales.py Articles request extended with module Article chang by right clicking on thirst item
+2020-06-20 sales.py counting annual-stock established by article booking.
+2020-06-20 documentation added procedure for changing article and calculation minimum_stock and order_size.
+2020-06-20 sales.py adjusted to calculation order-sizes and minimum stock for all articles
+2020-06-20 database cashregister.backup extended with params for even/odd year, ordercosts and surcharge factor storage.
+2020-06-20 sales.py module write off loss added.
+2020-06-21 sales.py module requesting loss items added via submenu.
+2020-06-21 sales.py module purchasing ready purchase collecting, viewing and printing. Delivery and importing new items ongoing.
+2020-06-21 cashregister.backup database changed according previous modifications
+2020-06-22 sales.py change title with view order versus delivery.
+2020-06-22 documentation adjusted for procedure purchase delivery
+2020-06-22 sales.py message added after gathering orderlines.
+2020-06-22 sales.py import prices, new products and remove expired products modules added and views for this items if imported.
+2020-06-22 documentation added explanation for imports.
+2020-06-22 added folders for imports.
+2020-06-22 sales.py changed headtext for viewlistfiles
+2020-06-22 sales.py added module for deliveryImport.
+2020-06-22 documentation Sales_CashRegister.pdf adjusted
+2020-06-22 comments.txt removed 
+2020-06-22 sales.py unnecessary print statement removed
+2020-06-22 documentation added parameters explanation VAT, ordercosts and surcharge on storage
+2020-06-22 documentation database structure screenshots added/changed
+2020-06-22 sales.py several registration marks changed
+2020-06-22 employees.png new print form with random barcode-accounts for security reasons random generated for printout and scanning.
+2020-06-22 cashregister.backup database changed new accountcodes 
+2020-06-22 sales.py try - except by imports with rollback procedure applied by importerrors prices, deleted, new items and deliveries.
+2020-06-23 sales.py message implied by imports if no barcode is found in database by prices, expired product and delivery, 
+           message barcode found in database by new products. try except method removed.
+2020-06-23 sales.py changed layout for import new items, new import files copied in directory forms and templates added for import
+2020-06-23 sales.py messages added by import deliveries.
+2020-06-25 sales.py logos removed login message replaced by red (logout) or green (logged on) sign, 40 bigger buttons for products 
+           unnessary logos removed adminbutton placed message bar.
+2020-06-25 cashregister.backup changed for more buttons (23 - 40)
+2020-06-25 red.jpg and green.jpg copied in logos for logon logoff.
+2020-06-26 sales.py added 3 switchable buttongroups with each 39 productbuttons buttons with programmable groupname in table params.
+2020-06-26 cashregister backup changed accordingly for extended buttongroups.
+2020-06-26 sales.py groups extended to 5.
+2020-06-26 cashregister.backup database extended for 5 groups
+2020-06-26 documentation adjusted for above changes.  
+2020-06-26 sales.py fields for buttontext insert adjusted for 3 lines and 10 characters per line maximum.
+2020-06-26 documentation changed for displaying scanned lines (19 to 16) and some explanations added.   
+2020-06-26 sales.py params buttongrouptext changed to QTextedit for 3 lines.
+2020-06-27 sales.py buttontext items changed in params
+2020-06-27 cashregister.backup changed for paramtext
+2020-06-27 sales.py VAT added zero rate besides high and low, for in some countries zero rate is used.
+2020-06-27 sales.py indexing by buttongroups went wrong due to forgotten sort. Repaired!
+2020-06-27 sales.py keyboard worked only as root in linux, so for linux i used subprocess.call(["xdotool", "key", "Return"])
+           install xdotool on linux with sudo apt install xdotool
+2020-06-27 sales.py groupbuttontext color changed.
+2020-06-27 documentation screenshot table articles changed. (column photo removed and default columntext high for VAT)
+2020-06-27 sales.py if same employee who logged on, logged out, was blocked for logon, untill other employee logged on. Recovered!
+2020-06-28 sales.py make barcode with logon invisible (bullets) for security reasons.
+2020-06-28 cashregister.backup replaced due to VAT column error. (high)
+2020-06-28 sales.py buttonnumber regexp range changed so buttons can be numbered until 199.
+2020-06-28 Sales_CashRegister.pdf documentation changed for buttonnumber ranges.
+2020-06-28 sales.py wrong path by import deliveries restored.
+2020-06-28 sales.py password showed by frist time logon. Changed made invisible by password logons.
+2020-06-29 sales.py admin Menu realised more structured submenus for accounts, articles, purchase and buttons.
+2020-06-29 sales.py error messages by import captured if no import files available
+2020-06-29 sales.py buttons in submenu's replaced.
+2020-06-29 LINUX_install.txt adjusted on several points.
+2020-06-29 sales.py namingconvention straightened out
+2020-07-03 sales.py several menu's naming conventions changed more unambiguously.
+2020-07-03 documentation changed according to menu naming
+2020-07-03 sales.py in view loss added columns description and item_price.
+2020-07-03 cashregister.backup changed for setting foreignkey barcode to table articles for above additions.
+2020-07-04 sales.py tabledefinitions loss changed according to ForeignKey barcode. 
+           (neccessary due to delete barcode items first table loss then table articles.
+2020-07-04 documentation changed according ForeignKey structure table loss barcode.
+2020-07-04 sales.py barcodes png also saved for imports new articles in ./forms/Barcodes/Articles/
+2020-07-04 LINUX_install.txt added warning import files from windows, due to controlcharacters.
+2020-07-04 sales.py bug repaired updArticle(self) .
+2020-07-04 sales.py more control added inserting buttontext maximum lines and positions per line.
+2020-07-05 sales.py improved capture for button text errorlines.
+2020-07-06 sales.py params fields hidden column_text and values if not applicable
+2020-07-06 sales.py improved wordwrap on hardcoded newlines for buttontext and blocking if no btnnumber is filled in.
+2020-07-06 LINUX_install.txt enabling barcodescanner changed for rc.local does not work anymore changed to systemd procedure.
+2020-07-06 sales.py buttontext area increased 110 x 65 pixels, param request display changed
+2020-07-06 documentation buttontext explanation adjusted.
+2020-07-10 LINUX_install.txt procedure enabling barcodescanner changed.
+2020-07-10 added script .usbkbd.sh
+2020-07-10 sales.py added call by starting script for enabling barcodescanner
+2020-07-12 sales.py keyboard import moved to section for windows, for it's not needed for LINUX.
+2020-07-12 LINUX_install.txt import keyboard for LINUX removed, for it's established by xdotool
+2020-07-14 sales.py adminMenu choice added for requesting totals daily / monthly or yearly turnover totals and VAT totals.
+2020-07-14 Sales_CahsRegister.pdf documentation added menuchoice for gross turnover countings
+2020-07-15 sales.py error with article not in product range repaired. Menu changed for turnover.
+2020-07-15 Sales_CashRegister changed according turnover.
+2020-07-16 sales.py accounts added accesslevel 0 for new and change accounts for block processing by employee.
+2020-07-16 Sales_CashRegister.pdf documentation adjusted for accesslevel 0.
+2020-07-22 sales.py info adjusted for accesslevel 0 No operation allowed.
+2020-08-16 sales.py check ean logon repaired
+2020-09-08 sales.py version2.0 released. Improved buttons with pageselect and colors. Linking with clicked buttons for text and colors as admin.
+           articles inserts by barcode for commercial products or generating in reserved part. purchasing modules included +imports by csv files
+           for new items, price changes or deleting expired items. Also imports for deliveries possible.
+2020-09-09 sales.py import loss changed for booking expired items on table loss category Obsolete.
+2020-09-09 cashregister.backup and cashregister_empty.backup removed foreignkey link with table articles, for possibility booking on table loss for deleted items.
+2020-09-09 backups table loss extended with fiels item_price
+2020-09-10 sales.py scaling adjusted for orderlines view
+2020-09-10 sales.py request loss and book loss articles added fields item_price and description for uncoupling foreignkey articles
+2020-09-10 cashregister.backup and cashregister_empty.backup database changed due to adding fields item_price and description
+2020-09-20 sales.py module payment message added "Payment done!".
+2020-09-20 sales.py unused menu bookingLoss removed
+2020-09-20 sales.py cleanup caches modest calculator by pushing Next Client button.
+2020-09-20 sales.py modest calculator also removed caches by no transactions
+2020-09-22 sales.py  by module change accounts  definition accountID moved after first column definition to avoid select errors.
+2020-09-22 sales.py  several modules by tabelview clicking on first column table definition moved after idx.column==0 to avoid wrong selections
+2020-09-23 sales.py view selections repaired purchasemenu all orders vies and yet to order views
+2020-09-25 sales.py module bookingLoss added possibility to book - for warehouse balance by differences
+2020-09-25 sales.py module bookingLoss default - placed by input to avoid misunderstandings
+2020-09-26 sales.py module imports/expired added prefix - number
+2020-10-27 LINUX_install.txt terminal commands applied for backup delete and restore database cashregister (commands for cashregister.backup)
+2020-11-26 sales.py by no access employee show red sign
+2021-01-03 sales.py changed copyright message
+2021-02-04 sales.py calculationStock with determination annual consumption by zero division solved
+2021-02-17 sales.py changeArticle wrong index changed by category showing and updating
+2021-03-10 Ducumentation type error repaired and placed on root master
+
+
+
+
+
+
