@@ -158,6 +158,7 @@
 2021-02-04 sales.py calculationStock with determination annual consumption by zero division solved
 2021-02-17 sales.py changeArticle wrong index changed by category showing and updating
 2021-03-10 Ducumentation type error repaired and placed on root master
+2021-03-10 sales.py infoEdit (Information button) set Readonly
 
 
 
