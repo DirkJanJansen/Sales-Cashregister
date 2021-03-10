@@ -5055,7 +5055,7 @@ def info():
         This will make the necessary bookings and prepare the order for the next customer.
         ''')
             grid.addWidget(infoEdit, 1, 0)
-                           
+            infoEdit.setReadOnly(True)               
             infoEdit.setStyleSheet("font: 10pt Comic Sans MS; color: black ; background-color: #D9E1DF")   
             grid.addWidget(QLabel('\u00A9 2020 all rights reserved dj.jansen@casema.nl'), 2, 0, 1, 2, Qt.AlignCenter)
             
