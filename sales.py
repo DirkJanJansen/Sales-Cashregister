@@ -3446,31 +3446,40 @@ def articleRequest(mflag, btn):
                     def insBtnText():
                         mbtnnr = int(self.q2Edit.text())
                         mbtntext = self.q3Edit.toPlainText()
-                        mlist = mbtntext.split('\n')
-                        mfgcolor = self.q4Edit.text()
-                        if len(mfgcolor) < 7:
-                            mfgcolor = '#000000'
-                        mbgcolor = self.q5Edit.text()
-                        if len(mbgcolor) < 7:
-                            mbgcolor = '#F8F7EE'
-                        for line in mlist:
-                             if len(line) > 10:
-                                 message = 'No more then 10 characters per line allowed'
-                                 alertText(message)
-                                 break
-                             elif len(mlist) > 3:
-                                 message= 'No more then 3 lines allowed'
-                                 alertText(message)
-                                 break
-                        else:
+                        if mbtntext.strip() == '':
                             updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
-                             values(barcode=str(mbarcode), buttontext=mbtntext,
-                             fg_color=mfgcolor, bg_color=mbgcolor)
+                             values(barcode='', buttontext='',
+                             fg_color='#000000', bg_color='#F8F7EE')
                             con.execute(updbtn)
-                            message = 'Update succeeded!'
+                            message = 'Button released empty!'
                             actionOK(message)
                             self.close()
-                                            
+                        else:
+                            mlist = mbtntext.split('\n')
+                            mfgcolor = self.q4Edit.text()
+                            if len(mfgcolor) < 7:
+                                mfgcolor = '#000000'
+                            mbgcolor = self.q5Edit.text()
+                            if len(mbgcolor) < 7:
+                                mbgcolor = '#F8F7EE'
+                            for line in mlist:
+                                 if len(line) > 10:
+                                     message = 'No more then 10 characters per line allowed'
+                                     alertText(message)
+                                     break
+                                 elif len(mlist) > 3:
+                                     message= 'No more then 3 lines allowed'
+                                     alertText(message)
+                                     break
+                            else:
+                                updbtn = update(buttons).where(buttons.c.buttonID==mbtnnr).\
+                                 values(barcode=str(mbarcode), buttontext=mbtntext,
+                                 fg_color=mfgcolor, bg_color=mbgcolor)
+                                con.execute(updbtn)
+                                message = 'Update succeeded!'
+                                actionOK(message)
+                                self.close()
+      
                     self.setLayout(grid)
                     self.setGeometry(600, 200, 150, 100)
     
