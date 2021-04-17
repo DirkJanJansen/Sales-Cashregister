@@ -162,6 +162,7 @@
 2021-03-30 LINUX_install.txt path error by pg_restore changed in Installation (Capital i)
 2021-04-07 sales.py by emptying productbuttons also barcode released empty
 2021-04-08 documentation changed for empty productbuttons
+2021-04-17 added some screenshots
 
 
 
