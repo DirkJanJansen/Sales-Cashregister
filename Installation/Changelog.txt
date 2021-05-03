@@ -165,6 +165,7 @@
 2021-04-17 added some screenshots
 2021-04-23 Screenshot Administrator_Menu Mainscreen refreshed so buttons showed with administrator-view contents.
 2021-04-24 Screenshot Sales-View added
+2021-5-03 Screenshot Reprint_Sales_Receipts.png added
 
 
 
