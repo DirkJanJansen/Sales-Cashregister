@@ -22,6 +22,8 @@ Barcodes inserts for new products in own range generated and in commercial range
 
 Link to Installation: https://github.com/DirkJanJansen/Sales/blob/master/Installation/install.txt
 
+Link to Screenshots: https://github.com/DirkJanJansen/Sales/blob/master/Screenshots
+
 Link to Linux Installation: https://github.com/DirkJanJansen/Sales/blob/master/Installation/LINUX_install.txt
 
 Link to documentation: https://github.com/DirkJanJansen/Sales/blob/master/Installation/Sales_CashRegister.pdf
