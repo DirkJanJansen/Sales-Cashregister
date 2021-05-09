@@ -91,4 +91,6 @@ createdb cashregister
 
 restore database:
 pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/cashregister.backup"
+Or for empty database (Only functional data):
+pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/cashregister_empty.backup"
 

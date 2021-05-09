@@ -164,8 +164,9 @@
 2021-04-08 documentation changed for empty productbuttons
 2021-04-17 added some screenshots
 2021-04-23 Screenshot Administrator_Menu Mainscreen refreshed so buttons showed with administrator-view contents.
-2021-04-24 Screenshot Sales-View added
-2021-05-03 Screenshot Reprint_Sales_Receipts.png added
+2021-04-24 Screenshot Sales_View added
+2021-05-03 Screenshot Reprint_Sales_receipts.png added
+2021-05-09 added LINUX_install.txt with restore for empty database
 
 
 
