@@ -167,6 +167,7 @@
 2021-04-24 Screenshot Sales_View added
 2021-05-03 Screenshot Reprint_Sales_receipts.png added
 2021-05-09 added LINUX_install.txt with restore for empty database
+2021-05-11 install.txt added commands for restore empty database (Only functional data)
 
 
 
