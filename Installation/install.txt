@@ -33,7 +33,7 @@ remove database with:
 "C:\ProgramData\postgres\bin\dropdb.exe"  -h localhost -p 5432 -U postgres  -w cashregister
 create new database
 "C:\ProgramData\postgres\bin\createdb.exe" -h  localhost -p 5432 -U postgres -w cashregister
-restore empty database (only functioanl data):
+restore empty database (only functional data):
 "C:\ProgramData\postgres\bin\pg_restore.exe" --dbname=cashregister  --verbose "D:\Sales\Installation\cashregister_empty.backup"
 
 pgdrop-bisystem.bat is included for deleting the database cashregister (change pathnames to your own pathnames)
