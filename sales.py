@@ -2487,6 +2487,7 @@ def adminMenu():
             self.k0Edit.setFixedWidth(280)
             self.k0Edit.setFont(QFont("Arial",12))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE') 
+            self.k0Edit.setMaxVisibleItems(11)
             self.k0Edit.addItem('Accounts Submenu')
             self.k0Edit.addItem('Articles Submenu')
             self.k0Edit.addItem('Imports Submenu')
