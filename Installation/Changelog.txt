@@ -171,7 +171,7 @@
 2021-05-18 Change screenshot Assign-productbutton.png
 2021-06-26 Administrator Menu combobox maximum visible items increased to 11, so all menu-items are visible.
 2021-06-27 Screenshot Administrator Menu changed according to visible menu-items.
-
+2021-07-07 sales.py insertArticles error routine added by faulty scanning barcode.
 
 
 
