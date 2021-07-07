@@ -4772,43 +4772,50 @@ def insertArticles():
             grid.addWidget(QLabel('Barcode overruled by scanning'), 9, 0)
             grid.addWidget(self.q13Edit, 9, 1)
             grid.addWidget(QLabel('Fill all fields before scanning'), 9, 2)
-  
+      
             def insArticle(self):
+                def writeArticle():
+                    mdescr = self.q2Edit.text()
+                    mshort = self.q2aEdit.text()
+                    mprice = float(self.q3Edit.text())
+                    mselprice = float(self.q3aEdit.text())
+                    munit = self.q5Edit.currentText()
+                    mminstock = float(self.q6Edit.text())
+                    morder_size = float(self.q7Edit.text())
+                    mlocation = self.q8Edit.text()
+                    martgroup = self.q9Edit.text()
+                    mthumb = self.q10Edit.text()
+                    mcategory = self.q11Edit.currentIndex()+1
+                    mvat = self.q12Edit.currentText()
+                    if mdescr and mprice and morder_size and mlocation and mcategory:
+                        insart = insert(articles).values(barcode=mbarcode,description=mdescr,\
+                            short_descr=mshort,item_price=mprice,selling_price=mselprice,\
+                            item_unit=munit, minimum_stock = mminstock,order_size=morder_size,\
+                            location_warehouse=mlocation,article_group=martgroup,\
+                            thumbnail=mthumb,category=mcategory,VAT=mvat)
+                        con.execute(insart)
+                        if sys.platform == 'win32':
+                            ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
+                        else:
+                            ean.save('./Barcodes/Articles/'+str(mbarcode))
+                        message = 'Update succeeded!'
+                        actionOK(message)
+                        self.close()
+                    else:
+                        message = 'Not all fields are filled in!'
+                        alertText(message)
+                        self.close()
+                        
                 if len(self.q13Edit.text())==13 and checkEan13(self.q13Edit.text()):
                     mbarcode = str(self.q13Edit.text())
+                    writeArticle()
+                elif len(self.q13Edit.text()) > 0:
+                    message = 'Scan error occurred!'
+                    alertText(message)
                 else:
                     mbarcode = str(self.q1Edit.text())
-                mdescr = self.q2Edit.text()
-                mshort = self.q2aEdit.text()
-                mprice = float(self.q3Edit.text())
-                mselprice = float(self.q3aEdit.text())
-                munit = self.q5Edit.currentText()
-                mminstock = float(self.q6Edit.text())
-                morder_size = float(self.q7Edit.text())
-                mlocation = self.q8Edit.text()
-                martgroup = self.q9Edit.text()
-                mthumb = self.q10Edit.text()
-                mcategory = self.q11Edit.currentIndex()+1
-                mvat = self.q12Edit.currentText()
-                if mdescr and mprice and morder_size and mlocation and mcategory:
-                    insart = insert(articles).values(barcode=mbarcode,description=mdescr,\
-                        short_descr=mshort,item_price=mprice,selling_price=mselprice,\
-                        item_unit=munit, minimum_stock = mminstock,order_size=morder_size,\
-                        location_warehouse=mlocation,article_group=martgroup,\
-                        thumbnail=mthumb,category=mcategory,VAT=mvat)
-                    con.execute(insart)
-                    if sys.platform == 'win32':
-                        ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
-                    else:
-                        ean.save('./Barcodes/Articles/'+str(mbarcode))
-                    message = 'Update succeeded!'
-                    actionOK(message)
-                    self.close()
-                else:
-                    message = 'Not all fields are filled in!'
-                    alertText(message)
-                    self.close()
- 
+                    writeArticle()
+
             applyBtn = QPushButton('Insert')
             applyBtn.clicked.connect(lambda: insArticle(self))
     
