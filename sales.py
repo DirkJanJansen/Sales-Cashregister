@@ -4798,7 +4798,10 @@ def insertArticles():
                             ean.save('.\\Barcodes\\Articles\\'+str(mbarcode))
                         else:
                             ean.save('./Barcodes/Articles/'+str(mbarcode))
-                        message = 'Update succeeded!'
+                        #x1 = 372.9
+                        #y1 = 228.5
+                        #printEan(self, x1, y1)
+                        message = 'Insert succeeded!'
                         actionOK(message)
                         self.close()
                     else:
