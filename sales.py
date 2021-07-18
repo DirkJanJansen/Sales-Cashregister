@@ -482,8 +482,8 @@ def articleMenu():
                     mflag = 0
                     articleRequest(mflag, 0)
                 elif mindex == 2:
-                    flag = 2
-                    articleRequest(flag, 0)
+                    mflag = 2
+                    articleRequest(mflag, 0)
                 elif mindex == 3:
                     requestLoss()
 
