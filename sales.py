@@ -5677,7 +5677,7 @@ def barcodeScan():
                 Column('bg_color', String))
                         
             #choose next groupbutton (from 8) and start with group 1
-            #see line 5742 and 5743
+            #see line 5767 and 5768
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
