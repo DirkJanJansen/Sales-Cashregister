@@ -11,7 +11,7 @@ if you want a editor install Visual code from Microsoft:
 follow instructions on:
 https://linuxhint.com/install-visual-studio-code-ubuntu22-04/
 
-sqlalchemy and psycopg2 is installed with postgreSQL-contrib see next lines
+sqlalchemy  version 1.4.46 or before and psycopg2 is installed with postgreSQL-contrib see next lines
 
 Installation Sales as user postgres with password postgres45:
 Copy .pgpass in /home/postgres  
