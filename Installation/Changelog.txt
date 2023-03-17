@@ -173,6 +173,7 @@
 2021-06-27 Screenshot Administrator Menu changed according to visible menu-items.
 2021-07-07 sales.py insertArticles error routine added by faulty scanning barcode.\
 2022-01-26 login with Sandra failed. Database record changed - repaired!
+2023-03-17 sales.py corrected for for mismatch by even/odd year by use more then a year agoo
 
 
 
