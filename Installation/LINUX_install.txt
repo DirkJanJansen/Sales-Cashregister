@@ -93,3 +93,9 @@ pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/c
 Or for empty database (Only functional data):
 pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/cashregister_empty.backup"
 
+Before starting the program for the first time run script reset_odd_even.py to set the parameter for odd-even year for the right year
+Ctrl+Alt+t (opens terminal)
+in terminal following commands:
+cd Sales
+python3 reset_odd_even.py
+
