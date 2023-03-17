@@ -45,6 +45,10 @@ If you change install folders, the pathnames in pgrestore-custom.bat and pgdump-
 Login is realised with barcode see folder \Sales\Barcodes\Accounts
 For scanning barcodes a sheet is present in folder \Sales\Barcodes\Articles
 
+Before starting the program for the first time run script reset_odd_even.py to set the parameter for odd-even year for the right year
+in command prompt folder Sales:
+python reset_odd_even.py
+
 Dirk Jansen
 dj.jansen@casema.nl
 
