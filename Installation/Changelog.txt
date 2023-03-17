@@ -176,6 +176,7 @@
 2023-03-17 sales.py corrected for mismatch by even/odd year by use more then a year agoo
 2023-03-17 sales.py mismatch routine removed and changed by a one-time program reset_odd_even.py if the problem occurs
 2023-03-17 reset_odd_even.py message if reset successful.
+2023-03-17 procedure added for starting reset_odd_even.py in install texts
 
 
 
