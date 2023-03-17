@@ -3126,10 +3126,13 @@ def calculationStock():
     
     engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
     con = engine.connect()
-           
+    myear = int(str(datetime.date.today())[0:4])
+    updeven = update(params).where(params.c.paramID == 4).values(value = int(myear%2))
+    con.execute(updeven)
+
     selpar = select([params]).order_by(params.c.paramID)
     rppar = con.execute(selpar).fetchall()
-    myear = int(str(datetime.date.today())[0:4])
+
     if myear%2 == 1 and int(rppar[3][2]) == 0:
         selarticles = select([articles]).order_by(articles.c.barcode)
         rparticles = con.execute(selarticles)
@@ -3137,11 +3140,8 @@ def calculationStock():
         con.execute(updpar)
                      
         for row in rparticles:
-            try:
-                mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-                mjrverbr = row[4]
-            except:
-                mjrverbr = 0
+            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+            mjrverbr = row[4]
             if row[3] == 1:
                 minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
             elif row[3] == 2:
@@ -3169,11 +3169,8 @@ def calculationStock():
         con.execute(updpar)
                    
         for row in rparticles:
-            try:
-                mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-                mjrverbr = row[5]
-            except:
-                mjrverbr = 0
+            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+            mjrverbr = row[5]
             if row[3] == 1:
                 minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
             elif row[3] == 2:
@@ -5677,7 +5674,7 @@ def barcodeScan():
                 Column('bg_color', String))
                         
             #choose next groupbutton (from 8) and start with group 1
-            #see line 5767 and 5768
+            #see line 5742 and 5743
             def btngroupChange(btngroup):
                 if btngroup == 1:
                     index = 0
