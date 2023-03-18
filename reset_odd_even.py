@@ -13,16 +13,16 @@ def odd_even(message):
     msg.setWindowTitle('Reset parameter')
     msg.exec_()
 
-metadata = MetaData()
-params = Table('params', metadata,
-       Column('paramID', Integer(), primary_key=True),
-       Column('item', String),
-       Column('value', Float))
-
-engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
-con = engine.connect()
-
 try:
+    metadata = MetaData()
+    params = Table('params', metadata,
+                   Column('paramID', Integer(), primary_key=True),
+                   Column('item', String),
+                   Column('value', Float))
+
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+
     myear = int(str(datetime.date.today())[0:4])
     updeven = update(params).where(params.c.paramID == 4).values(value = int(myear%2))
     con.execute(updeven)
