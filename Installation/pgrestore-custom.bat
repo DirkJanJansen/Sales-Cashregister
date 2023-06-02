@@ -7,26 +7,26 @@ echo.
 echo.
 echo.
 echo. 
-echo Verwijder eerst met pgdrop-cashregister.bat de database
-echo als dit nog niet is gedaan
+echo Remove first with pgdrop-cashregister.bat database if already exist
+echo 
 echo.
 echo.
-echo U gaat nu de database cashregister.backup terugplaatsen
-echo Druk een toets voor terugplaatsen database cashregister ........
+echoecho You are going to replace database cashregister.
+echo Press a key to restore ........
 echo.
-echo of druk CTRL+C om te annuleren
+echo or press CTRL+C to cancel
 echo.
 pause > nul
 echo.
 echo.
-echo Restore database bisystem via cashregister.backup
+echo Restore database cashregister by cashregister.backup
 echo.
 echo.
 echo.
-"C:\ProgramData\postgres\bin\createdb.exe" -h  localhost -p 5432 -U postgres -w cashregister 
-"C:\ProgramData\postgres\bin\pg_restore.exe" --dbname=cashregister  --verbose "C:\ProgramData\Sales\Installation\cashregister.backup"
+"C:\ProgramData\postgresql\bin\createdb.exe" -h  localhost -p 5432 -U postgres -w cashregister 
+"C:\ProgramData\postgresql\bin\pg_restore.exe" --dbname=cashregister  --verbose "C:\ProgramData\Sales\Installation\cashregister.backup"
 echo.
-echo Database cashregister is teruggeplaatst!
+echo Database cashregister is restored!
 echo.
-echo Druk een toets voor einde programma .........
+echo Press any key for ending this program .........
 pause > nul

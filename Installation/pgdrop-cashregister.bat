@@ -2,23 +2,23 @@
 set PGPASSWORD=postgres45
 echo.
 echo.
-echo LET OP Database bisystem wordt verwijderd!!!
+echo Pay attention Database cashregister is being removed!!!
 echo.
 echo.
-echo Druk een toets om database cashregister te verwijderen
+echo Press a key to remove!
 echo.
 echo.
-echo of druk Ctrl+C om te annuleren
+echo or press Ctrl+C to abort
 pause > nul
 
-"C:\ProgramData\postgres\bin\dropdb.exe"  -h localhost -p 5432 -U postgres  -w cashregister
+"C:\ProgramData\postgresql\bin\dropdb.exe"  -h localhost -p 5432 -U postgres  -w cashregister
 echo.
 echo.
 echo.
 echo.
-echo Database cashregister is verwijderd.
+echo Database cashregister is removed.
 echo.
 echo.
 echo.
-echo Druk een toets voor einde programma .........
+echo Press a key for ending program .........
 pause > nul

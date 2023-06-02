@@ -5,15 +5,15 @@ set PGPASSWORD=postgres45
 echo.
 echo.
 echo.
-echo Druk op een toets om een backup te maken van de database cashregister.
+echo Press a key to backup database cashregister.
 pause > nul
 echo.
-"C:\ProgramData\Postgres\bin\pg_dump.exe" -U postgres -v --verbose -d  cashregister -Fc -f  "C:\ProgramData\Sales\Installation\cashregister.backup"
+"C:\ProgramData\Postgres\bin\pg_dump.exe" -U postgres -v --verbose -d  cashregister -Fc -f  "D:\Sales\Installation\cashregister.backup"
 echo.
 echo.
-echo Backup van de database cashregister is gemaakt.
+echo Backup of database cashregister is done.
 echo.
-echo Druk een toets om af te sluiten.
+echo Press a key to exit.
 pause > nul
 #-Fp Plain
 #-Fc Custom
