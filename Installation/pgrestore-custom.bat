@@ -11,7 +11,7 @@ echo Remove first with pgdrop-cashregister.bat database if already exist
 echo 
 echo.
 echo.
-echoecho You are going to replace database cashregister.
+echo You are going to replace database cashregister.
 echo Press a key to restore ........
 echo.
 echo or press CTRL+C to cancel
