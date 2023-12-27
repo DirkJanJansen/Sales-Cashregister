@@ -1,28 +1,36 @@
+All commands keyboard Ctrl+Alt+t to open terminal
 Installation software:
-
-Python 3 is already installed in Ubuntu above version 18
+Python 3 is already installed in Ubuntu 19.04 and newer
 
 sudo apt install python3-pip
 sudo pip3 install pyqt5
+sudo pip3 install pyqtchart
 sudo pip3 install python-barcode
 sudo pip3 install pillow
+sudo pip3 install psycopg2
+sudo pip3 install sqlalchemy==1.4.0
 
-If you want a editor install PyCharm community
-in terminal Crtr+alt+t:
+if you want a editor install PyCharm community:
+Install:
 sudo snap install pycharm-community --classic
 
-sqlalchemy  version 1.4.46 or before and psycopg2 is installed with postgreSQL-contrib see next lines
+Install postgresql:
+in terminal
+sudo apt update -y
+sudo apt install gnupg2 wget vim -y
+sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+sudo apt update -y
+sudo apt install postgresql
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+psql
+in psql set password with \password (postgres45)
 
-Installation Sales as user postgres with password postgres45:
-Copy .pgpass in /home/postgres  
-in terminal chmod 600 .pgpass
-for installation postgresql follow steps in:
-https://tecadmin.net/install-postgresql-server-on-ubuntu/
-additional set password in psql with \password   (postgres45)
-Install pgadmin4 follow steps in:
-https://tecadmin.net/install-pgadmin4-on-ubuntu/
-install pgadmin other then described with:
-sudo apt-get install pgadmin4 (without apache)
+Install pgadmin4:
+curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+sudo apt install pgadmin4
 
 Printer settings in linux for printing listings:
 Retrieve printer_name on Linux terminal:
@@ -49,17 +57,17 @@ For Return adding by buttons in Linux install:
 sudo apt install xdotool
 
 Installing database:
-In pgadmin4 tree create a server LocalHost and a empty database:  cashregister, right click databases (login with postgres45) 
-set password in pgadmin4: postgres45 with making tree cashregister
-In tree pgadmin4 Localhost-Databases-cashregister restore from cashregister.backup, right click cashregister and browse to cashregister.backup 
-Or install database from terminal see last section in this document!
+createdb cashregister
+restore database:
+pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/cashregister.backup"
+for restricted database installation see section restore database
 Copy Sales with folder structures in /home/postgres so you get /home/postgres/Sales
 
 The fonts in Linux differ from Windows. (Install Arial, Comic Sans MS, Times, Sans Serif and Consolas)
 https://www.ostechnix.com/install-microsoft-windows-fonts-ubuntu-16-04/
 Or copy fonts from Windows/Fonts in dir .local/share/fonts
 in terminal sudo fc-cache -r -f
-install Ubuntu tweak tools and increase font  size for optimal views
+install Ubuntu tweak tools and increase font  size with 20%  for optimal views
    
 startup files in Linux:
 Copy register.png from folder Installation in folder /home/postgres/.icons
@@ -92,10 +100,4 @@ restore database:
 pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/cashregister.backup"
 Or for empty database (Only functional data):
 pg_restore --dbname=cashregister  --verbose "/home/postgres/Sales/Installation/cashregister_empty.backup"
-
-Before starting the program for the first time run script reset_odd_even.py to set the parameter for odd-even year for the right year
-Ctrl+Alt+t (opens terminal)
-in terminal following commands:
-cd Sales
-python3 reset_odd_even.py
 
