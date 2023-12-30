@@ -4,6 +4,6 @@ python-barcode
 keyboard 
 PyQt5
 psycopg2
-sqlalchemy<2.0
+sqlalchemy==1.4.0
 pypiwin32 #(only windows)
 postgreSQL
