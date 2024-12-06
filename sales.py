@@ -672,7 +672,7 @@ def newSupplier():
                 mresid = self.q6Edit.text()
                 mtel = self.q7Edit.text()
                 def memailContr(memail):
-                    ab = re.compile("[^@]+@[^@]+\.[^@]+$")
+                    ab = re.compile("[^@]+@[^@]+\\.[^@]+$")
                     if ab.match(memail):
                         return(True)
                     else:
@@ -987,7 +987,7 @@ def requestSupplier():
                         mresid = self.q6Edit.text()
                         mtel = self.q7Edit.text()
                         def memailContr(memail):
-                            ab = re.compile("[^@]+@[^@]+\.[^@]+$")
+                            ab = re.compile("[^@]+@[^@]+\\.[^@]+$")
                             if ab.match(memail):
                                 return(True)
                             else:
@@ -2293,7 +2293,7 @@ def paramChange():
                     else:
                         self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q2Edit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q2Edit)
                     self.q2Edit.setValidator(input_validator)
                     
@@ -3545,7 +3545,7 @@ def articleRequest(mflag, btn):
                     self.q3Edit.setFixedWidth(100)
                     self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q3Edit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q3Edit)
                     self.q3Edit.setValidator(input_validator)
                     
@@ -3555,7 +3555,7 @@ def articleRequest(mflag, btn):
                     self.q3aEdit.setFixedWidth(100)
                     self.q3aEdit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q3aEdit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q3aEdit)
                     self.q3aEdit.setValidator(input_validator)
                     
@@ -3565,7 +3565,7 @@ def articleRequest(mflag, btn):
                     self.q4Edit.setFixedWidth(100)
                     self.q4Edit.setStyleSheet('color: black; background-color: #F8F7EE')
                     self.q4Edit.setFont(QFont("Arial",10))
-                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q4Edit)
                     self.q4Edit.setValidator(input_validator)
                     
@@ -3589,7 +3589,7 @@ def articleRequest(mflag, btn):
                     self.q6Edit.setFixedWidth(100)
                     self.q6Edit.setFont(QFont("Arial",10))
                     self.q6Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-                    reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q6Edit)
                     self.q6Edit.setValidator(input_validator)
         
@@ -3599,7 +3599,7 @@ def articleRequest(mflag, btn):
                     self.q7Edit.setFixedWidth(100)
                     self.q7Edit.setFont(QFont("Arial",10))
                     self.q7Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-                    reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q7Edit)
                     self.q7Edit.setValidator(input_validator)
                                  
@@ -3868,7 +3868,7 @@ def articleRequest(mflag, btn):
                     qnumber.setFixedWidth(150)
                     qnumber.setFont(QFont("Arial",10))
                     qnumber.setStyleSheet("color: black;  background-color: #F8F7EE")
-                    reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+                    reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, qnumber)
                     qnumber.setValidator(input_validator)
                     
@@ -4579,7 +4579,7 @@ def insertArticles():
             self.q3Edit.setFixedWidth(100)
             self.q3Edit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q3Edit.setFont(QFont("Arial",10))
-            reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+            reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
             input_validator = QRegExpValidator(reg_ex, self.q3Edit)
             self.q3Edit.setValidator(input_validator)
             
@@ -4588,7 +4588,7 @@ def insertArticles():
             self.q3aEdit.setFixedWidth(100)
             self.q3aEdit.setStyleSheet('color: black; background-color: #F8F7EE')
             self.q3aEdit.setFont(QFont("Arial",10))
-            reg_ex = QRegExp("^[-+]?[0-9]*\.?[0-9]+$")
+            reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
             input_validator = QRegExpValidator(reg_ex, self.q3aEdit)
             self.q3Edit.setValidator(input_validator)
           
@@ -4610,7 +4610,7 @@ def insertArticles():
             self.q6Edit.setFixedWidth(100)
             self.q6Edit.setFont(QFont("Arial",10))
             self.q6Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+            reg_ex = QRegExp("^[0-9]*\\.?[0-9]+$")
             input_validator = QRegExpValidator(reg_ex, self.q6Edit)
             self.q6Edit.setValidator(input_validator)
 
@@ -4619,7 +4619,7 @@ def insertArticles():
             self.q7Edit.setFixedWidth(100)
             self.q7Edit.setFont(QFont("Arial",10))
             self.q7Edit.setStyleSheet('color: black; background-color: #F8F7EE')
-            reg_ex = QRegExp("^[0-9]*\.?[0-9]+$")
+            reg_ex = QRegExp("^[0-9]*\\.?[0-9]+$")
             input_validator = QRegExpValidator(reg_ex, self.q7Edit)
             self.q7Edit.setValidator(input_validator)
                          
