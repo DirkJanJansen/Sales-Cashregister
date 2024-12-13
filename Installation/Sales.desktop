@@ -2,8 +2,8 @@
 Version=2.0
 Name=Cashregister
 Comment=Barcode Sales System
-Path=/home/postgres/Sales
-Exec=python3 sales.py
+Path=$HOME/Sales
+Exec=bash $HOME/Sales/sales.sh
 Icon=register.png
 Terminal=false
 Type=Application
