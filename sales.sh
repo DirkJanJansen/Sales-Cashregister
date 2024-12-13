@@ -6,5 +6,5 @@ cd $HOME/Sales
 
 python3 sales.py
 
-source $HOME/venv/bin/deactivate
+deactivate
 
