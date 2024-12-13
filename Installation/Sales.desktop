@@ -1,10 +1,10 @@
 [Desktop Entry]
-Version=2.0
+Version=1.0
 Name=Cashregister
 Comment=Barcode Sales System
-Path=/home/postgres/Sales
-Exec=bash /home/postgres/Sales/sales.sh
-Icon=register.png
+Path=./Sales
+Exec=bash sales.sh
 Terminal=false
+Icon=register
 Type=Application
 Categories=Application;
