@@ -93,6 +93,7 @@ install Ubuntu tweak tools and increase font  size with 20%  for optimal views
 startup files in Linux:
 Copy register.png from folder Installation in folder /home/postgres/.icons
 Copy Sales.desktop from folder Installation in /home/postgres/.local/share/applications
+Login again, to activate.
 
 All settings that differ from executing in Windows are automatically adjusted for Ubuntu
 
