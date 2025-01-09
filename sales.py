@@ -3137,28 +3137,29 @@ def calculationStock():
         con.execute(updpar)
                      
         for row in rparticles:
-            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-            mjrverbr = row[4]
-            if row[3] == 1:
-                minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
-            elif row[3] == 2:
-                minstock = round(mjrverbr*1/52, 0) # < 1 week deliverytime
-            elif row[3] == 3:
-                minstock = round(mjrverbr*1/26, 0) # < 2 weeks deliverytime
-            elif row[3] == 4:
-                minstock = round(mjrverbr*1/17, 0) # < 3 weeks deliverytime
-            elif row[3] == 5:
-                minstock = round(mjrverbr*2/17, 0) # < 6 weeks deliverytime
-            elif row[3] == 6:
-                minstock = round(mjrverbr*4/17, 0) # < 12 weeks deliverytime
-            elif row[3] == 7: 
-                minstock = round(mjrverbr*8/17, 0) # < 26 weeks deliverytime
-            elif row[3] == 8: 
-                minstock = round(mjrverbr*16/17,0) # < 52 weeks deliverytime
+            if row[4] > 0:
+                mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+                mjrverbr = row[4]
+                if row[3] == 1:
+                    minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
+                elif row[3] == 2:
+                    minstock = round(mjrverbr*1/52, 0) # < 1 week deliverytime
+                elif row[3] == 3:
+                    minstock = round(mjrverbr*1/26, 0) # < 2 weeks deliverytime
+                elif row[3] == 4:
+                    minstock = round(mjrverbr*1/17, 0) # < 3 weeks deliverytime
+                elif row[3] == 5:
+                    minstock = round(mjrverbr*2/17, 0) # < 6 weeks deliverytime
+                elif row[3] == 6:
+                    minstock = round(mjrverbr*4/17, 0) # < 12 weeks deliverytime
+                elif row[3] == 7:
+                    minstock = round(mjrverbr*8/17, 0) # < 26 weeks deliverytime
+                elif row[3] == 8:
+                    minstock = round(mjrverbr*16/17,0) # < 52 weeks deliverytime
                 
-            updart = update(articles).where(articles.c.barcode == row[0]).\
-                values(annual_consumption_2 = 0, minimum_stock = minstock, order_size = mordersize)
-            con.execute(updart)
+                updart = update(articles).where(articles.c.barcode == row[0]).\
+                    values(annual_consumption_2 = 0, minimum_stock = minstock, order_size = mordersize)
+                con.execute(updart)
     elif myear%2 == 0 and int(rppar[3][2]) == 1:
         selarticles = select([articles]).order_by(articles.c.barcode)
         rparticles = con.execute(selarticles)
@@ -3166,28 +3167,29 @@ def calculationStock():
         con.execute(updpar)
                    
         for row in rparticles:
-            mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
-            mjrverbr = row[5]
-            if row[3] == 1:
-                minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
-            elif row[3] == 2:
-                minstock = round(mjrverbr*1/52, 0) # < 1 week deliverytime
-            elif row[3] == 3:
-                minstock = round(mjrverbr*1/26, 0) # < 2 weeks deliverytime
-            elif row[3] == 4:
-                minstock = round(mjrverbr*1/17, 0) # < 3 weeks deliverytime
-            elif row[3] == 5:
-                minstock = round(mjrverbr*2/17, 0) # < 6 weeks deliverytime
-            elif row[3] == 6:
-                minstock = round(mjrverbr*4/17, 0) # < 12 weeks deliverytime
-            elif row[3] == 7: 
-                minstock = round(mjrverbr*8/17, 0) # < 26 weeks deliverytime
-            elif row[3] == 8: 
-                minstock = round(mjrverbr*16/17,0) # < 52 weeks deliverytime
-                
-            updart = update(articles).where(articles.c.barcode == row[0]).\
-                values(annual_consumption_1 = 0, minimum_stock = minstock, order_size = mordersize)
-            con.execute(updart)
+            if row[5] > 0:
+                mordersize = round(sqrt(2*row[5]*rppar[4][2])/(row[1]*rppar[5][2]),0)
+                mjrverbr = row[5]
+                if row[3] == 1:
+                    minstock = round(mjrverbr*1/104, 0) # < 3 days deliverytime
+                elif row[3] == 2:
+                    minstock = round(mjrverbr*1/52, 0) # < 1 week deliverytime
+                elif row[3] == 3:
+                    minstock = round(mjrverbr*1/26, 0) # < 2 weeks deliverytime
+                elif row[3] == 4:
+                    minstock = round(mjrverbr*1/17, 0) # < 3 weeks deliverytime
+                elif row[3] == 5:
+                    minstock = round(mjrverbr*2/17, 0) # < 6 weeks deliverytime
+                elif row[3] == 6:
+                    minstock = round(mjrverbr*4/17, 0) # < 12 weeks deliverytime
+                elif row[3] == 7:
+                    minstock = round(mjrverbr*8/17, 0) # < 26 weeks deliverytime
+                elif row[3] == 8:
+                    minstock = round(mjrverbr*16/17,0) # < 52 weeks deliverytime
+
+                updart = update(articles).where(articles.c.barcode == row[0]).\
+                    values(annual_consumption_1 = 0, minimum_stock = minstock, order_size = mordersize)
+                con.execute(updart)
   
 def articleRequest(mflag, btn):
     metadata = MetaData()
