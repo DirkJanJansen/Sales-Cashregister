@@ -2169,7 +2169,106 @@ def purchaseMenu():
             self.setGeometry(900, 200, 150, 100)
                 
     window = Widget()
-    window.exec_() 
+    window.exec_()
+
+def btnPages():
+    metadata = MetaData()
+    params = Table('params', metadata,
+                   Column('paramID', Integer(), primary_key=True),
+                   Column('item', String),
+                   Column('value', Float),
+                   Column('buttongroup', String),
+                   Column('fg_color', String),
+                   Column('bg_color', String))
+
+    engine = create_engine('postgresql+psycopg2://postgres@localhost/cashregister')
+    con = engine.connect()
+
+    selpar = select([params]).where(and_(params.c.value == int(1), params.c.paramID > 8)).order_by(params.c.paramID)
+    rppar = con.execute(selpar).first()
+    pos = int(rppar[0]) - 8  # existing number of buttonpages to set initial spinbox
+
+    class btnPages(QDialog):
+        def __init__(self):
+            QDialog.__init__(self)
+
+            self.setWindowTitle("Modify number")
+            self.setWindowIcon(QIcon('./images/logos/logo.jpg'))
+            self.setWindowFlags(self.windowFlags() | Qt.WindowSystemMenuHint |
+                                Qt.WindowMinimizeButtonHint)  # Qt.WindowMinMaxButtonsHint
+            self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+            self.setFont(QFont('Arial', 10))
+            self.setStyleSheet("background-color: #D9E1DF")
+
+            grid = QGridLayout()
+            grid.setSpacing(20)
+
+            pyqt = QLabel()
+            movie = QMovie('./logos/pyqt.gif')
+            pyqt.setMovie(movie)
+            movie.setScaledSize(QSize(240, 80))
+            movie.start()
+            grid.addWidget(pyqt, 0, 0, 1, 2)
+
+            logo = QLabel()
+            pixmap = QPixmap('./logos/logo.jpg')
+            logo.setPixmap(pixmap)
+            grid.addWidget(logo, 0, 0, 1, 2, Qt.AlignRight)
+
+            self.qspin = QSpinBox()
+            self.qspin.setRange(1, 8)
+            self.qspin.setFrame(True)
+            self.qspin.setFont(QFont('Arial', 10))
+            self.qspin.setValue(pos)
+            self.qspin.setFixedSize(40, 30)
+            self.qspin.setStyleSheet("color: black; font: bold;  background-color: gainsboro")
+
+            def valuechange():
+                self.qspin.setValue(self.qspin.value())
+
+            self.qspin.valueChanged.connect(valuechange)
+
+            grid.addWidget(QLabel('Number of Buttonpages'), 3, 0, 1, 2)
+            grid.addWidget(self.qspin, 3, 1)
+
+            def writeVal(pagenumber):
+                paramnr = pagenumber + 8
+                for x in range(8, 16):
+                    upd = update(params).where(params.c.paramID == x).values(value=x - 7)
+                    con.execute(upd)
+                updpar = update(params).where(params.c.paramID == paramnr).values(value=1)
+                con.execute(updpar)
+                lbl = QLabel('Set to '+str(pagenumber)+' restart program to effectuate!')
+                grid.addWidget(lbl, 4, 0, 1, 2)
+                lbl.setFont(QFont('Arial', 10))
+
+            closeBtn = QPushButton('Close')
+            closeBtn.clicked.connect(self.close)
+
+            grid.addWidget(closeBtn, 5, 0, 1, 1, Qt.AlignRight)
+            closeBtn.setFont(QFont("Arial", 10))
+            closeBtn.setFixedWidth(100)
+            closeBtn.setStyleSheet("color: black;  background-color: gainsboro")
+
+            aanpBtn = QPushButton('Modify')
+            aanpBtn.clicked.connect(lambda: writeVal(self.qspin.value()))
+
+            grid.addWidget(aanpBtn, 5, 1, 1, 1, Qt.AlignRight)
+            aanpBtn.setFont(QFont("Arial", 10))
+            aanpBtn.setFixedWidth(100)
+            aanpBtn.setStyleSheet("color: black;  background-color: gainsboro")
+
+            grid.addWidget(QLabel('Number of buttonpages : '+ str(pos)), 4, 0, 1, 2)
+
+            grid.addWidget(QLabel('\u00A9 2017 all rights reserved dj.jansen@casema.nl'), 6, 0, 1, 2,
+                           Qt.AlignCenter)
+
+            self.setLayout(grid)
+            self.setGeometry(900, 200, 150, 100)
+            self.setLayout(grid)
+
+    btnWin = btnPages()
+    btnWin.exec_()
         
 def paramChange():
     class Widget(QDialog):
@@ -2287,11 +2386,13 @@ def paramChange():
                     self.q2Edit = QLineEdit(str(round(float(rppar[2]),2)))
                     self.q2Edit.setFixedWidth(100)
                     self.q2Edit.setAlignment(Qt.AlignRight)
-                    if rppar[0] == 3 or rppar[0] == 4:
+                    if rppar[0] == 3 or rppar[0] == 4 or rppar[0] > 7:
                         self.q2Edit.setDisabled(True)
                         self.q2Edit.setStyleSheet('color: black')
                     else:
                         self.q2Edit.setStyleSheet('color: black; background-color: #F8F7EE')
+                    self.q1Edit.setDisabled(True)
+                    self.q1Edit.setStyleSheet('color: black')
                     self.q2Edit.setFont(QFont("Arial",10))
                     reg_ex = QRegExp("^[-+]?[0-9]*\\.?[0-9]+$")
                     input_validator = QRegExpValidator(reg_ex, self.q2Edit)
@@ -2487,7 +2588,7 @@ def adminMenu():
             self.k0Edit.setFixedWidth(280)
             self.k0Edit.setFont(QFont("Arial",12))
             self.k0Edit.setStyleSheet('color: black; background-color: #F8F7EE') 
-            self.k0Edit.setMaxVisibleItems(11)
+            self.k0Edit.setMaxVisibleItems(12)
             self.k0Edit.addItem('Accounts Submenu')
             self.k0Edit.addItem('Articles Submenu')
             self.k0Edit.addItem('Imports Submenu')
@@ -2496,10 +2597,11 @@ def adminMenu():
             self.k0Edit.addItem('Suppliers submenu')
             self.k0Edit.addItem('Purchases Submenu')
             self.k0Edit.addItem('Parameters - View / Change')
+            self.k0Edit.addItem('Set number of buttonpages')
             self.k0Edit.addItem('Turnover Submenu')
             self.k0Edit.addItem('Reprint purchase orders')
             self.k0Edit.addItem('Reprint sales receipts')
-            
+
             def k0Changed():
                 self.k0Edit.setCurrentIndex(self.k0Edit.currentIndex())
             self.k0Edit.currentIndexChanged.connect(k0Changed)
@@ -2526,20 +2628,22 @@ def adminMenu():
                 elif mindex == 7:
                     paramChange()
                 elif mindex == 8:
-                    turnoverMenu()
+                    btnPages()
                 elif mindex == 9:
+                    turnoverMenu()
+                elif mindex == 10:
                     if sys.platform == 'win32':
                         path = '.\\forms\\Purchasing\\'
                     else:
                         path = './forms/Purchasing/'
                     reprintForms(path)
-                elif mindex == 10:
+                elif mindex == 11:
                     if sys.platform == 'win32':
                         path = '.\\forms\\Sales\\'
                     else:
                         path = './forms/Sales/'
                     reprintForms(path)
- 
+
             applyBtn = QPushButton('Select')
             applyBtn.clicked.connect(lambda: menuChoice(self))  
             applyBtn.setFont(QFont("Arial",10))
