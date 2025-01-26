@@ -181,7 +181,7 @@
 2024-12-13 Added sales.sh and changed Sales.desktop for starting with Virtual Environment view LINUX_install.txt
 2025-01-09 in function calculationStock(), if statement added, to avoiding  divided by 0 error if annual consumption is 0.
 2025-01-24 sales.py In the administrator menu I created a new menu item to set the number of buttonpages with a spinbox from 1 to 8
-2025-01-24 Documentation-Sales_CashRegister.pdf added exlanation to set number of buttonpages see section "Programmable Buttons".
+2025-01-24 Documentation-Sales_CashRegister.pdf added explanation to set number of buttonpages see section "Programmable Buttons".
 
 
 
